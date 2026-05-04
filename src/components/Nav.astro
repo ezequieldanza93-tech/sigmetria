@@ -97,18 +97,11 @@ const sectors = [
             </div>
           </div>
         ))}
-        <div class="nav-dropdown-section-divider"></div>
-        <a
-          href="/blog/"
-          class={`nav-dropdown-link nav-dropdown-blog ${currentPath.startsWith('/blog/') ? 'active' : ''}`}
-          role="menuitem"
-        >
-          <span class="nav-blog-icon">✦</span> Blog de H&S
-        </a>
       </div>
     </div>
 
     <a href="/nosotros/" class={`nav-link ${currentPath === '/nosotros/' ? 'active' : ''}`}>Nosotros</a>
+    <a href="/blog/"     class={`nav-link ${currentPath.startsWith('/blog/') ? 'active' : ''}`}>Blog H&S</a>
     <a href="/contacto/"  class={`nav-link ${currentPath === '/contacto/'  ? 'active' : ''}`}>Contacto</a>
     <a href="/contacto/" class="nav-cta">Consultanos</a>
   </div>
@@ -138,11 +131,10 @@ const sectors = [
           </div>
         </div>
       ))}
-      <div class="nav-mobile-blog-divider"></div>
-      <a href="/blog/" class="nav-mobile-link nav-mobile-blog">✦ Blog de H&S</a>
     </div>
   </div>
   <a href="/nosotros/" class="nav-mobile-link nav-mobile-root">Nosotros</a>
+  <a href="/blog/"     class="nav-mobile-link nav-mobile-root">Blog H&S</a>
   <a href="/contacto/"  class="nav-mobile-link nav-mobile-root">Contacto</a>
   <a href="/contacto/" class="btn-primary" style="margin-top:8px;">Consultanos</a>
 </div>
@@ -324,20 +316,6 @@ nav.scrolled {
 }
 .nav-submenu-link:hover { color: #64d2ff; background: rgba(100,210,255,0.06); padding-left: 20px; }
 
-/* ---- BLOG EN DROPDOWN ---- */
-.nav-dropdown-section-divider {
-  height: 1px;
-  background: rgba(255,255,255,.06);
-  margin: 6px 10px;
-}
-.nav-dropdown-blog {
-  color: rgba(100,210,255,.75) !important;
-  justify-content: flex-start;
-}
-.nav-dropdown-blog:hover { color: #64d2ff !important; background: rgba(100,210,255,0.08); }
-.nav-dropdown-blog.active { color: #64d2ff !important; }
-.nav-blog-icon { font-size: .65rem; flex-shrink: 0; }
-
 /* ---- HAMBURGER ---- */
 .nav-hamburger {
   display: none;
@@ -422,17 +400,6 @@ nav.scrolled {
   padding: 12px 0;
   border-bottom: 1px solid rgba(255,255,255,.05);
 }
-.nav-mobile-blog-divider {
-  height: 1px;
-  background: rgba(255,255,255,.06);
-  margin: 6px 0;
-}
-.nav-mobile-blog {
-  color: rgba(100,210,255,.75) !important;
-  font-weight: 500;
-}
-.nav-mobile-blog:hover { color: #64d2ff !important; }
-
 @media (max-width: 900px) {
   nav { padding: 0 24px; }
   .nav-right { display: none; }
