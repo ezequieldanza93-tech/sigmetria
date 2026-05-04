@@ -33,6 +33,7 @@ export const servicios: ServicioIndividual[] = [
     heroBajada: 'Determinamos la exposición diaria de cada puesto de trabajo al ruido y verificamos el cumplimiento del límite legal de 85 dB(A). Informe con protocolo oficial firmado por profesional habilitado.',
     normativa: {
       codigo: 'Res. SRT 85/2012',
+      url: 'https://www.argentina.gob.ar/normativa/nacional/resoluci%C3%B3n-85-2012-193617/texto',
       nombre: 'Protocolo para la medición de la exposición al ruido en el ambiente laboral',
       resumen: 'La Resolución SRT 85/2012, dictada en el marco de la Ley 19.587 y el Decreto 351/79 (Anexo V), establece el protocolo obligatorio para medir la exposición al ruido en cualquier puesto de trabajo. Exige que las mediciones sean realizadas por un Licenciado en Higiene y Seguridad o Técnico habilitado, y que el informe final incluya el nivel de presión sonora continuo equivalente (LAeq), el nivel de exposición diario (NED) y la comparación con el límite de 85 dB(A). Cuando el NED supera ese umbral, el empleador debe implementar medidas de ingeniería, controles administrativos o proveer protección auditiva con la atenuación adecuada.',
       obligatoriedad: 'Toda empresa con maquinaria, motores, compresores, ventiladores, prensas u otras fuentes de ruido. Obligatoria para la emisión y renovación del Legajo Técnico ante la SRT.',
@@ -64,6 +65,7 @@ export const servicios: ServicioIndividual[] = [
     heroBajada: 'Verificamos que los niveles de iluminación en cada puesto cumplan los valores mínimos del Decreto 351/79. Detectamos zonas de riesgo visual y generamos el protocolo oficial requerido por la SRT.',
     normativa: {
       codigo: 'Res. SRT 84/2012 / Dec. 351/79 Anexo IV',
+      url: 'https://www.argentina.gob.ar/normativa/nacional/resoluci%C3%B3n-84-2012-193616/texto',
       nombre: 'Protocolo para la medición de iluminación en el ambiente laboral',
       resumen: 'La Resolución SRT 84/2012 establece la metodología oficial para medir iluminación en puestos de trabajo, complementando el Anexo IV del Decreto 351/79 que fija los valores mínimos según el tipo de tarea (desde 100 lux para depósitos hasta 1000 lux para trabajos de alta precisión). La medición debe realizarse en los planos de trabajo reales, considerar tanto iluminación general como localizada, y el protocolo debe ser firmado por profesional habilitado. El incumplimiento de los valores mínimos obliga al empleador a mejorar la instalación o añadir iluminación localizada.',
       obligatoriedad: 'Toda empresa o establecimiento con puestos de trabajo fijos. Requerida para el Legajo Técnico SRT y como parte de la evaluación de riesgos ergonómicos y visuales.',
@@ -95,6 +97,7 @@ export const servicios: ServicioIndividual[] = [
     heroBajada: 'Evaluamos la carga térmica en puestos con exposición a calor extremo mediante el índice WBGT. Determinamos los límites de exposición según la carga metabólica de cada tarea y el tipo de ropa de trabajo.',
     normativa: {
       codigo: 'Dec. 351/79 Anexo IV — Tabla de estrés térmico',
+      url: 'https://www.argentina.gob.ar/normativa/nacional/decreto-351-1979-32030/actualizacion',
       nombre: 'Reglamentación de Higiene y Seguridad — Condiciones ambientales en lugares de trabajo',
       resumen: 'El Anexo IV del Decreto 351/79 establece los valores límite de exposición al calor expresados en índice WBGT (Wet Bulb Globe Temperature), diferenciados según la carga de trabajo (leve, moderada, pesada) y el ciclo trabajo-descanso. El empleador debe realizar mediciones cuando existen fuentes de calor radiante, trabajo al aire libre en verano o procesos que generan humedad y temperatura simultáneamente. Cuando el WBGT medido supera los valores de la tabla, es obligatorio implementar pausas programadas, hidratación y/o modificaciones técnicas en el proceso.',
       obligatoriedad: 'Establecimientos con hornos, fundición, soldadura intensa, cocinas industriales, lavanderías, trabajos al sol o cualquier puesto con temperatura de bulbo seco superior a 28 °C.',
@@ -126,6 +129,7 @@ export const servicios: ServicioIndividual[] = [
     heroBajada: 'Determinamos la concentración de polvo en el ambiente de trabajo y lo comparamos con los Valores Límite de Umbral (TLV) del Anexo III del Decreto 351/79. Fundamental en industrias de corte, lijado, cementeras y química.',
     normativa: {
       codigo: 'Dec. 351/79 Anexo III / Res. SRT 415/2002',
+      url: 'https://servicios.infoleg.gob.ar/infolegInternet/anexos/75000-79999/76318/norma.htm',
       nombre: 'Concentraciones máximas permisibles de sustancias químicas en el ambiente de trabajo',
       resumen: 'El Anexo III del Decreto 351/79 establece los Valores Límite de Umbral (TLV) para cientos de sustancias químicas, incluyendo polvo inerte (10 mg/m³ total, 5 mg/m³ respirable), polvo de sílice (0,1 mg/m³ en fracción respirable) y polvos específicos por industria. La Resolución SRT 415/2002 complementa con la metodología de muestreo. Las mediciones deben realizarse durante la jornada laboral normal, con muestras de área y personales, y el informe debe indicar el índice de exposición diaria (ratio concentración medida / TLV).',
       obligatoriedad: 'Industrias de piedra, cerámica, construcción, madera, textil, fundición, minería, impresión, panificación y toda actividad con generación de aerosoles sólidos visibles o polvos finos.',
@@ -157,6 +161,7 @@ export const servicios: ServicioIndividual[] = [
     heroBajada: 'Evaluamos la concentración ambiental de solventes, gases tóxicos y vapores químicos mediante muestreo pasivo e instrumental directo. Cubrimos desde VOCs en pinturas hasta CO en procesos de combustión.',
     normativa: {
       codigo: 'Dec. 351/79 Anexo III',
+      url: 'https://www.argentina.gob.ar/normativa/nacional/decreto-351-1979-32030/actualizacion',
       nombre: 'Valores Límite de Umbral (TLV) para sustancias químicas en el ambiente laboral',
       resumen: 'El Anexo III del Decreto 351/79 lista los TLV-TWA (concentración promedio en 8 horas) y TLV-STEL (concentración máxima en 15 minutos) para más de 600 sustancias químicas, adoptando como referencia los TLV de la ACGIH. Las mediciones deben cubrir el peor escenario de exposición del turno laboral. Para sustancias con efecto cancerígeno confirmado (Grupo A1/A2 ACGIH), la obligación de medición es permanente y el informe debe incluir evaluación de riesgo residual.',
       obligatoriedad: 'Toda empresa que utilice, almacene o genere solventes orgánicos, adhesivos, pinturas, limpiadores, gases de combustión, amoníaco, cloro u otras sustancias químicas en el proceso productivo.',
@@ -188,6 +193,7 @@ export const servicios: ServicioIndividual[] = [
     heroBajada: 'Identificamos y evaluamos los factores de riesgo de trastornos musculoesqueléticos (TME) en puestos de trabajo. Aplicamos métodos validados (REBA, NIOSH, OCRA) y generamos un plan de mejora.',
     normativa: {
       codigo: 'Res. SRT 886/2015 / Res. SRT 295/2003',
+      url: 'https://www.argentina.gob.ar/srt/prevencion/publicaciones/protocolos/ergonomia',
       nombre: 'Protocolo de ergonomía — Identificación de factores de riesgo ergonómico',
       resumen: 'La Resolución SRT 886/2015 establece el protocolo obligatorio de ergonomía para empresas, exigiendo identificar factores de riesgo (postura, fuerza, repetitividad, vibración) en todos los puestos de trabajo. La Resolución 295/2003 incorporó a la normativa argentina las metodologías RULA, REBA y la ecuación de NIOSH para levantamiento manual de cargas. Las empresas deben documentar los resultados en la evaluación de riesgos y aplicar medidas de rediseño de puestos, herramientas o ciclos de trabajo cuando los índices superan los niveles de acción.',
       obligatoriedad: 'Obligatoria para todas las empresas en el marco de la evaluación de riesgos del Legajo Técnico. Prioritaria en industria alimentaria, automotriz, manufacturera y logística con tareas repetitivas o manipulación manual de cargas.',
@@ -219,6 +225,7 @@ export const servicios: ServicioIndividual[] = [
     heroBajada: 'Verificamos el estado de la instalación eléctrica industrial mediante mediciones de resistencia de puesta a tierra, aislamiento de conductores y continuidad. Prevenimos el riesgo de electrocución y cumplimos el Anexo VI del Decreto 351/79.',
     normativa: {
       codigo: 'Dec. 351/79 Anexo VI / IRAM 2281',
+      url: 'https://www.argentina.gob.ar/normativa/nacional/decreto-351-1979-32030/actualizacion',
       nombre: 'Instalaciones eléctricas — requisitos de seguridad',
       resumen: 'El Anexo VI del Decreto 351/79 establece los requisitos de seguridad para instalaciones eléctricas industriales: puesta a tierra con resistencia inferior a 5 Ω (o 1 Ω en ambientes húmedos), protección diferencial con disparo ≤ 30 mA en circuitos de uso general, y verificación periódica obligatoria. La norma IRAM 2281 (equivalente a IEC 60364) fija los métodos de medición y los valores de aislamiento mínimo (1 MΩ por circuito a 500 VDC). La SRT exige que la verificación sea realizada por técnico matriculado y que los resultados consten en el Legajo Técnico.',
       obligatoriedad: 'Todo establecimiento industrial, comercial o de servicios. La verificación debe repetirse cada 2 años o tras modificaciones en la instalación. Requerida obligatoriamente para el Legajo Técnico SRT.',
@@ -252,6 +259,7 @@ export const servicios: ServicioIndividual[] = [
     heroBajada: 'Medimos la exposición al ruido de los trabajadores en obra (operadores de maquinaria, perforistas, soldadores) y verificamos el cumplimiento del límite de 85 dB(A) conforme al Decreto 911/96.',
     normativa: {
       codigo: 'Dec. 911/96 / Res. SRT 85/2012',
+      url: 'https://www.argentina.gob.ar/normativa/nacional/decreto-911-1996-38568/actualizacion',
       nombre: 'Reglamento de Higiene y Seguridad para la Industria de la Construcción',
       resumen: 'El Decreto 911/96 reglamenta la Ley 19.587 para el sector de la construcción y establece requisitos específicos de control del ruido en obra, remitiendo a los TLV del Decreto 351/79 (Anexo V, límite 85 dB(A)) y a la Resolución SRT 85/2012 como metodología de medición. El Programa de Seguridad de Obra exigido por la Resolución SRT 231/96 debe incluir el relevamiento de los niveles de ruido en los puestos de mayor exposición (operadores, perforistas, demolición) y el plan de protección auditiva.',
       obligatoriedad: 'Obras con martillos neumáticos, perforadoras, sierras circulares, compactadoras, cizallas y cualquier puesto con exposición sostenida a maquinaria ruidosa. Exigida en el Legajo Técnico de Obra (Res. SRT 231/96).',
@@ -283,6 +291,7 @@ export const servicios: ServicioIndividual[] = [
     heroBajada: 'Verificamos los niveles de iluminación en frentes de trabajo, escaleras, sótanos y zonas de tránsito en obra. Garantizamos el cumplimiento del Dec. 911/96 y la Resolución SRT 84/2012.',
     normativa: {
       codigo: 'Dec. 911/96 Art. 61 / Res. SRT 84/2012',
+      url: 'https://www.argentina.gob.ar/normativa/nacional/decreto-911-1996-38568/actualizacion',
       nombre: 'Reglamento de Higiene y Seguridad para la Industria de la Construcción — Iluminación',
       resumen: 'El artículo 61 del Decreto 911/96 establece valores mínimos de iluminación para distintas zonas de obra: 20 lux en vías de tránsito y accesos, 50 lux en trabajos en andamios y excavaciones, 100 lux en trabajos de precisión y oficinas de obra. La Resolución SRT 84/2012 fija la metodología de medición aplicable también a obras. El déficit de iluminación en obra es una de las principales causas de accidentes nocturnos o en subsuelos.',
       obligatoriedad: 'Toda obra de construcción, especialmente trabajos nocturnos, en subsuelos, pozos de fundación, túneles y plantas de pisos bajo nivel de calle. Exigida en el Legajo Técnico de Obra.',
@@ -314,6 +323,7 @@ export const servicios: ServicioIndividual[] = [
     heroBajada: 'Evaluamos la exposición al polvo de sílice libre en trabajos de demolición, corte de bloques, perforación y movimientos de tierra. La silicosis es irreversible — prevenirla es obligación y prioridad.',
     normativa: {
       codigo: 'Dec. 911/96 / Dec. 351/79 Anexo III',
+      url: 'https://www.argentina.gob.ar/normativa/nacional/decreto-911-1996-38568/actualizacion',
       nombre: 'Concentraciones máximas permisibles — Polvo con sílice libre cristalina',
       resumen: 'El Decreto 351/79 fija el TLV del cuarzo (sílice libre cristalina) en 0,1 mg/m³ en fracción respirable (10 veces más restrictivo que el polvo inerte). El Decreto 911/96 exige que el Legajo Técnico de Obra incluya la evaluación del riesgo de exposición a polvo en trabajos de hormigonado, demolición, corte de mampostería y perforación de roca. Dado que la silicosis es una enfermedad profesional incurable, la normativa privilegia los controles en el origen (aspiración, humedecimiento) sobre el uso de respirador.',
       obligatoriedad: 'Obras con demolición de estructuras, corte de bloques calcáreos o de hormigón, perforación de roca, excavación en suelos con cuarzo libre y trabajos en areneras. Exigida en el Legajo Técnico.',
@@ -345,6 +355,7 @@ export const servicios: ServicioIndividual[] = [
     heroBajada: 'Evaluamos la exposición al calor en tareas al aire libre durante el verano y en zonas confinadas (sótanos, locales sin ventilación). Determinamos los regímenes de trabajo-descanso reglamentarios.',
     normativa: {
       codigo: 'Dec. 911/96 / Dec. 351/79 Anexo IV',
+      url: 'https://www.argentina.gob.ar/normativa/nacional/decreto-911-1996-38568/actualizacion',
       nombre: 'Condiciones climáticas y ambientales — Trabajo en calor en industria de la construcción',
       resumen: 'El Decreto 911/96 incorpora los requisitos del Decreto 351/79 para el control del estrés térmico en obra, con la particularidad de que la construcción al aire libre en verano genera condiciones de WBGT frecuentemente superiores a los límites. Los valores límite varían entre 25 °C WBGT (trabajo pesado continuo) y 32 °C WBGT (trabajo leve con 75% de descanso). El empleador debe implementar pausas, hidratación obligatoria (mínimo 250 ml cada 20 min) y reubicación de tareas pesadas a horarios frescos.',
       obligatoriedad: 'Obligatoria en obra durante los meses de octubre a marzo en CABA/GBA y siempre que la temperatura de bulbo seco supere 28 °C en el puesto de trabajo.',
@@ -376,6 +387,7 @@ export const servicios: ServicioIndividual[] = [
     heroBajada: 'Evaluamos la exposición a vibración mano-brazo (herramientas eléctricas y neumáticas) y vibración de cuerpo completo (maquinaria). Prevenimos el síndrome de dedo blanco y lesiones de columna.',
     normativa: {
       codigo: 'Dec. 351/79 Anexo V / ISO 5349-1 / ISO 2631-1',
+      url: 'https://servicios.infoleg.gob.ar/infolegInternet/anexos/85000-89999/89597/norma.htm',
       nombre: 'Vibraciones mecánicas en el trabajo — valores límite de exposición',
       resumen: 'El Decreto 351/79 incorpora los valores límite de vibración mano-brazo (HAV) de 2,5 m/s² como valor de acción (8 h) y 5 m/s² como límite de exposición, y de vibración de cuerpo completo (WBV) de 0,5 m/s² y 1,15 m/s² respectivamente, tomados de la norma ISO 5349-1 y ISO 2631-1. En construcción, la exposición a herramientas de percusión (martillo neumático, rompedor, desbarbadora) genera niveles de HAV frecuentemente superiores a 10 m/s², lo que obliga a limitar el tiempo de uso diario y realizar vigilancia médica.',
       obligatoriedad: 'Obras con uso de martillos neumáticos, rompedores, desbarbadoras, compactadoras de mano, y operadores de maquinaria pesada (retroexcavadora, rodillo, minicargadora).',
@@ -409,6 +421,7 @@ export const servicios: ServicioIndividual[] = [
     heroBajada: 'Evaluamos la exposición al ruido de docentes, personal de mantenimiento y operadores de equipos en establecimientos educativos y clubes. El ruido de aula prolongado es un riesgo ocupacional real.',
     normativa: {
       codigo: 'Res. SRT 85/2012 / Ley 19.587',
+      url: 'https://www.argentina.gob.ar/normativa/nacional/resoluci%C3%B3n-85-2012-193617/texto',
       nombre: 'Protocolo de medición de ruido laboral — aplicación en sector educativo',
       resumen: 'La Ley 19.587 y el Decreto 351/79 se aplican a todos los establecimientos con trabajadores en relación de dependencia, incluyendo escuelas, universidades y clubs. Los docentes expuestos a aulas ruidosas, porristas, músicos y personal de mantenimiento con herramientas eléctricas están sujetos al límite de 85 dB(A) de la Resolución SRT 85/2012. Las áreas de talleres, gimnasios con equipo de música, buffets con maquinaria y salas de máquinas deben ser medidas periódicamente.',
       obligatoriedad: 'Colegios con talleres industriales, gimnasios con sistemas de sonido, clubs deportivos, establecimientos con sala de máquinas, calderas, grupos electrógenos o cocinas industriales.',
@@ -440,6 +453,7 @@ export const servicios: ServicioIndividual[] = [
     heroBajada: 'Verificamos los niveles de iluminación en aulas, laboratorios, talleres y zonas de circulación. Una buena iluminación reduce la fatiga visual docente y mejora las condiciones de trabajo del personal.',
     normativa: {
       codigo: 'Res. SRT 84/2012 / Dec. 351/79 Anexo IV',
+      url: 'https://www.argentina.gob.ar/normativa/nacional/resoluci%C3%B3n-84-2012-193616/texto',
       nombre: 'Protocolo de medición de iluminación — sector educativo',
       resumen: 'El Decreto 351/79 (Anexo IV) fija 300 lux como valor mínimo para aulas y oficinas, y 500 lux para laboratorios y talleres de precisión. La Resolución SRT 84/2012 establece el protocolo de medición. En establecimientos educativos, la combinación de iluminación natural variable y artificial frecuentemente genera zonas con menos de 200 lux, especialmente en aulas orientadas al norte o con cortinas. El encandilamiento por ventanas sin tratamiento es otro factor de riesgo visual.',
       obligatoriedad: 'Todo establecimiento educativo, recreativo o club con trabajadores. Exigida para el Legajo Técnico SRT y requerida por las habilitaciones municipales de CABA y GBA.',
@@ -471,6 +485,7 @@ export const servicios: ServicioIndividual[] = [
     heroBajada: 'Evaluamos temperatura, humedad relativa y velocidad de aire en aulas y espacios de trabajo. Verificamos el cumplimiento del rango de confort (18-24 °C, 45-65% HR) establecido por el Decreto 351/79.',
     normativa: {
       codigo: 'Dec. 351/79 Anexo IV',
+      url: 'https://www.argentina.gob.ar/normativa/nacional/decreto-351-1979-32030/actualizacion',
       nombre: 'Condiciones ambientales — temperatura, humedad y velocidad de aire',
       resumen: 'El Decreto 351/79 (Anexo IV) establece que en los lugares de trabajo sedentario (oficinas, aulas) la temperatura debe mantenerse entre 18 °C y 24 °C, la humedad relativa entre 45% y 65%, y la velocidad del aire no debe superar 0,25 m/s. Estas condiciones son responsabilidad del empleador, quien debe asegurarlas mediante sistemas de climatización adecuados. La exposición prolongada fuera de estos rangos genera fatiga, baja productividad y aumenta el ausentismo por enfermedades respiratorias.',
       obligatoriedad: 'Todo establecimiento con puestos de trabajo sedentarios: escuelas, universidades, clubes con oficinas, centros culturales y cualquier actividad educativa o administrativa.',
@@ -502,6 +517,7 @@ export const servicios: ServicioIndividual[] = [
     heroBajada: 'Medimos CO₂, monóxido de carbono y otros indicadores de calidad de aire interior. En aulas superpobladas o edificios herméticos, el CO₂ suele superar los 1000 ppm, causando fatiga y pérdida de concentración.',
     normativa: {
       codigo: 'Dec. 351/79 Anexo III / Guía OMS calidad de aire interior',
+      url: 'https://www.argentina.gob.ar/normativa/nacional/decreto-351-1979-32030/actualizacion',
       nombre: 'Calidad del aire en lugares de trabajo — CO₂ y contaminantes de ambientes interiores',
       resumen: 'El Decreto 351/79 fija un TLV de 5000 ppm (0,5%) para CO₂ en exposición laboral de 8 horas. Sin embargo, la OMS y la ASHRAE 62.1 recomiendan no superar 1000 ppm en ambientes de trabajo y educativos, dado que concentraciones de 1000-2500 ppm ya afectan la función cognitiva. La ventilación mínima reglamentaria exige 10 m³/h de aire fresco por persona en ambientes climatizados. El síndrome del edificio enfermo (SBS) es reconocido como riesgo laboral cuando la ventilación es insuficiente.',
       obligatoriedad: 'Escuelas, universidades y clubs con alta densidad de ocupantes. Prioritaria tras el período de pandemia COVID-19 como medida de prevención de enfermedades respiratorias.',
@@ -533,6 +549,7 @@ export const servicios: ServicioIndividual[] = [
     heroBajada: 'Evaluamos las condiciones ergonómicas de puestos de trabajo docente y administrativo. Identificamos factores de riesgo de trastornos musculoesqueléticos y generamos recomendaciones de mejora.',
     normativa: {
       codigo: 'Res. SRT 886/2015 / Res. SRT 295/2003',
+      url: 'https://www.argentina.gob.ar/srt/prevencion/publicaciones/protocolos/ergonomia',
       nombre: 'Protocolo de ergonomía — puestos administrativos y docentes',
       resumen: 'La Resolución SRT 886/2015 obliga a realizar la evaluación ergonómica en todos los puestos. Para puestos docentes, los principales factores son: bipedestación prolongada (fatiga de miembros inferiores), voz como herramienta de trabajo, uso de pantallas sin adecuación del puesto, y carga manual de materiales. La Resolución 295/2003 incorpora las guías de la UE para pantallas de visualización de datos. Los riesgos de TME (tendinitis de hombro, cervicalgia, lumbalgia) en docentes tienen alta incidencia de accidentes de trabajo.',
       obligatoriedad: 'Todos los establecimientos educativos como empleadores. Incluye a docentes, personal administrativo, auxiliares y personal de secretaría con tareas en computadora.',
@@ -566,6 +583,7 @@ export const servicios: ServicioIndividual[] = [
     heroBajada: 'Verificamos los niveles de iluminación en puestos de caja, oficinas, depósitos y salones de atención al público. Cumplimos la normativa SRT y mejoramos las condiciones visuales de tu equipo.',
     normativa: {
       codigo: 'Res. SRT 84/2012 / Dec. 351/79 Anexo IV',
+      url: 'https://www.argentina.gob.ar/normativa/nacional/resoluci%C3%B3n-84-2012-193616/texto',
       nombre: 'Protocolo de medición de iluminación — sector comercial',
       resumen: 'El Decreto 351/79 establece los niveles mínimos de iluminación según el tipo de tarea: 200 lux para trabajo simple (almacén, tránsito), 300 lux para oficinas y trabajo con papeles, 500 lux para trabajo fino (confección, joyería, farmacia). La Resolución SRT 84/2012 fija la metodología de medición. En comercios, el diseño lumínico orientado a la exhibición de productos frecuentemente descuida la iluminación del puesto de trabajo del empleado, generando asimetrías y deslumbramiento.',
       obligatoriedad: 'Todo local comercial, oficina o establecimiento de atención al público con trabajadores en relación de dependencia. Exigida para el Legajo Técnico SRT.',
@@ -597,6 +615,7 @@ export const servicios: ServicioIndividual[] = [
     heroBajada: 'Medimos la exposición al ruido en locales comerciales con música ambiental, restaurantes, talleres mecánicos y oficinas con equipos ruidosos. El límite de 85 dB(A) aplica igual en este sector.',
     normativa: {
       codigo: 'Res. SRT 85/2012 / Dec. 351/79 Anexo V',
+      url: 'https://www.argentina.gob.ar/normativa/nacional/resoluci%C3%B3n-85-2012-193617/texto',
       nombre: 'Protocolo de medición de ruido — sector comercial y servicios',
       resumen: 'La Resolución SRT 85/2012 es de aplicación universal para todos los trabajadores expuestos a ruido, sin distinción de sector. En comercios y servicios, los principales riesgos se dan en: bares y restaurantes con música a alto volumen (80-95 dB), talleres mecánicos con impactos y maquinaria, centros de distribución con montacargas, y call centers con auriculares mal regulados. El empleador debe documentar la evaluación en el Legajo Técnico y tomar medidas cuando el NED supera el nivel de acción de 80 dB(A).',
       obligatoriedad: 'Locales con sistemas de música, talleres de reparaciones, restaurantes y bares, centros de distribución, callcenters y toda actividad con fuentes de ruido sostenido.',
@@ -628,6 +647,7 @@ export const servicios: ServicioIndividual[] = [
     heroBajada: 'Evaluamos temperatura, humedad y corrientes de aire en oficinas y locales. Las malas condiciones térmicas aumentan el ausentismo, la fatiga y los conflictos laborales. Te ayudamos a cumplir la norma.',
     normativa: {
       codigo: 'Dec. 351/79 Anexo IV',
+      url: 'https://www.argentina.gob.ar/normativa/nacional/decreto-351-1979-32030/actualizacion',
       nombre: 'Condiciones ambientales térmicas en puestos de trabajo sedentario',
       resumen: 'El Decreto 351/79 establece para trabajo sedentario: temperatura entre 18 °C y 24 °C, humedad relativa entre 45% y 65%, y velocidad de aire ≤ 0,25 m/s. El empleador tiene la obligación de mantener estas condiciones durante toda la jornada, lo que implica un sistema de climatización adecuado y su correcto mantenimiento. El exceso de frío (A/C excesivo en verano) es tan sancionable como el calor, y es una fuente frecuente de conflictos laborales y enfermedades inculpables.',
       obligatoriedad: 'Todas las oficinas, locales comerciales y establecimientos de servicios con trabajadores sedentarios. Exigida para el Legajo Técnico SRT.',
@@ -659,6 +679,7 @@ export const servicios: ServicioIndividual[] = [
     heroBajada: 'Medimos CO₂, monóxido de carbono y compuestos orgánicos en aire interior. El 90% del tiempo lo pasamos en interiores — la calidad del aire es salud y productividad.',
     normativa: {
       codigo: 'Dec. 351/79 Anexo III / ASHRAE 62.1',
+      url: 'https://www.argentina.gob.ar/normativa/nacional/decreto-351-1979-32030/actualizacion',
       nombre: 'Calidad de aire interior en edificios de oficinas y locales comerciales',
       resumen: 'El Decreto 351/79 establece el TLV de CO₂ en 5000 ppm, pero la evidencia científica actual (y la norma ASHRAE 62.1) recomienda no superar 1000 ppm para preservar la función cognitiva. En edificios cerrados con A/C recirculado sin aporte de aire fresco suficiente, el CO₂ puede superar los 2000-3000 ppm durante las horas de mayor ocupación. Los VOCs emitidos por mobiliario nuevo, pinturas y alfombras son otro factor de riesgo frecuente en locales remodelados.',
       obligatoriedad: 'Edificios de oficinas con alta densidad de ocupación, locales remodelados recientemente, edificios con sistema de A/C central recirculado y cualquier espacio cerrado con quejas de fatiga o "olor raro".',
@@ -690,6 +711,7 @@ export const servicios: ServicioIndividual[] = [
     heroBajada: 'Evaluamos cada puesto de trabajo con pantalla y escritorio. Las malas posturas frente a la computadora son la primera causa de ausentismo en oficinas. Lo prevenimos antes de que se convierta en una enfermedad profesional.',
     normativa: {
       codigo: 'Res. SRT 886/2015 / Res. SRT 295/2003',
+      url: 'https://www.argentina.gob.ar/srt/prevencion/publicaciones/protocolos/ergonomia',
       nombre: 'Protocolo de ergonomía — puestos con pantallas de visualización de datos',
       resumen: 'La Resolución SRT 295/2003 incorporó a la normativa argentina los requisitos para puestos con pantallas de visualización de datos (PVD), incluyendo: altura del monitor (borde superior al nivel de los ojos o ligeramente por debajo), distancia de visualización de 50-70 cm, silla regulable con apoyo lumbar, antebrazo horizontal al teclado, y pausa activa de 5 minutos cada hora. La Resolución 886/2015 sistematizó la obligación de documentar el riesgo ergonómico en el Legajo Técnico. La cervicalgia y la tendinitis de hombro por uso prolongado de computadora son enfermedades profesionales reconocidas.',
       obligatoriedad: 'Todo empleador con trabajadores que usan computadora más de 4 horas diarias. Incluye oficinas, callcenters, comercios con administración y cualquier actividad con trabajo de pantalla sostenido.',
