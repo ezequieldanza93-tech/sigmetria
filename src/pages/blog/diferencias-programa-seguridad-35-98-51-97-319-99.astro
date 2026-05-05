@@ -4,7 +4,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
 <BaseLayout
   title="Diferencias entre Programa de Seguridad 35/98, 51/97 y 319/99 — Privisor HyS"
-  description="Explicamos de forma clara cuándo usar el Plan de H&S (Res. 51/97), el Programa de Seguridad (Res. 35/98) o el Programa Vial (Res. 319/99) en obras de construcción argentina."
+  description="Explicamos cuándo usar el Plan de H&S (Res. 51/97), el Programa de Seguridad (Res. 35/98) y qué regula realmente la Res. 319/99: coordinación de comitentes y obras repetitivas de corta duración."
 >
   <section class="page-hero">
     <nav aria-label="Breadcrumb" class="breadcrumb">
@@ -55,9 +55,9 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
             <span>Obras que NO requieren Legajo Técnico (obras menores)</span>
           </div>
           <div class="art-tabla-row">
-            <span class="art-doc">Programa Vial</span>
+            <span class="art-doc">Coordinación + Prog. repetitivo</span>
             <span class="art-res">Res. SRT 319/99</span>
-            <span>Obras en la vía pública (repavimentación, señalización, etc.)</span>
+            <span>Obras con múltiples contratistas sin contratista principal único, y obras repetitivas de corta duración (≤7 días corridos, mismo procedimiento)</span>
           </div>
         </div>
 
@@ -91,24 +91,30 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
           <strong>Error frecuente:</strong> Muchas empresas hacen una obra mediana con andamios y trabajo en altura y presentan el 35/98 porque "es más fácil". La ART lo puede objetar y la SRT también. Si hay altura, excavación o riesgo eléctrico, mejor ir directamente al 51/97.
         </div>
 
-        <h2>Res. SRT 319/99 — Programa de Seguridad para Obras Viales</h2>
-        <p>Es un programa específico para <strong>obras que se desarrollan en la vía pública</strong>: repavimentación, bacheo, pintura de demarcación, instalación de semáforos, instalación de cañerías en vereda, poda de árboles con maquinaria, y cualquier trabajo que interfiera con el tránsito.</p>
-        <p>Tiene particularidades que no están en los otros dos:</p>
-        <ul class="art-list">
-          <li>Señalización y vallado del frente de trabajo (cono, cartel, balizas)</li>
-          <li>Plan de desvío de tránsito con aprobación de la autoridad vial</li>
-          <li>Protección del peatón y los vehículos que circulan</li>
-          <li>Horarios de trabajo permitidos según el municipio o concesionaria vial</li>
-        </ul>
-        <p>En CABA, además del 319/99, muchas obras viales requieren la autorización del GCBA (Gobierno de la Ciudad) y deben cumplir el protocolo de señalización vial específico de la ciudad.</p>
+        <h2>Res. SRT 319/99 — Lo que realmente regula</h2>
+        <p>La 319/99 no es un "tercer tipo de programa" en el mismo sentido que la 51/97 y la 35/98. Es una resolución que complementa a ambas con <strong>dos objetivos distintos</strong>.</p>
+
+        <h3>1. Coordinación cuando no hay contratista principal único</h3>
+        <p>El Dec. 911/96 (art. 6) ya establecía que cuando trabajan múltiples contratistas en una obra, la coordinación de H&S la asume el contratista principal. Pero no definía qué pasa cuando <strong>no hay un solo contratista principal</strong> — contratos por administración, UTEs, varios contratistas de igual jerarquía.</p>
+        <p>La 319/99 (art. 1) cierra ese vacío: en esos casos, el <strong>comitente</strong> debe implementar obligatoriamente un Servicio de Higiene y Seguridad y coordinar las acciones de prevención durante toda la ejecución de la obra. Las acciones mínimas de ese servicio están definidas en el Anexo I de la resolución.</p>
+        <p>El comitente puede eximirse de esa responsabilidad si en el contrato de locación de obra <strong>designa expresamente</strong> a uno de los contratistas como responsable de la coordinación (art. 3). Eso no elimina la responsabilidad solidaria que establece el art. 4 del Dec. 911/96.</p>
+
+        <h3>2. Programa simplificado para obras repetitivas y de corta duración</h3>
+        <p>El art. 5 define con precisión: obra repetitiva y de corta duración es la que <strong>sigue siempre el mismo procedimiento de trabajo</strong> y cuya ejecución <strong>no excede los 7 días corridos</strong>. Ambas condiciones deben cumplirse.</p>
+        <p>Para este tipo de obras que están dentro del alcance de la Res. 51/97, el art. 6 permite presentar ante la ART un único Programa de Seguridad con <strong>validez de 6 meses</strong> (renovable por otro período igual), en lugar de uno por cada obra. Ese programa debe cumplir los contenidos mínimos del Anexo II: identificación de la empresa, descripción de tareas, procedimientos de trabajo, riesgos, organización de seguridad y forma de comunicación con el responsable de H&S.</p>
+        <p>Adicionalmente, el art. 7 establece que las ARTs tienen un plazo máximo de <strong>5 días hábiles</strong> para aprobar o rechazar cualquier Programa presentado bajo la 51/97 o la 35/98.</p>
+
+        <div class="art-destacado art-destacado--warn">
+          <strong>Error frecuente:</strong> confundir la 319/99 con un "Programa Vial" para obras en vía pública. Eso no existe en la normativa argentina. La 319/99 regula coordinación entre contratistas y un mecanismo simplificado para trabajos repetitivos breves — no tiene ningún vínculo con obras en la vía pública.
+        </div>
 
         <h2>¿Cuál elegir? Diagrama de decisión rápida</h2>
         <div class="art-decision">
           <div class="dec-step">
             <span class="dec-num">1</span>
             <div>
-              <strong>¿La obra se hace en la vía pública?</strong>
-              <p>Sí → <span class="dec-result">Programa Vial (319/99)</span></p>
+              <strong>¿La obra dura ≤7 días corridos y siempre sigue el mismo procedimiento?</strong>
+              <p>Sí → <span class="dec-result">Programa repetitivo bajo Res. 51/97 con validez 6 meses (319/99 art. 5-6)</span></p>
               <p>No → seguí al paso 2</p>
             </div>
           </div>
@@ -126,6 +132,14 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
               <strong>¿El comitente o la ART exige PHyS en el contrato?</strong>
               <p>Sí → <span class="dec-result">Plan de H&S (51/97)</span></p>
               <p>No → <span class="dec-result">Programa de Seguridad (35/98)</span></p>
+            </div>
+          </div>
+          <div class="dec-step">
+            <span class="dec-num">+</span>
+            <div>
+              <strong>¿Trabajan 2 o más contratistas sin un contratista principal único?</strong>
+              <p>Sí → <span class="dec-result">El comitente debe implementar Servicio de H&S propio (319/99 art. 1)</span></p>
+              <p>No → la coordinación recae en el contratista principal (Dec. 911/96 art. 6)</p>
             </div>
           </div>
         </div>
@@ -148,7 +162,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
         <div class="art-cta">
           <h3>¿Necesitás que te preparemos el Plan o Programa?</h3>
-          <p>Elaboramos Planes de Higiene y Seguridad (51/97), Programas de Seguridad (35/98) y Programas Viales (319/99) con firma de profesional habilitado. Respuesta en el día.</p>
+          <p>Elaboramos Planes de Higiene y Seguridad (51/97), Programas de Seguridad (35/98) y Programas para obras repetitivas (319/99) con firma de profesional habilitado. Respuesta en el día.</p>
           <div class="cta-actions" style="margin-top:16px">
             <a href="https://wa.me/5491133572984?text=Hola%2C%20necesito%20un%20Programa%20o%20Plan%20de%20Seguridad%20para%20una%20obra" class="btn-primary" target="_blank" rel="noopener">Consultar por WhatsApp</a>
             <a href="/servicios/construccion/seguridad-en-obra/" class="btn-outline">Ver servicio completo</a>
