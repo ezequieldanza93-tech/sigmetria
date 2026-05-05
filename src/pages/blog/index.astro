@@ -25,10 +25,12 @@ const sectores = [
       <a href="/">Inicio</a><span>/</span>
       <span>Blog</span>
     </nav>
-    <div class="page-hero-inner">
-      <div class="page-hero-badge">Normativa · EPP · Mediciones · Gestión</div>
-      <h1>BLOG DE<br><em>H&amp;S LABORAL</em></h1>
-      <p>Artículos prácticos escritos por profesionales. Sin tecnicismos innecesarios — lo que necesitás saber para cumplir y proteger a tu equipo.</p>
+    <div class="page-hero-inner blog-hero-inner">
+      <div class="blog-hero-left">
+        <div class="page-hero-badge">Normativa · EPP · Mediciones · Gestión</div>
+        <h1>BLOG DE<br><em>H&amp;S LABORAL</em></h1>
+      </div>
+      <p class="blog-hero-desc">Artículos prácticos escritos por profesionales. Sin tecnicismos innecesarios — lo que necesitás saber para cumplir y proteger a tu equipo.</p>
     </div>
   </section>
 
@@ -99,6 +101,27 @@ const sectores = [
 </BaseLayout>
 
 <style>
+/* ---- Hero two-column ---- */
+.blog-hero-inner {
+  max-width: 1100px !important;
+  display: flex;
+  align-items: center;
+  gap: 60px;
+}
+.blog-hero-left { flex-shrink: 0; }
+.blog-hero-desc {
+  font-size: 15px;
+  font-weight: 300;
+  color: rgba(255,255,255,.5);
+  line-height: 1.8;
+  max-width: 360px;
+  margin: 0;
+}
+@media (max-width: 900px) {
+  .blog-hero-inner { flex-direction: column; align-items: flex-start; gap: 14px; }
+  .blog-hero-desc { max-width: 100%; }
+}
+
 /* ---- Toolbar ---- */
 .blog-toolbar {
   display: flex;
