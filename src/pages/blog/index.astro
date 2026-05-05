@@ -8,7 +8,12 @@ function formatFecha(iso: string) {
   return `${parseInt(d)} ${meses[parseInt(m) - 1]} ${y}`;
 }
 
-const categorias = [...new Set(blogPosts.map(p => p.categoria))];
+const sectores = [
+  'Empresas Industriales',
+  'Construcción',
+  'Educativo y Recreativo',
+  'Comercial y Oficinas',
+];
 ---
 
 <BaseLayout
@@ -30,7 +35,7 @@ const categorias = [...new Set(blogPosts.map(p => p.categoria))];
   <section class="content-section">
     <div class="content-inner">
 
-      <!-- Buscador + filtros -->
+      <!-- Buscador -->
       <div class="blog-toolbar">
         <div class="blog-search-wrap">
           <svg class="blog-search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
@@ -45,10 +50,11 @@ const categorias = [...new Set(blogPosts.map(p => p.categoria))];
         <span class="blog-count" id="blog-count">{blogPosts.length} artículos</span>
       </div>
 
+      <!-- Filtros por sector -->
       <div class="blog-filters" id="blog-filters">
-        <button class="blog-filter active" data-cat="todos">Todos</button>
-        {categorias.map(cat => (
-          <button class="blog-filter" data-cat={cat}>{cat}</button>
+        <button class="blog-filter active" data-sector="todos">Todos</button>
+        {sectores.map(s => (
+          <button class="blog-filter" data-sector={s}>{s}</button>
         ))}
       </div>
 
@@ -57,7 +63,7 @@ const categorias = [...new Set(blogPosts.map(p => p.categoria))];
         {blogPosts.map(post => (
           <article
             class="blog-card"
-            data-cat={post.categoria}
+            data-sectores={post.sectores.join('|')}
             data-text={`${post.titulo} ${post.resumen} ${post.categoria} ${post.tags.join(' ')}`.toLowerCase()}
           >
             <div class="blog-card-meta">
@@ -287,15 +293,16 @@ const search  = document.getElementById('blog-search') as HTMLInputElement;
 const count   = document.getElementById('blog-count') as HTMLElement;
 const empty   = document.getElementById('blog-empty') as HTMLElement;
 
-let activeCat = 'todos';
-let searchVal = '';
+let activeSector = 'todos';
+let searchVal    = '';
 
 function update() {
   let visible = 0;
   cards.forEach(card => {
-    const catMatch = activeCat === 'todos' || card.dataset.cat === activeCat;
-    const textMatch = !searchVal || (card.dataset.text ?? '').includes(searchVal);
-    const show = catMatch && textMatch;
+    const sectores = (card.dataset.sectores ?? '').split('|');
+    const sectorMatch = activeSector === 'todos' || sectores.includes(activeSector);
+    const textMatch   = !searchVal || (card.dataset.text ?? '').includes(searchVal);
+    const show = sectorMatch && textMatch;
     card.classList.toggle('hidden', !show);
     if (show) visible++;
   });
@@ -307,7 +314,7 @@ filters.forEach(btn => {
   btn.addEventListener('click', () => {
     filters.forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
-    activeCat = btn.dataset.cat ?? 'todos';
+    activeSector = btn.dataset.sector ?? 'todos';
     update();
   });
 });

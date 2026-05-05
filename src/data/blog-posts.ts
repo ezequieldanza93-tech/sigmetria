@@ -7,6 +7,7 @@ export interface BlogPost {
   tiempoLectura: string;
   resumen: string;
   tags: string[];
+  sectores: string[];
 }
 
 export const blogPosts: BlogPost[] = [
@@ -19,6 +20,7 @@ export const blogPosts: BlogPost[] = [
     tiempoLectura: '6 min',
     resumen: 'Tres documentos, tres situaciones distintas. Si trabajás en construcción, seguro te preguntaste cuándo corresponde cada uno. Te lo explicamos sin vueltas.',
     tags: ['construcción', 'normativa', 'programa de seguridad', 'SRT', 'Dec. 911/96'],
+    sectores: ['Construcción'],
   },
   {
     slug: 'que-es-el-legajo-tecnico-srt',
@@ -29,6 +31,7 @@ export const blogPosts: BlogPost[] = [
     tiempoLectura: '5 min',
     resumen: 'Es el documento central de la seguridad en tu empresa. Lo puede pedir la SRT, tu ART o el municipio. Si no sabés qué es, leé esto antes de que te llegue una notificación.',
     tags: ['legajo técnico', 'SRT', 'ART', 'Ley 19587', 'normativa'],
+    sectores: ['Empresas Industriales', 'Construcción', 'Educativo y Recreativo', 'Comercial y Oficinas'],
   },
   {
     slug: 'cuando-es-obligatoria-la-medicion-de-ruido',
@@ -39,6 +42,7 @@ export const blogPosts: BlogPost[] = [
     tiempoLectura: '5 min',
     resumen: 'Si tu empresa tiene maquinaria, generadores, talleres o música ambiental, muy probablemente estés obligado a medir el ruido. Te contamos cuándo, cómo y qué pasa si no lo hacés.',
     tags: ['ruido', 'Res. 85/2012', 'medición', 'hipoacusia', 'ART'],
+    sectores: ['Empresas Industriales', 'Construcción'],
   },
   {
     slug: 'como-elegir-protector-auditivo',
@@ -49,6 +53,7 @@ export const blogPosts: BlogPost[] = [
     tiempoLectura: '5 min',
     resumen: 'No todos los protectores auditivos son iguales ni sirven para todos los ruidos. Si no calculás la atenuación real que necesitás, estás regalando EPP inútil o, peor, dándole al trabajador algo que no lo protege.',
     tags: ['EPP', 'protector auditivo', 'NRR', 'ruido', 'equipos de protección'],
+    sectores: ['Empresas Industriales', 'Construcción'],
   },
   {
     slug: 'mapa-de-riesgos-laborales',
@@ -59,6 +64,7 @@ export const blogPosts: BlogPost[] = [
     tiempoLectura: '6 min',
     resumen: 'No es un dibujo decorativo para pegar en la pared: es el documento que muestra dónde están los riesgos en tu empresa y qué medidas de control existen. Si no lo tenés actualizado, empezá por acá.',
     tags: ['mapa de riesgos', 'Ley 19587', 'Dec. 351/79', 'normativa', 'identificación de riesgos'],
+    sectores: ['Empresas Industriales', 'Construcción', 'Educativo y Recreativo', 'Comercial y Oficinas'],
   },
   {
     slug: 'estres-termico-laboral',
@@ -69,6 +75,7 @@ export const blogPosts: BlogPost[] = [
     tiempoLectura: '6 min',
     resumen: 'El golpe de calor puede ser fatal. La Res. SRT 30/2023 reemplazó la tabla anterior con el índice WBGT y nuevos límites. Si tenés trabajadores expuestos al calor y no mediste, estás incumpliendo la norma vigente.',
     tags: ['estrés térmico', 'WBGT', 'Res. SRT 30/2023', 'calor', 'mediciones'],
+    sectores: ['Empresas Industriales', 'Construcción'],
   },
   {
     slug: 'plan-de-evacuacion-empresa',
@@ -79,6 +86,7 @@ export const blogPosts: BlogPost[] = [
     tiempoLectura: '7 min',
     resumen: 'Un plan que existe solo en papel no sirve de nada en una emergencia real. Te explicamos qué debe incluir, cómo conformar la brigada y por qué el simulacro y el plan son dos cosas distintas.',
     tags: ['plan de evacuación', 'brigada de emergencias', 'Dec. 351/79', 'Ley 5920', 'emergencias'],
+    sectores: ['Empresas Industriales', 'Educativo y Recreativo', 'Comercial y Oficinas'],
   },
   {
     slug: 'ergonomia-laboral',
@@ -89,6 +97,7 @@ export const blogPosts: BlogPost[] = [
     tiempoLectura: '6 min',
     resumen: 'La lumbalgia es la primera enfermedad profesional en Argentina — y es prevenible. Si no evaluaste la ergonomía de tus puestos, estás asumiendo responsabilidad legal por cada baja médica que se genere.',
     tags: ['ergonomía', 'RULA', 'REBA', 'NIOSH', 'Res. 295/03', 'enfermedades profesionales'],
+    sectores: ['Empresas Industriales', 'Construcción', 'Comercial y Oficinas'],
   },
   {
     slug: 'ley-5920-sistema-autoproteccion-caba',
@@ -99,6 +108,7 @@ export const blogPosts: BlogPost[] = [
     tiempoLectura: '6 min',
     resumen: 'Si tu establecimiento está en CABA y tiene concurrencia de público, la Ley 5920 te exige un Plan de Autoprotección vigente. Escuelas, restaurantes, gimnasios, comercios: aplica a más sectores de los que creés.',
     tags: ['Ley 5920', 'CABA', 'autoprotección', 'plan de emergencia', 'Defensa Civil'],
+    sectores: ['Educativo y Recreativo', 'Comercial y Oficinas'],
   },
   {
     slug: 'medicion-iluminacion-puestos-trabajo',
@@ -109,6 +119,7 @@ export const blogPosts: BlogPost[] = [
     tiempoLectura: '6 min',
     resumen: 'Una iluminación deficiente no solo provoca fatiga visual: aumenta los errores, los accidentes y la productividad cae. Y tiene un estándar legal concreto que podés estar incumpliendo sin saberlo.',
     tags: ['iluminación', 'luxómetro', 'Dec. 351/79', 'mediciones', 'lux'],
+    sectores: ['Empresas Industriales', 'Construcción', 'Educativo y Recreativo', 'Comercial y Oficinas'],
   },
   {
     slug: 'agentes-cancerigenos-trabajo-srt',
@@ -119,6 +130,7 @@ export const blogPosts: BlogPost[] = [
     tiempoLectura: '6 min',
     resumen: 'Si en tu empresa se usa benceno, asbesto, cromo VI, formaldehído o sílice cristalina, tenés 60 días para registrarlo ante la SRT. No hacerlo es una infracción grave — y no tenerlo declarado ante una enfermedad profesional oncológica agrava exponencialmente tu responsabilidad.',
     tags: ['agentes cancerígenos', 'Res. SRT 81/2019', 'SRT', 'IARC', 'riesgo químico'],
+    sectores: ['Empresas Industriales', 'Construcción'],
   },
   {
     slug: 'simulacro-evacuacion-como-organizar',
@@ -129,6 +141,7 @@ export const blogPosts: BlogPost[] = [
     tiempoLectura: '6 min',
     resumen: 'Un simulacro sin informe firmado no existe legalmente. Te explicamos cómo planificarlo, qué registrar durante la ejecución y qué tiene que incluir el informe para que sea válido ante la ART.',
     tags: ['simulacro', 'evacuación', 'plan de emergencia', 'Dec. 351/79', 'informe'],
+    sectores: ['Empresas Industriales', 'Educativo y Recreativo', 'Comercial y Oficinas'],
   },
   {
     slug: 'medicion-vibraciones-laborales',
@@ -139,6 +152,7 @@ export const blogPosts: BlogPost[] = [
     tiempoLectura: '6 min',
     resumen: 'Las vibraciones crónicas generan síndrome de vibración mano-brazo y lesiones de columna que no tienen cura. La Res. 295/03 fija los límites y la forma de medirlos — ¿los conocés?',
     tags: ['vibraciones', 'Res. 295/03', 'mano-brazo', 'cuerpo entero', 'mediciones'],
+    sectores: ['Empresas Industriales', 'Construcción'],
   },
   {
     slug: 'plan-anual-capacitaciones-higiene-seguridad',
@@ -149,6 +163,7 @@ export const blogPosts: BlogPost[] = [
     tiempoLectura: '6 min',
     resumen: 'No alcanza con dar charlas esporádicas: la normativa exige un plan anual documentado, registros firmados y temarios específicos. Si tu plan de capacitaciones no existe en papel, no existe para la SRT.',
     tags: ['capacitación', 'plan anual', 'Ley 19587', 'Dec. 351/79', 'registros'],
+    sectores: ['Empresas Industriales', 'Construcción', 'Educativo y Recreativo', 'Comercial y Oficinas'],
   },
   {
     slug: 'contaminantes-biologicos-ambiente-trabajo',
@@ -159,6 +174,7 @@ export const blogPosts: BlogPost[] = [
     tiempoLectura: '6 min',
     resumen: 'Bacterias, hongos, endotoxinas y virus en el aire del lugar de trabajo: más común de lo que creés y más regulado de lo que parece. Los sectores de riesgo van mucho más allá de los hospitales.',
     tags: ['contaminantes biológicos', 'bioaerosoles', 'Res. 295/03', 'HEPA', 'bioseguridad'],
+    sectores: ['Empresas Industriales'],
   },
   {
     slug: 'ley-11748-antisiniestral-provincia-buenos-aires',
@@ -169,6 +185,7 @@ export const blogPosts: BlogPost[] = [
     tiempoLectura: '6 min',
     resumen: 'Si tu establecimiento queda en la Provincia de Buenos Aires y tiene más de 50 personas, la Ley 11748 te aplica. No es solo para boliches: alcanza escuelas, supermercados, gimnasios y hasta consultorios con sala de espera.',
     tags: ['Ley 11748', 'Provincia de Buenos Aires', 'antisiniestral', 'plan de autoprotección', 'Defensa Civil'],
+    sectores: ['Educativo y Recreativo', 'Comercial y Oficinas'],
   },
   {
     slug: 'vapores-organicos-evaluacion-laboral',
@@ -179,6 +196,7 @@ export const blogPosts: BlogPost[] = [
     tiempoLectura: '6 min',
     resumen: 'Pinturas, adhesivos, solventes de limpieza: en muchas empresas el riesgo por vapores orgánicos es cotidiano y silencioso. La Res. 295/03 fija los TLV-TWA y los métodos de evaluación obligatorios.',
     tags: ['vapores orgánicos', 'COV', 'TLV', 'Res. 295/03', 'solventes', 'mediciones'],
+    sectores: ['Empresas Industriales', 'Construcción'],
   },
   {
     slug: 'material-particulado-suspension-trabajo',
@@ -189,6 +207,7 @@ export const blogPosts: BlogPost[] = [
     tiempoLectura: '6 min',
     resumen: 'La silicosis no tiene cura, es irreversible y el agente causante (cuarzo respirable) tiene un límite de 0,025 mg/m³. Si no medís la fracción respirable, no sabés si estás por encima del límite.',
     tags: ['material particulado', 'sílice', 'fracción respirable', 'Res. 295/03', 'silicosis'],
+    sectores: ['Empresas Industriales', 'Construcción'],
   },
   {
     slug: 'primeros-auxilios-empresa-obligaciones',
@@ -199,6 +218,7 @@ export const blogPosts: BlogPost[] = [
     tiempoLectura: '6 min',
     resumen: 'No tener un botiquín completo o personal capacitado en RCP no es solo un incumplimiento normativo: es una responsabilidad civil concreta si un empleado sufre una emergencia médica en el trabajo.',
     tags: ['primeros auxilios', 'RCP', 'botiquín', 'Dec. 351/79', 'Ley 19587'],
+    sectores: ['Empresas Industriales', 'Construcción', 'Educativo y Recreativo', 'Comercial y Oficinas'],
   },
   {
     slug: 'estudio-impacto-ambiental-industrial',
@@ -209,6 +229,7 @@ export const blogPosts: BlogPost[] = [
     tiempoLectura: '6 min',
     resumen: 'Querés habilitar una planta o ampliar una línea de producción y te piden un EIA. No es un formulario: es un documento técnico predictivo. Un EIA rechazado puede paralizar tu habilitación 6 a 12 meses.',
     tags: ['EIA', 'impacto ambiental', 'Ley 25675', 'Ley 11459', 'habilitación industrial'],
+    sectores: ['Empresas Industriales'],
   },
   {
     slug: 'efluentes-liquidos-industriales-normativa',
@@ -219,6 +240,7 @@ export const blogPosts: BlogPost[] = [
     tiempoLectura: '6 min',
     resumen: 'Tirar un efluente a la red cloacal sin tratamiento puede generar multas, clausura y responsabilidad penal. Los límites dependen de si descargás a red, a cuerpo superficial o al suelo — y cambian según la jurisdicción.',
     tags: ['efluentes líquidos', 'ACUMAR', 'OPDS', 'descarga industrial', 'medio ambiente'],
+    sectores: ['Empresas Industriales'],
   },
   {
     slug: 'guia-extintores-tipo-fuego-argentina',
@@ -229,6 +251,7 @@ export const blogPosts: BlogPost[] = [
     tiempoLectura: '6 min',
     resumen: 'Poner el extintor equivocado en un fuego puede empeorarlo. Muchas empresas tienen matafuegos de polvo ABC donde necesitan CO₂ — o viceversa. Acá está la guía completa para no adivinar.',
     tags: ['extintores', 'matafuegos', 'clases de fuego', 'IRAM 3517', 'Dec. 351/79'],
+    sectores: ['Empresas Industriales', 'Construcción', 'Educativo y Recreativo', 'Comercial y Oficinas'],
   },
   {
     slug: 'capacitacion-realidad-virtual-seguridad-laboral',
@@ -239,6 +262,7 @@ export const blogPosts: BlogPost[] = [
     tiempoLectura: '6 min',
     resumen: 'La VR puede simular un incendio, una caída en altura o un derrame químico sin riesgo real. Pero tiene límites claros: no reemplaza la capacitación formal ni los registros que exige la SRT.',
     tags: ['realidad virtual', 'VR', 'capacitación', 'innovación', 'Ley 19587'],
+    sectores: ['Empresas Industriales', 'Construcción'],
   },
   {
     slug: 'programa-higiene-ocupacional-corporativo',
@@ -249,6 +273,7 @@ export const blogPosts: BlogPost[] = [
     tiempoLectura: '6 min',
     resumen: 'Un programa de HO no es solo hacer mediciones: es un sistema de vigilancia continua de los agentes de riesgo con metodología estandarizada y trazabilidad de resultados. Así se estructura correctamente.',
     tags: ['higiene ocupacional', 'programa anual', 'muestreo', 'calibración', 'OAA'],
+    sectores: ['Empresas Industriales'],
   },
   {
     slug: 'relevamiento-agentes-riesgo-rar-como-completar',
@@ -259,6 +284,7 @@ export const blogPosts: BlogPost[] = [
     tiempoLectura: '7 min',
     resumen: 'El RAR es el formulario que le dice a la SRT qué riesgos existen en tu empresa. Si lo completás mal o no lo actualizás, podés quedar expuesto ante una inspección. Acá explicamos cómo hacerlo bien.',
     tags: ['RAR', 'Res. SRT 463/2009', 'agentes de riesgo', 'SRT', 'normativa'],
+    sectores: ['Empresas Industriales', 'Construcción', 'Educativo y Recreativo', 'Comercial y Oficinas'],
   },
   {
     slug: 'capacitacion-autoelevadores-seguridad-srt',
@@ -269,6 +295,7 @@ export const blogPosts: BlogPost[] = [
     tiempoLectura: '6 min',
     resumen: 'Los accidentes con autoelevadores están entre los más graves de la industria. La Res. SRT 960/2015 exige capacitación específica y documentada para cada operador — no alcanza con la experiencia del trabajador.',
     tags: ['autoelevadores', 'Res. SRT 960/2015', 'capacitación', 'operadores', 'logística'],
+    sectores: ['Empresas Industriales', 'Construcción'],
   },
   {
     slug: 'dosimetria-ruido-laboral',
@@ -279,6 +306,7 @@ export const blogPosts: BlogPost[] = [
     tiempoLectura: '6 min',
     resumen: 'Si el trabajador se mueve entre distintos sectores con diferente nivel de ruido, la sonometría no alcanza: necesitás dosimetría personal. Acá explicamos cuándo y cómo interpretarla.',
     tags: ['dosimetría', 'sonometría', 'ruido', 'Res. SRT 85/2012', 'TWA', 'dosis'],
+    sectores: ['Empresas Industriales', 'Construcción'],
   },
   {
     slug: 'seguridad-estaciones-de-servicio',
@@ -289,6 +317,7 @@ export const blogPosts: BlogPost[] = [
     tiempoLectura: '7 min',
     resumen: 'Una EDS tiene riesgos que van desde incendio y explosión hasta exposición crónica a vapores de nafta. El servicio de H&S en una estación de servicio no es el mismo que en una oficina — tiene sus propias obligaciones.',
     tags: ['estaciones de servicio', 'combustibles', 'vapores', 'electrostática', 'Dec. 351/79'],
+    sectores: ['Comercial y Oficinas'],
   },
   {
     slug: 'como-implementar-iso-45001-pyme',
@@ -299,6 +328,7 @@ export const blogPosts: BlogPost[] = [
     tiempoLectura: '8 min',
     resumen: 'ISO 45001 no es un lujo para multinacionales. Una PyME puede implementarla en 6 a 12 meses y la diferencia con el cumplimiento de la Ley 19.587 es más pequeña de lo que pensás. Acá está el roadmap.',
     tags: ['ISO 45001', 'OHSAS 18001', 'PyME', 'sistema de gestión', 'certificación'],
+    sectores: ['Empresas Industriales'],
   },
   {
     slug: 'efluentes-gaseosos-industriales-normativa',
@@ -309,6 +339,7 @@ export const blogPosts: BlogPost[] = [
     tiempoLectura: '7 min',
     resumen: 'Las emisiones gaseosas de tu chimenea están reguladas. Partículas totales, SOx, NOx, COVs: cada uno tiene un límite que depende de la categoría industrial y la jurisdicción. Medir mal equivale a no medir.',
     tags: ['efluentes gaseosos', 'emisiones', 'OPDS', 'Ley 25675', 'muestreo isocinético'],
+    sectores: ['Empresas Industriales'],
   },
 ];
 
