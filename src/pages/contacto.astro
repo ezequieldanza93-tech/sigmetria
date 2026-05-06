@@ -32,16 +32,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <a href="https://wa.me/5491123496789" class="btn-primary" target="_blank" rel="noopener" style="margin-top:12px;display:inline-flex;">💬 WhatsApp</a>
           </div>
 
-          <form
-            class="contact-form"
-            action="https://formspree.io/f/TU_FORM_ID"
-            method="POST"
-          >
-            <!-- Formspree: asunto del email recibido -->
-            <input type="hidden" name="_subject" value="Nueva consulta desde SIGMETRÍA HyS" />
-            <!-- Formspree: redirigir después de enviar -->
-            <input type="hidden" name="_next" value="https://sigmetriahys.com/contacto/?enviado=1" />
-            <!-- Honeypot anti-spam de Formspree -->
+          <form id="contact-form" class="contact-form">
+            <!-- Honeypot anti-spam -->
             <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
 
             <div class="form-group">
@@ -241,9 +233,51 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 </style>
 
 <script>
-  const params = new URLSearchParams(window.location.search);
-  if (params.get('enviado') === '1') {
-    document.getElementById('form-success')?.style.setProperty('display', 'block');
-    document.querySelector('.contact-form')?.style.setProperty('display', 'none');
-  }
+  import { createClient } from '@supabase/supabase-js';
+
+  const supabase = createClient(
+    import.meta.env.PUBLIC_SUPABASE_URL,
+    import.meta.env.PUBLIC_SUPABASE_KEY
+  );
+
+  const form    = document.getElementById('contact-form') as HTMLFormElement;
+  const success = document.getElementById('form-success') as HTMLElement;
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    // Honeypot: si está relleno es un bot
+    const honeypot = form.querySelector<HTMLInputElement>('input[name="_gotcha"]');
+    if (honeypot?.value) return;
+
+    const btn = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+    const originalLabel = btn.textContent;
+    btn.textContent = 'Enviando...';
+    btn.disabled = true;
+
+    const data = new FormData(form);
+
+    const { error } = await supabase.from('leads').insert({
+      nombre:        data.get('nombre')   as string,
+      empresa:       data.get('empresa')  as string,
+      telefono:      data.get('telefono') as string,
+      email:         (data.get('email')   as string) || null,
+      sector:        data.get('sector')   as string,
+      mensaje:       (data.get('mensaje') as string) || null,
+      fuente:        'formulario-web',
+      pagina_origen: window.location.href,
+    });
+
+    if (error) {
+      console.error('Error al guardar lead:', error.message);
+      btn.textContent = originalLabel;
+      btn.disabled = false;
+      alert('Hubo un error. Por favor intentá de nuevo o escribinos por WhatsApp.');
+      return;
+    }
+
+    form.style.display = 'none';
+    success.style.display = 'block';
+    success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  });
 </script>

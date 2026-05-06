@@ -8,7 +8,8 @@
     "preview": "astro preview"
   },
   "dependencies": {
-    "astro": "^5.7.0",
-    "@astrojs/sitemap": "^3.2.1"
+    "@astrojs/sitemap": "^3.2.1",
+    "@supabase/supabase-js": "^2.105.3",
+    "astro": "^5.7.0"
   }
 }
