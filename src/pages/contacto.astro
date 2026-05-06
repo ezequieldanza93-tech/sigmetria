@@ -269,10 +269,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     });
 
     if (error) {
-      console.error('Error al guardar lead:', error);
+      console.error('Error al guardar lead:', error.message);
       btn.textContent = originalLabel;
       btn.disabled = false;
-      alert(`DEBUG — Supabase error:\ncode: ${error.code}\nmessage: ${error.message}\ndetails: ${error.details}`);
+      alert('Hubo un error. Por favor intentá de nuevo o escribinos por WhatsApp.');
       return;
     }
 
