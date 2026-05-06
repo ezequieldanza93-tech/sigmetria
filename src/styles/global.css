@@ -4,6 +4,7 @@
    SIGMETRÍA HyS — SISTEMA DE DISEÑO v1.0
    ============================================= */
 :root {
+  color-scheme: light;
   --verde:       #4CAF50;
   --verde-dark:  #388E3C;
   --verde-light: #E8F5E9;
