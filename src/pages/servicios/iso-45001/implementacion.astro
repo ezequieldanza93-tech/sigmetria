@@ -1,0 +1,286 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Implementación ISO 45001 Argentina — 6 meses",
+  "description": "Implementación ISO 45001 desde cero en 6 meses. Roadmap por cláusula, plataforma digital y auditoría sombra previa a la certificación.",
+  "provider": { "@type": "ProfessionalService", "name": "SIGMETRÍA HyS", "url": "https://sigmetriahys.com" },
+  "areaServed": "Argentina",
+  "serviceType": "Implementación ISO 45001:2018"
+};
+
+const bullets = [
+  { icon: '🗺️', title: 'Roadmap por cláusula con avance medible', desc: 'Dashboard que muestra exactamente qué falta, qué está en proceso y qué está cerrado. El avance es visible en tiempo real — para vos y para la dirección.' },
+  { icon: '🔍', title: 'Gap analysis dinámico desde el día 1', desc: 'Antes de implementar, sabés exactamente en qué estado estás. El gap analysis no es un informe: es un tablero que se actualiza a medida que avanzás.' },
+  { icon: '🤖', title: 'Documentación con IA: procedimientos listos para adaptar', desc: 'Generamos la base documental (procedimientos, políticas, registros, manuales) con IA y la adaptamos a tu empresa. No empezás de cero ni de copia genérica.' },
+  { icon: '🛡️', title: 'Auditoría sombra previa a la certificación', desc: 'A los 5 meses hacemos una auditoría interna con criterio de auditor externo. Si hay desvíos, los cerramos antes de la auditoría real. Sorpresas: ninguna.' },
+  { icon: '🔗', title: 'Integración con ISO 9001 / 14001 existente', desc: 'Si ya tenés otras normas implementadas, las integramos en una sola estructura documental. Sin duplicar trabajo ni crear silos.' },
+  { icon: '💻', title: 'Plataforma SaaS post-certificación incluida', desc: 'El sistema no se cae cuando terminamos. Tu equipo lo opera en nuestra plataforma. Nosotros somos soporte, no muleta.' },
+];
+
+const fases = [
+  { num: '01', meses: 'Meses 1-2', titulo: 'Diagnóstico y planificación', desc: 'Gap analysis completo, definición del alcance, política y objetivos. Plataforma activada.' },
+  { num: '02', meses: 'Meses 3-4', titulo: 'Documentación y capacitaciones', desc: 'Procedimientos obligatorios, registros, capacitaciones al personal. Sistema operativo.' },
+  { num: '03', meses: 'Mes 5', titulo: 'Auditoría interna y sombra', desc: 'Auditamos internamente con criterio externo. Cerramos todas las no conformidades.' },
+  { num: '04', meses: 'Mes 6', titulo: 'Certificación', desc: 'Auditoría externa con el organismo certificador. Sistema listo para presentar.' },
+];
+---
+
+<BaseLayout
+  title="Implementación ISO 45001 Argentina — Desde cero en 6 meses | SIGMETRÍA HyS"
+  description="Implementación ISO 45001 con roadmap por cláusula, plataforma digital propia y auditoría sombra. No entregamos carpetas. Dejamos sistema que tu equipo opera solo."
+  schema={schema}
+>
+
+  <section class="page-hero">
+    <div class="page-hero-inner">
+      <nav aria-label="Breadcrumb" class="breadcrumb">
+        <a href="/">Inicio</a><span>/</span>
+        <a href="/servicios/">Servicios</a><span>/</span>
+        <span>ISO 45001 — Implementación</span>
+      </nav>
+      <div class="page-hero-badge">ISO 45001:2018 · Desde cero · 6 meses</div>
+      <h1>ISO 45001 EN 6 MESES.<br><em>Y UN SISTEMA QUE SIGUE DESPUÉS.</em></h1>
+      <p class="hero-sub-text">No entregamos carpetas. Dejamos plataforma viva, documentación lista y un equipo que opera el sistema sin depender de nosotros.</p>
+      <div class="hero-ctas">
+        <a href="/contacto/" class="btn-primary">Diagnóstico ISO gratuito</a>
+        <a href="/servicios/iso-45001/mantenimiento/" class="btn-outline">¿Ya certificado? Ver mantenimiento</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="content-inner">
+
+      <!-- Diferenciador clave -->
+      <div class="diferenciador-banner">
+        <div class="dif-col">
+          <p class="dif-label">Consultora tradicional</p>
+          <ul class="dif-lista dif-lista--negativo">
+            <li>Carpetas que nadie sabe operar</li>
+            <li>El sistema se cae cuando se va el consultor</li>
+            <li>18-24 meses de implementación</li>
+            <li>Sorpresas en la auditoría externa</li>
+          </ul>
+        </div>
+        <div class="dif-vs">VS</div>
+        <div class="dif-col dif-col--positivo">
+          <p class="dif-label">SIGMETRÍA HyS</p>
+          <ul class="dif-lista dif-lista--positivo">
+            <li>Plataforma viva que tu equipo opera</li>
+            <li>Sistema independiente del consultor</li>
+            <li>6 meses con roadmap por cláusula</li>
+            <li>Auditoría sombra antes de la externa</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Bullets de valor -->
+      <div class="seccion-titulo-wrapper">
+        <div class="kicker">Lo que incluye</div>
+        <h2 class="seccion-titulo">QUÉ HACEMOS EN TU <em>IMPLEMENTACIÓN</em></h2>
+      </div>
+      <div class="bullets-grid">
+        {bullets.map(b => (
+          <div class="bullet-card">
+            <span class="bullet-icon">{b.icon}</span>
+            <div>
+              <h3 class="bullet-titulo">{b.title}</h3>
+              <p class="bullet-desc">{b.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Roadmap 4 fases -->
+      <div class="seccion-titulo-wrapper">
+        <div class="kicker">Roadmap</div>
+        <h2 class="seccion-titulo">DE CERO A CERTIFICADO EN <em>6 MESES</em></h2>
+      </div>
+      <div class="fases-grid">
+        {fases.map(f => (
+          <div class="fase-card">
+            <div class="fase-num">{f.num}</div>
+            <div class="fase-meses">{f.meses}</div>
+            <h3 class="fase-titulo">{f.titulo}</h3>
+            <p class="fase-desc">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+
+      <!-- Objeción común -->
+      <div class="objecion-box">
+        <h3>"6 meses parece muy rápido"</h3>
+        <p>No es marketing. Es el resultado de tener el proceso sistematizado, documentación base generada con IA y una plataforma que corre el seguimiento en paralelo. Te pasamos el roadmap detallado por cláusula. Si después no te cierra, no avanzamos.</p>
+        <a href="/contacto/" class="btn-primary">Ver el roadmap en una reunión de 30 min</a>
+      </div>
+
+      <!-- CTA final -->
+      <div class="cta-banner">
+        <h2>DIAGNÓSTICO <em>ISO GRATUITO</em></h2>
+        <p>Te decimos en qué estado real estás antes de cualquier propuesta. Gap analysis sin cargo, sin compromiso. Si no tiene sentido implementar ahora, te lo decimos nosotros.</p>
+        <div class="cta-actions">
+          <a href="/contacto/" class="btn-primary">Solicitar diagnóstico gratuito</a>
+          <a href="https://wa.me/5491123496789" class="btn-outline" target="_blank" rel="noopener">Consultar por WhatsApp</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+.hero-sub-text {
+  font-size: 16px;
+  font-weight: 300;
+  color: var(--gris-2);
+  line-height: 1.8;
+  max-width: 620px;
+  margin: 12px 0 24px;
+}
+.hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+
+/* Diferenciador */
+.diferenciador-banner {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 24px;
+  align-items: start;
+  background: var(--gris-bg);
+  border: 1px solid var(--borde);
+  border-radius: 12px;
+  padding: 28px 32px;
+  margin-bottom: 52px;
+}
+.dif-label {
+  font-family: 'Montserrat', sans-serif;
+  font-size: .6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--gris-3);
+  margin-bottom: 12px;
+}
+.dif-lista { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.dif-lista li {
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 1.5;
+  padding-left: 18px;
+  position: relative;
+}
+.dif-lista--negativo li { color: var(--gris-3); }
+.dif-lista--negativo li::before { content: '✗'; position: absolute; left: 0; color: #ef4444; font-size: .7rem; }
+.dif-lista--positivo li { color: var(--gris-1); font-weight: 400; }
+.dif-lista--positivo li::before { content: '✓'; position: absolute; left: 0; color: var(--verde); font-size: .7rem; }
+.dif-col--positivo { background: var(--verde-light); border: 1px solid var(--verde-borde); border-radius: 8px; padding: 16px; }
+.dif-vs {
+  font-family: 'Montserrat', sans-serif;
+  font-size: .7rem;
+  font-weight: 800;
+  color: var(--gris-3);
+  letter-spacing: 2px;
+  align-self: center;
+}
+
+/* Sección título */
+.seccion-titulo-wrapper { margin-bottom: 24px; }
+.seccion-titulo {
+  font-size: clamp(24px, 3vw, 40px);
+  letter-spacing: 2px;
+  color: var(--gris-1);
+  line-height: 1;
+}
+.seccion-titulo em { font-style: normal; color: var(--verde); }
+
+/* Bullets */
+.bullets-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-bottom: 56px;
+}
+.bullet-card {
+  display: flex;
+  gap: 16px;
+  padding: 22px;
+  background: var(--blanco);
+  border: 1px solid var(--borde);
+  border-radius: 10px;
+  transition: all .2s;
+}
+.bullet-card:hover { border-color: var(--verde-borde); box-shadow: 0 6px 20px rgba(0,0,0,.06); }
+.bullet-icon { font-size: 1.6rem; flex-shrink: 0; }
+.bullet-titulo { font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; color: var(--gris-1); margin-bottom: 6px; }
+.bullet-desc { font-size: 13px; font-weight: 300; color: var(--gris-2); line-height: 1.7; margin: 0; }
+
+/* Fases */
+.fases-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-bottom: 48px;
+}
+.fase-card {
+  padding: 22px 18px;
+  background: var(--blanco);
+  border: 1px solid var(--borde);
+  border-radius: 10px;
+}
+.fase-num {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--verde-light);
+  -webkit-text-stroke: 2px var(--verde-borde);
+  margin-bottom: 4px;
+}
+.fase-meses {
+  font-family: 'Montserrat', sans-serif;
+  font-size: .52rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--verde);
+  margin-bottom: 8px;
+}
+.fase-titulo { font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; color: var(--gris-1); margin-bottom: 8px; }
+.fase-desc { font-size: 13px; font-weight: 300; color: var(--gris-2); line-height: 1.65; margin: 0; }
+
+/* Objeción */
+.objecion-box {
+  background: var(--gris-bg);
+  border: 1px solid var(--borde);
+  border-left: 4px solid var(--verde);
+  border-radius: 8px;
+  padding: 28px 32px;
+  margin-bottom: 48px;
+}
+.objecion-box h3 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--gris-1);
+  margin-bottom: 12px;
+}
+.objecion-box p {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--gris-2);
+  line-height: 1.8;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 900px) {
+  .diferenciador-banner { grid-template-columns: 1fr; }
+  .dif-vs { text-align: center; }
+  .bullets-grid { grid-template-columns: 1fr; }
+  .fases-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .fases-grid { grid-template-columns: 1fr; }
+}
+</style>

@@ -5,11 +5,11 @@ const schema = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
   "name": "SIGMETRÍA HyS",
-  "description": "Consultora de Higiene y Seguridad Laboral en CABA y provincia de Buenos Aires. Matriculados en COPIME, CPSH y Colegio de Ingeniería Industrial. Cumplimiento normativo integral.",
+  "description": "Sistema de gestión operativa basado en HyS, ISO 45001, automatización e IA. Planificamos, ejecutamos, controlamos y medimos en tiempo real — con plataforma propia y presencia en obra.",
   "url": "https://sigmetriahys.com",
   "telephone": "+5491123496789",
   "email": "ezequiel@sigmetriahys.com",
-  "areaServed": ["Ciudad Autónoma de Buenos Aires", "Gran Buenos Aires"],
+  "areaServed": ["Ciudad Autónoma de Buenos Aires", "Gran Buenos Aires", "Argentina"],
   "address": {
     "@type": "PostalAddress",
     "addressRegion": "Ciudad Autónoma de Buenos Aires",
@@ -17,97 +17,162 @@ const schema = {
   },
   "hasOfferCatalog": {
     "@type": "OfferCatalog",
-    "name": "Servicios de Higiene y Seguridad Laboral",
+    "name": "Servicios de Gestión HyS",
     "itemListElement": [
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Higiene y Seguridad para Empresas Industriales" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Higiene y Seguridad para Construcción" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Higiene y Seguridad para Establecimientos Educativos" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Higiene y Seguridad para Locales Comerciales" } }
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Higiene y Seguridad para Construcción y Obra — CABA y GBA" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Implementación ISO 45001:2018" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Plataforma SaaS de Gestión HyS" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Mediciones Técnicas en Planta y Obra" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Capacitaciones HyS In Company" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Auditorías y Gap Analysis ISO 45001" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Mantenimiento ISO 45001 Post-Certificación" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Sistemas Enterprise y Dashboards Ejecutivos" } }
     ]
   },
   "sameAs": []
 };
 
-const sectores = [
+const servicios = [
   {
-    id: 'empresas-industriales',
-    icon: '🏭',
-    badge: 'Decreto 351/79 · SRT',
-    name: 'Empresas Industriales',
-    desc: 'Plantas de producción, manufactura, logística y depósitos. Cobertura completa de mediciones, documentación y gestión normativa.',
-    servicios: ['Iluminación, ruido, vibraciones, ergonomía', 'Estrés térmico e índice WBGT', 'Puesta a tierra y continuidad de masas', 'RAR, RGRL, plan antisiniestral', 'ISO 45001:2018'],
-  },
-  {
-    id: 'construccion',
+    href: '/servicios/hys-construccion-caba/',
     icon: '🏗️',
-    badge: 'Decreto 911/96',
-    name: 'Construcción',
-    desc: 'Obras civiles, constructoras e infraestructura. Técnico en obra con visitas semanales y legajo completo.',
-    servicios: ['Programa de seguridad con aviso de obra', 'Visitas semanales de técnico en campo', 'Legajo técnico de seguridad', 'Mediciones: ruido, iluminación, vibraciones', 'Plan antisiniestral y simulacros'],
+    badge: 'Decreto 911/96 · CABA · GBA',
+    name: 'HyS Construcción y Obra',
+    desc: 'Matriculado disponible, plan firmado y app de campo. Obra documentada en 7 días, lista para AGC, GCBA o SRT.',
+    items: ['Matriculado COPIME · Ing. Industrial', 'Plan de seguridad con aviso de obra', 'App de campo para capataces', 'Control de subcontratistas', 'Visitas en obra + soporte continuo'],
   },
   {
-    id: 'educativo-recreativo',
-    icon: '🏫',
-    badge: 'Ley 5920 CABA',
-    name: 'Educativo & Recreativo',
-    desc: 'Colegios, universidades, clubes y centros culturales. Cumplimiento de la Ley de Autoprotección 5920.',
-    servicios: ['Plan de emergencia y evacuación', 'Planos de evacuación por planta', 'Formación y capacitación de brigadas', 'Simulacros con informe y certificación', 'RAR, RGRL y plan antisiniestral'],
+    href: '/servicios/iso-45001/implementacion/',
+    icon: '📋',
+    badge: 'ISO 45001:2018 · 6 meses',
+    name: 'Implementación ISO 45001',
+    desc: 'Desde cero a certificado en 6 meses. Roadmap por cláusula y plataforma que sobrevive al consultor.',
+    items: ['Roadmap por cláusula con avance medible', 'Gap analysis dinámico', 'Documentación adaptable con IA', 'Auditoría sombra previa a la externa', 'Plataforma SaaS post-certificación'],
   },
   {
-    id: 'locales-comerciales',
-    icon: '🏪',
-    badge: 'SRT · ART · Ley 5920',
-    name: 'Locales Comerciales',
-    desc: 'Comercios, restaurantes, oficinas y atención al público. Documentación siempre al día, sin complicaciones.',
-    servicios: ['Mediciones: iluminación, ruido, estrés térmico', 'Puesta a tierra y continuidad de masas', 'Ergonomía en puestos de trabajo', 'Plan de emergencia para CABA (Ley 5920)', 'Capacitaciones y simulacros'],
+    href: '/plataforma/',
+    icon: '💻',
+    badge: 'SaaS · Onboarding en 30 días',
+    name: 'Plataforma SaaS HyS',
+    desc: 'Planificá, ejecutá, controlá y medí tu sistema completo. Vencimientos automáticos y reportes listos para auditoría.',
+    items: ['Gestión documental y vencimientos', 'Seguimiento de desvíos con trazabilidad', 'Capacitaciones digitales con evidencias', 'Matriz de riesgos dinámica', 'App de campo para operarios'],
+  },
+  {
+    href: '/servicios/mediciones/',
+    icon: '📐',
+    badge: 'Protocolos SRT · CABA · GBA',
+    name: 'Mediciones Técnicas',
+    desc: 'Iluminación, ruido, carga térmica, puesta a tierra y ergonomía. Informes firmados y carga directa al sistema.',
+    items: ['Iluminación en puestos de trabajo', 'Ruido y vibración', 'Carga térmica e índice WBGT', 'Puesta a tierra y continuidad de masas', 'Ergonomía y contaminantes'],
+  },
+  {
+    href: '/servicios/capacitaciones/',
+    icon: '🎓',
+    badge: 'In company · Registro digital',
+    name: 'Capacitaciones In Company',
+    desc: 'Trabajo en altura, espacios confinados, riesgo eléctrico y más. Constancias digitales listas para auditoría.',
+    items: ['Trabajo en altura', 'Espacios confinados', 'Riesgo eléctrico', 'Uso correcto de EPP', 'Brigada de emergencia'],
+  },
+  {
+    href: '/servicios/auditorias/',
+    icon: '🔍',
+    badge: 'Gap analysis · Auditoría sombra',
+    name: 'Auditorías y Gap Analysis',
+    desc: 'Sabé exactamente en qué estado estás antes de la auditoría externa. Gap analysis, auditoría interna y sombra.',
+    items: ['Gap analysis ISO 45001', 'Auditoría interna', 'Auditoría sombra pre-externa', 'Hallazgos con plan de acción', 'Preparación para certificadoras'],
+  },
+  {
+    href: '/servicios/iso-45001/mantenimiento/',
+    icon: '🔄',
+    badge: 'Post-certificación · SaaS',
+    name: 'Mantenimiento ISO 45001',
+    desc: 'Mantenemos vivo tu sistema post-certificación sin que dependa de nosotros. SaaS + soporte + seguimiento.',
+    items: ['SaaS post-certificación activo', 'Auditorías de seguimiento y recertificación', 'Actualización documental continua', 'No conformidades con trazabilidad', 'Soporte continuo'],
+  },
+  {
+    href: '/enterprise/',
+    icon: '🖥️',
+    badge: 'Enterprise · ERP · IA',
+    name: 'Enterprise + Dashboards',
+    desc: 'HyS integrado a tu modelo operativo. Dashboards multi-sitio, integraciones con ERP y IA aplicada.',
+    items: ['Integración SAP / Oracle / Dynamics', 'Dashboards multi-planta en tiempo real', 'KPIs consolidados por planta', 'Alertas automáticas con escalado', 'Soporte enterprise 24/7 con SLA'],
   },
 ];
 ---
 
 <BaseLayout
-  title="SIGMETRÍA HyS — Consultora de Higiene y Seguridad Laboral | CABA y Provincia de Buenos Aires"
-  description="Consultora de Higiene y Seguridad Laboral en CABA y provincia de Buenos Aires. Matriculados en COPIME, CPSH y Colegio de Ingeniería Industrial. Mediciones, gestión normativa, ISO 45001 y planes de emergencia."
+  title="SIGMETRÍA HyS — Sistema de Gestión HyS | ISO 45001 · Plataforma · CABA y GBA"
+  description="No somos una consultora. Somos el sistema de gestión operativa basado en HyS, ISO 45001, automatización e IA. No entregamos carpetas. Dejamos sistema."
   schema={schema}
 >
 
   <!-- HERO -->
   <section class="hero">
     <div class="hero-layout">
-
       <div class="hero-content">
-        <div class="kicker kicker--left">CABA · GBA</div>
-        <h1 class="hero-title">HIGIENE Y SEGURIDAD <em>LABORAL</em></h1>
-        <p class="hero-sub">Tu empresa cumpliendo la normativa vigente, sin complicaciones. Matriculados en COPIME, CPSH y el Colegio de Ingeniería Industrial — con cobertura legal en CABA y toda la provincia de Buenos Aires.</p>
+        <div class="kicker kicker--left">SISTEMA · NO CONSULTORÍA</div>
+        <h1 class="hero-title">HYS QUE PLANIFICA, CONTROLA Y <em>MIDE</em></h1>
+        <p class="hero-sub">No somos una consultora. Somos el sistema de gestión operativa basado en HyS, ISO 45001, automatización e IA. <strong>No entregamos carpetas. Dejamos sistema.</strong></p>
 
         <div class="hero-badges">
-          <span class="hero-badge">Cumplimiento SRT / ART</span>
-          <span class="hero-badge">Presencia en campo</span>
-          <span class="hero-badge">COPIME · CPSH · Ing. Industrial</span>
-          <span class="hero-badge">ISO 45001:2018</span>
+          <span class="hero-badge">Sistema, no consultoría</span>
+          <span class="hero-badge">ISO 45001 en 6 meses</span>
+          <span class="hero-badge">Plataforma digital propia</span>
+          <span class="hero-badge">CABA · GBA · Argentina</span>
         </div>
 
         <div class="hero-actions">
-          <a href="/contacto/" class="btn-primary">Consultanos ahora</a>
+          <a href="/contacto/" class="btn-primary">Diagnóstico gratuito</a>
           <a href="/servicios/" class="btn-outline">Ver servicios</a>
         </div>
       </div>
-
-
     </div>
   </section>
 
-  <!-- SECTORES -->
-  <section class="sectores-section" id="sectores" aria-label="Servicios por sector">
+  <!-- BRAND: SIG + METRÍA -->
+  <section class="marca-section" aria-label="Por qué el nombre Sigmetría">
+    <div class="marca-inner">
+      <div class="marca-etimo">
+        <div class="kicker kicker--left">El nombre explica la misión</div>
+        <div class="etimo-wrap">
+          <div class="etimo-bloque">
+            <span class="etimo-sigla">SIG</span>
+            <span class="etimo-flecha">→</span>
+            <span class="etimo-def">Seguridad</span>
+          </div>
+          <span class="etimo-plus">+</span>
+          <div class="etimo-bloque">
+            <span class="etimo-sigla">METRÍA</span>
+            <span class="etimo-flecha">→</span>
+            <span class="etimo-def">Métricas</span>
+          </div>
+        </div>
+        <blockquote class="marca-slogan">
+          "Lo que no registrás, no lo podés medir.<br>Lo que no se mide, no se mejora."
+        </blockquote>
+      </div>
+      <div class="marca-datos">
+        <div class="marca-stat">
+          <span class="stat-num">80<span class="stat-pct">%</span></span>
+          <p class="stat-label">de las empresas en Argentina no tienen un registro digitalizado de sus métricas de gestión HyS.</p>
+        </div>
+        <p class="marca-context">Venimos a cambiar eso. No con una app predefinida que te forzamos a adoptar, sino <strong>adaptando el sistema a las necesidades reales de tu organización</strong> — con mejora continua bajo los conceptos de la ISO y métricas accionables en tiempo real.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICIOS -->
+  <section class="sectores-section" id="servicios" aria-label="Servicios y soluciones">
     <div class="sectores-inner">
       <header class="sectores-header">
         <div class="sectores-header-left">
           <div class="kicker kicker--left">Cobertura completa</div>
-          <h2 class="sectores-title">SERVICIOS POR <em>SECTOR</em></h2>
+          <h2 class="sectores-title">SERVICIOS Y <em>SOLUCIONES</em></h2>
         </div>
-        <p class="sectores-sub">Cada industria tiene su normativa específica. Seleccioná tu sector y conocé exactamente qué servicios de H&S aplican a tu empresa.</p>
+        <p class="sectores-sub">Ocho servicios especializados integrados en un solo sistema. No son servicios aislados — son partes de una plataforma.</p>
       </header>
       <div class="sectores-grid">
-        {sectores.map(s => (
+        {servicios.map(s => (
           <article class="sector-card">
             <div class="sector-card-top">
               <span class="sector-icon" aria-hidden="true">{s.icon}</span>
@@ -115,10 +180,10 @@ const sectores = [
             </div>
             <h3 class="sector-name">{s.name}</h3>
             <p class="sector-desc">{s.desc}</p>
-            <ul class="sector-list" aria-label={`Servicios para ${s.name}`}>
-              {s.servicios.map(sv => <li>{sv}</li>)}
+            <ul class="sector-list" aria-label={`Detalle — ${s.name}`}>
+              {s.items.map(item => <li>{item}</li>)}
             </ul>
-            <a href={`/servicios/${s.id}/`} class="sector-cta">Ver todos los servicios →</a>
+            <a href={s.href} class="sector-cta">Ver detalle →</a>
           </article>
         ))}
       </div>
@@ -135,23 +200,23 @@ const sectores = [
       <div class="porque-grid">
         <div class="porque-item">
           <div class="porque-num">01</div>
-          <h3>Matriculados en COPIME, CPSH e Ing. Industrial</h3>
-          <p>Profesionales matriculados en COPIME, CPSH y el Colegio de Ingeniería Industrial. Cobertura legal en CABA y toda la provincia de Buenos Aires.</p>
+          <h3>Sistema, no consultoría</h3>
+          <p>Te dejamos el sistema, no carpetas. Tu equipo lo opera sin depender de nosotros. Si el consultor se va mañana, el sistema sigue funcionando.</p>
         </div>
         <div class="porque-item">
           <div class="porque-num">02</div>
-          <h3>Presencia en campo</h3>
-          <p>Vamos a tu establecimiento. No tercerizamos ni hacemos gestión remota. El profesional está en tu empresa cuando lo necesitás.</p>
+          <h3>Datos, no relato</h3>
+          <p>Lo que no medís, no lo controlás. KPIs en tiempo real, dashboards accionables y reportes que le hablan al directorio — no narrativas mensuales.</p>
         </div>
         <div class="porque-item">
           <div class="porque-num">03</div>
-          <h3>Documentación completa y a tiempo</h3>
-          <p>Cumplimos con todos los plazos ante SRT y ART. Informes, protocolos y presentaciones entregados sin retrasos ni excusas.</p>
+          <h3>Velocidad real</h3>
+          <p>Obra documentada en 7 días. ISO 45001 desde cero en 6 meses. Onboarding de plataforma en 30 días. Promesas con roadmap, no marketing.</p>
         </div>
         <div class="porque-item">
           <div class="porque-num">04</div>
-          <h3>Cobertura CABA y GBA</h3>
-          <p>Atendemos en toda la Ciudad Autónoma de Buenos Aires y el Gran Buenos Aires. Un solo proveedor para todas tus sedes.</p>
+          <h3>ROI tangible</h3>
+          <p>El sistema se paga con una multa evitada, una licitación ganada o un accidente que no sucedió. Calculá el ROI con tus números antes de firmar.</p>
         </div>
       </div>
     </div>
@@ -213,6 +278,7 @@ const sectores = [
   max-width: 560px;
   animation: fadeUp .6s ease .25s both;
 }
+.hero-sub strong { color: var(--gris-1); font-weight: 600; }
 .hero-badges {
   display: flex;
   flex-wrap: wrap;
@@ -243,8 +309,7 @@ const sectores = [
   animation: fadeUp .6s ease .45s both;
 }
 
-
-/* SECTORES */
+/* SERVICIOS */
 .sectores-section {
   position: relative;
   z-index: 1;
@@ -445,6 +510,105 @@ const sectores = [
   font-weight: 300;
   color: var(--gris-2);
   line-height: 1.7;
+}
+
+/* MARCA: SIG + METRÍA */
+.marca-section {
+  position: relative;
+  z-index: 1;
+  padding: 64px 51px;
+  background: var(--gris-1);
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+.marca-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+.marca-etimo .kicker { color: var(--verde); }
+.marca-etimo .kicker::after { background: var(--verde); }
+.etimo-wrap {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin: 20px 0 24px;
+  flex-wrap: wrap;
+}
+.etimo-bloque {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.etimo-sigla {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(22px, 3vw, 34px);
+  font-weight: 800;
+  color: var(--verde);
+  letter-spacing: 2px;
+}
+.etimo-flecha {
+  font-size: 1.2rem;
+  color: rgba(255,255,255,.3);
+}
+.etimo-def {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(18px, 2.5vw, 26px);
+  font-weight: 300;
+  color: rgba(255,255,255,.85);
+  letter-spacing: 1px;
+}
+.etimo-plus {
+  font-size: 2rem;
+  color: rgba(255,255,255,.2);
+  font-weight: 300;
+  line-height: 1;
+}
+.marca-slogan {
+  font-size: 14px;
+  font-weight: 300;
+  color: rgba(255,255,255,.55);
+  font-style: italic;
+  line-height: 1.8;
+  border-left: 3px solid var(--verde);
+  padding-left: 16px;
+  max-width: 440px;
+}
+.marca-stat {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(255,255,255,.1);
+}
+.stat-num {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(48px, 6vw, 72px);
+  font-weight: 800;
+  color: var(--verde);
+  line-height: 1;
+  flex-shrink: 0;
+}
+.stat-pct { font-size: .6em; }
+.stat-label {
+  font-size: 13px;
+  font-weight: 300;
+  color: rgba(255,255,255,.6);
+  line-height: 1.65;
+}
+.marca-context {
+  font-size: 14px;
+  font-weight: 300;
+  color: rgba(255,255,255,.65);
+  line-height: 1.8;
+}
+.marca-context strong { color: rgba(255,255,255,.9); font-weight: 600; }
+@media (max-width: 900px) {
+  .marca-section { padding: 52px 24px; }
+  .marca-inner { grid-template-columns: 1fr; gap: 36px; }
 }
 
 /* RESPONSIVE */

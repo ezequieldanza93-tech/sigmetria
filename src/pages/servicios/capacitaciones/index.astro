@@ -1,0 +1,108 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+const cursos = [
+  { titulo: 'Trabajo en altura', desc: 'Prevención de caídas, uso de arneses, anclajes y líneas de vida. Obligatorio para toda tarea a más de 2 metros.', badge: 'Alta demanda', icon: '⬆️' },
+  { titulo: 'Espacios confinados', desc: 'Identificación, evaluación de atmósferas y procedimiento de ingreso. Incluye rescate básico y comunicaciones.', badge: 'Obligatorio', icon: '🕳️' },
+  { titulo: 'Riesgo eléctrico', desc: 'Capacitación para tareas en baja y media tensión. Uso de EPP eléctrico, distancias de seguridad y bloqueo/etiquetado.', badge: 'Obligatorio', icon: '⚡' },
+  { titulo: 'Uso correcto de EPP', desc: 'Selección, colocación, mantenimiento y descarte de equipos de protección personal. Incluye práctica con EPP real.', badge: '', icon: '🦺' },
+  { titulo: 'Brigada de emergencia', desc: 'Conformación y entrenamiento de brigada: primeros auxilios, uso de matafuegos, evacuación y comunicaciones.', badge: '', icon: '🚨' },
+  { titulo: 'Inducción de ingreso', desc: 'Capacitación de nuevos ingresos: riesgos del puesto, normas internas, procedimientos de emergencia y firma de constancia.', badge: '', icon: '👤' },
+  { titulo: 'Manejo de sustancias peligrosas', desc: 'Clasificación, etiquetado, almacenamiento y respuesta ante derrames. Incluye lectura de MSDS y uso de EPP específico.', badge: '', icon: '☢️' },
+  { titulo: 'Seguridad vial laboral', desc: 'Manejo defensivo, fatiga al volante, uso de equipos pesados y normativa vial aplicada a trabajo en ruta y obra.', badge: '', icon: '🚗' },
+];
+---
+
+<BaseLayout
+  title="Capacitaciones HyS In Company — Trabajo en altura · Espacios confinados | SIGMETRÍA HyS"
+  description="Capacitaciones in company con registro digital y constancias listas para auditoría. Trabajo en altura, espacios confinados, riesgo eléctrico, EPP y más en CABA y GBA."
+>
+
+  <section class="page-hero">
+    <div class="page-hero-inner">
+      <nav aria-label="Breadcrumb" class="breadcrumb">
+        <a href="/">Inicio</a><span>/</span>
+        <a href="/servicios/">Servicios</a><span>/</span>
+        <span>Capacitaciones</span>
+      </nav>
+      <div class="page-hero-badge">In company · Registro digital · CABA · GBA</div>
+      <h1>CAPACITACIONES HYS<br><em>IN COMPANY</em></h1>
+      <p class="hero-sub">Cursos adaptados al puesto, registro digital con firma y constancias listas para auditoría. Si las capacitaciones no tienen evidencia, como si no las hubieras hecho.</p>
+      <div class="hero-ctas">
+        <a href="/contacto/" class="btn-primary">Cotizar capacitación</a>
+        <a href="https://wa.me/5491123496789" class="btn-outline" target="_blank" rel="noopener">Consulta por WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="content-inner">
+
+      <div class="cursos-grid">
+        {cursos.map(c => (
+          <div class="curso-card">
+            <div class="curso-top">
+              <span class="curso-icon">{c.icon}</span>
+              {c.badge && <span class="curso-badge">{c.badge}</span>}
+            </div>
+            <h2 class="curso-titulo">{c.titulo}</h2>
+            <p class="curso-desc">{c.desc}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="info-box">
+        <h3>La evidencia de capacitación es tan importante como la capacitación en sí</h3>
+        <p>En una auditoría, el auditor pregunta por la evidencia: registro de asistencia, firma del participante y constancia con fecha y contenido. Si el registro está en papel en una carpeta, hay riesgo de pérdida, inconsistencia o simplemente de no encontrarlo en el momento. Todos los cursos de Sigmetría generan evidencia digital con trazabilidad completa.</p>
+      </div>
+
+      <div class="cta-banner">
+        <h2>COTIZÁ TU <em>CAPACITACIÓN</em></h2>
+        <p>Decinos qué curso necesitás, cuántos participantes y en qué sede. En 24 horas tenés una propuesta con fechas disponibles.</p>
+        <div class="cta-actions">
+          <a href="/contacto/" class="btn-primary">Solicitar propuesta</a>
+          <a href="https://wa.me/5491123496789" class="btn-outline" target="_blank" rel="noopener">WhatsApp</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+.hero-sub { font-size: 15px; font-weight: 300; color: var(--gris-2); line-height: 1.8; max-width: 600px; margin: 12px 0 24px; }
+.hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+.cursos-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-bottom: 48px;
+}
+.curso-card {
+  padding: 20px 16px;
+  background: var(--blanco);
+  border: 1px solid var(--borde);
+  border-radius: 10px;
+  transition: all .2s;
+}
+.curso-card:hover { border-color: var(--verde-borde); box-shadow: 0 6px 20px rgba(0,0,0,.06); }
+.curso-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+.curso-icon { font-size: 1.6rem; }
+.curso-badge {
+  font-family: 'Montserrat', sans-serif; font-size: .44rem; font-weight: 600;
+  text-transform: uppercase; letter-spacing: .5px;
+  color: var(--verde-dark); background: var(--verde-light);
+  border: 1px solid var(--verde-borde); padding: 2px 7px; border-radius: 3px;
+}
+.curso-titulo { font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; color: var(--gris-1); margin-bottom: 8px; }
+.curso-desc { font-size: 12px; font-weight: 300; color: var(--gris-2); line-height: 1.65; margin: 0; }
+.info-box {
+  background: var(--verde-light); border: 1px solid var(--verde-borde); border-radius: 10px;
+  padding: 28px 32px; margin-bottom: 48px;
+}
+.info-box h3 { font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 700; color: var(--gris-1); margin-bottom: 10px; }
+.info-box p { font-size: 13px; font-weight: 300; color: var(--gris-2); line-height: 1.8; margin: 0; }
+@media (max-width: 1100px) { .cursos-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .cursos-grid { grid-template-columns: 1fr; } }
+</style>

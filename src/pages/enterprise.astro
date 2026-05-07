@@ -1,0 +1,98 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="HyS Enterprise — Dashboards Ejecutivos · Integración ERP · Multi-sitio | SIGMETRÍA HyS"
+  description="HyS integrado a tu modelo operativo. Dashboards multi-planta en tiempo real, integración con SAP/Oracle/Dynamics y KPIs de safety al nivel de producción."
+>
+
+  <section class="page-hero">
+    <div class="page-hero-inner">
+      <nav aria-label="Breadcrumb" class="breadcrumb">
+        <a href="/">Inicio</a><span>/</span>
+        <span>Enterprise</span>
+      </nav>
+      <div class="page-hero-badge">Enterprise · ERP · Multi-sitio · IA</div>
+      <h1>CONTROL OPERATIVO TOTAL.<br><em>SIN SILOS. SIN FRICCIÓN.</em></h1>
+      <p class="hero-sub">HyS es el último silo de datos de tu operación. Lo integramos a tu modelo de gestión: dashboards multi-planta, KPIs en tiempo real y datos accionables.</p>
+      <div class="hero-ctas">
+        <a href="/contacto/" class="btn-primary">Reunión técnica</a>
+        <a href="https://wa.me/5491123496789" class="btn-outline" target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="content-inner">
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <span class="feature-icon">🔗</span>
+          <h2>Integración con ERP</h2>
+          <p>Conectores documentados para SAP, Oracle y Microsoft Dynamics. API abierta para integraciones personalizadas.</p>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon">📊</span>
+          <h2>Dashboards multi-planta en tiempo real</h2>
+          <p>Vista consolidada por planta, región o empresa. KPIs de safety al mismo nivel que tus KPIs de producción.</p>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon">🔔</span>
+          <h2>Alertas automáticas con escalado</h2>
+          <p>Configuración de alertas por nivel de severidad con escalado automático a los responsables. Sin dependencia del operador.</p>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon">🤖</span>
+          <h2>IA aplicada a HyS</h2>
+          <p>Predicción de desvíos, generación asistida de documentación y análisis de tendencias de siniestralidad.</p>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon">🏭</span>
+          <h2>Despliegue multi-sitio</h2>
+          <p>Onboarding por planta con configuración replicable. Escalable a nuevas sedes o adquisiciones sin empezar de cero.</p>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon">🛡️</span>
+          <h2>Soporte enterprise 24/7 con SLA</h2>
+          <p>Account técnico dedicado, SLA escrito en contrato y soporte en horario extendido para operaciones críticas.</p>
+        </div>
+      </div>
+
+      <div class="cta-banner">
+        <h2>POC TÉCNICO DE <em>60 DÍAS</em></h2>
+        <p>1 planta · criterios de aceptación firmados · sin riesgo. Si en 60 días no cumple los criterios acordados, salida sin penalidad.</p>
+        <div class="cta-actions">
+          <a href="/contacto/" class="btn-primary">Proponer POC</a>
+          <a href="https://wa.me/5491123496789" class="btn-outline" target="_blank" rel="noopener">WhatsApp</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+.hero-sub { font-size: 15px; font-weight: 300; color: var(--gris-2); line-height: 1.8; max-width: 600px; margin: 12px 0 24px; }
+.hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 48px;
+}
+.feature-card {
+  padding: 24px 20px;
+  background: var(--blanco);
+  border: 1px solid var(--borde);
+  border-radius: 10px;
+  transition: all .2s;
+}
+.feature-card:hover { border-color: var(--verde-borde); box-shadow: 0 6px 20px rgba(0,0,0,.06); }
+.feature-icon { font-size: 1.8rem; display: block; margin-bottom: 12px; }
+.feature-card h2 { font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; color: var(--gris-1); margin-bottom: 8px; }
+.feature-card p { font-size: 13px; font-weight: 300; color: var(--gris-2); line-height: 1.7; margin: 0; }
+@media (max-width: 900px) { .features-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .features-grid { grid-template-columns: 1fr; } }
+</style>

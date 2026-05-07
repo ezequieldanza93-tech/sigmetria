@@ -1,0 +1,109 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+const mediciones = [
+  { href: '/servicios/mediciones/iluminacion/', icon: '💡', title: 'Medición de iluminación', desc: 'Medición en puestos de trabajo según Protocolo SRT. Informe técnico firmado con valores, comparativa normativa y recomendaciones.' },
+  { href: '/servicios/mediciones/ruido/', icon: '🔊', title: 'Medición de ruido laboral', desc: 'Dosimetría y niveles de presión sonora. Protocolo SRT completo con mapas de ruido y plan de acción si aplica.' },
+  { href: '/servicios/mediciones/puesta-a-tierra/', icon: '⚡', title: 'Puesta a tierra y continuidad de masas', desc: 'Verificación de resistencia y continuidad con instrumentos calibrados. Certificado firmado listo para presentar ante SRT o ART.' },
+  { href: '/servicios/mediciones/carga-termica/', icon: '🌡️', title: 'Carga térmica e índice WBGT', desc: 'Medición de estrés térmico en puestos expuestos. Índice WBGT y análisis de riesgo por exposición térmica.' },
+  { href: '/servicios/mediciones/ergonomia/', icon: '🪑', title: 'Ergonomía en puestos de trabajo', desc: 'Evaluación de condiciones ergonómicas, posturas forzadas y riesgos musculoesqueléticos. Informe con medidas correctivas.' },
+  { href: '/servicios/mediciones/', icon: '🧪', title: 'Contaminantes y agentes físicos', desc: 'Medición de vibraciones, material particulado, contaminantes laborales y otros agentes según normativa SRT.' },
+];
+---
+
+<BaseLayout
+  title="Mediciones Técnicas HyS — Iluminación · Ruido · Puesta a Tierra | SIGMETRÍA HyS"
+  description="Mediciones obligatorias SRT: iluminación, ruido, carga térmica, puesta a tierra y ergonomía. Instrumentos calibrados, informes firmados y carga directa al sistema de gestión."
+>
+
+  <section class="page-hero">
+    <div class="page-hero-inner">
+      <nav aria-label="Breadcrumb" class="breadcrumb">
+        <a href="/">Inicio</a><span>/</span>
+        <a href="/servicios/">Servicios</a><span>/</span>
+        <span>Mediciones Técnicas</span>
+      </nav>
+      <div class="page-hero-badge">Protocolos SRT · Instrumentos calibrados · CABA · GBA</div>
+      <h1>MEDICIONES TÉCNICAS<br><em>OBLIGATORIAS SRT</em></h1>
+      <p class="hero-sub">Cumplí con todas las mediciones obligatorias. Instrumentos calibrados, informes firmados por matriculado y carga directa al sistema de gestión.</p>
+      <div class="hero-ctas">
+        <a href="/contacto/" class="btn-primary">Cotizá tus mediciones</a>
+        <a href="https://wa.me/5491123496789" class="btn-outline" target="_blank" rel="noopener">Consulta rápida por WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="content-inner">
+
+      <div class="med-grid">
+        {mediciones.map(m => (
+          <div class="med-card">
+            <span class="med-icon">{m.icon}</span>
+            <h2 class="med-titulo">{m.title}</h2>
+            <p class="med-desc">{m.desc}</p>
+            <a href="/contacto/" class="med-cta">Cotizar →</a>
+          </div>
+        ))}
+      </div>
+
+      <div class="info-box">
+        <h3>¿Por qué las mediciones deben estar en el sistema y no solo en papel?</h3>
+        <p>Una medición en papel se pierde en la auditoría o en el traspaso de responsable. Cuando las mediciones se cargan directamente en la plataforma de gestión, quedan trazadas, con fecha, con firma y accesibles desde cualquier dispositivo. El auditor lo ve en pantalla — no en una carpeta que hay que buscar.</p>
+      </div>
+
+      <div class="cta-banner">
+        <h2>COTIZÁ TUS <em>MEDICIONES</em></h2>
+        <p>Decinos qué tipo de medición necesitás y en qué planta o sede. En 24 horas tenés una cotización con fechas disponibles.</p>
+        <div class="cta-actions">
+          <a href="/contacto/" class="btn-primary">Solicitar cotización</a>
+          <a href="https://wa.me/5491123496789" class="btn-outline" target="_blank" rel="noopener">WhatsApp</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+.hero-sub { font-size: 15px; font-weight: 300; color: var(--gris-2); line-height: 1.8; max-width: 560px; margin: 12px 0 24px; }
+.hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+.med-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 48px;
+}
+.med-card {
+  padding: 24px 20px;
+  background: var(--blanco);
+  border: 1px solid var(--borde);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  transition: all .2s;
+}
+.med-card:hover { border-color: var(--verde-borde); box-shadow: 0 6px 20px rgba(0,0,0,.06); }
+.med-icon { font-size: 1.8rem; margin-bottom: 12px; }
+.med-titulo { font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; color: var(--gris-1); margin-bottom: 8px; }
+.med-desc { font-size: 13px; font-weight: 300; color: var(--gris-2); line-height: 1.7; flex: 1; margin-bottom: 16px; }
+.med-cta {
+  font-family: 'Montserrat', sans-serif; font-size: .58rem; font-weight: 700;
+  color: var(--verde); text-transform: uppercase; letter-spacing: .8px; text-decoration: none;
+  border-top: 1px solid var(--borde); padding-top: 12px; transition: gap .2s;
+  display: flex; align-items: center; gap: 5px;
+}
+.med-cta:hover { gap: 9px; }
+.info-box {
+  background: var(--verde-light);
+  border: 1px solid var(--verde-borde);
+  border-radius: 10px;
+  padding: 28px 32px;
+  margin-bottom: 48px;
+}
+.info-box h3 { font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 700; color: var(--gris-1); margin-bottom: 10px; }
+.info-box p { font-size: 13px; font-weight: 300; color: var(--gris-2); line-height: 1.8; margin: 0; }
+@media (max-width: 900px) { .med-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .med-grid { grid-template-columns: 1fr; } }
+</style>

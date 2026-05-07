@@ -1,0 +1,153 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Matriz de riesgos ISO 45001: cómo armarla bien y los errores que la invalidan — SIGMETRÍA HyS"
+  description="Guía para armar una matriz de riesgos ISO 45001 válida en auditoría: metodología, niveles de riesgo y plantilla."
+>
+  <section class="page-hero">
+    <nav aria-label="Breadcrumb" class="breadcrumb">
+      <a href="/">Inicio</a><span>/</span>
+      <a href="/blog/">Blog</a><span>/</span>
+      <span>Matriz de riesgos ISO 45001</span>
+    </nav>
+    <div class="page-hero-inner">
+      <div class="page-hero-badge">ISO 45001 · Matriz de Riesgos · IPER</div>
+      <h1>MATRIZ DE RIESGOS ISO 45001:<br><em>CÓMO ARMARLA BIEN Y LOS ERRORES QUE LA INVALIDAN</em></h1>
+      <p>La matriz de riesgos es el documento central de cualquier sistema ISO 45001. Si está mal hecha, todo lo demás tambalea. Acá explicamos cómo construirla con metodología sólida y qué fallas la convierten en papel sin valor.</p>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="content-inner article-wrap">
+
+      <div class="article-meta">
+        <span class="art-cat">Gestión</span>
+        <span class="art-sep">·</span>
+        <span class="art-fecha">4 feb 2026</span>
+        <span class="art-sep">·</span>
+        <span class="art-tiempo">7 min lectura</span>
+      </div>
+
+      <div class="article-body">
+        <p class="article-lead">En toda auditoría ISO 45001, el auditor va a ir primero a la matriz de riesgos. Es el documento que refleja si la organización realmente entiende sus peligros o si simplemente llenó un Excel para cumplir un requisito formal. La diferencia entre una matriz que pasa la auditoría y una que no se ve en la metodología, en la cobertura de puestos y en la coherencia entre los riesgos identificados y los controles implementados.</p>
+
+        <h2>¿Qué exige ISO 45001 respecto a la identificación de peligros y riesgos?</h2>
+        <p>La cláusula 6.1.2 de la ISO 45001 establece que la organización debe establecer, implementar y mantener procesos para la identificación continua y proactiva de los peligros. El proceso debe considerar: las actividades rutinarias y no rutinarias, las situaciones de emergencia, los factores humanos (error, fatiga, diseño de tareas), los cambios en la organización y los peligros que surgen de fuera del lugar de trabajo que pueden afectar a los trabajadores.</p>
+        <p>Acá aparece una distinción importante que muchas matrices ignoran: la diferencia entre peligro y riesgo. El <strong>peligro</strong> es la fuente con potencial de causar daño (una sierra circular, una sustancia química, una escalera). El <strong>riesgo</strong> es la combinación de probabilidad de que ese peligro se materialice en daño y la severidad de ese daño. Una matriz que mezcla peligros con riesgos o que usa los términos indistintamente es una señal de que quien la armó no tiene claridad conceptual sobre la norma.</p>
+        <p>La norma no exige una metodología específica de evaluación: la organización puede elegir el método que sea apropiado para el tipo y complejidad de sus peligros. Sin embargo, cualquier método debe ser reproducible (dos personas evaluando el mismo peligro deben llegar a resultados similares) y trazable (debe poder justificarse por qué se asignó cada nivel de probabilidad y consecuencia).</p>
+
+        <h2>Metodología de evaluación: probabilidad × consecuencia</h2>
+        <p>El método más utilizado en Argentina para el IPER (Identificación de Peligros y Evaluación de Riesgos) es la matriz bidimensional de probabilidad × consecuencia, también conocida como método Fine o variantes locales. El nivel de riesgo surge del producto de dos variables: la probabilidad de que el evento dañoso ocurra (considerando los controles existentes) y la consecuencia o severidad del daño esperado.</p>
+        <p>La probabilidad no es un valor arbitrario: debe basarse en evidencia. Los factores que informan la probabilidad incluyen el historial de accidentes en esa tarea, la frecuencia de exposición al peligro, la calidad y uso de los controles existentes y la experiencia del personal. Una probabilidad "alta" asignada sin justificación es tan cuestionable como una "baja" asignada por optimismo.</p>
+
+        <div class="art-tabla">
+          <div class="art-tabla-header" style="grid-template-columns: 1fr 1fr 1fr 1fr;">
+            <span>Probabilidad</span>
+            <span>Descripción</span>
+            <span>Frecuencia referencial</span>
+            <span>Valor</span>
+          </div>
+          <div class="art-tabla-row" style="grid-template-columns: 1fr 1fr 1fr 1fr;">
+            <span class="art-doc">Improbable</span>
+            <span>Ha ocurrido en la industria, no en la empresa</span>
+            <span>Una vez en 10+ años</span>
+            <span>1</span>
+          </div>
+          <div class="art-tabla-row" style="grid-template-columns: 1fr 1fr 1fr 1fr;">
+            <span class="art-doc">Posible</span>
+            <span>Ha ocurrido en la empresa alguna vez</span>
+            <span>Una vez en 1-10 años</span>
+            <span>2</span>
+          </div>
+          <div class="art-tabla-row" style="grid-template-columns: 1fr 1fr 1fr 1fr;">
+            <span class="art-doc">Probable</span>
+            <span>Ha ocurrido más de una vez en la empresa</span>
+            <span>Varias veces al año</span>
+            <span>3</span>
+          </div>
+          <div class="art-tabla-row" style="grid-template-columns: 1fr 1fr 1fr 1fr;">
+            <span class="art-doc">Muy probable</span>
+            <span>Ocurre regularmente en condiciones actuales</span>
+            <span>Mensual o más frecuente</span>
+            <span>4</span>
+          </div>
+        </div>
+
+        <p>Para la consecuencia, los niveles deben reflejar la peor consecuencia razonablemente esperada si el control falla, no el promedio histórico. Si una caída desde altura puede causar la muerte, la consecuencia es "fatal", independientemente de que en los últimos 10 años solo haya habido lesiones leves. La evaluación de riesgo es prospectiva, no estadística.</p>
+
+        <h2>Cómo clasificar riesgos: tolerables, moderados, importantes e intolerables</h2>
+        <p>El resultado del producto probabilidad × consecuencia ubica cada riesgo en una de cuatro categorías. La clasificación debe estar definida en la metodología del sistema y aplicarse de forma consistente en todas las áreas. Una empresa que clasifica el mismo nivel de riesgo como "tolerable" en producción e "importante" en administración sin justificación técnica tiene un problema de coherencia metodológica.</p>
+
+        <div class="art-tabla">
+          <div class="art-tabla-header" style="grid-template-columns: 1fr 1fr 1fr;">
+            <span>Clasificación</span>
+            <span>Rango típico (P × C)</span>
+            <span>Acción requerida</span>
+          </div>
+          <div class="art-tabla-row" style="grid-template-columns: 1fr 1fr 1fr;">
+            <span class="art-doc">Tolerable</span>
+            <span>1 – 4</span>
+            <span>Mantener controles existentes, revisar periódicamente</span>
+          </div>
+          <div class="art-tabla-row" style="grid-template-columns: 1fr 1fr 1fr;">
+            <span class="art-doc">Moderado</span>
+            <span>5 – 9</span>
+            <span>Implementar mejoras dentro de un plazo definido</span>
+          </div>
+          <div class="art-tabla-row" style="grid-template-columns: 1fr 1fr 1fr;">
+            <span class="art-doc">Importante</span>
+            <span>10 – 15</span>
+            <span>Reducir el riesgo sin demora; no iniciar la tarea sin controles</span>
+          </div>
+          <div class="art-tabla-row" style="grid-template-columns: 1fr 1fr 1fr;">
+            <span class="art-doc">Intolerable</span>
+            <span>16 – 20</span>
+            <span>No iniciar la actividad hasta reducir el riesgo; puede requerir prohibición</span>
+          </div>
+        </div>
+
+        <div class="art-destacado">
+          <strong>Punto clave:</strong> la clasificación del riesgo debe hacerse considerando los controles existentes (riesgo residual), no el riesgo teórico sin controles. Pero también debe registrarse el riesgo inherente (sin controles) para poder evaluar la eficacia de los controles implementados.
+        </div>
+
+        <h2>Controles sugeridos por nivel de riesgo</h2>
+        <p>La ISO 45001 exige que los controles sigan la jerarquía de controles establecida en la cláusula 8.1.2: eliminación del peligro en primer lugar, seguida de sustitución, controles de ingeniería, controles administrativos y, como última opción, equipos de protección personal. Una matriz que propone EPP como primer y único control para un riesgo importante está invirtiendo la jerarquía y va a generar una observación de auditoría.</p>
+        <p>Para riesgos tolerables, los controles existentes suelen ser suficientes con un programa de revisión periódica. Para riesgos moderados, se espera que exista al menos un control de ingeniería o administrativo documentado con evidencia de implementación. Para riesgos importantes e intolerables, los controles deben ser verificables, con responsable asignado, plazo de implementación y evidencia de seguimiento.</p>
+
+        <ul class="art-list">
+          <li><strong>Eliminación:</strong> rediseñar el proceso para eliminar el peligro. Ej: automatizar una tarea manual con riesgo ergonómico severo.</li>
+          <li><strong>Sustitución:</strong> reemplazar el agente peligroso por uno menos dañino. Ej: sustituir un solvente clorado por uno de menor toxicidad.</li>
+          <li><strong>Controles de ingeniería:</strong> barreras físicas, guardas, ventilación localizada, sistemas de enclavamiento.</li>
+          <li><strong>Controles administrativos:</strong> permisos de trabajo, procedimientos de bloqueo/etiquetado (LOTO), rotación de puestos, capacitación.</li>
+          <li><strong>EPP:</strong> casco, arnés, protector auditivo, respirador. Siempre como complemento, nunca como único control.</li>
+        </ul>
+
+        <h2>Los 5 errores que hacen que tu matriz no pase auditoría</h2>
+        <p>En auditorías de certificación ISO 45001, los problemas con la matriz de riesgos son la causa más frecuente de no conformidades mayores. Estos son los cinco errores que aparecen repetidamente:</p>
+
+        <ul class="art-list">
+          <li><strong>Cobertura incompleta de puestos:</strong> la matriz cubre producción pero no mantenimiento, administración o los trabajadores de empresas contratistas. La norma exige considerar a todos los trabajadores, incluidos los de terceros bajo control de la organización.</li>
+          <li><strong>No actualización ante cambios:</strong> la empresa incorporó una nueva máquina, cambió un proceso o contrató un nuevo servicio y la matriz no se actualizó. La cláusula 8.1.3 exige gestión del cambio con evaluación de nuevos peligros.</li>
+          <li><strong>Riesgos intolerables sin plan de acción:</strong> la matriz identifica riesgos intolerables pero no hay ningún plan de acción asociado con responsable y plazo. Esto indica que la identificación fue formal pero no operativa.</li>
+          <li><strong>EPP como único control:</strong> para prácticamente todos los riesgos, el control propuesto es EPP. Esto viola la jerarquía de controles de la cláusula 8.1.2 y genera una no conformidad mayor.</li>
+          <li><strong>Sin participación de los trabajadores:</strong> la matriz fue armada por el responsable de HyS o la consultora sin intervención de los trabajadores que realizan las tareas. La cláusula 5.4 exige participación de los trabajadores en la identificación de peligros. Un auditor pregunta a los operarios si participaron en la evaluación de riesgos de su puesto.</li>
+        </ul>
+
+        <h2>Cómo digitalizar tu matriz para tenerla siempre actualizada</h2>
+        <p>El mayor problema de las matrices en Excel es que envejecen. Se arman para la auditoría de certificación y dos años después nadie las actualizó, a pesar de que entraron 15 personas nuevas, se incorporaron dos procesos nuevos y hubo tres accidentes. Una matriz desactualizada es, en términos de auditoría, peor que no tener matriz: demuestra que el sistema no tiene gestión activa.</p>
+        <p>Las soluciones digitales para la gestión de IPER permiten asignar responsables de revisión periódica, recibir alertas cuando un registro está próximo a vencer, vincular los peligros con los controles implementados y los incidentes registrados, y generar evidencia de que la matriz se revisa cada vez que hay un cambio en el proceso. La trazabilidad de las actualizaciones (quién modificó qué y cuándo) es un punto que los auditores valoran específicamente.</p>
+
+        <div class="art-cta">
+          <h3>Gestioná tu IPER de forma dinámica, no en un Excel estático</h3>
+          <p>Nuestra plataforma incluye un módulo de gestión de riesgos que te permite mantener la matriz actualizada, asignar controles con responsables y fechas, y generar evidencia de revisión continua para tus auditorías ISO 45001.</p>
+          <div class="cta-actions" style="margin-top:16px">
+            <a href="https://wa.me/5491123496789" class="btn-primary" target="_blank" rel="noopener">Consultar por WhatsApp</a>
+            <a href="/plataforma/" class="btn-outline">Ver plataforma con matriz dinámica</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

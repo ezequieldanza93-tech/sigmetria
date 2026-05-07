@@ -1,0 +1,270 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Higiene y Seguridad en Obra — CABA y GBA",
+  "description": "Servicio de HyS para obras de construcción en CABA y GBA. Matriculado disponible, plan de seguridad firmado y app de campo. Obra documentada en 7 días.",
+  "provider": { "@type": "ProfessionalService", "name": "SIGMETRÍA HyS", "url": "https://sigmetriahys.com" },
+  "areaServed": ["Ciudad Autónoma de Buenos Aires", "Gran Buenos Aires"],
+  "serviceType": "Higiene y Seguridad Laboral en Construcción"
+};
+
+const bullets = [
+  { icon: '👷', title: 'Matriculado disponible', desc: 'Profesional matriculado en COPIME y Colegio de Ingeniería Industrial. Firma válida ante AGC, GCBA, SRT y cualquier organismo de control.' },
+  { icon: '📄', title: 'Plan de seguridad con aviso de obra', desc: 'Confeccionamos el plan de seguridad según Decreto 911/96 y tramitamos el aviso de obra ante la SRT. Todo el papeleo, sin que vos te muevas.' },
+  { icon: '📱', title: 'App de campo para capataces', desc: 'Checklist digital, registro fotográfico, firma y reporte de desvíos desde el celular. Tu capataz reporta en tiempo real — vos lo ves en el dashboard.' },
+  { icon: '📋', title: 'Documentación al día para inspecciones', desc: 'Legajo técnico completo, capacitaciones registradas y EPP documentado. Si mañana viene la AGC o el SRT, tenés todo en regla y accesible desde el sistema.' },
+  { icon: '🏢', title: 'Control de subcontratistas', desc: 'Legajos, inducciones, vencimientos de ART y habilitaciones de todos tus subcontratistas centralizados. Sin burocracia manual, sin vacíos de información.' },
+  { icon: '📅', title: 'Visita mensual + soporte continuo', desc: 'Técnico en obra con frecuencia mensual más soporte ante inspecciones, incidentes o consultas urgentes. No desaparecemos después de la firma.' },
+];
+
+const fases = [
+  { num: '01', titulo: 'Diagnóstico de obra', desc: 'Evaluamos el estado actual de la documentación, el equipo y los riesgos específicos de tu obra. Sin costo.' },
+  { num: '02', titulo: 'Plan y documentación', desc: 'Confeccionamos el plan de seguridad, tramitamos el aviso de obra y completamos el legajo técnico. En paralelo instalamos la app de campo.' },
+  { num: '03', titulo: 'Obra en regla en 7 días', desc: 'Tu obra queda documentada, tu cuadrilla con inducción registrada y la app activa. Estás listo para cualquier inspección.' },
+  { num: '04', titulo: 'Seguimiento mensual', desc: 'Visita mensual de técnico, reporte de KPIs y soporte ante desvíos o inspecciones. El sistema sigue activo mientras la obra avance.' },
+];
+---
+
+<BaseLayout
+  title="Licenciado en Seguridad e Higiene CABA — Obra documentada en 7 días | SIGMETRÍA HyS"
+  description="Matriculado disponible para tu obra en CABA. Plan de seguridad, aviso de obra SRT y app de campo en 7 días. Si mañana viene la AGC, vas a estar en regla."
+  schema={schema}
+>
+
+  <section class="page-hero">
+    <div class="page-hero-inner">
+      <nav aria-label="Breadcrumb" class="breadcrumb">
+        <a href="/">Inicio</a><span>/</span>
+        <a href="/servicios/">Servicios</a><span>/</span>
+        <span>HyS Construcción CABA</span>
+      </nav>
+      <div class="page-hero-badge">Decreto 911/96 · CABA · GBA</div>
+      <h1>SI MAÑANA VIENE LA AGC,<br><em>¿ESTÁS EN REGLA?</em></h1>
+      <p class="hero-sub-text">Matriculado disponible, plan firmado y obra documentada en 7 días. Sin papeles. Sin sorpresas.</p>
+      <div class="hero-ctas">
+        <a href="/contacto/" class="btn-primary">Auditoría express gratuita</a>
+        <a href="https://wa.me/5491123496789" class="btn-outline" target="_blank" rel="noopener">Consulta urgente por WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="content-inner">
+
+      <!-- Urgencia CABA -->
+      <div class="urgencia-banner">
+        <div class="urgencia-icon">⚠️</div>
+        <div>
+          <p class="urgencia-titulo">Una clausura de obra en CABA cuesta más que un año del sistema</p>
+          <p class="urgencia-desc">La AGC, el GCBA y la SRT inspeccionan con regularidad. Una sola acta puede pausar la obra días o semanas. El fee mensual de Sigmetría es una fracción de ese costo.</p>
+        </div>
+      </div>
+
+      <!-- Bullets de valor -->
+      <div class="seccion-titulo-wrapper">
+        <div class="kicker">Lo que incluye el servicio</div>
+        <h2 class="seccion-titulo">QUÉ HACEMOS EN TU <em>OBRA</em></h2>
+      </div>
+      <div class="bullets-grid">
+        {bullets.map(b => (
+          <div class="bullet-card">
+            <span class="bullet-icon">{b.icon}</span>
+            <div>
+              <h3 class="bullet-titulo">{b.title}</h3>
+              <p class="bullet-desc">{b.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Proceso en 4 pasos -->
+      <div class="seccion-titulo-wrapper">
+        <div class="kicker">Cómo funciona</div>
+        <h2 class="seccion-titulo">OBRA EN REGLA EN <em>7 DÍAS</em></h2>
+      </div>
+      <div class="fases-grid">
+        {fases.map(f => (
+          <div class="fase-card">
+            <div class="fase-num">{f.num}</div>
+            <h3 class="fase-titulo">{f.titulo}</h3>
+            <p class="fase-desc">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+
+      <!-- Cobertura geográfica -->
+      <div class="geo-grid">
+        <div class="geo-card geo-card--prioridad">
+          <div class="geo-badge">Foco prioritario</div>
+          <h3>🏙️ CABA</h3>
+          <p>Control intensivo de AGC, GCBA, DGFyCO y SRT. Inspecciones frecuentes con sanciones reales. Urgencia alta, ciclo de decisión corto.</p>
+          <ul>
+            <li>Palermo · Belgrano · Caballito</li>
+            <li>Villa Crespo · Almagro · Flores</li>
+            <li>Puerto Madero · San Telmo · La Boca</li>
+            <li>Y todo CABA</li>
+          </ul>
+        </div>
+        <div class="geo-card">
+          <div class="geo-badge geo-badge--secundario">Cobertura completa</div>
+          <h3>🏘️ GBA y Provincia</h3>
+          <p>Municipios con control variable. Indispensable si participás en licitaciones públicas o trabajás con clientes corporativos.</p>
+          <ul>
+            <li>Zona Norte: Pilar · Tigre · San Isidro</li>
+            <li>Zona Sur: Quilmes · Avellaneda · La Plata</li>
+            <li>Zona Oeste: Morón · Merlo · La Matanza</li>
+            <li>Interior a coordinar</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- CTA final -->
+      <div class="cta-banner">
+        <h2>AUDITORÍA <em>EXPRESS GRATUITA</em></h2>
+        <p>1 obra · 1 visita · 1 informe. Sin costo. Te decimos exactamente en qué estás expuesto y qué necesitás para estar en regla antes de la próxima inspección.</p>
+        <div class="cta-actions">
+          <a href="/contacto/" class="btn-primary">Solicitar auditoría gratuita</a>
+          <a href="https://wa.me/5491123496789" class="btn-outline" target="_blank" rel="noopener">Hablar ahora por WhatsApp</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+.hero-sub-text {
+  font-size: 16px;
+  font-weight: 300;
+  color: var(--gris-2);
+  line-height: 1.8;
+  max-width: 560px;
+  margin: 12px 0 24px;
+}
+.hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+
+/* Urgencia */
+.urgencia-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  background: #fff8e1;
+  border: 1px solid #ffe082;
+  border-left: 4px solid #f59e0b;
+  border-radius: 8px;
+  padding: 20px 24px;
+  margin-bottom: 52px;
+}
+.urgencia-icon { font-size: 1.6rem; flex-shrink: 0; }
+.urgencia-titulo { font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 700; color: var(--gris-1); margin-bottom: 6px; }
+.urgencia-desc { font-size: 13px; font-weight: 300; color: var(--gris-2); line-height: 1.7; margin: 0; }
+
+/* Sección título */
+.seccion-titulo-wrapper { margin-bottom: 24px; }
+.seccion-titulo {
+  font-size: clamp(24px, 3vw, 40px);
+  letter-spacing: 2px;
+  color: var(--gris-1);
+  line-height: 1;
+}
+.seccion-titulo em { font-style: normal; color: var(--verde); }
+
+/* Bullets grid */
+.bullets-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-bottom: 56px;
+}
+.bullet-card {
+  display: flex;
+  gap: 16px;
+  padding: 22px;
+  background: var(--blanco);
+  border: 1px solid var(--borde);
+  border-radius: 10px;
+  transition: all .2s;
+}
+.bullet-card:hover { border-color: var(--verde-borde); box-shadow: 0 6px 20px rgba(0,0,0,.06); }
+.bullet-icon { font-size: 1.6rem; flex-shrink: 0; }
+.bullet-titulo { font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; color: var(--gris-1); margin-bottom: 6px; }
+.bullet-desc { font-size: 13px; font-weight: 300; color: var(--gris-2); line-height: 1.7; margin: 0; }
+
+/* Fases */
+.fases-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-bottom: 56px;
+}
+.fase-card {
+  padding: 22px 18px;
+  background: var(--blanco);
+  border: 1px solid var(--borde);
+  border-radius: 10px;
+}
+.fase-num {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--verde-light);
+  -webkit-text-stroke: 2px var(--verde-borde);
+  margin-bottom: 10px;
+}
+.fase-titulo { font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; color: var(--gris-1); margin-bottom: 8px; }
+.fase-desc { font-size: 13px; font-weight: 300; color: var(--gris-2); line-height: 1.65; margin: 0; }
+
+/* Geo */
+.geo-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-bottom: 48px;
+}
+.geo-card {
+  padding: 28px 24px;
+  background: var(--blanco);
+  border: 1px solid var(--borde);
+  border-radius: 10px;
+}
+.geo-card--prioridad { border-color: var(--verde-borde); background: var(--verde-light); }
+.geo-badge {
+  display: inline-block;
+  font-family: 'Montserrat', sans-serif;
+  font-size: .48rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--verde-dark);
+  background: #fff;
+  border: 1px solid var(--verde-borde);
+  padding: 3px 9px;
+  border-radius: 3px;
+  margin-bottom: 12px;
+}
+.geo-badge--secundario { color: var(--gris-3); background: var(--gris-bg); border-color: var(--borde); }
+.geo-card h3 { font-family: 'Montserrat', sans-serif; font-size: 18px; font-weight: 800; color: var(--gris-1); margin-bottom: 10px; }
+.geo-card p { font-size: 13px; font-weight: 300; color: var(--gris-2); line-height: 1.7; margin-bottom: 14px; }
+.geo-card ul { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+.geo-card li {
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--gris-3);
+  padding-left: 14px;
+  position: relative;
+}
+.geo-card li::before { content: '—'; position: absolute; left: 0; color: var(--verde); opacity: .6; font-size: .6rem; }
+
+@media (max-width: 900px) {
+  .bullets-grid { grid-template-columns: 1fr; }
+  .fases-grid { grid-template-columns: repeat(2, 1fr); }
+  .geo-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .fases-grid { grid-template-columns: 1fr; }
+}
+</style>
