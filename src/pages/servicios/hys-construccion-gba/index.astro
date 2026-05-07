@@ -1,0 +1,185 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Higiene y Seguridad en Obra — Gran Buenos Aires",
+  "description": "Servicio completo de HyS para obras de construcción en el Gran Buenos Aires: plan de seguridad Dec. 911/96, aviso de obra SRT y app de campo. Cobertura en Quilmes, La Plata, Pilar y toda la zona.",
+  "provider": { "@type": "ProfessionalService", "name": "SIGMETRÍA HyS", "url": "https://sigmetriahys.com" },
+  "areaServed": ["Gran Buenos Aires", "Quilmes", "La Plata", "Pilar"],
+  "serviceType": "Higiene y Seguridad Laboral en Construcción"
+};
+
+const bullets = [
+  { icon: '👷', title: 'Matriculado disponible', desc: 'Profesional matriculado con firma válida ante SRT, COPIME y organismos de control de cada partido del GBA. Sin demoras desde el primer día.' },
+  { icon: '📄', title: 'Plan de seguridad + aviso de obra SRT', desc: 'Confeccionamos el plan de seguridad según Dec. 911/96, tramitamos el aviso de obra ante la SRT federal y gestionamos los requerimientos propios de cada municipio del GBA.' },
+  { icon: '📱', title: 'App de campo para capataces', desc: 'Checklist digital, registro fotográfico, firma y reporte de desvíos desde el celular. Tu capataz reporta en tiempo real desde cualquier punto del GBA.' },
+  { icon: '📅', title: 'Seguimiento mensual', desc: 'Visita técnica mensual más soporte ante inspecciones de SRT, dirección de trabajo municipal o OPDS. No desaparecemos después de la firma.' },
+];
+
+const fases = [
+  { num: '01', titulo: 'Diagnóstico de obra', desc: 'Evaluamos el estado actual de la documentación, el equipo y los riesgos específicos de tu obra en GBA. Sin costo.' },
+  { num: '02', titulo: 'Plan y documentación', desc: 'Confeccionamos el plan de seguridad, tramitamos el aviso de obra ante la SRT y completamos el legajo técnico. En paralelo instalamos la app de campo.' },
+  { num: '03', titulo: 'Obra en regla en 7 días', desc: 'Tu obra queda documentada, tu cuadrilla con inducción registrada y la app activa. Listo para cualquier inspección municipal o de la SRT.' },
+  { num: '04', titulo: 'Seguimiento mensual', desc: 'Visita mensual de técnico, reporte de KPIs y soporte ante desvíos o inspecciones. El sistema sigue activo mientras la obra avance.' },
+];
+---
+
+<BaseLayout
+  title="Higiene y Seguridad en Obra GBA — Matriculado disponible en toda la provincia | SIGMETRÍA HyS"
+  description="Servicio completo de HyS para obras de construcción en el Gran Buenos Aires: plan de seguridad Dec. 911/96, aviso de obra SRT y app de campo. Cobertura en Quilmes, La Plata, Pilar y toda la zona."
+  schema={schema}
+>
+
+  <section class="page-hero">
+    <div class="page-hero-inner">
+      <nav aria-label="Breadcrumb" class="breadcrumb">
+        <a href="/">Inicio</a><span>/</span>
+        <a href="/servicios/">Servicios</a><span>/</span>
+        <a href="/servicios/hys-construccion-caba/">HyS Construcción</a><span>/</span>
+        <span>GBA</span>
+      </nav>
+      <div class="page-hero-badge">GBA · Dec. 911/96 · SRT · Municipios</div>
+      <h1>HYS EN OBRA EN EL GBA:<br><em>DOCUMENTACIÓN EN REGLA ANTES DE LA SRT</em></h1>
+      <p class="hero-sub-text">Misma profesionalidad que en CABA, con conocimiento de la normativa municipal de cada partido. Obra documentada en 7 días.</p>
+      <div class="hero-ctas">
+        <a href="/contacto/" class="btn-primary">Auditoría express gratuita</a>
+        <a href="https://wa.me/5491123496789" class="btn-outline" target="_blank" rel="noopener">Consulta urgente por WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="content-inner">
+
+      <!-- Urgencia GBA -->
+      <div class="urgencia-banner">
+        <div class="urgencia-icon">⚠️</div>
+        <div>
+          <p class="urgencia-titulo">En GBA, la SRT y los municipios inspeccionan — y el Dec. 911/96 aplica exactamente igual que en CABA</p>
+          <p class="urgencia-desc">Muchas empresas constructoras del GBA operan sin el plan de seguridad formalizado porque asumen que "en el municipio no controlan tanto". Cuando viene la SRT — que es nacional — esa suposición sale cara.</p>
+        </div>
+      </div>
+
+      <!-- Partidos cubiertos -->
+      <div class="seccion-titulo-wrapper">
+        <div class="kicker">Cobertura GBA</div>
+        <h2 class="seccion-titulo">ZONAS QUE <em>CUBRIMOS</em></h2>
+      </div>
+      <div class="partidos-grid">
+        <a href="/servicios/hys-construccion-gba/quilmes/" class="partido-card">
+          <span class="partido-zona">Zona Sur</span>
+          <h3>Quilmes y Corredor Sur</h3>
+          <p>Quilmes, Berazategui, Avellaneda, Lanús. Mix industrial-residencial con control SRT frecuente en entornos fabriles.</p>
+          <span class="partido-cta">Ver cobertura →</span>
+        </a>
+        <a href="/servicios/hys-construccion-gba/la-plata/" class="partido-card">
+          <span class="partido-zona">Zona Capital Provincial</span>
+          <h3>La Plata y Gran La Plata</h3>
+          <p>Capital de la provincia. Marco legal PBA, obras públicas frecuentes, exigencias formales más altas.</p>
+          <span class="partido-cta">Ver cobertura →</span>
+        </a>
+        <a href="/servicios/hys-construccion-gba/pilar/" class="partido-card">
+          <span class="partido-zona">Zona Norte</span>
+          <h3>Pilar y Corredor Norte</h3>
+          <p>Pilar, Tigre, Escobar. Polo de desarrollo inmobiliario (countries, barrios privados) y parque industrial.</p>
+          <span class="partido-cta">Ver cobertura →</span>
+        </a>
+      </div>
+
+      <!-- Qué incluye -->
+      <div class="seccion-titulo-wrapper">
+        <div class="kicker">Lo que incluye el servicio</div>
+        <h2 class="seccion-titulo">QUÉ HACEMOS EN TU <em>OBRA GBA</em></h2>
+      </div>
+      <div class="bullets-grid">
+        {bullets.map(b => (
+          <div class="bullet-card">
+            <span class="bullet-icon">{b.icon}</span>
+            <div>
+              <h3 class="bullet-titulo">{b.title}</h3>
+              <p class="bullet-desc">{b.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Proceso 4 fases -->
+      <div class="seccion-titulo-wrapper">
+        <div class="kicker">Cómo funciona</div>
+        <h2 class="seccion-titulo">OBRA EN REGLA EN <em>7 DÍAS</em></h2>
+      </div>
+      <div class="fases-grid">
+        {fases.map(f => (
+          <div class="fase-card">
+            <div class="fase-num">{f.num}</div>
+            <h3 class="fase-titulo">{f.titulo}</h3>
+            <p class="fase-desc">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+
+      <!-- Diferencia GBA vs CABA -->
+      <div class="dif-box">
+        <h3>¿En qué se diferencia trabajar en GBA vs. CABA?</h3>
+        <p>El Decreto 911/96 y la SRT son nacionales: aplican exactamente igual en Quilmes, Pilar o La Plata que en Palermo o Caballito. No hay excepción geográfica ni "zona de menor control" — la SRT puede presentarse en cualquier obra del país sin importar el partido.</p>
+        <p>La diferencia real está en la capa municipal. Cada partido del GBA tiene su propio circuito de habilitaciones y permisos de obra: tiempos distintos, formularios distintos, ventanillas distintas. Conocer ese circuito local es clave para no generar demoras: tramitar el aviso de obra ante la SRT sin tener el permiso municipal tramitado puede crear conflictos de plazo que paran la obra.</p>
+        <p>Además, en GBA se suman organismos provinciales que no existen en CABA: el OPDS para aspectos ambientales, la Dirección Provincial de Trabajo y, en obras que involucren dependencias estatales, la normativa de la Ley 11.358 PBA. Conocer cuándo aplica cada organismo — y cuándo no — ahorra trámites innecesarios y costos de compliance que muchas empresas asumen por desconocimiento.</p>
+      </div>
+
+      <!-- CTA final -->
+      <div class="cta-banner">
+        <h2>AUDITORÍA <em>EXPRESS GRATUITA</em></h2>
+        <p>Evaluamos tu obra en GBA sin costo y te decimos exactamente qué documentación necesitás. Cubrimos todo el Gran Buenos Aires.</p>
+        <div class="cta-actions">
+          <a href="/contacto/" class="btn-primary">Solicitar auditoría gratuita</a>
+          <a href="https://wa.me/5491123496789" class="btn-outline" target="_blank" rel="noopener">Hablar ahora por WhatsApp</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+.hero-sub-text { font-size: 15px; font-weight: 300; color: var(--gris-2); line-height: 1.8; max-width: 580px; margin: 12px 0 24px; }
+.hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+.urgencia-banner { display: flex; align-items: flex-start; gap: 20px; background: #fff8e1; border: 1px solid #ffe082; border-left: 4px solid #f59e0b; border-radius: 8px; padding: 20px 24px; margin-bottom: 48px; }
+.urgencia-icon { font-size: 1.6rem; flex-shrink: 0; }
+.urgencia-titulo { font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 700; color: var(--gris-1); margin-bottom: 6px; }
+.urgencia-desc { font-size: 13px; font-weight: 300; color: var(--gris-2); line-height: 1.7; margin: 0; }
+.seccion-titulo-wrapper { margin-bottom: 24px; }
+.seccion-titulo { font-size: clamp(22px, 3vw, 36px); letter-spacing: 2px; color: var(--gris-1); line-height: 1; }
+.seccion-titulo em { font-style: normal; color: var(--verde); }
+.zona-intro { font-size: 14px; font-weight: 300; color: var(--gris-2); line-height: 1.85; max-width: 780px; margin-bottom: 48px; }
+.bullets-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 48px; }
+.bullet-card { display: flex; gap: 16px; padding: 22px; background: var(--blanco); border: 1px solid var(--borde); border-radius: 10px; transition: all .2s; }
+.bullet-card:hover { border-color: var(--verde-borde); box-shadow: 0 6px 20px rgba(0,0,0,.06); }
+.bullet-icon { font-size: 1.5rem; flex-shrink: 0; }
+.bullet-titulo { font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; color: var(--gris-1); margin-bottom: 6px; }
+.bullet-desc { font-size: 13px; font-weight: 300; color: var(--gris-2); line-height: 1.7; margin: 0; }
+.fases-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 48px; }
+.fase-card { padding: 22px 18px; background: var(--blanco); border: 1px solid var(--borde); border-radius: 10px; }
+.fase-num { font-family: 'Montserrat', sans-serif; font-size: 2rem; font-weight: 800; color: var(--verde-light); -webkit-text-stroke: 2px var(--verde-borde); margin-bottom: 10px; }
+.fase-titulo { font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; color: var(--gris-1); margin-bottom: 8px; }
+.fase-desc { font-size: 13px; font-weight: 300; color: var(--gris-2); line-height: 1.65; margin: 0; }
+.parent-link-box { background: var(--gris-bg); border: 1px solid var(--borde); border-radius: 8px; padding: 16px 20px; margin-bottom: 48px; font-size: 13px; font-weight: 300; color: var(--gris-2); }
+.parent-link-box a { color: var(--verde-dark); font-weight: 600; text-decoration: none; }
+.parent-link-box a:hover { text-decoration: underline; }
+/* Partidos grid — solo index GBA */
+.partidos-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 48px; }
+.partido-card { display: flex; flex-direction: column; gap: 8px; padding: 24px 20px; background: var(--blanco); border: 1px solid var(--borde); border-radius: 10px; text-decoration: none; transition: all .2s; }
+.partido-card:hover { border-color: var(--verde-borde); box-shadow: 0 6px 20px rgba(0,0,0,.06); transform: translateY(-3px); }
+.partido-zona { font-family: 'Montserrat', sans-serif; font-size: .5rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--verde-dark); background: var(--verde-light); border: 1px solid var(--verde-borde); padding: 2px 8px; border-radius: 3px; width: fit-content; }
+.partido-card h3 { font-family: 'Montserrat', sans-serif; font-size: 15px; font-weight: 700; color: var(--gris-1); margin: 0; }
+.partido-card p { font-size: 13px; font-weight: 300; color: var(--gris-2); line-height: 1.65; margin: 0; flex: 1; }
+.partido-cta { font-family: 'Montserrat', sans-serif; font-size: .55rem; font-weight: 700; text-transform: uppercase; letter-spacing: .8px; color: var(--verde); margin-top: auto; }
+.dif-box { background: var(--verde-light); border: 1px solid var(--verde-borde); border-radius: 10px; padding: 28px 32px; margin-bottom: 48px; }
+.dif-box h3 { font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 700; color: var(--gris-1); margin-bottom: 12px; }
+.dif-box p { font-size: 13px; font-weight: 300; color: var(--gris-2); line-height: 1.8; margin: 0 0 12px; }
+.dif-box p:last-child { margin-bottom: 0; }
+@media (max-width: 900px) { .bullets-grid { grid-template-columns: 1fr; } .fases-grid { grid-template-columns: repeat(2, 1fr); } .partidos-grid { grid-template-columns: 1fr; } }
+@media (max-width: 600px) { .fases-grid { grid-template-columns: 1fr; } }
+</style>
