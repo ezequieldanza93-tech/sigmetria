@@ -74,99 +74,97 @@ const servicios = [
   description="Ocho servicios especializados integrados en un solo sistema. HyS construcción, ISO 45001, plataforma SaaS, mediciones, capacitaciones, auditorías y enterprise en CABA y GBA."
 >
 
-  <div class="sv-layout">
+  <div class="sv-page">
 
-    <!-- Sidebar izquierdo -->
-    <aside class="sv-aside">
-      <nav aria-label="Breadcrumb" class="breadcrumb">
-        <a href="/">Inicio</a><span>/</span><span>Servicios</span>
-      </nav>
-      <div class="page-hero-badge">Sistema · No consultoría</div>
-      <h1 class="sv-title">SERVICIOS Y<br><em>SOLUCIONES</em></h1>
+    <!-- Header compacto en una sola fila -->
+    <header class="sv-header">
+      <div class="sv-header-left">
+        <nav aria-label="Breadcrumb" class="breadcrumb">
+          <a href="/">Inicio</a><span>/</span><span>Servicios</span>
+        </nav>
+        <div class="page-hero-badge sv-badge">Sistema · No consultoría</div>
+        <h1 class="sv-title">SERVICIOS Y <em>SOLUCIONES</em></h1>
+      </div>
       <p class="sv-desc">Ocho servicios integrados en un solo sistema. No son servicios aislados — son partes de una plataforma que planifica, ejecuta, controla y mide tu HyS.</p>
       <a href="/contacto/" class="btn-primary sv-cta">Diagnóstico gratuito</a>
-    </aside>
+    </header>
 
-    <!-- Grid de servicios -->
-    <main class="sv-main">
-      <div class="servicios-grid">
-        {servicios.map(s => (
-          <article class="servicio-card">
-            <div class="sc-top">
-              <span class="sc-icon" aria-hidden="true">{s.icon}</span>
-              <span class="sc-badge">{s.badge}</span>
-            </div>
-            <h2 class="sc-name">{s.name}</h2>
-            <p class="sc-desc">{s.desc}</p>
-            <ul class="sc-list">
-              {s.items.map(item => <li>{item}</li>)}
-            </ul>
-            <a href={s.href} class="sc-cta">Ver detalle →</a>
-          </article>
-        ))}
-      </div>
-    </main>
+    <!-- Grid 4×2 pegado abajo del header -->
+    <div class="servicios-grid">
+      {servicios.map(s => (
+        <article class="servicio-card">
+          <div class="sc-top">
+            <span class="sc-icon" aria-hidden="true">{s.icon}</span>
+            <span class="sc-badge">{s.badge}</span>
+          </div>
+          <h2 class="sc-name">{s.name}</h2>
+          <p class="sc-desc">{s.desc}</p>
+          <ul class="sc-list">
+            {s.items.map(item => <li>{item}</li>)}
+          </ul>
+          <a href={s.href} class="sc-cta">Ver detalle →</a>
+        </article>
+      ))}
+    </div>
 
   </div>
 
 </BaseLayout>
 
 <style>
-/* Layout principal: sidebar + grid */
-.sv-layout {
+/* Página completa ocupa el viewport */
+.sv-page {
+  height: calc(100vh - 68px);
+  margin-top: 68px;
   display: flex;
-  min-height: calc(100vh - 68px);
+  flex-direction: column;
+  padding: 0 28px 20px;
+  overflow: hidden;
+  max-width: 1600px;
+  margin-left: auto;
+  margin-right: auto;
+  /* override margin-top sin perder el auto */
   margin-top: 68px;
 }
 
-/* Sidebar */
-.sv-aside {
-  width: 260px;
-  flex-shrink: 0;
-  padding: 40px 28px;
-  border-right: 1px solid var(--borde);
-  background: var(--gris-bg);
+/* Header: una fila con 3 zonas */
+.sv-header {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 14px;
-  position: sticky;
-  top: 68px;
-  height: calc(100vh - 68px);
-  overflow: hidden;
+  align-items: center;
+  gap: 32px;
+  padding: 18px 0 14px;
+  border-bottom: 1px solid var(--borde);
+  flex-shrink: 0;
 }
-.sv-aside .breadcrumb { margin-bottom: 4px; }
+.sv-header-left { flex-shrink: 0; }
+.sv-badge { margin-bottom: 6px; }
 .sv-title {
-  font-size: clamp(22px, 2.2vw, 34px);
+  font-size: clamp(18px, 1.8vw, 28px);
   letter-spacing: 1.5px;
   color: var(--gris-1);
   line-height: 1.05;
+  white-space: nowrap;
 }
 .sv-title em { font-style: normal; color: var(--verde); }
 .sv-desc {
+  flex: 1;
   font-size: 13px;
   font-weight: 300;
   color: var(--gris-2);
-  line-height: 1.75;
+  line-height: 1.65;
+  max-width: 420px;
 }
-.sv-cta { align-self: flex-start; margin-top: 8px; }
+.sv-cta { flex-shrink: 0; white-space: nowrap; }
 
-/* Área del grid */
-.sv-main {
-  flex: 1;
-  padding: 24px 28px;
-  display: flex;
-  align-items: center;
-  min-width: 0;
-}
-
-/* Grid 4×2 */
+/* Grid 4×2 que llena el espacio restante */
 .servicios-grid {
+  flex: 1;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(2, 1fr);
-  gap: 12px;
-  width: 100%;
+  gap: 10px;
+  padding-top: 12px;
+  min-height: 0;
 }
 
 /* Tarjetas */
@@ -174,12 +172,13 @@ const servicios = [
   background: var(--blanco);
   border: 1px solid var(--borde);
   border-radius: 10px;
-  padding: 16px 14px 14px;
+  padding: 14px 14px 12px;
   display: flex;
   flex-direction: column;
   transition: all .25s;
   position: relative;
   overflow: hidden;
+  min-height: 0;
 }
 .servicio-card::before {
   content: '';
@@ -193,8 +192,8 @@ const servicios = [
 }
 .servicio-card:hover {
   border-color: var(--verde-borde);
-  transform: translateY(-3px);
-  box-shadow: 0 10px 28px rgba(0,0,0,.07);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,.07);
 }
 .servicio-card:hover::before { transform: scaleX(1); }
 
@@ -202,12 +201,12 @@ const servicios = [
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 9px;
+  margin-bottom: 8px;
 }
-.sc-icon { font-size: 1.5rem; line-height: 1; }
+.sc-icon { font-size: 1.4rem; line-height: 1; }
 .sc-badge {
   font-family: 'Montserrat', sans-serif;
-  font-size: .44rem;
+  font-size: .43rem;
   font-weight: 600;
   color: var(--verde-dark);
   background: var(--verde-light);
@@ -221,11 +220,11 @@ const servicios = [
 }
 .sc-name {
   font-family: 'Montserrat', sans-serif;
-  font-size: 11.5px;
+  font-size: 11px;
   font-weight: 700;
   letter-spacing: .4px;
   color: var(--gris-1);
-  margin-bottom: 6px;
+  margin-bottom: 5px;
   text-transform: uppercase;
   line-height: 1.3;
 }
@@ -233,16 +232,17 @@ const servicios = [
   font-size: 11.5px;
   font-weight: 300;
   color: var(--gris-2);
-  line-height: 1.55;
-  margin-bottom: 10px;
+  line-height: 1.5;
+  margin-bottom: 8px;
 }
 .sc-list {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  margin-bottom: 10px;
+  gap: 3px;
+  margin-bottom: 8px;
   flex: 1;
+  overflow: hidden;
 }
 .sc-list li {
   font-size: 11px;
@@ -250,7 +250,10 @@ const servicios = [
   color: var(--gris-3);
   padding-left: 13px;
   position: relative;
-  line-height: 1.35;
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .sc-list li::before {
   content: '—';
@@ -262,34 +265,33 @@ const servicios = [
 }
 .sc-cta {
   font-family: 'Montserrat', sans-serif;
-  font-size: .54rem;
+  font-size: .52rem;
   font-weight: 700;
   color: var(--verde);
   letter-spacing: .7px;
   text-decoration: none;
   text-transform: uppercase;
   border-top: 1px solid var(--borde);
-  padding-top: 10px;
+  padding-top: 8px;
   margin-top: auto;
   transition: all .2s;
   display: flex;
   align-items: center;
   gap: 4px;
+  flex-shrink: 0;
 }
 .sc-cta:hover { color: var(--verde-dark); gap: 8px; }
 
 /* Responsive */
-@media (max-width: 1200px) {
-  .servicios-grid { grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(4, 1fr); }
-  .sv-main { align-items: flex-start; }
-  .sv-layout { min-height: auto; }
-  .sv-aside { height: auto; position: static; }
-}
-@media (max-width: 860px) {
-  .sv-layout { flex-direction: column; margin-top: 68px; }
-  .sv-aside { width: 100%; height: auto; position: static; padding: 28px 24px; }
-  .sv-main { padding: 20px 24px; }
+@media (max-width: 1100px) {
+  .sv-page { height: auto; overflow: visible; padding-bottom: 40px; }
   .servicios-grid { grid-template-columns: repeat(2, 1fr); grid-template-rows: auto; }
+  .sv-header { flex-wrap: wrap; }
+}
+@media (max-width: 768px) {
+  .sv-page { padding: 0 20px 32px; }
+  .sv-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .sv-desc { max-width: 100%; }
 }
 @media (max-width: 500px) {
   .servicios-grid { grid-template-columns: 1fr; }
