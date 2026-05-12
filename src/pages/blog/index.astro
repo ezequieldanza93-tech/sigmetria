@@ -310,4 +310,31 @@ search.addEventListener('input', () => {
   update();
 });
 
+// Activar filtro desde hash de URL (ej: /blog/#mediciones)
+const hashMap: Record<string, string> = {
+  'construccion-y-obra': 'Construcción y Obra',
+  'mediciones':          'Mediciones',
+  'capacitaciones':      'Capacitaciones',
+  'iso-45001':           'ISO 45001',
+  'auditorias':          'Auditorías',
+  'plataforma-hys':      'Plataforma HyS',
+  'medio-ambiente':      'Medio Ambiente',
+};
+
+function activateFromHash() {
+  const hash = window.location.hash.replace('#', '');
+  const cat = hashMap[hash];
+  if (!cat) return;
+  const btn = filters.find(b => b.dataset.cat === cat);
+  if (btn) {
+    filters.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    activeCat = cat;
+    update();
+  }
+}
+
+activateFromHash();
+window.addEventListener('hashchange', activateFromHash);
+
 </script>

@@ -1,41 +1,50 @@
 ---
 const currentPath = Astro.url.pathname;
 
-const sectors = [
+const serviceGroups = [
   {
-    label: 'Empresas Industriales',
-    href: '/servicios/empresas-industriales/',
-    subs: [
-      { label: 'Mediciones',        href: '/servicios/empresas-industriales/mediciones/' },
-      { label: 'Gestión normativa', href: '/servicios/empresas-industriales/gestion-normativa/' },
-      { label: 'ISO 45001',         href: '/servicios/empresas-industriales/iso-45001/' },
+    label: '🏗️ Cumplimiento operativo',
+    servicios: [
+      { label: 'Industria y Construcción', href: '/servicios/construccion/' },
+      { label: 'Mediciones técnicas',      href: '/servicios/mediciones/' },
+      { label: 'Capacitaciones',           href: '/servicios/capacitaciones/' },
     ],
   },
   {
-    label: 'Construcción',
-    href: '/servicios/construccion/',
-    subs: [
-      { label: 'Seguridad en obra', href: '/servicios/construccion/seguridad-en-obra/' },
-      { label: 'Mediciones',        href: '/servicios/construccion/mediciones/' },
-      { label: 'Gestión normativa', href: '/servicios/construccion/gestion-normativa/' },
+    label: '📋 ISO 45001',
+    servicios: [
+      { label: 'Implementación ISO 45001', href: '/servicios/iso-45001/' },
+      { label: 'Auditorías de HyS y SIG',  href: '/servicios/auditorias/' },
     ],
   },
   {
-    label: 'Educativo & Recreativo',
-    href: '/servicios/educativo-recreativo/',
-    subs: [
-      { label: 'Planes de emergencia', href: '/servicios/educativo-recreativo/planes-de-emergencia/' },
-      { label: 'Mediciones',           href: '/servicios/educativo-recreativo/mediciones/' },
-      { label: 'Gestión normativa',    href: '/servicios/educativo-recreativo/gestion-normativa/' },
+    label: '💻 Plataforma y tecnología',
+    servicios: [
+      { label: 'Plataforma SaaS HyS', href: '/servicios/' },
+    ],
+  },
+];
+
+const blogGroups = [
+  {
+    label: '🏗️ Cumplimiento operativo',
+    categorias: [
+      { label: 'Construcción y Obra', hash: 'construccion-y-obra' },
+      { label: 'Mediciones',          hash: 'mediciones' },
+      { label: 'Capacitaciones',      hash: 'capacitaciones' },
     ],
   },
   {
-    label: 'Locales Comerciales',
-    href: '/servicios/locales-comerciales/',
-    subs: [
-      { label: 'Mediciones',           href: '/servicios/locales-comerciales/mediciones/' },
-      { label: 'Planes de emergencia', href: '/servicios/locales-comerciales/planes-de-emergencia/' },
-      { label: 'Gestión normativa',    href: '/servicios/locales-comerciales/gestion-normativa/' },
+    label: '📋 ISO 45001',
+    categorias: [
+      { label: 'ISO 45001',  hash: 'iso-45001' },
+      { label: 'Auditorías', hash: 'auditorias' },
+    ],
+  },
+  {
+    label: '💻 Plataforma y tecnología',
+    categorias: [
+      { label: 'Plataforma HyS', hash: 'plataforma-hys' },
     ],
   },
 ];
@@ -62,7 +71,7 @@ const sectors = [
 
   <div class="nav-right">
 
-    <!-- SERVICIOS con flyout dropdown -->
+    <!-- SERVICIOS — mega-menu 3 columnas -->
     <div class="nav-item nav-has-dropdown">
       <a
         href="/servicios/"
@@ -73,26 +82,13 @@ const sectors = [
         Servicios <span class="nav-arrow">▾</span>
       </a>
 
-      <!-- Dropdown nivel 1 -->
-      <div class="nav-dropdown" role="menu">
-        {sectors.map(sector => (
-          <div class="nav-subitem">
-            <a href={sector.href} class="nav-dropdown-link" role="menuitem">
-              {sector.label}
-              <span class="nav-sub-arrow">›</span>
-            </a>
-            <!-- Submenu nivel 2 -->
-            <div class="nav-submenu" role="menu">
-              <a href={sector.href} class="nav-submenu-header" role="menuitem">
-                Ver todo — {sector.label}
-              </a>
-              <div class="nav-submenu-divider"></div>
-              {sector.subs.map(sub => (
-                <a href={sub.href} class="nav-submenu-link" role="menuitem">
-                  {sub.label}
-                </a>
-              ))}
-            </div>
+      <div class="nav-mega" role="menu">
+        {serviceGroups.map(group => (
+          <div class="nav-mega-col">
+            <span class="nav-mega-label">{group.label}</span>
+            {group.servicios.map(s => (
+              <a href={s.href} class="nav-mega-link" role="menuitem">{s.label}</a>
+            ))}
           </div>
         ))}
       </div>
@@ -100,7 +96,7 @@ const sectors = [
 
     <a href="/nosotros/" class={`nav-link ${currentPath === '/nosotros/' ? 'active' : ''}`}>Nosotros</a>
 
-    <!-- BLOG con dropdown de sectores -->
+    <!-- BLOG H&S — dropdown agrupado por categoría S0 -->
     <div class="nav-item nav-has-dropdown">
       <a
         href="/blog/"
@@ -110,13 +106,19 @@ const sectors = [
       >
         Blog H&S <span class="nav-arrow">▾</span>
       </a>
-      <div class="nav-dropdown" role="menu">
+      <div class="nav-dropdown nav-blog-dropdown" role="menu">
         <a href="/blog/" class="nav-dropdown-link" role="menuitem">Ver todos los artículos</a>
         <div class="nav-submenu-divider"></div>
-        <a href="/blog/empresas-industriales/" class="nav-dropdown-link" role="menuitem">Empresas Industriales</a>
-        <a href="/blog/construccion/" class="nav-dropdown-link" role="menuitem">Construcción</a>
-        <a href="/blog/educativo-recreativo/" class="nav-dropdown-link" role="menuitem">Educativo &amp; Recreativo</a>
-        <a href="/blog/locales-comerciales/" class="nav-dropdown-link" role="menuitem">Locales Comerciales</a>
+        {blogGroups.map(group => (
+          <div class="nav-blog-group">
+            <span class="nav-blog-group-label">{group.label}</span>
+            {group.categorias.map(cat => (
+              <a href={`/blog/#${cat.hash}`} class="nav-dropdown-link nav-dropdown-cat" role="menuitem">
+                {cat.label}
+              </a>
+            ))}
+          </div>
+        ))}
       </div>
     </div>
 
@@ -135,15 +137,14 @@ const sectors = [
       Servicios <span class="mobile-arrow">▾</span>
     </button>
     <div class="nav-mobile-sub" id="mobile-servicios-sub">
-      {sectors.map(sector => (
+      {serviceGroups.map((group, gi) => (
         <div class="nav-mobile-sector">
-          <button class={`nav-mobile-sector-toggle`} aria-expanded="false">
-            {sector.label} <span class="mobile-arrow">›</span>
+          <button class="nav-mobile-sector-toggle" aria-expanded="false">
+            {group.label} <span class="mobile-arrow">›</span>
           </button>
           <div class="nav-mobile-sector-links">
-            <a href={sector.href} class="nav-mobile-link">Ver todo</a>
-            {sector.subs.map(sub => (
-              <a href={sub.href} class="nav-mobile-link">{sub.label}</a>
+            {group.servicios.map(s => (
+              <a href={s.href} class="nav-mobile-link">{s.label}</a>
             ))}
           </div>
         </div>
@@ -157,10 +158,18 @@ const sectors = [
     </button>
     <div class="nav-mobile-sub" id="mobile-blog-sub">
       <a href="/blog/" class="nav-mobile-link">Ver todos los artículos</a>
-      <a href="/blog/empresas-industriales/" class="nav-mobile-link">Empresas Industriales</a>
-      <a href="/blog/construccion/" class="nav-mobile-link">Construcción</a>
-      <a href="/blog/educativo-recreativo/" class="nav-mobile-link">Educativo &amp; Recreativo</a>
-      <a href="/blog/locales-comerciales/" class="nav-mobile-link">Locales Comerciales</a>
+      {blogGroups.map(group => (
+        <div class="nav-mobile-sector">
+          <button class="nav-mobile-sector-toggle" aria-expanded="false">
+            {group.label} <span class="mobile-arrow">›</span>
+          </button>
+          <div class="nav-mobile-sector-links">
+            {group.categorias.map(cat => (
+              <a href={`/blog/#${cat.hash}`} class="nav-mobile-link">{cat.label}</a>
+            ))}
+          </div>
+        </div>
+      ))}
     </div>
   </div>
   <a href="/contacto/" class="btn-primary" style="margin-top:8px;">Consultanos</a>
@@ -194,15 +203,8 @@ nav.scrolled {
   gap: 10px;
   text-decoration: none;
 }
-.nav-triangle {
-  flex-shrink: 0;
-  display: block;
-}
-.nav-brand {
-  display: flex;
-  flex-direction: column;
-  line-height: 1;
-}
+.nav-triangle { flex-shrink: 0; display: block; }
+.nav-brand { display: flex; flex-direction: column; line-height: 1; }
 .nav-brand-name {
   font-family: 'Montserrat', sans-serif;
   font-size: .95rem;
@@ -258,7 +260,7 @@ nav.scrolled {
 }
 .nav-cta:hover { background: var(--verde-dark); }
 
-/* ---- DROPDOWN NIVEL 1 ---- */
+/* ---- DROPDOWN (Blog) ---- */
 .nav-item { position: relative; }
 
 .nav-dropdown {
@@ -277,7 +279,6 @@ nav.scrolled {
   transition: opacity .18s ease, transform .18s ease;
   z-index: 300;
 }
-
 .nav-has-dropdown:hover .nav-dropdown,
 .nav-has-dropdown:focus-within .nav-dropdown {
   opacity: 1;
@@ -286,13 +287,8 @@ nav.scrolled {
 }
 .nav-has-dropdown:hover .nav-arrow { transform: rotate(180deg); }
 
-/* ---- ITEMS NIVEL 1 ---- */
-.nav-subitem { position: relative; }
-
 .nav-dropdown-link {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  display: block;
   padding: 9px 16px;
   font-family: 'Montserrat', sans-serif;
   font-size: .75rem;
@@ -302,56 +298,24 @@ nav.scrolled {
   letter-spacing: .3px;
   transition: all .15s;
   white-space: nowrap;
-  gap: 8px;
 }
 .nav-dropdown-link:hover { color: var(--verde); background: var(--verde-light); }
-.nav-sub-arrow {
-  font-size: .9rem;
-  color: var(--verde);
-  opacity: .5;
-  flex-shrink: 0;
-  transition: transform .15s;
-}
-.nav-subitem:hover .nav-sub-arrow { transform: translateX(3px); opacity: 1; }
+.nav-dropdown-cat { font-weight: 400; padding-left: 24px; font-size: .72rem; }
+.nav-dropdown-cat:hover { padding-left: 28px; }
 
-/* ---- SUBMENU NIVEL 2 ---- */
-.nav-submenu {
-  position: absolute;
-  top: -6px;
-  left: calc(100% + 2px);
-  min-width: 210px;
-  background: #fff;
-  border: 1px solid var(--borde);
-  border-radius: 8px;
-  padding: 6px 0;
-  box-shadow: 8px 12px 40px rgba(0,0,0,.1);
-  opacity: 0;
-  pointer-events: none;
-  transform: translateX(-6px);
-  transition: opacity .15s ease, transform .15s ease;
-  z-index: 310;
-}
-.nav-subitem:hover .nav-submenu,
-.nav-subitem:focus-within .nav-submenu {
-  opacity: 1;
-  pointer-events: all;
-  transform: translateX(0);
-}
-.nav-subitem:hover .nav-dropdown-link { color: var(--verde); background: var(--verde-light); }
-
-.nav-submenu-header {
+/* Blog dropdown groups */
+.nav-blog-dropdown { min-width: 240px; }
+.nav-blog-group { margin-top: 4px; }
+.nav-blog-group-label {
   display: block;
-  padding: 8px 16px;
+  padding: 6px 16px 2px;
   font-family: 'Montserrat', sans-serif;
-  font-size: .54rem;
-  color: var(--verde-dark);
-  letter-spacing: 1px;
-  text-decoration: none;
-  text-transform: uppercase;
+  font-size: .5rem;
   font-weight: 700;
-  transition: color .15s;
+  letter-spacing: .6px;
+  text-transform: uppercase;
+  color: var(--verde-dark);
 }
-.nav-submenu-header:hover { color: var(--verde); }
 
 .nav-submenu-divider {
   height: 1px;
@@ -359,19 +323,58 @@ nav.scrolled {
   margin: 4px 10px;
 }
 
-.nav-submenu-link {
+/* ---- MEGA-MENU (Servicios) ---- */
+.nav-mega {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #fff;
+  border: 1px solid var(--borde);
+  border-radius: 8px;
+  padding: 16px 0;
+  box-shadow: 0 12px 40px rgba(0,0,0,.1);
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-4px);
+  transition: opacity .18s ease, transform .18s ease;
+  z-index: 300;
+  white-space: nowrap;
+}
+.nav-has-dropdown:hover .nav-mega,
+.nav-has-dropdown:focus-within .nav-mega {
+  opacity: 1;
+  pointer-events: all;
+  transform: translateY(0);
+}
+.nav-mega-col {
+  padding: 0 20px;
+  border-right: 1px solid var(--borde);
+}
+.nav-mega-col:last-child { border-right: none; }
+.nav-mega-label {
   display: block;
-  padding: 8px 16px;
   font-family: 'Montserrat', sans-serif;
-  font-size: .73rem;
+  font-size: .52rem;
+  font-weight: 700;
+  letter-spacing: .5px;
+  color: var(--verde-dark);
+  padding-bottom: 8px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid var(--borde);
+}
+.nav-mega-link {
+  display: block;
+  padding: 6px 0;
+  font-family: 'Montserrat', sans-serif;
+  font-size: .74rem;
   font-weight: 400;
   color: var(--gris-2);
   text-decoration: none;
-  letter-spacing: .2px;
-  transition: all .15s;
-  white-space: nowrap;
+  transition: color .15s, padding-left .15s;
 }
-.nav-submenu-link:hover { color: var(--verde); background: var(--verde-light); padding-left: 20px; }
+.nav-mega-link:hover { color: var(--verde); padding-left: 6px; }
 
 /* ---- HAMBURGER ---- */
 .nav-hamburger {
