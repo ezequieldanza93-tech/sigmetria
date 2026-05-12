@@ -1,31 +1,16 @@
-﻿---
+---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { blogPosts } from '../../data/blog-posts';
 
-function formatFecha(iso: string) {
-  const [y, m, d] = iso.split('-');
-  const meses = ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
-  return `${parseInt(d)} ${meses[parseInt(m) - 1]} ${y}`;
-}
-
-const categoryGroups = [
-  {
-    label: '🏗️ Cumplimiento operativo',
-    categorias: ['Industrias y Construcciones', 'Mediciones', 'Capacitaciones'],
-  },
-  {
-    label: '📋 ISO 45001',
-    categorias: ['ISO 45001', 'Auditorías'],
-  },
-  {
-    label: '💻 Plataforma y tecnología',
-    categorias: ['Plataforma HyS'],
-  },
-  {
-    label: '🌿 Medio Ambiente',
-    categorias: ['Medio Ambiente'],
-  },
+const sections = [
+  { id: 'cumplimiento',  label: '🏗️ Cumplimiento operativo', categorias: ['Industrias y Construcciones', 'Mediciones', 'Capacitaciones'] },
+  { id: 'iso45001',      label: '📋 ISO 45001',               categorias: ['ISO 45001', 'Auditorías'] },
+  { id: 'plataforma',    label: '💻 Plataforma y tecnología',  categorias: ['Plataforma HyS'] },
+  { id: 'medioambiente', label: '🌿 Medio Ambiente',           categorias: ['Medio Ambiente'] },
 ];
+
+const catToSectionId: Record<string, string> = {};
+sections.forEach(s => s.categorias.forEach(cat => { catToSectionId[cat] = s.id; }));
 ---
 
 <BaseLayout
@@ -49,7 +34,7 @@ const categoryGroups = [
   <section class="content-section">
     <div class="content-inner">
 
-      <!-- Buscador -->
+      <!-- Buscador + contador -->
       <div class="blog-toolbar">
         <div class="blog-search-wrap">
           <svg class="blog-search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
@@ -64,19 +49,28 @@ const categoryGroups = [
         <span class="blog-count" id="blog-count">{blogPosts.length} artículos</span>
       </div>
 
-      <!-- Filtros por categoría de servicio -->
-      <div class="blog-filters" id="blog-filters">
-        <div class="blog-filters-top">
-          <button class="blog-filter active" data-cat="todos">Todos</button>
-        </div>
-        {categoryGroups.map(group => (
-          <div class="filter-group">
-            <span class="filter-group-label">{group.label}</span>
-            {group.categorias.map(cat => (
-              <button class="blog-filter" data-cat={cat}>{cat}</button>
+      <!-- Filtro de secciones (dropdown) -->
+      <div class="filter-area">
+        <div class="section-wrap" id="section-wrap">
+          <button class="section-btn" id="section-btn" aria-expanded="false">
+            <span id="section-label">Todas las secciones</span>
+            <svg class="section-chevron" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="section-panel" id="section-panel">
+            <button class="section-opt active" data-sec="todos">Todas las secciones</button>
+            {sections.map(s => (
+              <button class="section-opt" data-sec={s.id}>{s.label}</button>
             ))}
           </div>
-        ))}
+        </div>
+
+        <!-- Filtro de subcategorías -->
+        <div class="subcat-row" id="subcat-filters">
+          <button class="blog-filter active" data-cat="todos">Todos</button>
+          {sections.map(s => s.categorias.map(cat => (
+            <button class="blog-filter" data-cat={cat} data-sec={s.id}>{cat}</button>
+          )))}
+        </div>
       </div>
 
       <!-- Grid -->
@@ -85,6 +79,7 @@ const categoryGroups = [
           <article
             class="blog-card"
             data-cat={post.categoria}
+            data-sec={catToSectionId[post.categoria] ?? ''}
             data-text={`${post.titulo} ${post.resumen} ${post.categoria} ${post.tags.join(' ')}`.toLowerCase()}
           >
             <div class="blog-card-meta">
@@ -118,7 +113,7 @@ const categoryGroups = [
 </BaseLayout>
 
 <style>
-/* ---- Hero compacto ---- */
+/* ---- Hero ---- */
 .page-hero {
   padding-top: 100px;
   padding-bottom: 28px;
@@ -127,9 +122,7 @@ const categoryGroups = [
   font-size: clamp(26px, 3.5vw, 46px);
   margin-bottom: 8px;
 }
-.page-hero-badge {
-  margin-bottom: 10px;
-}
+.page-hero-badge { margin-bottom: 10px; }
 .blog-hero-inner {
   max-width: 1100px !important;
   display: flex;
@@ -156,7 +149,7 @@ const categoryGroups = [
   display: flex;
   align-items: center;
   gap: 16px;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
   flex-wrap: wrap;
 }
 .blog-search-wrap {
@@ -198,35 +191,96 @@ const categoryGroups = [
   flex-shrink: 0;
 }
 
-/* ---- Filtros ---- */
-.blog-filters {
+/* ---- Filter area ---- */
+.filter-area {
   display: flex;
   flex-direction: column;
   gap: 8px;
   margin-bottom: 28px;
 }
-.blog-filters-top {
-  display: flex;
-  gap: 6px;
+
+/* Section dropdown */
+.section-wrap {
+  position: relative;
+  width: fit-content;
 }
-.filter-group {
-  display: flex;
+.section-btn {
+  display: inline-flex;
   align-items: center;
-  gap: 4px;
-  flex-wrap: wrap;
-  background: var(--gris-bg);
+  gap: 8px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: .62rem;
+  font-weight: 600;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  color: var(--gris-1);
+  background: var(--blanco);
   border: 1px solid var(--borde);
   border-radius: 6px;
-  padding: 6px 10px;
-}
-.filter-group-label {
-  font-family: 'Montserrat', sans-serif;
-  font-size: .5rem;
-  font-weight: 700;
-  letter-spacing: .3px;
-  color: var(--gris-2);
+  padding: 9px 14px;
+  cursor: pointer;
+  transition: all .18s;
   white-space: nowrap;
-  margin-right: 6px;
+}
+.section-btn:hover { border-color: var(--verde-borde); color: var(--verde-dark); }
+.section-wrap.open .section-btn {
+  border-color: var(--verde);
+  color: var(--verde-dark);
+  background: var(--verde-light);
+}
+.section-chevron {
+  flex-shrink: 0;
+  transition: transform .2s;
+}
+.section-wrap.open .section-chevron { transform: rotate(180deg); }
+
+.section-panel {
+  display: none;
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 0;
+  flex-direction: column;
+  gap: 2px;
+  background: var(--blanco);
+  border: 1px solid var(--borde);
+  border-radius: 8px;
+  box-shadow: 0 8px 28px rgba(0,0,0,.1);
+  min-width: 240px;
+  padding: 6px;
+  z-index: 200;
+}
+.section-wrap.open .section-panel { display: flex; }
+
+.section-opt {
+  font-family: 'Montserrat', sans-serif;
+  font-size: .58rem;
+  font-weight: 600;
+  letter-spacing: .4px;
+  text-transform: uppercase;
+  text-align: left;
+  color: var(--gris-2);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  padding: 9px 12px;
+  cursor: pointer;
+  transition: all .15s;
+}
+.section-opt:hover {
+  background: var(--verde-light);
+  color: var(--verde-dark);
+}
+.section-opt.active {
+  background: var(--verde-light);
+  color: var(--verde-dark);
+  border-color: var(--verde-borde);
+}
+
+/* Subcat filter buttons */
+.subcat-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
 }
 .blog-filter {
   font-family: 'Montserrat', sans-serif;
@@ -253,10 +307,6 @@ const categoryGroups = [
   background: var(--verde-light);
   border-color: var(--verde);
 }
-@media (max-width: 768px) {
-  .filter-group { width: 100%; }
-  .filter-group-label { display: block; width: 100%; margin-bottom: 4px; }
-}
 
 /* ---- Empty state ---- */
 .blog-empty {
@@ -270,25 +320,35 @@ const categoryGroups = [
 @media (max-width: 600px) {
   .blog-toolbar { flex-direction: column; align-items: stretch; }
   .blog-count { text-align: right; }
+  .section-wrap { width: 100%; }
+  .section-btn { width: 100%; justify-content: space-between; }
+  .section-panel { width: 100%; }
 }
 </style>
 
 <script>
-const cards   = Array.from(document.querySelectorAll<HTMLElement>('#blog-grid .blog-card'));
-const filters = Array.from(document.querySelectorAll<HTMLButtonElement>('#blog-filters .blog-filter'));
-const search  = document.getElementById('blog-search') as HTMLInputElement;
-const count   = document.getElementById('blog-count') as HTMLElement;
-const empty   = document.getElementById('blog-empty') as HTMLElement;
+const cards       = Array.from(document.querySelectorAll<HTMLElement>('#blog-grid .blog-card'));
+const sectionWrap = document.getElementById('section-wrap') as HTMLElement;
+const sectionBtn  = document.getElementById('section-btn') as HTMLButtonElement;
+const sectionLbl  = document.getElementById('section-label') as HTMLElement;
+const sectionPanel= document.getElementById('section-panel') as HTMLElement;
+const sectionOpts = Array.from(document.querySelectorAll<HTMLButtonElement>('#section-panel .section-opt'));
+const subcatBtns  = Array.from(document.querySelectorAll<HTMLButtonElement>('#subcat-filters .blog-filter'));
+const searchInput = document.getElementById('blog-search') as HTMLInputElement;
+const count       = document.getElementById('blog-count') as HTMLElement;
+const empty       = document.getElementById('blog-empty') as HTMLElement;
 
+let activeSec = 'todos';
 let activeCat = 'todos';
 let searchVal = '';
 
 function update() {
   let visible = 0;
   cards.forEach(card => {
+    const secMatch  = activeSec === 'todos' || card.dataset.sec === activeSec;
     const catMatch  = activeCat === 'todos' || card.dataset.cat === activeCat;
     const textMatch = !searchVal || (card.dataset.text ?? '').includes(searchVal);
-    const show = catMatch && textMatch;
+    const show = secMatch && catMatch && textMatch;
     card.classList.toggle('hidden', !show);
     if (show) visible++;
   });
@@ -296,45 +356,88 @@ function update() {
   empty.style.display = visible === 0 ? 'block' : 'none';
 }
 
-filters.forEach(btn => {
-  btn.addEventListener('click', () => {
-    filters.forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    activeCat = btn.dataset.cat ?? 'todos';
-    update();
+function setSection(secId: string) {
+  activeSec = secId;
+  const opt = sectionOpts.find(o => o.dataset.sec === secId);
+  sectionLbl.textContent = opt?.textContent?.trim() ?? 'Todas las secciones';
+  sectionOpts.forEach(o => o.classList.toggle('active', o.dataset.sec === secId));
+
+  // Mostrar sólo las subcategorías de la sección seleccionada
+  subcatBtns.forEach(btn => {
+    if (!btn.dataset.sec) return; // botón "Todos" no tiene data-sec
+    btn.style.display = secId === 'todos' || btn.dataset.sec === secId ? '' : 'none';
+  });
+
+  // Resetear subcat si ya no pertenece a la nueva sección
+  if (activeCat !== 'todos') {
+    const catBtn = subcatBtns.find(b => b.dataset.cat === activeCat);
+    if (catBtn && secId !== 'todos' && catBtn.dataset.sec !== secId) {
+      activeCat = 'todos';
+      subcatBtns.forEach(b => b.classList.toggle('active', b.dataset.cat === 'todos'));
+    }
+  }
+  update();
+}
+
+function setSubcat(cat: string) {
+  activeCat = cat;
+  subcatBtns.forEach(b => b.classList.toggle('active', b.dataset.cat === cat));
+  update();
+}
+
+// Toggle dropdown sección
+sectionBtn.addEventListener('click', e => {
+  e.stopPropagation();
+  const isOpen = sectionWrap.classList.toggle('open');
+  sectionBtn.setAttribute('aria-expanded', String(isOpen));
+});
+
+// Cerrar al clickear afuera
+document.addEventListener('click', () => {
+  sectionWrap.classList.remove('open');
+  sectionBtn.setAttribute('aria-expanded', 'false');
+});
+sectionPanel.addEventListener('click', e => e.stopPropagation());
+
+// Opciones de sección
+sectionOpts.forEach(opt => {
+  opt.addEventListener('click', () => {
+    setSection(opt.dataset.sec ?? 'todos');
+    sectionWrap.classList.remove('open');
+    sectionBtn.setAttribute('aria-expanded', 'false');
   });
 });
 
-search.addEventListener('input', () => {
-  searchVal = search.value.toLowerCase().trim();
+// Subcategorías
+subcatBtns.forEach(btn => {
+  btn.addEventListener('click', () => setSubcat(btn.dataset.cat ?? 'todos'));
+});
+
+// Búsqueda
+searchInput.addEventListener('input', () => {
+  searchVal = searchInput.value.toLowerCase().trim();
   update();
 });
 
-// Activar filtro desde hash de URL (ej: /blog/#mediciones)
-const hashMap: Record<string, string> = {
-  'industrias-y-construcciones': 'Industrias y Construcciones',
-  'mediciones':          'Mediciones',
-  'capacitaciones':      'Capacitaciones',
-  'iso-45001':           'ISO 45001',
-  'auditorias':          'Auditorías',
-  'plataforma-hys':      'Plataforma HyS',
-  'medio-ambiente':      'Medio Ambiente',
+// Hash routing desde nav (ej: /blog/#mediciones)
+const hashMap: Record<string, { cat: string; sec: string }> = {
+  'industrias-y-construcciones': { cat: 'Industrias y Construcciones', sec: 'cumplimiento' },
+  'mediciones':                  { cat: 'Mediciones',                  sec: 'cumplimiento' },
+  'capacitaciones':              { cat: 'Capacitaciones',              sec: 'cumplimiento' },
+  'iso-45001':                   { cat: 'ISO 45001',                   sec: 'iso45001'     },
+  'auditorias':                  { cat: 'Auditorías',                  sec: 'iso45001'     },
+  'plataforma-hys':              { cat: 'Plataforma HyS',              sec: 'plataforma'   },
+  'medio-ambiente':              { cat: 'Medio Ambiente',              sec: 'medioambiente'},
 };
 
 function activateFromHash() {
   const hash = window.location.hash.replace('#', '');
-  const cat = hashMap[hash];
-  if (!cat) return;
-  const btn = filters.find(b => b.dataset.cat === cat);
-  if (btn) {
-    filters.forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    activeCat = cat;
-    update();
-  }
+  const entry = hashMap[hash];
+  if (!entry) return;
+  setSection(entry.sec);
+  setSubcat(entry.cat);
 }
 
 activateFromHash();
 window.addEventListener('hashchange', activateFromHash);
-
 </script>
