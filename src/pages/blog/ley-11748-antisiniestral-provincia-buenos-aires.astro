@@ -1,5 +1,6 @@
 ﻿---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import FormConsulta from '../../components/FormConsulta.astro';
 ---
 
 <BaseLayout
@@ -132,12 +133,19 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         </div>
 
         <div class="art-cta">
-          <h3>Plan antisiniestral Ley 11748 para tu establecimiento</h3>
-          <p>Elaboramos el Plan de Autoprotección, capacitamos la brigada y gestionamos la presentación ante Defensa Civil. Cobertura en toda la Provincia de Buenos Aires.</p>
-          <div class="cta-actions" style="margin-top:16px">
-            <a href="https://wa.me/5491123496789?text=Hola%2C%20necesito%20asesoramiento" class="btn-primary" target="_blank" rel="noopener">Consultar por WhatsApp</a>
-            <a href="/servicios/educativo-recreativo/planes-de-emergencia/" class="btn-outline">Ver servicio</a>
-          </div>
+          <FormConsulta
+            servicios={['s1']}
+            funnel="mofu"
+            leadMagnet="checklist-srt-obras"
+            titulo="Descargá el checklist sin cargo"
+            subtitulo="Checklist SRT para obras — todos los documentos que te puede pedir un inspector, organizados por tipo y etapa de obra."
+            cta="Quiero el checklist"
+            successMsg="¡Listo! Te enviamos el recurso a tu email. Si no llega en 5 minutos, revisá spam."
+          />
+          <p style="margin-top:20px;font-size:13px;font-weight:300;color:var(--gris-3)">
+            ¿Preferís hablar directamente?
+            <a href="https://wa.me/5491123496789" target="_blank" rel="noopener" style="color:var(--verde)">Escribinos por WhatsApp →</a>
+          </p>
         </div>
 
       </div>

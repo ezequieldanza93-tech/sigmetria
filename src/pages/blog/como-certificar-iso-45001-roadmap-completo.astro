@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import FormConsulta from '../../components/FormConsulta.astro';
 ---
 
 <BaseLayout
@@ -151,12 +152,19 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         </ul>
 
         <div class="art-cta">
-          <h3>Arrancá tu certificación con un diagnóstico real</h3>
-          <p>Te acompañamos en todo el proceso: desde el gap analysis inicial hasta el día de la auditoría de certificación. Conocemos los requisitos de los organismos certificadores argentinos y sabemos qué evidencias buscan en cada cláusula.</p>
-          <div class="cta-actions" style="margin-top:16px">
-            <a href="https://wa.me/5491123496789" class="btn-primary" target="_blank" rel="noopener">Consultar por WhatsApp</a>
-            <a href="/servicios/iso-45001/implementacion/" class="btn-outline">Arrancar mi certificación</a>
-          </div>
+          <FormConsulta
+            servicios={['s2']}
+            funnel="mofu"
+            leadMagnet="guia-8-pasos-sgs"
+            titulo="Descargá la guía sin cargo"
+            subtitulo="Guía de 8 pasos para un sistema de gestión de seguridad — el roadmap real que usamos con nuestros clientes en Argentina."
+            cta="Quiero la guía"
+            successMsg="¡Listo! Te enviamos el recurso a tu email. Si no llega en 5 minutos, revisá spam."
+          />
+          <p style="margin-top:20px;font-size:13px;font-weight:300;color:var(--gris-3)">
+            ¿Preferís hablar directamente?
+            <a href="https://wa.me/5491123496789" target="_blank" rel="noopener" style="color:var(--verde)">Escribinos por WhatsApp →</a>
+          </p>
         </div>
       </div>
     </div>

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import FormConsulta from '../../components/FormConsulta.astro';
 ---
 
 <BaseLayout
@@ -114,12 +115,19 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         <p>Lo que sí está claro es que la multa, en el mejor caso, es un indicador rezagado: llega cuando el incumplimiento ya existió. El costo real de no gestionar la seguridad —accidentes, juicios laborales, daño reputacional, pérdida de contratos— supera con creces cualquier multa de la SRT. Las empresas que invierten en H&S no lo hacen para evitar multas. Lo hacen porque entienden que el accidente sale más caro que la prevención.</p>
 
         <div class="art-cta">
-          <h3>Diagnóstico de cumplimiento normativo</h3>
-          <p>Evaluamos el estado de tu empresa frente a los requisitos de la SRT, identificamos los incumplimientos con mayor exposición y te damos un plan de regularización priorizado por riesgo e impacto.</p>
-          <div class="cta-actions" style="margin-top:16px">
-            <a href="https://wa.me/5491123496789?text=Hola%2C%20necesito%20asesoramiento" class="btn-primary" target="_blank" rel="noopener">Diagnóstico de cumplimiento gratuito</a>
-            <a href="/servicios/auditorias/" class="btn-outline">Ver servicio de auditorías</a>
-          </div>
+          <FormConsulta
+            servicios={['s1']}
+            funnel="mofu"
+            leadMagnet="15-documentos-inspeccion-obra"
+            titulo="Descargá la lista sin cargo"
+            subtitulo="Los 15 documentos que revisa la SRT en una inspección de obra — organizados por etapa para que no te falte nada cuando llegue el inspector."
+            cta="Quiero la lista"
+            successMsg="¡Listo! Te enviamos el recurso a tu email. Si no llega en 5 minutos, revisá spam."
+          />
+          <p style="margin-top:20px;font-size:13px;font-weight:300;color:var(--gris-3)">
+            ¿Preferís hablar directamente?
+            <a href="https://wa.me/5491123496789" target="_blank" rel="noopener" style="color:var(--verde)">Escribinos por WhatsApp →</a>
+          </p>
         </div>
 
       </div>

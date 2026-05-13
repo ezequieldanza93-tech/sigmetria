@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import FormConsulta from '../../components/FormConsulta.astro';
 ---
 
 <BaseLayout
@@ -124,12 +125,19 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         <p>Las capacitaciones de contenido teórico o que no tienen componente práctico obligatorio pueden realizarse en modalidad virtual, siempre que la plataforma permita verificar la participación real del trabajador (control de tiempo en pantalla, evaluación final, registro de acceso con identificación). La evidencia requerida es la misma: planilla de asistencia (en este caso, registro de acceso digital) y evidencia del contenido cubierto. La SRT ha aceptado registros de e-learning en inspecciones, pero con el mismo rigor en cuanto a la calidad de la evidencia que para capacitaciones presenciales.</p>
 
         <div class="art-cta">
-          <h3>Capacitaciones in company con registro válido para SRT y auditorías ISO</h3>
-          <p>Diseñamos e implementamos el plan de capacitaciones anual de tu empresa: desde la inducción de ingreso hasta las capacitaciones especiales por tarea de riesgo. Entregamos toda la documentación en formato auditable.</p>
-          <div class="cta-actions" style="margin-top:16px">
-            <a href="https://wa.me/5491123496789" class="btn-primary" target="_blank" rel="noopener">Consultar por WhatsApp</a>
-            <a href="/servicios/capacitaciones/" class="btn-outline">Ver catálogo de cursos</a>
-          </div>
+          <FormConsulta
+            servicios={['s7']}
+            funnel="mofu"
+            leadMagnet="capacitaciones-obligatorias-por-puesto"
+            titulo="Descargá el recurso sin cargo"
+            subtitulo="Capacitaciones obligatorias por puesto — la lista completa de qué capacitación necesita cada trabajador según su tarea y riesgo."
+            cta="Quiero la lista"
+            successMsg="¡Listo! Te enviamos el recurso a tu email. Si no llega en 5 minutos, revisá spam."
+          />
+          <p style="margin-top:20px;font-size:13px;font-weight:300;color:var(--gris-3)">
+            ¿Preferís hablar directamente?
+            <a href="https://wa.me/5491123496789" target="_blank" rel="noopener" style="color:var(--verde)">Escribinos por WhatsApp →</a>
+          </p>
         </div>
       </div>
     </div>

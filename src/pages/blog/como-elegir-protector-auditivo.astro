@@ -1,5 +1,6 @@
 ﻿---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import FormConsulta from '../../components/FormConsulta.astro';
 ---
 
 <BaseLayout
@@ -140,12 +141,19 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         </div>
 
         <div class="art-cta">
-          <h3>Hacemos la medición y especificamos el EPP correcto</h3>
-          <p>En nuestro informe de medición de ruido siempre incluimos la recomendación del protector auditivo específico (NRR mínimo requerido) para cada puesto. No dejamos el EPP librado al criterio del proveedor.</p>
-          <div class="cta-actions" style="margin-top:16px">
-            <a href="https://wa.me/5491123496789?text=Hola%2C%20necesito%20asesoramiento%20sobre%20protecci%C3%B3n%20auditiva" class="btn-primary" target="_blank" rel="noopener">Consultar por WhatsApp</a>
-            <a href="/servicios/empresas-industriales/mediciones/ruido/" class="btn-outline">Medición de ruido</a>
-          </div>
+          <FormConsulta
+            servicios={['s6']}
+            funnel="mofu"
+            leadMagnet="mediciones-tecnicas-obligatorias-srt"
+            titulo="Descargá la guía sin cargo"
+            subtitulo="Mediciones técnicas obligatorias ante la SRT — qué medir, con qué protocolo y con qué frecuencia en cada puesto de trabajo."
+            cta="Quiero la guía"
+            successMsg="¡Listo! Te enviamos el recurso a tu email. Si no llega en 5 minutos, revisá spam."
+          />
+          <p style="margin-top:20px;font-size:13px;font-weight:300;color:var(--gris-3)">
+            ¿Preferís hablar directamente?
+            <a href="https://wa.me/5491123496789" target="_blank" rel="noopener" style="color:var(--verde)">Escribinos por WhatsApp →</a>
+          </p>
         </div>
 
       </div>

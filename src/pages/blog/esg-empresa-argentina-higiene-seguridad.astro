@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import FormConsulta from '../../components/FormConsulta.astro';
 ---
 
 <BaseLayout
@@ -120,12 +121,19 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         </div>
 
         <div class="art-cta">
-          <h3>Preparate para las exigencias ESG con ISO 45001</h3>
-          <p>Te acompañamos desde el diagnóstico inicial hasta la certificación, con foco en que el sistema que construyas te sirva tanto para cumplir la normativa como para aprobar los due diligence de tus clientes corporativos.</p>
-          <div class="cta-actions" style="margin-top:16px">
-            <a href="https://wa.me/5491123496789?text=Hola%2C%20necesito%20asesoramiento" class="btn-primary" target="_blank" rel="noopener">Consultar certificación ISO 45001</a>
-            <a href="/servicios/iso-45001/implementacion/" class="btn-outline">Ver implementación ISO 45001</a>
-          </div>
+          <FormConsulta
+            servicios={['s8']}
+            funnel="mofu"
+            leadMagnet="reporte-ejecutivo-hys-directorio"
+            titulo="Descargá el reporte sin cargo"
+            subtitulo="Reporte ejecutivo de H&S para el directorio — el tablero de indicadores que necesita la dirección para tomar decisiones de inversión en seguridad."
+            cta="Quiero el reporte"
+            successMsg="¡Listo! Te enviamos el recurso a tu email. Si no llega en 5 minutos, revisá spam."
+          />
+          <p style="margin-top:20px;font-size:13px;font-weight:300;color:var(--gris-3)">
+            ¿Preferís hablar directamente?
+            <a href="https://wa.me/5491123496789" target="_blank" rel="noopener" style="color:var(--verde)">Escribinos por WhatsApp →</a>
+          </p>
         </div>
 
       </div>

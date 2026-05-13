@@ -1,5 +1,6 @@
 ﻿---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import FormConsulta from '../../components/FormConsulta.astro';
 ---
 
 <BaseLayout
@@ -167,12 +168,19 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         </div>
 
         <div class="art-cta">
-          <h3>Gestionamos el cumplimiento de tus efluentes</h3>
-          <p>Asesoramos en la habilitación de vuelcos ante ACUMAR, OPDS y AySA. Coordinamos los análisis de laboratorio, interpretamos los resultados y acompañamos la presentación de planes de adecuación. Si ya tenés un incumplimiento, te ayudamos a gestionarlo antes de que escale.</p>
-          <div class="cta-actions" style="margin-top:16px">
-            <a href="https://wa.me/5491123496789?text=Hola%2C%20necesito%20asesoramiento" class="btn-primary" target="_blank" rel="noopener">Consultar por WhatsApp</a>
-            <a href="/servicios/empresas-industriales/gestion-normativa/" class="btn-outline">Ver servicio</a>
-          </div>
+          <FormConsulta
+            servicios={['s6']}
+            funnel="mofu"
+            leadMagnet="mediciones-tecnicas-obligatorias-srt"
+            titulo="Descargá la guía sin cargo"
+            subtitulo="Mediciones técnicas obligatorias ante la SRT — protocolos, frecuencias y requisitos formales para ruido, iluminación y más."
+            cta="Quiero la guía"
+            successMsg="¡Listo! Te enviamos el recurso a tu email. Si no llega en 5 minutos, revisá spam."
+          />
+          <p style="margin-top:20px;font-size:13px;font-weight:300;color:var(--gris-3)">
+            ¿Preferís hablar directamente?
+            <a href="https://wa.me/5491123496789" target="_blank" rel="noopener" style="color:var(--verde)">Escribinos por WhatsApp →</a>
+          </p>
         </div>
 
       </div>

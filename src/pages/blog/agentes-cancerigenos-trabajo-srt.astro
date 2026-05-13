@@ -1,5 +1,6 @@
 ﻿---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import FormConsulta from '../../components/FormConsulta.astro';
 ---
 
 <BaseLayout
@@ -131,12 +132,19 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         <p>Además, los trabajadores expuestos deben tener acceso a vigilancia médica específica: exámenes periódicos orientados al órgano blanco de cada sustancia (radiografía de tórax para asbesto y sílice, hemograma completo para benceno, etc.).</p>
 
         <div class="art-cta">
-          <h3>Gestionamos la declaración ante la SRT</h3>
-          <p>Te ayudamos a identificar qué agentes cancerígenos usás, completar el registro SRT 81/2019 y diseñar el programa de control. Sin multas, sin exposición legal.</p>
-          <div class="cta-actions" style="margin-top:16px">
-            <a href="https://wa.me/5491123496789?text=Hola%2C%20necesito%20asesoramiento" class="btn-primary" target="_blank" rel="noopener">Consultar por WhatsApp</a>
-            <a href="/servicios/empresas-industriales/gestion-normativa/" class="btn-outline">Ver servicio</a>
-          </div>
+          <FormConsulta
+            servicios={['s6']}
+            funnel="mofu"
+            leadMagnet="mediciones-tecnicas-obligatorias-srt"
+            titulo="Descargá la guía sin cargo"
+            subtitulo="Mediciones técnicas obligatorias ante la SRT — todo lo que tu empresa necesita medir, cuándo y con qué protocolo."
+            cta="Quiero la guía"
+            successMsg="¡Listo! Te enviamos el recurso a tu email. Si no llega en 5 minutos, revisá spam."
+          />
+          <p style="margin-top:20px;font-size:13px;font-weight:300;color:var(--gris-3)">
+            ¿Preferís hablar directamente?
+            <a href="https://wa.me/5491123496789" target="_blank" rel="noopener" style="color:var(--verde)">Escribinos por WhatsApp →</a>
+          </p>
         </div>
 
       </div>

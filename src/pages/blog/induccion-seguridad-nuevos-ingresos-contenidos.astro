@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import FormConsulta from '../../components/FormConsulta.astro';
 ---
 
 <BaseLayout
@@ -124,12 +125,19 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         <p>La digitalización de este proceso tiene ventajas claras: acceso inmediato desde cualquier dispositivo (útil en obras o plantas con personal disperso), firma digital con validez legal, recordatorios automáticos de vencimientos y reinducción necesaria, y trazabilidad completa para auditorías. Herramientas como formularios digitales con firma electrónica (desde Google Forms hasta plataformas especializadas de H&S) permiten digitalizar el proceso sin una inversión tecnológica significativa.</p>
 
         <div class="art-cta">
-          <h3>Capacitaciones in company para tu empresa</h3>
-          <p>Diseñamos e implementamos el programa de inducción para nuevos ingresos adaptado a los riesgos reales de tu establecimiento, con toda la documentación necesaria para el Legajo Técnico.</p>
-          <div class="cta-actions" style="margin-top:16px">
-            <a href="https://wa.me/5491123496789?text=Hola%2C%20necesito%20asesoramiento" class="btn-primary" target="_blank" rel="noopener">Ver capacitaciones in company</a>
-            <a href="/servicios/capacitaciones/" class="btn-outline">Ver servicio de capacitaciones</a>
-          </div>
+          <FormConsulta
+            servicios={['s7']}
+            funnel="mofu"
+            leadMagnet="capacitaciones-obligatorias-por-puesto"
+            titulo="Descargá el recurso sin cargo"
+            subtitulo="Capacitaciones obligatorias por puesto — qué capacitación necesita cada trabajador, con qué frecuencia y qué documentación debe quedar en el legajo."
+            cta="Quiero el recurso"
+            successMsg="¡Listo! Te enviamos el recurso a tu email. Si no llega en 5 minutos, revisá spam."
+          />
+          <p style="margin-top:20px;font-size:13px;font-weight:300;color:var(--gris-3)">
+            ¿Preferís hablar directamente?
+            <a href="https://wa.me/5491123496789" target="_blank" rel="noopener" style="color:var(--verde)">Escribinos por WhatsApp →</a>
+          </p>
         </div>
 
       </div>

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import FormConsulta from '../../components/FormConsulta.astro';
 ---
 
 <BaseLayout
@@ -118,12 +119,19 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         </div>
 
         <div class="art-cta">
-          <h3>Checklist de documentación para tu obra</h3>
-          <p>Te enviamos el checklist completo de documentación que revisa la AGC en una inspección de obra en CABA, con las prioridades según etapa de construcción. Sin costo, sin compromiso.</p>
-          <div class="cta-actions" style="margin-top:16px">
-            <a href="https://wa.me/5491123496789?text=Hola%2C%20quiero%20el%20checklist%20de%20documentaci%C3%B3n%20para%20mi%20obra" class="btn-primary" target="_blank" rel="noopener">Consultar por WhatsApp</a>
-            <a href="/servicios/hys-construccion-caba/" class="btn-outline">Ver servicio</a>
-          </div>
+          <FormConsulta
+            servicios={['s1']}
+            funnel="mofu"
+            leadMagnet="15-documentos-inspeccion-obra"
+            titulo="Descargá la lista sin cargo"
+            subtitulo="Los 15 documentos que revisa la SRT en una inspección de obra — organizados por etapa para que no te falte nada cuando llegue el inspector."
+            cta="Quiero la lista"
+            successMsg="¡Listo! Te enviamos el recurso a tu email. Si no llega en 5 minutos, revisá spam."
+          />
+          <p style="margin-top:20px;font-size:13px;font-weight:300;color:var(--gris-3)">
+            ¿Preferís hablar directamente?
+            <a href="https://wa.me/5491123496789" target="_blank" rel="noopener" style="color:var(--verde)">Escribinos por WhatsApp →</a>
+          </p>
         </div>
 
       </div>

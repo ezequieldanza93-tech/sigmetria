@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import FormConsulta from '../../components/FormConsulta.astro';
 ---
 
 <BaseLayout
@@ -112,12 +113,19 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         </div>
 
         <div class="art-cta">
-          <h3>Diagnóstico ISO 45001 gratuito para tu empresa</h3>
-          <p>Evaluamos el estado actual de tu gestión de H&S frente a los requisitos de ISO 45001, identificamos las brechas reales y te proponemos un plan de implementación que evite los errores que hacen fracasar a la mayoría.</p>
-          <div class="cta-actions" style="margin-top:16px">
-            <a href="https://wa.me/5491123496789?text=Hola%2C%20necesito%20asesoramiento" class="btn-primary" target="_blank" rel="noopener">Diagnóstico ISO gratuito</a>
-            <a href="/servicios/iso-45001/implementacion/" class="btn-outline">Ver implementación ISO 45001</a>
-          </div>
+          <FormConsulta
+            servicios={['s3']}
+            funnel="mofu"
+            leadMagnet="10-errores-iso-45001-primer-año"
+            titulo="Descargá la guía sin cargo"
+            subtitulo="Los 10 errores más frecuentes en el primer año de ISO 45001 — y cómo evitarlos antes de que te cuesten la certificación."
+            cta="Quiero la guía"
+            successMsg="¡Listo! Te enviamos el recurso a tu email. Si no llega en 5 minutos, revisá spam."
+          />
+          <p style="margin-top:20px;font-size:13px;font-weight:300;color:var(--gris-3)">
+            ¿Preferís hablar directamente?
+            <a href="https://wa.me/5491123496789" target="_blank" rel="noopener" style="color:var(--verde)">Escribinos por WhatsApp →</a>
+          </p>
         </div>
 
       </div>

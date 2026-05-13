@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import FormConsulta from '../../components/FormConsulta.astro';
 ---
 
 <BaseLayout
@@ -122,12 +123,19 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         <p>Todavía no vale la pena cuando: el Legajo Técnico está desactualizado, no tenés mediciones ambientales al día, o la cultura de seguridad está en nivel reactivo. En ese contexto, invertir en EPP inteligente es poner tecnología cara sobre una base frágil. El retorno esperado no se va a materializar porque el problema no es la información — es la gestión.</p>
 
         <div class="art-cta">
-          <h3>Soluciones enterprise de seguridad con tecnología integrada</h3>
-          <p>Para empresas con operaciones complejas y presupuesto para innovar, diseñamos programas de H&S que integran tecnología donde agrega valor real — con una base de gestión sólida que garantiza el retorno.</p>
-          <div class="cta-actions" style="margin-top:16px">
-            <a href="https://wa.me/5491123496789?text=Hola%2C%20necesito%20asesoramiento" class="btn-primary" target="_blank" rel="noopener">Consultar solución enterprise</a>
-            <a href="/enterprise/" class="btn-outline">Ver servicio enterprise</a>
-          </div>
+          <FormConsulta
+            servicios={['s4']}
+            funnel="mofu"
+            leadMagnet="comparativa-excel-vs-software-hys"
+            titulo="Descargá la comparativa sin cargo"
+            subtitulo="Excel vs. software de gestión de H&S — cuándo cada herramienta tiene sentido y qué criterios usar para tomar la decisión."
+            cta="Quiero la comparativa"
+            successMsg="¡Listo! Te enviamos el recurso a tu email. Si no llega en 5 minutos, revisá spam."
+          />
+          <p style="margin-top:20px;font-size:13px;font-weight:300;color:var(--gris-3)">
+            ¿Preferís hablar directamente?
+            <a href="https://wa.me/5491123496789" target="_blank" rel="noopener" style="color:var(--verde)">Escribinos por WhatsApp →</a>
+          </p>
         </div>
 
       </div>

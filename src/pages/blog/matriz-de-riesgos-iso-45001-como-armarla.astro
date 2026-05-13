@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import FormConsulta from '../../components/FormConsulta.astro';
 ---
 
 <BaseLayout
@@ -150,12 +151,19 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         <p>Las soluciones digitales para la gestión de IPER permiten asignar responsables de revisión periódica, recibir alertas cuando un registro está próximo a vencer, vincular los peligros con los controles implementados y los incidentes registrados, y generar evidencia de que la matriz se revisa cada vez que hay un cambio en el proceso. La trazabilidad de las actualizaciones (quién modificó qué y cuándo) es un punto que los auditores valoran específicamente.</p>
 
         <div class="art-cta">
-          <h3>Gestioná tu IPER de forma dinámica, no en un Excel estático</h3>
-          <p>Nuestra plataforma incluye un módulo de gestión de riesgos que te permite mantener la matriz actualizada, asignar controles con responsables y fechas, y generar evidencia de revisión continua para tus auditorías ISO 45001.</p>
-          <div class="cta-actions" style="margin-top:16px">
-            <a href="https://wa.me/5491123496789" class="btn-primary" target="_blank" rel="noopener">Consultar por WhatsApp</a>
-            <a href="/plataforma/" class="btn-outline">Ver plataforma con matriz dinámica</a>
-          </div>
+          <FormConsulta
+            servicios={['s5']}
+            funnel="mofu"
+            leadMagnet="plantilla-gap-analysis-iso-45001"
+            titulo="Descargá la plantilla sin cargo"
+            subtitulo="Plantilla de gap analysis ISO 45001 — evaluá vos mismo el nivel de cumplimiento de tu sistema contra los 10 capítulos de la norma."
+            cta="Quiero la plantilla"
+            successMsg="¡Listo! Te enviamos el recurso a tu email. Si no llega en 5 minutos, revisá spam."
+          />
+          <p style="margin-top:20px;font-size:13px;font-weight:300;color:var(--gris-3)">
+            ¿Preferís hablar directamente?
+            <a href="https://wa.me/5491123496789" target="_blank" rel="noopener" style="color:var(--verde)">Escribinos por WhatsApp →</a>
+          </p>
         </div>
       </div>
     </div>

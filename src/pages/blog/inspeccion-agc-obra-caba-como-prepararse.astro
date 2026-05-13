@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import FormConsulta from '../../components/FormConsulta.astro';
 ---
 
 <BaseLayout
@@ -151,12 +152,19 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         </div>
 
         <div class="art-cta">
-          <h3>Auditoría express antes de tu próxima inspección</h3>
-          <p>Revisamos tu carpeta de HyS en obra contra la lista de la AGC y la SRT. Identificamos los faltantes con mayor riesgo de multa y te ayudamos a regularizarlos antes de que llegue el inspector. Sin compromiso.</p>
-          <div class="cta-actions" style="margin-top:16px">
-            <a href="https://wa.me/5491123496789?text=Hola%2C%20necesito%20una%20auditor%C3%ADa%20express%20de%20obra" class="btn-primary" target="_blank" rel="noopener">Consultar por WhatsApp</a>
-            <a href="/servicios/hys-construccion-caba/" class="btn-outline">Ver servicio</a>
-          </div>
+          <FormConsulta
+            servicios={['s1']}
+            funnel="mofu"
+            leadMagnet="15-documentos-inspeccion-obra"
+            titulo="Descargá la lista sin cargo"
+            subtitulo="Los 15 documentos que revisa la SRT en una inspección de obra — organizados por etapa para que no te falte nada cuando llegue el inspector."
+            cta="Quiero la lista"
+            successMsg="¡Listo! Te enviamos el recurso a tu email. Si no llega en 5 minutos, revisá spam."
+          />
+          <p style="margin-top:20px;font-size:13px;font-weight:300;color:var(--gris-3)">
+            ¿Preferís hablar directamente?
+            <a href="https://wa.me/5491123496789" target="_blank" rel="noopener" style="color:var(--verde)">Escribinos por WhatsApp →</a>
+          </p>
         </div>
 
       </div>

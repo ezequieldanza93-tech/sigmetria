@@ -1,5 +1,6 @@
 ﻿---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import FormConsulta from '../../components/FormConsulta.astro';
 ---
 
 <BaseLayout
@@ -149,12 +150,19 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         </div>
 
         <div class="art-cta">
-          <h3>Gestionamos el H&S de tu estación de servicio</h3>
-          <p>Relevamos todos los riesgos específicos de tu EDS, desarrollamos el programa de seguridad, coordinamos las mediciones de COVs, ruido e iluminación con laboratorio habilitado, capacitamos al personal y elaboramos el plan de emergencia ante derrames e incendios. Cobertura en toda el área metropolitana y zona sur de PBA.</p>
-          <div class="cta-actions" style="margin-top:16px">
-            <a href="https://wa.me/5491123496789?text=Hola%2C%20necesito%20asesoramiento" class="btn-primary" target="_blank" rel="noopener">Consultar por WhatsApp</a>
-            <a href="/servicios/sector-comercial/estaciones-de-servicio/" class="btn-outline">Ver servicio</a>
-          </div>
+          <FormConsulta
+            servicios={['s6']}
+            funnel="mofu"
+            leadMagnet="mediciones-tecnicas-obligatorias-srt"
+            titulo="Descargá la guía sin cargo"
+            subtitulo="Mediciones técnicas obligatorias ante la SRT — protocolos, frecuencias y requisitos formales para ruido, iluminación y más."
+            cta="Quiero la guía"
+            successMsg="¡Listo! Te enviamos el recurso a tu email. Si no llega en 5 minutos, revisá spam."
+          />
+          <p style="margin-top:20px;font-size:13px;font-weight:300;color:var(--gris-3)">
+            ¿Preferís hablar directamente?
+            <a href="https://wa.me/5491123496789" target="_blank" rel="noopener" style="color:var(--verde)">Escribinos por WhatsApp →</a>
+          </p>
         </div>
       </div>
     </div>

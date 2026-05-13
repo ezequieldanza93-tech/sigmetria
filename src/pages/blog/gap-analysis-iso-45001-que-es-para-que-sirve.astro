@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import FormConsulta from '../../components/FormConsulta.astro';
 ---
 
 <BaseLayout
@@ -118,12 +119,19 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         <p>El entregable es un informe de brecha con nivel de cumplimiento por cláusula expresado en porcentaje, listado de hallazgos prioritarios clasificados por criticidad, y una hoja de ruta de implementación con fases, actividades, recursos estimados y plazos realistas hasta la certificación. El informe es la base sobre la cual construimos el presupuesto de implementación, de modo que las cifras tienen respaldo técnico.</p>
 
         <div class="art-cta">
-          <h3>Sabé exactamente cuánto te falta para certificar ISO 45001</h3>
-          <p>Nuestro gap analysis express te da el diagnóstico completo en 2-3 semanas: qué ya tenés, qué falta y cuánto va a costar llegar a la certificación. Sin sorpresas a mitad del camino.</p>
-          <div class="cta-actions" style="margin-top:16px">
-            <a href="https://wa.me/5491123496789" class="btn-primary" target="_blank" rel="noopener">Consultar por WhatsApp</a>
-            <a href="/servicios/auditorias/" class="btn-outline">Solicitar gap analysis express</a>
-          </div>
+          <FormConsulta
+            servicios={['s5']}
+            funnel="mofu"
+            leadMagnet="plantilla-gap-analysis-iso-45001"
+            titulo="Descargá la plantilla sin cargo"
+            subtitulo="Plantilla de gap analysis ISO 45001 — evaluá vos mismo el nivel de cumplimiento de tu sistema contra los 10 capítulos de la norma."
+            cta="Quiero la plantilla"
+            successMsg="¡Listo! Te enviamos el recurso a tu email. Si no llega en 5 minutos, revisá spam."
+          />
+          <p style="margin-top:20px;font-size:13px;font-weight:300;color:var(--gris-3)">
+            ¿Preferís hablar directamente?
+            <a href="https://wa.me/5491123496789" target="_blank" rel="noopener" style="color:var(--verde)">Escribinos por WhatsApp →</a>
+          </p>
         </div>
       </div>
     </div>

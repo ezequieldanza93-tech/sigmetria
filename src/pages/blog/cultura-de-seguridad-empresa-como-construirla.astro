@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import FormConsulta from '../../components/FormConsulta.astro';
 ---
 
 <BaseLayout
@@ -117,12 +118,19 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         </ul>
 
         <div class="art-cta">
-          <h3>Construí la cultura de seguridad de tu empresa</h3>
-          <p>Acompañamos a empresas medianas y grandes en el diagnóstico de madurez cultural y la implementación de programas de cambio real — con resultados medibles en indicadores adelantados.</p>
-          <div class="cta-actions" style="margin-top:16px">
-            <a href="https://wa.me/5491123496789?text=Hola%2C%20necesito%20asesoramiento" class="btn-primary" target="_blank" rel="noopener">Hablar con un especialista</a>
-            <a href="/enterprise/" class="btn-outline">Ver servicio enterprise</a>
-          </div>
+          <FormConsulta
+            servicios={['s3']}
+            funnel="mofu"
+            leadMagnet="10-errores-iso-45001-primer-año"
+            titulo="Descargá el recurso sin cargo"
+            subtitulo="Los 10 errores en el primer año de ISO 45001 — los problemas más comunes que hacen que el sistema no funcione en la práctica."
+            cta="Quiero el recurso"
+            successMsg="¡Listo! Te enviamos el recurso a tu email. Si no llega en 5 minutos, revisá spam."
+          />
+          <p style="margin-top:20px;font-size:13px;font-weight:300;color:var(--gris-3)">
+            ¿Preferís hablar directamente?
+            <a href="https://wa.me/5491123496789" target="_blank" rel="noopener" style="color:var(--verde)">Escribinos por WhatsApp →</a>
+          </p>
         </div>
 
       </div>

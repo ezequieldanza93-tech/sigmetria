@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import FormConsulta from '../../components/FormConsulta.astro';
 ---
 
 <BaseLayout
@@ -134,12 +135,19 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         <p>Coordinamos la logística completa: definición de grupos (máximo 12 participantes por grupo para garantizar la calidad del módulo práctico), preparación del espacio de entrenamiento, entrega de material didáctico, realización de la evaluación y entrega de toda la documentación requerida (planillas, resultados de evaluación y certificados individuales) dentro de los 5 días hábiles posteriores al curso.</p>
 
         <div class="art-cta">
-          <h3>Curso de trabajo en altura in company — válido Res. SRT 503/2014</h3>
-          <p>8 horas con módulo práctico en tus instalaciones, evaluación individual, certificados y toda la documentación en formato auditable. Grupos reducidos para garantizar la parte práctica.</p>
-          <div class="cta-actions" style="margin-top:16px">
-            <a href="https://wa.me/5491123496789" class="btn-primary" target="_blank" rel="noopener">Consultar por WhatsApp</a>
-            <a href="/servicios/capacitaciones/" class="btn-outline">Cotizar curso in company</a>
-          </div>
+          <FormConsulta
+            servicios={['s7']}
+            funnel="mofu"
+            leadMagnet="capacitaciones-obligatorias-por-puesto"
+            titulo="Descargá el recurso sin cargo"
+            subtitulo="Capacitaciones obligatorias por puesto — qué capacitación necesita cada trabajador, con qué frecuencia y qué documentación debe quedar en el legajo."
+            cta="Quiero el recurso"
+            successMsg="¡Listo! Te enviamos el recurso a tu email. Si no llega en 5 minutos, revisá spam."
+          />
+          <p style="margin-top:20px;font-size:13px;font-weight:300;color:var(--gris-3)">
+            ¿Preferís hablar directamente?
+            <a href="https://wa.me/5491123496789" target="_blank" rel="noopener" style="color:var(--verde)">Escribinos por WhatsApp →</a>
+          </p>
         </div>
       </div>
     </div>

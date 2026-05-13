@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import FormConsulta from '../../components/FormConsulta.astro';
 ---
 
 <BaseLayout
@@ -161,12 +162,19 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         </div>
 
         <div class="art-cta">
-          <h3>Migrá tu sistema de OHSAS 18001 a ISO 45001</h3>
-          <p>Analizamos las brechas de tu sistema actual respecto a ISO 45001 y diseñamos el plan de migración con los cambios reales que necesitás para que el certificado refleje un sistema que funciona. No solo un trámite de actualización de documentos.</p>
-          <div class="cta-actions" style="margin-top:16px">
-            <a href="https://wa.me/5491123496789?text=Hola%2C%20quiero%20consultar%20la%20migraci%C3%B3n%20a%20ISO%2045001" class="btn-primary" target="_blank" rel="noopener">Consultar por WhatsApp</a>
-            <a href="/servicios/iso-45001/implementacion/" class="btn-outline">Ver servicio</a>
-          </div>
+          <FormConsulta
+            servicios={['s2']}
+            funnel="mofu"
+            leadMagnet="implementar-iso-45001-sin-burocracia"
+            titulo="Descargá la guía sin cargo"
+            subtitulo="Cómo implementar ISO 45001 sin burocracia — 12 páginas con el roadmap real que usamos en PyMEs argentinas."
+            cta="Quiero la guía"
+            successMsg="¡Listo! Te enviamos el recurso a tu email. Si no llega en 5 minutos, revisá spam."
+          />
+          <p style="margin-top:20px;font-size:13px;font-weight:300;color:var(--gris-3)">
+            ¿Preferís hablar directamente?
+            <a href="https://wa.me/5491123496789" target="_blank" rel="noopener" style="color:var(--verde)">Escribinos por WhatsApp →</a>
+          </p>
         </div>
 
       </div>

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import FormConsulta from '../../components/FormConsulta.astro';
 ---
 
 <BaseLayout
@@ -124,12 +125,19 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         </div>
 
         <div class="art-cta">
-          <h3>Gestionamos la documentación de EPP de tu obra</h3>
-          <p>Revisamos el stock de EPP en obra, verificamos que cumplan los estándares IRAM, generamos o actualizamos los registros de entrega y capacitamos al personal en el uso correcto. Todo documentado para pasar cualquier auditoría de la SRT o la AGC.</p>
-          <div class="cta-actions" style="margin-top:16px">
-            <a href="https://wa.me/5491123496789?text=Hola%2C%20necesito%20gestionar%20los%20EPP%20de%20mi%20obra" class="btn-primary" target="_blank" rel="noopener">Consultar por WhatsApp</a>
-            <a href="/servicios/hys-construccion-caba/" class="btn-outline">Ver servicio</a>
-          </div>
+          <FormConsulta
+            servicios={['s1']}
+            funnel="mofu"
+            leadMagnet="checklist-srt-obras"
+            titulo="Descargá el checklist sin cargo"
+            subtitulo="Checklist SRT para obras — todos los documentos que te puede pedir un inspector, organizados por tipo y etapa de obra."
+            cta="Quiero el checklist"
+            successMsg="¡Listo! Te enviamos el recurso a tu email. Si no llega en 5 minutos, revisá spam."
+          />
+          <p style="margin-top:20px;font-size:13px;font-weight:300;color:var(--gris-3)">
+            ¿Preferís hablar directamente?
+            <a href="https://wa.me/5491123496789" target="_blank" rel="noopener" style="color:var(--verde)">Escribinos por WhatsApp →</a>
+          </p>
         </div>
 
       </div>

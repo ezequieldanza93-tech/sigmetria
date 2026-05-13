@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import FormConsulta from '../../components/FormConsulta.astro';
 ---
 
 <BaseLayout
@@ -117,12 +118,19 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         <p>Nuestra posición es que la pregunta correcta no es "¿la IA me va a reemplazar?" sino "¿estoy desarrollando las habilidades que seguirán siendo valiosas cuando la IA haga lo rutinario?". El técnico de H&S que en cinco años sea incapaz de usar herramientas de IA va a quedar desactualizado. Pero el que crea que solo con herramientas de IA puede hacer su trabajo, sin entender los procesos que están detrás, también va a fracasar. La clave es saber lo suficiente para dirigir la herramienta — y lo suficiente para saber cuándo no usarla.</p>
 
         <div class="art-cta">
-          <h3>Plataforma de HyS con IA integrada</h3>
-          <p>Sigmetría integra automatización inteligente en la gestión de seguridad para que tus profesionales puedan enfocarse en lo que realmente genera impacto. Conocé cómo funciona.</p>
-          <div class="cta-actions" style="margin-top:16px">
-            <a href="https://wa.me/5491123496789?text=Hola%2C%20necesito%20asesoramiento" class="btn-primary" target="_blank" rel="noopener">Ver plataforma con IA integrada</a>
-            <a href="/plataforma/" class="btn-outline">Conocer la plataforma</a>
-          </div>
+          <FormConsulta
+            servicios={['s4']}
+            funnel="mofu"
+            leadMagnet="comparativa-excel-vs-software-hys"
+            titulo="Descargá la comparativa sin cargo"
+            subtitulo="Excel vs. software de gestión de H&S — cuándo cada herramienta tiene sentido y qué criterios usar para tomar la decisión."
+            cta="Quiero la comparativa"
+            successMsg="¡Listo! Te enviamos el recurso a tu email. Si no llega en 5 minutos, revisá spam."
+          />
+          <p style="margin-top:20px;font-size:13px;font-weight:300;color:var(--gris-3)">
+            ¿Preferís hablar directamente?
+            <a href="https://wa.me/5491123496789" target="_blank" rel="noopener" style="color:var(--verde)">Escribinos por WhatsApp →</a>
+          </p>
         </div>
 
       </div>

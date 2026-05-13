@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import FormConsulta from '../../components/FormConsulta.astro';
 ---
 
 <BaseLayout
@@ -132,12 +133,19 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         <p>Los estudios de la OSHA (EE.UU.) y de la EU-OSHA (Europa) son consistentes en mostrar que las empresas con programas de seguridad sólidos tienen: menor rotación de personal (los trabajadores se quedan más tiempo en empresas donde sienten que su seguridad importa), mejor reputación ante clientes y proveedores (especialmente en licitaciones donde la certificación ISO 45001 o la tasa de accidentabilidad son criterios de evaluación), y menores costos de financiamiento (algunos bancos y fondos de inversión ya aplican criterios ESG que incluyen la gestión de seguridad laboral como factor de riesgo en la evaluación crediticia).</p>
 
         <div class="art-cta">
-          <h3>Calculá el ROI de tu inversión en HyS</h3>
-          <p>Te ayudamos a construir el análisis de costo-beneficio de tu programa de HyS con los datos de accidentabilidad de tu empresa. Un número concreto para presentar al directorio.</p>
-          <div class="cta-actions" style="margin-top:16px">
-            <a href="https://wa.me/5491123496789" class="btn-primary" target="_blank" rel="noopener">Consultar por WhatsApp</a>
-            <a href="/contacto/" class="btn-outline">Calcular mi ROI de prevención</a>
-          </div>
+          <FormConsulta
+            servicios={['s8']}
+            funnel="mofu"
+            leadMagnet="reporte-ejecutivo-hys-directorio"
+            titulo="Descargá el reporte sin cargo"
+            subtitulo="Reporte ejecutivo de HyS para el directorio — cómo presentar los costos reales de la accidentabilidad y el ROI de la prevención."
+            cta="Quiero el reporte"
+            successMsg="¡Listo! Te enviamos el recurso a tu email. Si no llega en 5 minutos, revisá spam."
+          />
+          <p style="margin-top:20px;font-size:13px;font-weight:300;color:var(--gris-3)">
+            ¿Preferís hablar directamente?
+            <a href="https://wa.me/5491123496789" target="_blank" rel="noopener" style="color:var(--verde)">Escribinos por WhatsApp →</a>
+          </p>
         </div>
       </div>
     </div>

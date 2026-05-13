@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import FormConsulta from '../../components/FormConsulta.astro';
 ---
 
 <BaseLayout
@@ -120,12 +121,19 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         </div>
 
         <div class="art-cta">
-          <h3>Gestionamos el aviso de obra ante la SRT</h3>
-          <p>Presentamos el aviso de obra, lo actualizamos con cada cambio y hacemos el cierre al final. Tu obra en regla ante la SRT desde el primer día, sin vueltas burocráticas.</p>
-          <div class="cta-actions" style="margin-top:16px">
-            <a href="https://wa.me/5491123496789?text=Hola%2C%20necesito%20gestionar%20el%20aviso%20de%20obra%20ante%20la%20SRT" class="btn-primary" target="_blank" rel="noopener">Consultar por WhatsApp</a>
-            <a href="/servicios/hys-construccion-caba/" class="btn-outline">Ver servicio</a>
-          </div>
+          <FormConsulta
+            servicios={['s1']}
+            funnel="mofu"
+            leadMagnet="checklist-srt-obras"
+            titulo="Descargá el checklist sin cargo"
+            subtitulo="Checklist SRT para obras — todos los documentos que te puede pedir un inspector, organizados por etapa de obra."
+            cta="Quiero el checklist"
+            successMsg="¡Listo! Te enviamos el recurso a tu email. Si no llega en 5 minutos, revisá spam."
+          />
+          <p style="margin-top:20px;font-size:13px;font-weight:300;color:var(--gris-3)">
+            ¿Preferís hablar directamente?
+            <a href="https://wa.me/5491123496789" target="_blank" rel="noopener" style="color:var(--verde)">Escribinos por WhatsApp →</a>
+          </p>
         </div>
 
       </div>

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import FormConsulta from '../../components/FormConsulta.astro';
 ---
 
 <BaseLayout
@@ -112,12 +113,19 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         <p>El mayor obstáculo en la transición no es técnico: es cultural. El equipo que lleva años trabajando con Excel tiende a volver a él ante la primera dificultad con el sistema nuevo. Por eso es crítico que la implementación incluya acompañamiento real durante las primeras semanas de uso, no solo una sesión de capacitación inicial y un manual de usuario.</p>
 
         <div class="art-cta">
-          <h3>Conocé la plataforma de gestión HyS de Sigmetría</h3>
-          <p>Diseñada para la normativa argentina, con módulos de IPER, capacitaciones, incidentes y vencimientos. Acompañamiento en la migración desde Excel incluido en el onboarding.</p>
-          <div class="cta-actions" style="margin-top:16px">
-            <a href="https://wa.me/5491123496789" class="btn-primary" target="_blank" rel="noopener">Consultar por WhatsApp</a>
-            <a href="/plataforma/" class="btn-outline">Ver demo de la plataforma</a>
-          </div>
+          <FormConsulta
+            servicios={['s4']}
+            funnel="mofu"
+            leadMagnet="comparativa-excel-vs-software-hys"
+            titulo="Descargá la comparativa sin cargo"
+            subtitulo="Excel vs. software de gestión de H&S — cuándo cada herramienta tiene sentido y qué criterios usar para tomar la decisión."
+            cta="Quiero la comparativa"
+            successMsg="¡Listo! Te enviamos el recurso a tu email. Si no llega en 5 minutos, revisá spam."
+          />
+          <p style="margin-top:20px;font-size:13px;font-weight:300;color:var(--gris-3)">
+            ¿Preferís hablar directamente?
+            <a href="https://wa.me/5491123496789" target="_blank" rel="noopener" style="color:var(--verde)">Escribinos por WhatsApp →</a>
+          </p>
         </div>
       </div>
     </div>
