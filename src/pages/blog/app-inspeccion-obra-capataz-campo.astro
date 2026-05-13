@@ -1,0 +1,90 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FormConsulta from '../../components/FormConsulta.astro';
+---
+
+<BaseLayout
+  title="App de inspección en obra: qué cambia cuando el capataz reporta desde el celular — SIGMETRÍA HyS"
+  description="Cómo una app de campo para inspecciones de obra transforma la gestión de HyS: más registros, menos papel, datos en tiempo real y técnicos de seguridad que gestionan en lugar de archivar."
+>
+  <section class="page-hero">
+    <div class="page-hero-inner">
+      <nav aria-label="Breadcrumb" class="breadcrumb">
+        <a href="/">Inicio</a><span>/</span>
+        <a href="/blog/">Blog</a><span>/</span>
+        <span>App de inspección en obra</span>
+      </nav>
+      <div class="page-hero-badge">Plataforma SaaS · App de Campo · Construcción</div>
+      <h1>APP DE INSPECCIÓN EN OBRA:<br><em>LO QUE CAMBIA CUANDO EL CAPATAZ REPORTA DESDE EL CELULAR</em></h1>
+      <p>Durante décadas, la inspección de seguridad en obra tuvo el mismo flujo: recorrido a pie, planilla de papel, datos cargados tarde y mal en la oficina, archivado en carpeta. El celular de cada trabajador cambió esa ecuación — pero solo si el sistema está diseñado para el campo, no para la oficina.</p>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="content-inner article-wrap">
+      <div class="article-meta">
+        <span class="art-cat">Plataforma HyS</span>
+        <span class="art-sep">·</span>
+        <span class="art-fecha">13 may 2026</span>
+        <span class="art-sep">·</span>
+        <span class="art-tiempo">6 min lectura</span>
+      </div>
+
+      <div class="article-body">
+        <p class="article-lead">El técnico de HyS en obra hace entre 2 y 5 inspecciones diarias. Cada inspección genera datos sobre condiciones de trabajo, uso de EPP, estado de equipos y cumplimiento de procedimientos. En el modelo tradicional, esos datos viajan en papel hasta la oficina, donde alguien — generalmente el mismo técnico — los carga en Excel. Lo que llega al sistema es una fracción de lo que se observó, con demoras de horas o días. Lo que se pierde en el camino es exactamente lo que más valor tiene: la información en tiempo real sobre condiciones que pueden derivar en accidente.</p>
+
+        <h2>El problema del papel en campo: qué se pierde y por qué importa</h2>
+        <p>La inspección en papel tiene tres problemas que no son defectos de las personas — son limitaciones del soporte:</p>
+        <p><strong>Pérdida de contexto visual.</strong> Una planilla de papel puede registrar "piso mojado en sector B", pero no puede capturar la foto del piso mojado adyacente a la escalera con ausencia de señalización. La foto es la evidencia que convierte una observación en un hallazgo documentado con respaldo. Sin foto, el hallazgo existe en la memoria del técnico y en un renglón de papel que puede interpretarse de múltiples formas.</p>
+        <p><strong>Demora en la acción correctiva.</strong> Si la inspección revela un andamio sin baranda en el tercer nivel, la acción correctiva debería iniciarse en el momento o en pocas horas. Cuando el dato llega al sistema al día siguiente, el riesgo existió durante toda la tarde y parte de la noche sin que nadie con capacidad de actuar lo supiera. En campo, la velocidad de reporte es parte de la gestión del riesgo.</p>
+        <p><strong>Datos inconsistentes e incompletos.</strong> Las planillas de papel en campo se completan bajo presión, con letra que después nadie puede leer, con casilleros saltados porque el técnico estaba apurado. La transcripción al Excel introduce errores adicionales. El resultado es una base de datos de inspecciones que no refleja lo que realmente ocurrió.</p>
+
+        <h2>Qué hace una app de campo que el papel no puede hacer</h2>
+        <p>Una app de inspecciones diseñada para obra y campo resuelve los tres problemas del papel con capacidades específicas:</p>
+        <ul class="art-list">
+          <li><strong>Formularios guiados con campos obligatorios:</strong> el inspector completa un formulario digital estructurado que no deja avanzar sin completar los campos críticos. No hay casilleros saltados ni información ambigua — el sistema exige la información mínima necesaria para que el registro sea útil.</li>
+          <li><strong>Captura de fotos geolocalizadas:</strong> cada hallazgo puede tener una o más fotos adjuntas, tomadas desde el mismo celular en el momento de la inspección. La foto queda vinculada al registro con fecha, hora y geolocalización. Esto es evidencia que no admite ambigüedad.</li>
+          <li><strong>Funcionamiento offline:</strong> en obra, la señal de datos es variable. Una app que requiere conexión permanente falla en el momento más crítico. El modo offline permite completar inspecciones sin señal y sincronizar automáticamente cuando la conexión se restablece.</li>
+          <li><strong>Generación automática de acciones correctivas:</strong> cuando el inspector marca un hallazgo como no conformidad, el sistema puede generar automáticamente una acción correctiva asignada al responsable del sector, con plazo predefinido y notificación inmediata. La corrección empieza mientras el inspector todavía está en campo.</li>
+          <li><strong>Dashboard en tiempo real:</strong> el técnico de HyS en oficina o el responsable de obras puede ver el estado de todas las inspecciones activas en tiempo real. Sin esperar planillas, sin hacer llamadas para saber qué pasó.</li>
+        </ul>
+
+        <h2>El rol del capataz y el supervisor en el sistema digital</h2>
+        <p>Uno de los cambios más significativos que habilita una app de campo es la descentralización del reporte. En el modelo tradicional, solo el técnico de HyS puede reportar inspecciones porque es quien tiene la planilla y el entrenamiento. Con una app móvil correctamente configurada, el capataz o supervisor puede reportar condiciones inseguras, casi-accidentes y observaciones desde su celular personal, sin acceder a módulos que no le corresponden y sin necesitar capacitación extensa.</p>
+        <p>Esto multiplica los ojos en campo. Un técnico de HyS puede estar en un sector mientras que tres capataces en otros sectores están reportando en paralelo. El volumen de información de campo aumenta sin aumentar el costo de personal de seguridad. Y los capataces, al ser parte del sistema de reporte, desarrollan mayor conciencia sobre las condiciones de riesgo en su área.</p>
+        <p>La clave está en el diseño del acceso. El capataz no necesita ver el módulo de auditorías ni la matriz de riesgos — necesita una pantalla simple con tres opciones: "Reportar condición insegura", "Reportar casi-accidente" y "Confirmar que la corrección anterior se hizo". Eso y nada más. Si la app muestra todo el sistema, el capataz se pierde y abandona.</p>
+
+        <h2>Qué preguntar antes de elegir una app de campo para HyS</h2>
+        <p>No todas las apps de campo para HyS están diseñadas para el contexto de obra argentina. Estas son las preguntas que separan las herramientas útiles de las que se ven bien en la demo y fallan en la práctica:</p>
+        <ul class="art-list">
+          <li>¿Funciona offline con sincronización automática? (obligatorio para obra)</li>
+          <li>¿Permite configurar formularios de inspección específicos para cada tipo de obra o sector?</li>
+          <li>¿El reporte del capataz y del técnico fluyen al mismo sistema o son módulos separados?</li>
+          <li>¿Las fotos quedan vinculadas al hallazgo con fecha y geolocalización?</li>
+          <li>¿La acción correctiva se puede asignar y notificar directamente desde el celular?</li>
+          <li>¿El sistema tiene usuario para el SRT en caso de inspección — o los datos quedan dentro de la plataforma sin exportación posible?</li>
+        </ul>
+
+        <div class="art-destacado">
+          <strong>El indicador de que el sistema funciona:</strong> cuando los capataces empiezan a reportar voluntariamente — sin que el técnico de HyS les recuerde hacerlo — el sistema está adoptado. Ese es el cambio cultural que la app habilita, pero que solo ocurre si el proceso de reporte es realmente simple.
+        </div>
+
+        <div class="art-cta">
+          <FormConsulta
+            servicios={['s4']}
+            funnel="mofu"
+            leadMagnet="comparativa-excel-vs-software-hys"
+            titulo="Comparativa: Excel vs. software de gestión HyS"
+            subtitulo="Incluye el módulo de inspecciones de campo y app móvil — qué buscar y cómo evaluar si el sistema sirve realmente para obra."
+            cta="Quiero la comparativa"
+            successMsg="¡Listo! Te enviamos el recurso a tu email. Si no llega en 5 minutos, revisá spam."
+          />
+          <p style="margin-top:20px;font-size:13px;font-weight:300;color:var(--gris-3)">
+            ¿Preferís hablar directamente?
+            <a href="https://wa.me/5491123496789" target="_blank" rel="noopener" style="color:var(--verde)">Escribinos por WhatsApp →</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

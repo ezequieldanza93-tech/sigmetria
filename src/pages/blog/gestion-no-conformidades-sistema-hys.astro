@@ -1,0 +1,88 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FormConsulta from '../../components/FormConsulta.astro';
+---
+
+<BaseLayout
+  title="Gestión de no conformidades en HyS: del reporte en papel al cierre automático — SIGMETRÍA HyS"
+  description="Cómo gestionar no conformidades en seguridad e higiene: qué son, cómo se clasifican, el ciclo completo de cierre y por qué las hojas de cálculo no escalan."
+>
+  <section class="page-hero">
+    <div class="page-hero-inner">
+      <nav aria-label="Breadcrumb" class="breadcrumb">
+        <a href="/">Inicio</a><span>/</span>
+        <a href="/blog/">Blog</a><span>/</span>
+        <span>Gestión de no conformidades HyS</span>
+      </nav>
+      <div class="page-hero-badge">Plataforma SaaS · No conformidades · ISO 45001</div>
+      <h1>GESTIÓN DE NO CONFORMIDADES EN HyS:<br><em>DEL REPORTE EN PAPEL AL CIERRE AUTOMÁTICO</em></h1>
+      <p>Una no conformidad abierta sin cierre documentado es evidencia de que el sistema de gestión no funciona. Y en muchas empresas, las no conformidades se abren, se asignan y después nadie sabe en qué estado están — hasta que llega el auditor.</p>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="content-inner article-wrap">
+      <div class="article-meta">
+        <span class="art-cat">Plataforma HyS</span>
+        <span class="art-sep">·</span>
+        <span class="art-fecha">11 may 2026</span>
+        <span class="art-sep">·</span>
+        <span class="art-tiempo">7 min lectura</span>
+      </div>
+
+      <div class="article-body">
+        <p class="article-lead">El ciclo de gestión de una no conformidad en HyS parece simple: detectás un desvío, lo reportás, asignás una acción correctiva, la ejecutás y la cerrás con evidencia. En la práctica, el proceso se rompe casi siempre en el mismo punto: entre la asignación de la acción correctiva y su cierre. Las acciones quedan "en proceso" indefinidamente porque nadie hace seguimiento, porque la persona asignada cambió, o porque se cierra sin evidencia real para cumplir un plazo. Los auditores conocen este patrón de memoria.</p>
+
+        <h2>Qué es una no conformidad en HyS y cómo se diferencia de otros hallazgos</h2>
+        <p>En el contexto de sistemas de gestión de SST, una no conformidad es el incumplimiento de un requisito. Ese requisito puede ser de la norma ISO 45001, de la normativa legal aplicable (SRT, Ley 19.587, Decreto 351/79), de los procedimientos internos o de los estándares acordados con clientes. Lo que distingue una no conformidad de una observación o una oportunidad de mejora es la naturaleza del desvío: las observaciones y oportunidades de mejora no implican incumplimiento de un requisito, sino situaciones que podrían mejorar.</p>
+        <p>La clasificación importa porque define el nivel de urgencia y el tipo de respuesta. Una no conformidad mayor — un incumplimiento que afecta la capacidad del sistema de alcanzar sus resultados previstos — requiere análisis de causa raíz y acción correctiva documentada dentro de plazos más cortos. Una no conformidad menor permite un plazo más largo pero igualmente requiere cierre documentado.</p>
+
+        <h2>Las fuentes de no conformidades en un sistema HyS</h2>
+        <p>Las no conformidades pueden surgir de múltiples fuentes, y un sistema de gestión maduro las registra todas:</p>
+        <ul class="art-list">
+          <li><strong>Auditorías internas y externas:</strong> la fuente más formal. El auditor emite un informe con hallazgos clasificados que requieren respuesta con plan de acción y evidencia de cierre.</li>
+          <li><strong>Inspecciones periódicas:</strong> las inspecciones de campo detectan condiciones inseguras, equipos fuera de servicio, falta de EPP, procedimientos no seguidos. Cada hallazgo debe transformarse en una acción correctiva o preventiva.</li>
+          <li><strong>Investigación de incidentes y accidentes:</strong> el análisis de causa raíz de un incidente generalmente deriva en acciones correctivas que abordan las causas identificadas. Estas acciones son de las más críticas porque están vinculadas a un evento de daño real o potencial.</li>
+          <li><strong>Reportes del personal:</strong> los trabajadores identifican condiciones inseguras o desvíos de procedimiento. Si el sistema de reporte no está activo o los reportes no generan acciones visibles, el canal se apaga rápido.</li>
+          <li><strong>Evaluación de cumplimiento legal:</strong> la evaluación periódica del cumplimiento legal puede identificar requisitos no satisfechos que generan no conformidades legales.</li>
+        </ul>
+
+        <h2>El ciclo completo de cierre: las 6 etapas que no podés saltarte</h2>
+        <p>Un ciclo de gestión de no conformidades que satisface los requisitos de ISO 45001 tiene seis etapas. Saltarse alguna no es un atajo — es generar una no conformidad nueva en la próxima auditoría:</p>
+
+        <ul class="art-list">
+          <li><strong>1. Detección y registro:</strong> la no conformidad se identifica y se registra con descripción específica del desvío, la fecha, el lugar, el requisito incumplido y la persona que la detectó. La descripción tiene que ser específica — "no se usa EPP" no es suficiente para analizar causa raíz.</li>
+          <li><strong>2. Contención inmediata:</strong> si la no conformidad representa un riesgo inmediato, la primera acción es eliminar o controlar ese riesgo antes de analizar la causa. La contención no es la acción correctiva — es la medida de emergencia mientras se analiza la causa.</li>
+          <li><strong>3. Análisis de causa raíz:</strong> identificar la causa que originó el desvío, no solo la consecuencia visible. Herramientas comunes: los 5 Por Qué, el diagrama de Ishikawa, el análisis de árbol de fallas. El análisis de causa raíz es obligatorio para no conformidades mayores.</li>
+          <li><strong>4. Definición de la acción correctiva:</strong> la acción que ataca la causa raíz identificada, con responsable nominal, plazo de ejecución y tipo de evidencia que demostrará el cierre. Una acción sin responsable y sin plazo no es una acción — es una intención.</li>
+          <li><strong>5. Ejecución y registro de evidencia:</strong> la acción se ejecuta y se documenta con la evidencia correspondiente (foto, registro firmado, procedimiento actualizado, certificado de capacitación). La evidencia tiene que ser específica y fechada.</li>
+          <li><strong>6. Verificación de eficacia:</strong> confirmación de que la acción correctiva resolvió realmente la causa raíz y que el desvío no se repitió. Esta etapa se hace con un tiempo de demora respecto al cierre de la acción — no se puede verificar eficacia el mismo día que se ejecuta la acción.</li>
+        </ul>
+
+        <h2>Por qué el papel y el Excel no escalan para gestionar no conformidades</h2>
+        <p>En papel, el ciclo de no conformidades tiene dos puntos de ruptura inevitables. El primero es la visibilidad: nadie puede ver en tiempo real cuántas no conformidades están abiertas, cuáles están vencidas y cuáles cerraron. El responsable de HyS tiene que revisar carpetas o planillas para saberlo, y generalmente lo hace solo cuando se acerca una auditoría. El segundo punto de ruptura es el seguimiento: el papel no envía recordatorios al responsable de la acción correctiva. Si nadie hace seguimiento activo, las acciones se cierran tarde o no se cierran.</p>
+        <p>En Excel, los problemas se agregan. Cuando múltiples personas abren no conformidades desde distintos sectores, la gestión centralizada en un solo Excel crea cuellos de botella y conflictos de versión. El Excel tampoco diferencia entre una no conformidad abierta hace 10 días y una abierta hace 8 meses — a menos que alguien aplique formatos condicionales y los mantenga actualizados.</p>
+
+        <h2>Qué cambia con un sistema digital de gestión de desvíos</h2>
+        <p>Un sistema digital diseñado para gestión de no conformidades en HyS resuelve los puntos de ruptura del papel y el Excel con tres capacidades que no tienen alternativa manual eficiente: flujo de trabajo automatizado (cada etapa del ciclo tiene un responsable y un estado visible para todos), alertas de vencimiento automáticas (el sistema notifica al responsable cuando su acción correctiva está próxima a vencer, sin que nadie tenga que hacer seguimiento manual), y visibilidad en tiempo real del estado de todas las no conformidades abiertas en un tablero con filtros por área, responsable, tipo y estado.</p>
+        <p>La diferencia operativa más importante es que el sistema hace el seguimiento por vos. En papel y Excel, el seguimiento depende de que una persona decida revisarlo. En un sistema digital, el seguimiento es continuo y automático.</p>
+
+        <div class="art-cta">
+          <FormConsulta
+            servicios={['s4']}
+            funnel="mofu"
+            leadMagnet="comparativa-excel-vs-software-hys"
+            titulo="Comparativa: Excel vs. software de gestión HyS"
+            subtitulo="Incluye el análisis del módulo de no conformidades — por qué el Excel no escala y qué buscar en un sistema digital que sí funcione."
+            cta="Quiero la comparativa"
+            successMsg="¡Listo! Te enviamos el recurso a tu email. Si no llega en 5 minutos, revisá spam."
+          />
+          <p style="margin-top:20px;font-size:13px;font-weight:300;color:var(--gris-3)">
+            ¿Preferís hablar directamente?
+            <a href="https://wa.me/5491123496789" target="_blank" rel="noopener" style="color:var(--verde)">Escribinos por WhatsApp →</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

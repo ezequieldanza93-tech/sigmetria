@@ -1,0 +1,93 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FormConsulta from '../../components/FormConsulta.astro';
+---
+
+<BaseLayout
+  title="Cómo digitalizar la gestión de HyS sin que el equipo te abandone en el intento — SIGMETRÍA HyS"
+  description="Guía práctica para digitalizar la gestión de HyS: por dónde empezar, cómo lograr adopción del equipo y qué errores hacen fracasar la mayoría de las implementaciones digitales."
+>
+  <section class="page-hero">
+    <div class="page-hero-inner">
+      <nav aria-label="Breadcrumb" class="breadcrumb">
+        <a href="/">Inicio</a><span>/</span>
+        <a href="/blog/">Blog</a><span>/</span>
+        <span>Cómo digitalizar la gestión de HyS</span>
+      </nav>
+      <div class="page-hero-badge">Plataforma SaaS · Digitalización · HyS</div>
+      <h1>CÓMO DIGITALIZAR LA GESTIÓN DE HyS<br><em>SIN QUE EL EQUIPO TE ABANDONE EN EL INTENTO</em></h1>
+      <p>La digitalización de HyS no falla por tecnología. Falla porque el equipo que la tiene que usar no entiende por qué, no fue parte de la decisión y tiene que cargar datos en un sistema que no le simplifica el trabajo — solo lo cambia de lugar.</p>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="content-inner article-wrap">
+      <div class="article-meta">
+        <span class="art-cat">Plataforma HyS</span>
+        <span class="art-sep">·</span>
+        <span class="art-fecha">9 may 2026</span>
+        <span class="art-sep">·</span>
+        <span class="art-tiempo">8 min lectura</span>
+      </div>
+
+      <div class="article-body">
+        <p class="article-lead">Hay empresas que compraron un software de gestión HyS hace dos años y hoy lo usan solo para guardar los PDFs de las capacitaciones. El resto del sistema sigue en Excel, en papel y en el conocimiento tácito del responsable de seguridad. La plataforma existe, el pago mensual se debita, y el equipo la evita con la misma energía que usa para evitar cualquier tarea nueva sin valor claro. Ese es el fracaso más común de la digitalización de HyS — y tiene causa y solución conocida.</p>
+
+        <h2>Por qué la mayoría de las digitalizaciones de HyS fracasan</h2>
+        <p>El fracaso en la adopción de plataformas de gestión HyS no tiene que ver con la tecnología en sí misma. Los sistemas disponibles en el mercado, incluso los más simples, tienen capacidades técnicas más que suficientes para las necesidades de la mayoría de las empresas argentinas. El fracaso viene de tres causas recurrentes.</p>
+        <p><strong>Causa 1 — Implementación top-down sin involucrar al usuario.</strong> La dirección decide el sistema, lo contrata, lo configura con el proveedor y lo lanza al equipo operativo con una capacitación de dos horas. El equipo no participó en la selección, no entiende por qué ese sistema y no tiene contexto sobre cómo va a cambiar su trabajo cotidiano. El resultado es resistencia pasiva: usan el sistema cuando alguien los controla y vuelven al Excel cuando no hay nadie mirando.</p>
+        <p><strong>Causa 2 — Digitalizar el problema en lugar de rediseñar el proceso.</strong> Muchas implementaciones trasladan los procesos existentes al sistema digital sin cuestionarlos. Si el proceso de registro de incidentes era tedioso en papel, trasladarlo al sistema digital lo hace igual de tedioso pero en pantalla. La digitalización es la oportunidad de simplificar el proceso, no solo de cambiar el soporte.</p>
+        <p><strong>Causa 3 — No resolver el problema de conectividad en campo.</strong> En industria y construcción, parte del equipo trabaja en lugares con mala señal o sin señal. Si el sistema requiere conexión a internet para funcionar y el operario en campo no la tiene, el sistema falla en el punto más crítico de la cadena.</p>
+
+        <h2>Por dónde empezar: el módulo de mayor dolor, no el de mayor funcionalidad</h2>
+        <p>El error clásico de implementación es empezar por el módulo más completo o el que más impresiona en la demo. El error es entendible — cuando ves un dashboard con 20 KPIs en tiempo real, querés arrancarlo todo. Pero el equipo que tiene que cargar datos no ve el dashboard: ve el formulario de carga.</p>
+        <p>La estrategia que funciona es arrancar por el módulo que resuelve el dolor más inmediato del equipo interno. Preguntale al responsable de HyS cuál es la tarea que más tiempo le lleva o la que más dolores de cabeza le genera. Si la respuesta es "preparar los registros de capacitación para las auditorías porque todo está en carpetas y no encuentro nada", empezá por el módulo de capacitaciones. Si la respuesta es "no sé cuándo vencen las mediciones hasta que alguien me llama porque ya vencieron", empezá por los vencimientos y alertas.</p>
+        <p>Cuando el equipo experimenta que el sistema les resolvió algo concreto, la adopción de módulos adicionales tiene mucho menos resistencia. La secuencia importa tanto como la elección del sistema.</p>
+
+        <h2>Cómo lograr que el equipo en campo use el sistema</h2>
+        <p>El equipo de campo — operarios, supervisores, capataces — no va a usar una plataforma de gestión HyS si el proceso de carga es más complejo que mandar un mensaje por WhatsApp. No es falta de capacidad técnica: es una evaluación racional de esfuerzo vs. beneficio percibido.</p>
+        <p>Tres principios para lograr adopción en campo:</p>
+        <ul class="art-list">
+          <li><strong>Mobile-first, no desktop-first:</strong> la interfaz tiene que funcionar perfectamente en el celular del operario, no en la computadora del técnico de HyS. Si la app de campo requiere zoom y scroll horizontal para llenar un formulario, va a quedar sin usar.</li>
+          <li><strong>Offline capability:</strong> el sistema tiene que permitir cargar inspecciones y registros sin conexión y sincronizar cuando vuelve la señal. En obra y en planta, la conectividad es variable. Un sistema que depende de señal constante no sirve en campo.</li>
+          <li><strong>Formularios cortos y específicos:</strong> el formulario de inspección en campo no puede tener 40 campos. Tiene que tener los campos esenciales, con selección múltiple y fotos, en no más de 3 minutos de completado. Lo que no se llena en campo no existe.</li>
+        </ul>
+
+        <h2>La transición desde Excel: cuánto tarda y qué necesita</h2>
+        <p>Una migración bien ejecutada de Excel a sistema digital en una empresa mediana (50-200 empleados, 1-3 sedes) lleva entre 4 y 10 semanas dependiendo del volumen de datos históricos y la complejidad del sistema. Las etapas son: configuración del sistema (estructura de la empresa, sedes, sectores, usuarios y permisos) — 1 semana; migración de datos históricos prioritarios (IPER actual, registros de capacitación del último año, accidentes) — 1-2 semanas; capacitación del equipo en grupos pequeños — 1-2 semanas; período de operación en paralelo (sistema + Excel) — 2-4 semanas; corte definitivo al sistema.</p>
+        <p>El período de operación en paralelo es incómodo pero necesario. Permite que el equipo gane confianza en el sistema antes del corte. La tentación es saltarlo para "arrancar rápido", pero las implementaciones que lo saltean tienen tasas de abandono significativamente más altas.</p>
+
+        <h2>Qué preguntar antes de elegir el sistema</h2>
+        <p>Las preguntas que más importan antes de comprometerte con un software de gestión HyS no son sobre funcionalidades — son sobre adopción y soporte:</p>
+        <ul class="art-list">
+          <li>¿El sistema tiene app móvil con funcionamiento offline?</li>
+          <li>¿Cuánto tiempo de onboarding incluye el proveedor y quién lo ejecuta?</li>
+          <li>¿Puedo exportar mis datos en cualquier momento en un formato estándar?</li>
+          <li>¿Hay soporte en español y en zona horaria argentina?</li>
+          <li>¿El sistema está adaptado a la normativa argentina (SRT, Ley 19.587) o es una adaptación de una plataforma extranjera?</li>
+          <li>¿Puedo ver referencias de empresas similares a la mía que lo estén usando?</li>
+        </ul>
+
+        <div class="art-destacado">
+          <strong>La pregunta que separa los proveedores serios de los que solo venden:</strong> preguntá si te pueden mostrar el sistema siendo usado en campo por alguien de operaciones — no una demo del módulo administrativo. Si solo te muestran dashboards y reportes, el sistema probablemente está diseñado para que los directivos lo vean, no para que los operativos lo usen.
+        </div>
+
+        <div class="art-cta">
+          <FormConsulta
+            servicios={['s4']}
+            funnel="mofu"
+            leadMagnet="comparativa-excel-vs-software-hys"
+            titulo="Comparativa: Excel vs. software de gestión HyS"
+            subtitulo="Descargá la guía con los criterios para decidir cuándo conviene cada herramienta y cómo planificar la transición sin perder datos ni equipo."
+            cta="Quiero la comparativa"
+            successMsg="¡Listo! Te enviamos el recurso a tu email. Si no llega en 5 minutos, revisá spam."
+          />
+          <p style="margin-top:20px;font-size:13px;font-weight:300;color:var(--gris-3)">
+            ¿Preferís hablar directamente?
+            <a href="https://wa.me/5491123496789" target="_blank" rel="noopener" style="color:var(--verde)">Escribinos por WhatsApp →</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

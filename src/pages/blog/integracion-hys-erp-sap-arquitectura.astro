@@ -1,0 +1,87 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FormConsulta from '../../components/FormConsulta.astro';
+---
+
+<BaseLayout
+  title="Integrar HyS al ERP: qué arquitectura conviene y por qué pelean IT y operaciones — SIGMETRÍA HyS"
+  description="Cómo integrar el sistema de gestión de HyS con el ERP (SAP, Oracle, Microsoft Dynamics): qué datos conectar, qué arquitectura técnica usar y cómo evitar los conflictos entre IT y operaciones."
+>
+  <section class="page-hero">
+    <div class="page-hero-inner">
+      <nav aria-label="Breadcrumb" class="breadcrumb">
+        <a href="/">Inicio</a><span>/</span>
+        <a href="/blog/">Blog</a><span>/</span>
+        <span>Integrar HyS al ERP</span>
+      </nav>
+      <div class="page-hero-badge">Enterprise · Integración ERP · Tecnología</div>
+      <h1>INTEGRAR HyS AL ERP:<br><em>QUÉ ARQUITECTURA CONVIENE Y POR QUÉ PELEAN IT Y OPERACIONES</em></h1>
+      <p>La integración entre el sistema de gestión de HyS y el ERP corporativo es una de las iniciativas más valiosas que puede encarar una empresa grande — y una de las que más frecuentemente fracasa en la negociación entre el área de IT y las operaciones. El problema no es técnico: es de prioridades y lenguaje.</p>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="content-inner article-wrap">
+      <div class="article-meta">
+        <span class="art-cat">Enterprise · HyS</span>
+        <span class="art-sep">·</span>
+        <span class="art-fecha">12 may 2026</span>
+        <span class="art-sep">·</span>
+        <span class="art-tiempo">8 min lectura</span>
+      </div>
+
+      <div class="article-body">
+        <p class="article-lead">Hay dos formas de que la gestión de HyS y el ERP coexistan en una empresa grande. La primera: sistemas paralelos con datos que se reconcilian manualmente una vez por mes con todo el error humano y la demora que eso implica. La segunda: integración real donde los datos fluyen automáticamente y los sistemas se alimentan mutuamente. La diferencia entre las dos no es solo de eficiencia — es de calidad de la información y de capacidad real de gestionar el riesgo operacional.</p>
+
+        <h2>Por qué tiene sentido integrar HyS con el ERP</h2>
+        <p>El ERP corporativo (SAP, Oracle, Microsoft Dynamics u otros) es el sistema de registro de la empresa: tiene la estructura organizacional, el listado de empleados, los centros de costo, los proyectos activos, las órdenes de trabajo y los proveedores y contratistas. La gestión de HyS necesita exactamente esa información para operar: los empleados son los sujetos de las capacitaciones, los inspecciones y los accidentes; los centros de costo permiten imputar los costos de HyS; los proyectos activos son los contextos donde se gestionan los riesgos; las órdenes de trabajo son los momentos donde se ejecutan tareas de mantenimiento con riesgo.</p>
+        <p>Sin integración, el responsable de HyS mantiene manualmente una copia de parte de esa información: una lista de empleados por sector que se desactualiza cada vez que hay un ingreso, un egreso o una transferencia. Una lista de proyectos activos que puede diferir de la del ERP. Una lista de contratistas que no coincide exactamente con la del área de compras. Cada discrepancia es un error potencial en la gestión — un trabajador que no recibe la capacitación porque su ingreso no se reflejó a tiempo en el sistema de HyS, por ejemplo.</p>
+
+        <h2>Los datos que más valor generan al integrarse</h2>
+        <p>No todos los datos del ERP tienen el mismo valor para HyS, y no todos los datos de HyS interesan al ERP. La integración tiene mayor ROI cuando se focaliza en los flujos de datos de mayor impacto:</p>
+
+        <ul class="art-list">
+          <li><strong>Gestión de personal (ERP → HyS):</strong> los altas, bajas y transferencias de empleados en el ERP deberían reflejarse automáticamente en el sistema de HyS. Si un trabajador ingresa al sistema de RR.HH. hoy, el sistema de HyS debería asignarle automáticamente la inducción de seguridad, el equipo de protección personal correspondiente a su puesto y la primera capacitación obligatoria de su rol. Sin integración, alguien tiene que hacer ese vínculo manualmente — y se pueden pasar días o semanas.</li>
+          <li><strong>Órdenes de trabajo (ERP → HyS):</strong> en empresas con gestión de mantenimiento en ERP (SAP PM, por ejemplo), las órdenes de trabajo de mantenimiento en equipos críticos deberían generar automáticamente un permiso de trabajo de seguridad en el sistema de HyS. Esto garantiza que antes de ejecutar un trabajo de mantenimiento con riesgo, la gestión de seguridad estuvo involucrada.</li>
+          <li><strong>Costos de accidentes (HyS → ERP):</strong> los accidentes generan costos imputables a centros de costo específicos. Si el sistema de HyS registra el accidente con su imputación al centro de costo del área donde ocurrió, el ERP puede incorporar ese dato en el análisis de costos operacionales. Esto hace visible el costo real de los accidentes en la contabilidad de cada área — lo que crea incentivos internos para la prevención.</li>
+          <li><strong>Gestión de contratistas (ERP/Compras → HyS):</strong> cuando el área de compras da de alta a un proveedor o contratista en el ERP, el sistema de HyS debería recibir esa alta y desencadenar el proceso de habilitación de contratistas: verificación de documentación de seguridad, alta en el sistema, asignación de requisitos de capacitación. Sin integración, los contratistas ingresan a trabajar antes de que HyS sepa que existen.</li>
+          <li><strong>Activos y equipos (ERP → HyS):</strong> el mantenimiento de equipos en el ERP y el seguimiento del estado de seguridad de los equipos en HyS son procesos relacionados. Un equipo con vencimiento de su verificación de seguridad en el sistema de HyS podría generar automáticamente una alerta en el módulo de mantenimiento del ERP.</li>
+        </ul>
+
+        <h2>Las tres arquitecturas de integración y sus tradeoffs</h2>
+        <p>En el nivel técnico, hay tres enfoques principales para integrar el sistema de HyS con el ERP:</p>
+
+        <p><strong>Arquitectura 1 — Integración punto a punto mediante APIs:</strong> el sistema de HyS y el ERP se conectan directamente mediante APIs REST o servicios web. Cada evento en un sistema puede disparar una acción en el otro en tiempo real. Es la arquitectura de mayor valor funcional pero también la de mayor complejidad técnica. Requiere que el ERP tenga APIs publicadas (SAP S/4HANA y SAP BTP las tienen), que el sistema de HyS también tenga APIs disponibles, y que el equipo de IT tenga la capacidad de desarrollar y mantener los conectores.</p>
+
+        <p><strong>Arquitectura 2 — Integración mediante plataforma de middleware (iPaaS):</strong> en lugar de conectar los dos sistemas directamente, se usa una plataforma de integración intermedia (como MuleSoft, Azure Integration Services, Boomi u otras) que actúa como bus de datos. Esta arquitectura es más escalable y más fácil de mantener cuando hay múltiples sistemas a integrar, pero tiene un costo de licencia adicional y requiere conocimiento específico de la plataforma de middleware.</p>
+
+        <p><strong>Arquitectura 3 — Integración mediante batch / ficheros:</strong> es el enfoque más simple y el más limitado. Los dos sistemas intercambian archivos (CSV, XML, Excel) en forma periódica (diaria, semanal) que son procesados por scripts o imports manuales. No hay tiempo real — si un empleado ingresa hoy, el sistema de HyS lo va a conocer mañana o pasado mañana. Para muchas empresas medianas, esta es la arquitectura de arranque más práctica porque requiere menor inversión inicial y no depende de que los dos sistemas tengan APIs maduras.</p>
+
+        <h2>Por qué pelean IT y operaciones — y cómo resolverlo</h2>
+        <p>El conflicto más frecuente en proyectos de integración HyS-ERP no es técnico: es de prioridades. IT tiene un backlog de proyectos que incluye migración de infraestructura, seguridad informática, proyectos de negocio de mayor visibilidad ejecutiva y soporte operativo diario. El proyecto de integración de HyS no siempre tiene la urgencia para un equipo de IT que trabaja con recursos limitados.</p>
+        <p>Operaciones y HyS ven el proyecto como urgente — porque cada mes sin integración es un mes de errores manuales y riesgo de que un trabajador ingrese sin capacitación. La tensión entre estos dos ritmos es la principal causa de que los proyectos de integración se posterguen indefinidamente.</p>
+        <p>Las soluciones que funcionan en la práctica son: involucrar al CIO desde el inicio con el caso de negocio (costo de los errores manuales + riesgo regulatorio = justificación de inversión), arrancar con la arquitectura más simple que genere valor (aunque sea batch) para demostrar resultados antes de pedir inversión en la arquitectura ideal, y designar un interlocutor técnico del área de HyS que pueda comunicarse con IT en lenguaje técnico — no solo en lenguaje de usuario.</p>
+
+        <div class="art-destacado">
+          <strong>El caso de negocio que abre la discusión con el CIO:</strong> "Cada mes sin integración, aproximadamente X nuevos ingresos de personal no reciben la inducción de seguridad en tiempo y forma porque el sistema de HyS no se entera de que existen hasta que alguien lo carga manualmente. Cada uno de esos trabajadores representa un riesgo regulatorio y de accidente. La integración elimina ese riesgo y reduce Y horas de trabajo administrativo mensual." Con números, la conversación con IT es diferente.
+        </div>
+
+        <div class="art-cta">
+          <FormConsulta
+            servicios={['s8']}
+            funnel="mofu"
+            leadMagnet="reporte-ejecutivo-hys-directorio"
+            titulo="Plantilla de reporte ejecutivo de HyS"
+            subtitulo="Para empresas que están evaluando integrar HyS con el ERP: la plantilla incluye cómo presentar el caso de negocio al directorio con datos de ROI."
+            cta="Quiero la plantilla"
+            successMsg="¡Listo! Te enviamos el recurso a tu email. Si no llega en 5 minutos, revisá spam."
+          />
+          <p style="margin-top:20px;font-size:13px;font-weight:300;color:var(--gris-3)">
+            ¿Preferís hablar directamente?
+            <a href="https://wa.me/5491123496789" target="_blank" rel="noopener" style="color:var(--verde)">Escribinos por WhatsApp →</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

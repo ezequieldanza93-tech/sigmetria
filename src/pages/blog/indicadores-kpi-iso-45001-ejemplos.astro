@@ -1,0 +1,94 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FormConsulta from '../../components/FormConsulta.astro';
+---
+
+<BaseLayout
+  title="Los 12 indicadores ISO 45001 que sí miran los auditores — SIGMETRÍA HyS"
+  description="Qué KPIs de HyS exige ISO 45001, cuáles revisan los auditores con más atención y cómo construir un sistema de indicadores que sirva para gestionar y no solo para reportar."
+>
+  <section class="page-hero">
+    <div class="page-hero-inner">
+      <nav aria-label="Breadcrumb" class="breadcrumb">
+        <a href="/">Inicio</a><span>/</span>
+        <a href="/blog/">Blog</a><span>/</span>
+        <span>Indicadores ISO 45001</span>
+      </nav>
+      <div class="page-hero-badge">ISO 45001 · Indicadores · Mantenimiento</div>
+      <h1>LOS 12 INDICADORES ISO 45001<br><em>QUE SÍ MIRAN LOS AUDITORES</em></h1>
+      <p>Tener un tablero de indicadores de HyS no significa tener los indicadores correctos. Muchas empresas certificadas miden lo que es fácil de medir en lugar de lo que es útil para gestionar — y los auditores lo detectan.</p>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="content-inner article-wrap">
+      <div class="article-meta">
+        <span class="art-cat">ISO 45001 Mantenimiento</span>
+        <span class="art-sep">·</span>
+        <span class="art-fecha">13 may 2026</span>
+        <span class="art-sep">·</span>
+        <span class="art-tiempo">7 min lectura</span>
+      </div>
+
+      <div class="article-body">
+        <p class="article-lead">ISO 45001 exige que el sistema de gestión tenga indicadores de desempeño con seguimiento regular. Lo que no especifica es cuáles deben ser — eso lo define cada organización según su actividad, sus riesgos y sus objetivos de SST. El problema es que muchas empresas eligen indicadores que son fáciles de registrar pero que no dicen nada sobre el estado real de la seguridad. Un auditor experimentado ve la diferencia en dos minutos.</p>
+
+        <h2>La distinción que define si tus indicadores son útiles o decorativos</h2>
+        <p>Antes de hablar de indicadores específicos, hay que entender la distinción fundamental entre indicadores reactivos (también llamados lagging) e indicadores proactivos (leading). Los indicadores reactivos miden lo que ya ocurrió: accidentes, días perdidos, incidentes registrables. Son importantes porque son la métrica final de si la gente se lastima o no, pero tienen un problema: cuando el número sube, el daño ya ocurrió.</p>
+        <p>Los indicadores proactivos miden las condiciones y las acciones preventivas antes de que ocurra un incidente: inspecciones realizadas, no conformidades cerradas, capacitaciones ejecutadas, observaciones de comportamiento. Estos son los que permiten actuar antes del accidente. Un sistema de indicadores que solo tiene indicadores reactivos no está gestionando la prevención — está contando los daños.</p>
+        <p>ISO 45001 no exige una proporción específica, pero los auditores más rigurosos van a preguntar por los dos tipos. Un tablero solo con tasa de accidentabilidad y días sin accidentes es insuficiente para demostrar que el sistema está activo en la prevención.</p>
+
+        <h2>Los 12 indicadores que los auditores revisan con atención</h2>
+
+        <p><strong>Indicadores reactivos (resultado):</strong></p>
+        <ul class="art-list">
+          <li><strong>1. Índice de Frecuencia (IF):</strong> número de accidentes con lesión por cada millón de horas trabajadas. Es el indicador básico de accidentabilidad que ninguna empresa puede omitir. Fórmula: (Número de accidentes × 1.000.000) / Horas trabajadas en el período.</li>
+          <li><strong>2. Índice de Gravedad (IG):</strong> días perdidos por accidente por cada millón de horas trabajadas. Complementa al IF porque un accidente grave con 60 días perdidos tiene un impacto distinto al de 10 accidentes leves. Fórmula: (Días perdidos × 1.000.000) / Horas trabajadas.</li>
+          <li><strong>3. Índice de Incidencia:</strong> número de accidentes por cada mil trabajadores en el período. Útil para comparar con estadísticas sectoriales del SRT.</li>
+          <li><strong>4. Tasa de casi-accidentes reportados:</strong> la cantidad de casi-accidentes reportados es un indicador de la cultura de seguridad — en organizaciones con cultura de prevención madura, los casi-accidentes se reportan y se investigan. Una tasa de cero casi-accidentes en una empresa con riesgo elevado no es una buena noticia: sugiere que no se están reportando.</li>
+          <li><strong>5. Enfermedades profesionales declaradas:</strong> número de enfermedades profesionales reconocidas en el período con su causa principal. Permite detectar condiciones de trabajo que generan daño crónico.</li>
+        </ul>
+
+        <p><strong>Indicadores proactivos (proceso):</strong></p>
+        <ul class="art-list">
+          <li><strong>6. Cumplimiento del programa de inspecciones:</strong> porcentaje de inspecciones planificadas que se ejecutaron en el período. Si el programa dice 4 inspecciones mensuales y se hicieron 2, el cumplimiento es 50%. Este indicador revela si la gestión preventiva se está ejecutando.</li>
+          <li><strong>7. Tasa de cierre de no conformidades en plazo:</strong> porcentaje de no conformidades abiertas que se cerraron dentro del plazo comprometido. No conformidades que permanecen abiertas por más tiempo del acordado son señal de que el sistema de acciones correctivas no funciona.</li>
+          <li><strong>8. Cumplimiento del plan de capacitación:</strong> porcentaje de capacitaciones planificadas que se ejecutaron. Incluye número de trabajadores capacitados vs. planificados. Las auditorías siempre piden evidencia de que el plan se ejecuta.</li>
+          <li><strong>9. Porcentaje de accidentes con investigación de causa raíz completada:</strong> no alcanza con registrar el accidente — hay que investigar la causa raíz y cerrar la acción correctiva. Este indicador mide qué porcentaje de los accidentes tienen investigación completa y documentada.</li>
+          <li><strong>10. Índice de observaciones de comportamiento:</strong> en sistemas más maduros, la cantidad de observaciones preventivas de comportamiento por período indica el nivel de actividad preventiva en campo. Requiere un proceso de observación estructurado.</li>
+          <li><strong>11. Cumplimiento de mediciones técnicas obligatorias:</strong> porcentaje de mediciones exigidas por normativa (ruido, iluminación, puesta a tierra, etc.) que están vigentes. Una medición vencida es una no conformidad legal y un riesgo para la certificación.</li>
+          <li><strong>12. Evaluación del cumplimiento legal:</strong> resultado de la evaluación periódica del cumplimiento de los requisitos legales aplicables. ISO 45001 cláusula 9.1.2 exige evaluaciones periódicas. El indicador debe mostrar el porcentaje de cumplimiento y el estado de las acciones ante incumplimientos detectados.</li>
+        </ul>
+
+        <h2>Cómo definir los objetivos de SST que corresponden a tus indicadores</h2>
+        <p>Los indicadores solos no son suficientes — necesitan objetivos contra los cuales compararse para tener sentido. La norma exige objetivos de SST que sean medibles (si es posible), coherentes con la política, considerando los riesgos identificados, y con seguimiento, comunicación y actualización cuando corresponda.</p>
+        <p>Un objetivo bien formulado no dice "reducir accidentes". Dice "reducir el Índice de Frecuencia en un 20% respecto al promedio del año anterior para el 31 de diciembre de 2026, mediante la ejecución del 100% del programa de inspecciones y el cierre del 90% de las no conformidades críticas en plazo". Esa es la diferencia entre un objetivo que sirve para gestionar y uno que solo existe para llenar la planilla.</p>
+
+        <h2>Errores frecuentes en los tableros de indicadores</h2>
+        <p>Después de revisar sistemas de gestión en múltiples organizaciones, estos son los errores que se repiten:</p>
+        <ul class="art-list">
+          <li><strong>Solo indicadores reactivos:</strong> el tablero muestra accidentes, días perdidos y tasa de accidentabilidad. Ningún indicador de proceso preventivo. El auditor no puede ver si el sistema está activo en la prevención.</li>
+          <li><strong>Indicadores sin denominador:</strong> "se realizaron 15 inspecciones en el trimestre" no dice nada sin saber si estaban planificadas 15 o 50. El cumplimiento necesita numerador y denominador.</li>
+          <li><strong>Sin seguimiento regular:</strong> el tablero existe pero se actualiza solo cuando se acerca la auditoría. El historial de datos muestra ceros o blancos durante meses, lo que demuestra que el sistema no se opera regularmente.</li>
+          <li><strong>Datos sin análisis:</strong> se reportan los números pero no hay evidencia de que alguien los analizó y tomó decisiones sobre ellos. El análisis debe estar documentado en el seguimiento de objetivos.</li>
+        </ul>
+
+        <div class="art-cta">
+          <FormConsulta
+            servicios={['s3']}
+            funnel="mofu"
+            leadMagnet="10-errores-iso-45001-primer-año"
+            titulo="Guía: errores del primer año post-certificación"
+            subtitulo="Incluye los errores más frecuentes en el sistema de indicadores y cómo construir un tablero que satisfaga a los auditores y sirva para gestionar."
+            cta="Quiero la guía gratuita"
+            successMsg="¡Listo! Te enviamos el recurso a tu email. Si no llega en 5 minutos, revisá spam."
+          />
+          <p style="margin-top:20px;font-size:13px;font-weight:300;color:var(--gris-3)">
+            ¿Preferís hablar directamente?
+            <a href="https://wa.me/5491123496789" target="_blank" rel="noopener" style="color:var(--verde)">Escribinos por WhatsApp →</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
