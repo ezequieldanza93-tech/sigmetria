@@ -33,6 +33,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           </div>
 
           <form id="contact-form" class="contact-form">
+            <!-- Contexto de página (llenado por JS) -->
+            <input type="hidden" id="f_etapa_funnel"  name="etapa_funnel"  value="" />
+            <input type="hidden" id="f_lead_magnet"   name="lead_magnet"   value="" />
+            <input type="hidden" id="f_utm_source"    name="utm_source"    value="" />
+            <input type="hidden" id="f_utm_medium"    name="utm_medium"    value="" />
+            <input type="hidden" id="f_utm_campaign"  name="utm_campaign"  value="" />
+            <input type="hidden" id="f_utm_content"   name="utm_content"   value="" />
             <!-- Honeypot anti-spam -->
             <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
 
@@ -40,35 +47,54 @@ import BaseLayout from '../layouts/BaseLayout.astro';
               <label for="nombre">Nombre y apellido *</label>
               <input type="text" id="nombre" name="nombre" required placeholder="Juan García" />
             </div>
-            <div class="form-group">
-              <label for="empresa">Empresa *</label>
-              <input type="text" id="empresa" name="empresa" required placeholder="Razón social o nombre comercial" />
-            </div>
+
             <div class="form-row">
               <div class="form-group">
-                <label for="telefono">Teléfono / WhatsApp *</label>
-                <input type="tel" id="telefono" name="telefono" required placeholder="+54 9 11 XXXX-XXXX" />
+                <label for="telefono">WhatsApp / Teléfono *</label>
+                <input type="tel" id="telefono" name="telefono" required placeholder="+549 11 XXXX-XXXX" />
               </div>
               <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" placeholder="ejemplo@empresa.com" />
+                <label for="email">Email *</label>
+                <input type="email" id="email" name="email" required placeholder="ejemplo@empresa.com" />
               </div>
             </div>
+
             <div class="form-group">
-              <label for="sector">Sector de la empresa *</label>
-              <select id="sector" name="sector" required>
-                <option value="" disabled selected>Seleccioná tu sector</option>
-                <option value="industrial">Empresa industrial / manufactura / logística</option>
-                <option value="construccion">Construcción / obra civil</option>
-                <option value="educativo">Educativo / recreativo / club</option>
-                <option value="comercial">Local comercial / restaurante / oficina</option>
-                <option value="otro">Otro</option>
-              </select>
+              <label>¿Qué servicios te interesan? *</label>
+              <div class="servicios-grid">
+                <div class="servicio-categoria">
+                  <span class="categoria-label">Cumplimiento operativo</span>
+                  <label class="check-label"><input type="checkbox" name="servicios" value="s1" /> HyS en Construcción</label>
+                  <label class="check-label"><input type="checkbox" name="servicios" value="s6" /> Mediciones Técnicas</label>
+                  <label class="check-label"><input type="checkbox" name="servicios" value="s7" /> Capacitaciones</label>
+                </div>
+                <div class="servicio-categoria">
+                  <span class="categoria-label">Sistemas ISO 45001</span>
+                  <label class="check-label"><input type="checkbox" name="servicios" value="s2" /> Implementación ISO 45001</label>
+                  <label class="check-label"><input type="checkbox" name="servicios" value="s3" /> Mantenimiento ISO 45001</label>
+                  <label class="check-label"><input type="checkbox" name="servicios" value="s5" /> Auditorías HyS y SIG</label>
+                </div>
+                <div class="servicio-categoria">
+                  <span class="categoria-label">Plataforma digital</span>
+                  <label class="check-label"><input type="checkbox" name="servicios" value="s4" /> Software HyS (SaaS)</label>
+                  <label class="check-label"><input type="checkbox" name="servicios" value="s8" /> Enterprise / ERP</label>
+                </div>
+              </div>
+              <p id="servicios-error" class="field-error" style="display:none">Seleccioná al menos un servicio.</p>
             </div>
+
             <div class="form-group">
-              <label for="mensaje">¿Qué necesitás? (opcional)</label>
-              <textarea id="mensaje" name="mensaje" rows="4" placeholder="Contanos brevemente qué servicio te interesa o cuál es tu situación actual..."></textarea>
+              <label for="mensaje">¿Qué necesitás?</label>
+              <textarea id="mensaje" name="mensaje" rows="4" placeholder="Contanos brevemente tu situación, qué servicio te interesa o cuál es tu urgencia actual..."></textarea>
             </div>
+
+            <div class="form-group">
+              <label class="check-label check-label--terms">
+                <input type="checkbox" id="acepta" name="acepta" required />
+                Acepto la <a href="/politica-de-privacidad/" target="_blank" rel="noopener">política de privacidad</a> y el tratamiento de mis datos de contacto.
+              </label>
+            </div>
+
             <button type="submit" class="btn-primary" style="width:100%;justify-content:center;">Enviar consulta</button>
           </form>
         </div>
@@ -205,6 +231,63 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   .form-row { grid-template-columns: 1fr; }
 }
 
+/* Servicios checkboxes */
+.servicios-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 8px;
+}
+.servicio-categoria {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: var(--gris-bg);
+  border: 1px solid var(--borde);
+  border-radius: 8px;
+  padding: 14px 16px;
+}
+.categoria-label {
+  font-family: 'Montserrat', sans-serif;
+  font-size: .52rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--verde);
+  margin-bottom: 4px;
+}
+.check-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--gris-1);
+  cursor: pointer;
+  line-height: 1.4;
+}
+.check-label input[type="checkbox"] {
+  width: 15px;
+  height: 15px;
+  min-width: 15px;
+  margin-top: 1px;
+  accent-color: var(--verde);
+  cursor: pointer;
+}
+.check-label--terms {
+  font-size: 12px;
+  color: var(--gris-2);
+}
+.check-label--terms a { color: var(--verde); }
+.field-error {
+  font-size: 12px;
+  color: #ef4444;
+  margin-top: 4px;
+}
+@media (max-width: 700px) {
+  .servicios-grid { grid-template-columns: 1fr; }
+}
+
 /* Mensaje de éxito */
 .form-success {
   background: var(--verde-light);
@@ -240,15 +323,50 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     import.meta.env.PUBLIC_SUPABASE_KEY
   );
 
+  // ── Captura de contexto desde URL ──────────────────────────
+  const params = new URLSearchParams(window.location.search);
+
+  // Pre-seleccionar servicios si vienen como ?s=s2 o ?s=s1,s2
+  const sParam = params.get('s');
+  if (sParam) {
+    sParam.split(',').forEach(s => {
+      const cb = document.querySelector<HTMLInputElement>(`input[name="servicios"][value="${s.trim()}"]`);
+      if (cb) cb.checked = true;
+    });
+  }
+
+  // Llenar hidden fields con contexto y UTMs
+  const setHidden = (id: string, val: string | null) => {
+    const el = document.getElementById(id) as HTMLInputElement | null;
+    if (el && val) el.value = val;
+  };
+  setHidden('f_etapa_funnel', params.get('funnel'));
+  setHidden('f_lead_magnet',  params.get('lm'));
+  setHidden('f_utm_source',   params.get('utm_source'));
+  setHidden('f_utm_medium',   params.get('utm_medium'));
+  setHidden('f_utm_campaign', params.get('utm_campaign'));
+  setHidden('f_utm_content',  params.get('utm_content'));
+
+  // ── Submit ──────────────────────────────────────────────────
   const form    = document.getElementById('contact-form') as HTMLFormElement;
   const success = document.getElementById('form-success') as HTMLElement;
 
   form?.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    // Honeypot: si está relleno es un bot
-    const honeypot = form.querySelector<HTMLInputElement>('input[name="_gotcha"]');
-    if (honeypot?.value) return;
+    // Honeypot
+    if ((form.querySelector<HTMLInputElement>('input[name="_gotcha"]'))?.value) return;
+
+    // Validar al menos un servicio seleccionado
+    const serviciosChecked = [...form.querySelectorAll<HTMLInputElement>('input[name="servicios"]:checked')]
+      .map(cb => cb.value);
+    const serviciosError = document.getElementById('servicios-error')!;
+    if (serviciosChecked.length === 0) {
+      serviciosError.style.display = 'block';
+      form.querySelector<HTMLElement>('.servicios-grid')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+    serviciosError.style.display = 'none';
 
     const btn = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
     const originalLabel = btn.textContent;
@@ -256,16 +374,25 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     btn.disabled = true;
 
     const data = new FormData(form);
+    const str  = (k: string) => (data.get(k) as string)?.trim() || null;
 
     const { error } = await supabase.from('leads').insert({
-      nombre:        data.get('nombre')   as string,
-      empresa:       data.get('empresa')  as string,
-      telefono:      data.get('telefono') as string,
-      email:         (data.get('email')   as string) || null,
-      sector:        data.get('sector')   as string,
-      mensaje:       (data.get('mensaje') as string) || null,
-      fuente:        'formulario-web',
-      pagina_origen: window.location.href,
+      nombre:                str('nombre'),
+      telefono:              str('telefono'),
+      email:                 str('email'),
+      mensaje:               str('mensaje'),
+      servicios_interes:     serviciosChecked,
+      fuente:                'web',
+      primer_canal:          'web',
+      canales_visitados:     ['web'],
+      pagina_origen:         window.location.href,
+      etapa_funnel:          str('etapa_funnel'),
+      lead_magnet:           str('lead_magnet'),
+      utm_source:            str('utm_source'),
+      utm_medium:            str('utm_medium'),
+      utm_campaign:          str('utm_campaign'),
+      utm_content:           str('utm_content'),
+      acepta_condiciones_at: new Date().toISOString(),
     });
 
     if (error) {
