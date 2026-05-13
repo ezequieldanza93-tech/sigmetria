@@ -1,0 +1,214 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Demo de la Plataforma — SIGMETRÍA HyS | Próximamente"
+  description="La demo interactiva de la plataforma de gestión HyS de SIGMETRÍA está en desarrollo. Mientras tanto, solicitá una presentación personalizada para tu organización."
+>
+  <section class="page-hero">
+    <div class="page-hero-inner">
+      <nav aria-label="Breadcrumb" class="breadcrumb">
+        <a href="/">Inicio</a><span>/</span>
+        <a href="/plataforma/">Plataforma</a><span>/</span>
+        <span>Demo</span>
+      </nav>
+      <div class="page-hero-badge">En desarrollo · Próximamente</div>
+      <h1>LA DEMO<br><em>YA VIENE.</em></h1>
+      <p class="hero-sub">Estamos preparando algo que vale la pena esperar — una demo real, interactiva, sin video grabado ni vendedor que te guíe. La vas a poder recorrer a tu ritmo.</p>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="content-inner">
+
+      <div class="demo-estado">
+        <div class="demo-badge-wrap">
+          <span class="demo-badge">🛠️ En construcción</span>
+        </div>
+        <h2 class="demo-titulo">PRÓXIMAMENTE VAS A PODER<br><em>VER LA PLATAFORMA EN ACCIÓN</em></h2>
+        <p class="demo-desc">
+          Cuando esté lista, vas a encontrar acá una demo completa del sistema: gestión documental,
+          seguimiento de desvíos, matriz de riesgos, capacitaciones, app de campo y reportes ejecutivos —
+          todo funcionando en tiempo real, sin instalar nada.
+        </p>
+
+        <div class="demo-features">
+          <div class="df-item">
+            <span class="df-icon">📋</span>
+            <span>Gestión documental y vencimientos</span>
+          </div>
+          <div class="df-item">
+            <span class="df-icon">⚠️</span>
+            <span>Seguimiento de desvíos con trazabilidad</span>
+          </div>
+          <div class="df-item">
+            <span class="df-icon">📊</span>
+            <span>Matriz de riesgos dinámica</span>
+          </div>
+          <div class="df-item">
+            <span class="df-icon">📱</span>
+            <span>App de campo para operarios</span>
+          </div>
+          <div class="df-item">
+            <span class="df-icon">🎓</span>
+            <span>Capacitaciones digitales con evidencias</span>
+          </div>
+          <div class="df-item">
+            <span class="df-icon">📈</span>
+            <span>Reportes listos para auditoría</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="demo-cta-box">
+        <div class="demo-cta-inner">
+          <h3>¿Ya sabés que esto es para tu organización?</h3>
+          <p>
+            No esperes la demo pública. Si tu empresa necesita digitalizar la gestión de HyS ahora,
+            te armamos una presentación personalizada — con los módulos relevantes para tu rubro
+            y tu tamaño de equipo.
+          </p>
+          <p class="demo-cta-nota">
+            Todos los que llegan desde acá son organizaciones con intención real de implementar.
+            Te respondemos en menos de 24 horas hábiles.
+          </p>
+          <a href="/contacto/?s=s4&funnel=bofu" class="btn-primary demo-btn">
+            Solicitar presentación personalizada →
+          </a>
+          <p class="demo-wa">
+            O si preferís,
+            <a href="https://wa.me/5491123496789?text=Hola%2C%20quiero%20conocer%20la%20plataforma%20HyS%20de%20Sigmetr%C3%ADa" target="_blank" rel="noopener">
+              escribinos por WhatsApp
+            </a>
+            y lo coordinamos directamente.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+.hero-sub {
+  font-size: 16px;
+  font-weight: 300;
+  color: var(--gris-2);
+  line-height: 1.8;
+  max-width: 580px;
+  margin-top: 12px;
+}
+
+/* Estado demo */
+.demo-estado {
+  text-align: center;
+  padding: 52px 24px;
+  border: 1px solid var(--borde);
+  border-radius: 16px;
+  background: var(--gris-bg);
+  margin-bottom: 48px;
+}
+.demo-badge-wrap { margin-bottom: 20px; }
+.demo-badge {
+  display: inline-block;
+  background: #fff7ed;
+  border: 1px solid #fed7aa;
+  color: #c2410c;
+  font-family: 'Montserrat', sans-serif;
+  font-size: .55rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border-radius: 20px;
+}
+.demo-titulo {
+  font-size: clamp(22px, 3vw, 36px);
+  letter-spacing: 2px;
+  color: var(--gris-1);
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+.demo-titulo em { font-style: normal; color: var(--verde); }
+.demo-desc {
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--gris-2);
+  line-height: 1.8;
+  max-width: 600px;
+  margin: 0 auto 32px;
+}
+.demo-features {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  max-width: 680px;
+  margin: 0 auto;
+  text-align: left;
+}
+.df-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--blanco);
+  border: 1px solid var(--borde);
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--gris-1);
+}
+.df-icon { font-size: 1.1rem; flex-shrink: 0; }
+
+/* CTA box */
+.demo-cta-box {
+  background: var(--verde-light);
+  border: 1px solid var(--verde-borde);
+  border-radius: 16px;
+  padding: 48px 40px;
+  text-align: center;
+}
+.demo-cta-inner { max-width: 520px; margin: 0 auto; }
+.demo-cta-box h3 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--gris-1);
+  margin-bottom: 14px;
+}
+.demo-cta-box p {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--gris-2);
+  line-height: 1.8;
+  margin-bottom: 12px;
+}
+.demo-cta-nota {
+  font-size: 12px !important;
+  color: var(--gris-3) !important;
+  font-style: italic;
+  margin-bottom: 24px !important;
+}
+.demo-btn {
+  font-size: 15px;
+  padding: 14px 28px;
+  margin-bottom: 20px;
+}
+.demo-wa {
+  font-size: 13px !important;
+  color: var(--gris-3) !important;
+  margin: 0 !important;
+}
+.demo-wa a { color: var(--verde); font-weight: 500; }
+
+@media (max-width: 700px) {
+  .demo-features { grid-template-columns: 1fr 1fr; }
+  .demo-cta-box  { padding: 32px 20px; }
+}
+@media (max-width: 480px) {
+  .demo-features { grid-template-columns: 1fr; }
+}
+</style>
