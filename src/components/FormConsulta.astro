@@ -1,0 +1,236 @@
+---
+/**
+ * FormConsulta — formulario inline para lead magnets y páginas de servicio.
+ *
+ * Uso en lead magnet (Opción B):
+ *   <FormConsulta
+ *     servicios={['s2']}
+ *     funnel="mofu"
+ *     leadMagnet="implementar-iso-45001-sin-burocracia"
+ *     titulo="Descargá la guía sin cargo"
+ *     subtitulo="Cómo implementar ISO 45001 sin burocracia — PDF gratuito"
+ *     cta="Quiero la guía"
+ *   />
+ *
+ * Uso en página de servicio con CTA de demo/diagnóstico → usar link a /contacto/?s=s2&funnel=bofu
+ */
+
+interface Props {
+  servicios: string[];
+  funnel?: 'tofu' | 'mofu' | 'bofu';
+  leadMagnet?: string;
+  titulo?: string;
+  subtitulo?: string;
+  cta?: string;
+  successMsg?: string;
+}
+
+const {
+  servicios,
+  funnel = 'mofu',
+  leadMagnet,
+  titulo,
+  subtitulo,
+  cta = 'Enviar consulta',
+  successMsg = '¡Listo! En breve te contactamos. Revisá tu email.',
+} = Astro.props;
+---
+
+<div
+  class="fc-wrap"
+  data-servicios={JSON.stringify(servicios)}
+  data-funnel={funnel}
+  data-lm={leadMagnet ?? ''}
+>
+  <!-- Estado de éxito -->
+  <div class="fc-success" style="display:none">
+    <span class="fc-success-icon">✅</span>
+    <p>{successMsg}</p>
+  </div>
+
+  <!-- Formulario -->
+  <form class="fc-form" novalidate>
+    <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
+
+    {titulo    && <h3 class="fc-titulo">{titulo}</h3>}
+    {subtitulo && <p  class="fc-sub">{subtitulo}</p>}
+
+    <div class="fc-group">
+      <input type="text" name="nombre" required placeholder="Nombre y apellido *" />
+    </div>
+
+    <div class="fc-row">
+      <input type="tel"   name="telefono" required placeholder="WhatsApp +549 11..." />
+      <input type="email" name="email"    required placeholder="Email *" />
+    </div>
+
+    <label class="fc-terms">
+      <input type="checkbox" name="acepta" required />
+      <span>Acepto la <a href="/politica-de-privacidad/" target="_blank" rel="noopener">política de privacidad</a></span>
+    </label>
+
+    <p class="fc-error" style="display:none">Completá todos los campos para continuar.</p>
+
+    <button type="submit" class="btn-primary fc-btn">{cta}</button>
+  </form>
+</div>
+
+<style>
+.fc-wrap {
+  background: var(--verde-light);
+  border: 1px solid var(--verde-borde);
+  border-radius: 12px;
+  padding: 28px 32px;
+  max-width: 540px;
+}
+.fc-titulo {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--gris-1);
+  margin-bottom: 6px;
+}
+.fc-sub {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--gris-2);
+  margin-bottom: 16px;
+  line-height: 1.6;
+}
+.fc-form { display: flex; flex-direction: column; gap: 12px; }
+.fc-group input,
+.fc-row input {
+  background: var(--blanco);
+  border: 1px solid var(--borde);
+  border-radius: 6px;
+  padding: 11px 14px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--gris-1);
+  outline: none;
+  width: 100%;
+  transition: border-color .2s;
+}
+.fc-group input:focus,
+.fc-row input:focus { border-color: var(--verde); }
+.fc-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.fc-terms {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--gris-2);
+  cursor: pointer;
+}
+.fc-terms input { width: 14px; height: 14px; min-width: 14px; margin-top: 2px; accent-color: var(--verde); }
+.fc-terms a { color: var(--verde); }
+.fc-btn { width: 100%; justify-content: center; margin-top: 4px; }
+.fc-error { font-size: 12px; color: #ef4444; }
+
+/* Éxito */
+.fc-success {
+  text-align: center;
+  padding: 12px 0;
+}
+.fc-success-icon { font-size: 2rem; display: block; margin-bottom: 10px; }
+.fc-success p {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--gris-2);
+  line-height: 1.7;
+}
+
+@media (max-width: 520px) {
+  .fc-wrap { padding: 22px 18px; }
+  .fc-row  { grid-template-columns: 1fr; }
+}
+</style>
+
+<script>
+  import { createClient } from '@supabase/supabase-js';
+
+  const supabase = createClient(
+    import.meta.env.PUBLIC_SUPABASE_URL,
+    import.meta.env.PUBLIC_SUPABASE_KEY
+  );
+
+  // Capturar UTMs una sola vez (aplica a todos los forms de la página)
+  const p = new URLSearchParams(window.location.search);
+  const utm = {
+    utm_source:   p.get('utm_source'),
+    utm_medium:   p.get('utm_medium'),
+    utm_campaign: p.get('utm_campaign'),
+    utm_content:  p.get('utm_content'),
+  };
+
+  document.querySelectorAll<HTMLElement>('.fc-wrap').forEach(wrap => {
+    const servicios  = JSON.parse(wrap.dataset.servicios ?? '[]') as string[];
+    const funnel     = wrap.dataset.funnel  || null;
+    const leadMagnet = wrap.dataset.lm      || null;
+
+    const form    = wrap.querySelector<HTMLFormElement>('.fc-form')!;
+    const success = wrap.querySelector<HTMLElement>('.fc-success')!;
+    const errMsg  = wrap.querySelector<HTMLElement>('.fc-error')!;
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      // Honeypot
+      if ((form.querySelector<HTMLInputElement>('input[name="_gotcha"]'))?.value) return;
+
+      // Validación básica
+      const nombre   = (form.querySelector<HTMLInputElement>('[name="nombre"]')!).value.trim();
+      const telefono = (form.querySelector<HTMLInputElement>('[name="telefono"]')!).value.trim();
+      const email    = (form.querySelector<HTMLInputElement>('[name="email"]')!).value.trim();
+      const acepta   = (form.querySelector<HTMLInputElement>('[name="acepta"]')!).checked;
+      const mensaje  = (form.querySelector<HTMLInputElement>('[name="mensaje"]'))?.value.trim() || null;
+
+      if (!nombre || !telefono || !email || !acepta) {
+        errMsg.style.display = 'block';
+        return;
+      }
+      errMsg.style.display = 'none';
+
+      const btn = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+      const lbl = btn.textContent;
+      btn.textContent = 'Enviando...';
+      btn.disabled = true;
+
+      const { error } = await supabase.from('leads').insert({
+        nombre,
+        telefono,
+        email,
+        mensaje,
+        servicios_interes:     servicios.length ? servicios : null,
+        fuente:                'web',
+        primer_canal:          'web',
+        canales_visitados:     ['web'],
+        pagina_origen:         window.location.href,
+        etapa_funnel:          funnel,
+        lead_magnet:           leadMagnet || null,
+        acepta_condiciones_at: new Date().toISOString(),
+        ...Object.fromEntries(Object.entries(utm).filter(([, v]) => v)),
+      });
+
+      if (error) {
+        console.error(error.message);
+        btn.textContent = lbl;
+        btn.disabled = false;
+        errMsg.textContent = 'Hubo un error. Intentá de nuevo o escribinos por WhatsApp.';
+        errMsg.style.display = 'block';
+        return;
+      }
+
+      form.style.display   = 'none';
+      success.style.display = 'block';
+    });
+  });
+</script>

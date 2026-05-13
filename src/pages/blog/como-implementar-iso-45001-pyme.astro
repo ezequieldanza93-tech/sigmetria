@@ -1,5 +1,6 @@
 ﻿---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import FormConsulta from '../../components/FormConsulta.astro';
 ---
 
 <BaseLayout
@@ -220,12 +221,19 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         </div>
 
         <div class="art-cta">
-          <h3>Te acompañamos en la implementación y certificación ISO 45001</h3>
-          <p>Hacemos el diagnóstico inicial, desarrollamos toda la documentación del sistema, capacitamos al equipo interno, coordinamos la auditoría interna y te acompañamos hasta obtener el certificado. Experiencia con PyMEs industriales, logísticas y de servicios en el AMBA y GBA.</p>
-          <div class="cta-actions" style="margin-top:16px">
-            <a href="https://wa.me/5491123496789?text=Hola%2C%20necesito%20asesoramiento" class="btn-primary" target="_blank" rel="noopener">Consultar por WhatsApp</a>
-            <a href="/servicios/empresas-industriales/sistemas-de-gestion/" class="btn-outline">Ver servicio</a>
-          </div>
+          <FormConsulta
+            servicios={['s2']}
+            funnel="mofu"
+            leadMagnet="implementar-iso-45001-sin-burocracia"
+            titulo="Descargá la guía sin cargo"
+            subtitulo="Cómo implementar ISO 45001 sin burocracia — 12 páginas con el roadmap real que usamos en PyMEs argentinas."
+            cta="Quiero la guía"
+            successMsg="¡Listo! Te enviamos la guía a tu email. Si no llega en 5 minutos, revisá spam."
+          />
+          <p style="margin-top:20px;font-size:13px;font-weight:300;color:var(--gris-3)">
+            ¿Preferís hablar directamente?
+            <a href="https://wa.me/5491123496789" target="_blank" rel="noopener" style="color:var(--verde)">Escribinos por WhatsApp →</a>
+          </p>
         </div>
       </div>
     </div>
