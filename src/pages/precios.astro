@@ -24,8 +24,8 @@ const features: FeatureGroup[] = [
   {
     group: 'Precio',
     rows: [
-      { label: 'Precio mensual (neto + IVA 21%)',    values: ['Gratis',    '$16.900',   '$26.320',  '$34.000', 'A consultar'] },
-      { label: 'Precio anual mensualizado (−20%)',   values: ['—',         '$13.520',   '$21.056',  '$27.200', 'A consultar'] },
+      { label: 'Precio mensual (neto + IVA 21%)',    values: ['Gratis',    '$16.450',   '$21.250',  '$26.650', 'A consultar'] },
+      { label: 'Precio anual mensualizado (−20%)',   values: ['—',         '$13.160',   '$17.000',  '$21.320', 'A consultar'] },
       { label: 'Período de prueba gratuita',          values: ['14 días',  '14 días',   '14 días',  '14 días', '14 días'] },
     ],
   },
@@ -35,7 +35,7 @@ const features: FeatureGroup[] = [
       { label: 'Empresas cliente',      values: ['2',    '20',        '30',        '45',         'Ilimitadas'] },
       { label: 'Establecimientos',      values: ['5',    '40',        '80',        'Ilimitados', 'Ilimitados'] },
       { label: 'Gestiones registradas', values: ['200',  'Ilimitadas','Ilimitadas','Ilimitadas', 'Ilimitadas'] },
-      { label: 'Colaboradores en equipo', values: [false, false,      'Hasta 3',  'Hasta 6',    'Ilimitados'] },
+      { label: 'Colaboradores en equipo', values: [false, false,      'Hasta 3',  'Hasta 5',    'Ilimitados'] },
     ],
   },
   {
@@ -73,9 +73,9 @@ const features: FeatureGroup[] = [
 
 const precios = [
   { mensual: null,   anual_mes: null,   gratis: true,  empresa: false },
-  { mensual: 16900,  anual_mes: 13520,  gratis: false, empresa: false },
-  { mensual: 26320,  anual_mes: 21056,  gratis: false, empresa: false },
-  { mensual: 34000,  anual_mes: 27200,  gratis: false, empresa: false },
+  { mensual: 16450,  anual_mes: 13160,  gratis: false, empresa: false },
+  { mensual: 21250,  anual_mes: 17000,  gratis: false, empresa: false },
+  { mensual: 26650,  anual_mes: 21320,  gratis: false, empresa: false },
   { mensual: null,   anual_mes: null,   gratis: false, empresa: true  },
 ];
 
