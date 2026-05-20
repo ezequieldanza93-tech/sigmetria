@@ -1,0 +1,558 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const planes = [
+  {
+    slug: 'trial',
+    nombre: 'Trial',
+    descripcion: 'Para conocer la plataforma sin compromiso.',
+    precio_mensual: null,
+    precio_anual: null,
+    gratis: true,
+    duracion_trial: '14 días',
+    colaboradores: 0,
+    empresas: 2,
+    establecimientos: 5,
+    gestiones: '200',
+    destacado: false,
+    cta_label: 'Empezar gratis',
+    cta_href: 'https://sigmetria-hys.vercel.app/',
+    cta_external: true,
+  },
+  {
+    slug: 'profesional-independiente',
+    nombre: 'Profesional Independiente',
+    descripcion: 'Para técnicos y profesionales que trabajan solos.',
+    precio_mensual: 16900,
+    precio_anual_mensual: 13520,
+    precio_anual_total: 162240,
+    gratis: false,
+    colaboradores: 0,
+    empresas: 20,
+    establecimientos: 40,
+    gestiones: 'Ilimitadas',
+    destacado: false,
+    cta_label: 'Elegir plan',
+    cta_href: 'https://sigmetria-hys.vercel.app/',
+    cta_external: true,
+  },
+  {
+    slug: 'consultora-chica',
+    nombre: 'Consultora Chica',
+    descripcion: 'Para consultoras en crecimiento con pequeño equipo.',
+    precio_mensual: 26320,
+    precio_anual_mensual: 21056,
+    precio_anual_total: 252672,
+    gratis: false,
+    colaboradores: 3,
+    empresas: 8,
+    establecimientos: 80,
+    gestiones: 'Ilimitadas',
+    destacado: true,
+    cta_label: 'Elegir plan',
+    cta_href: 'https://sigmetria-hys.vercel.app/',
+    cta_external: true,
+  },
+  {
+    slug: 'consultora-grande',
+    nombre: 'Consultora Grande',
+    descripcion: 'Para consultoras con cartera amplia y múltiples técnicos.',
+    precio_mensual: 34000,
+    precio_anual_mensual: 27200,
+    precio_anual_total: 326400,
+    gratis: false,
+    colaboradores: 6,
+    empresas: 45,
+    establecimientos: null,
+    gestiones: 'Ilimitadas',
+    destacado: false,
+    cta_label: 'Elegir plan',
+    cta_href: 'https://sigmetria-hys.vercel.app/',
+    cta_external: true,
+  },
+  {
+    slug: 'empresa',
+    nombre: 'Empresa',
+    descripcion: 'Para grandes consultoras o empresas con necesidades específicas.',
+    precio_mensual: null,
+    precio_anual_mensual: null,
+    gratis: false,
+    empresa: true,
+    colaboradores: null,
+    empresas: null,
+    establecimientos: null,
+    gestiones: 'Ilimitadas',
+    destacado: false,
+    cta_label: 'Contactar',
+    cta_href: '/contacto/?s=s4&funnel=plan-empresa',
+    cta_external: false,
+  },
+];
+
+function fmt(n: number) {
+  return n.toLocaleString('es-AR');
+}
+---
+
+<BaseLayout
+  title="Planes y Precios — Gestión HyS SaaS | SIGMETRÍA"
+  description="Conocé los planes de SIGMETRÍA HyS: Trial gratis, Profesional Independiente, Consultora Chica, Consultora Grande y Empresa. Precios en ARS + IVA. Pagos por transferencia bancaria."
+>
+
+  <section class="page-hero">
+    <div class="page-hero-inner">
+      <nav aria-label="Breadcrumb" class="breadcrumb">
+        <a href="/">Inicio</a><span>/</span>
+        <a href="/plataforma/">Plataforma</a><span>/</span>
+        <span>Precios</span>
+      </nav>
+      <div class="page-hero-badge">Pagos por transferencia · IVA 21% discriminado · Sin permanencia mínima</div>
+      <h1>PLANES Y<br><em>PRECIOS</em></h1>
+      <p class="hero-sub">Elegí el plan que se adapta a tu consultora. Todos incluyen acceso completo a la plataforma, soporte por WhatsApp y 14 días de prueba gratuita.</p>
+
+      <div class="billing-toggle" id="billing-toggle">
+        <button class="toggle-btn active" id="btn-mensual" data-period="mensual">Mensual</button>
+        <button class="toggle-btn" id="btn-anual" data-period="anual">
+          Anual
+          <span class="toggle-badge">−20%</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="content-inner">
+
+      <div class="planes-grid">
+        {planes.map(plan => (
+          <div class={`plan-card ${plan.destacado ? 'plan-destacado' : ''} ${plan.empresa ? 'plan-empresa' : ''}`}>
+            {plan.destacado && <div class="plan-badge">Más elegido</div>}
+
+            <div class="plan-header">
+              <h2 class="plan-nombre">{plan.nombre}</h2>
+              <p class="plan-desc">{plan.descripcion}</p>
+            </div>
+
+            <div class="plan-precio">
+              {plan.gratis ? (
+                <div>
+                  <span class="precio-valor">Gratis</span>
+                  <span class="precio-periodo">por {plan.duracion_trial}</span>
+                </div>
+              ) : plan.empresa ? (
+                <div>
+                  <span class="precio-consultar">A consultar</span>
+                </div>
+              ) : (
+                <div>
+                  <div class="precio-mensual-wrap" data-show="mensual">
+                    <span class="precio-valor">${fmt(plan.precio_mensual!)}</span>
+                    <span class="precio-periodo">/ mes + IVA</span>
+                  </div>
+                  <div class="precio-anual-wrap hidden" data-show="anual">
+                    <span class="precio-valor">${fmt(plan.precio_anual_mensual!)}</span>
+                    <span class="precio-periodo">/ mes + IVA</span>
+                    <div class="precio-anual-sub">Facturado ${fmt(plan.precio_anual_total!)} / año</div>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <ul class="plan-features">
+              <li>
+                <span class="feat-icon">👤</span>
+                <span>
+                  {plan.colaboradores === null
+                    ? 'Colaboradores ilimitados'
+                    : plan.colaboradores === 0
+                      ? 'Solo para el titular'
+                      : `Hasta ${plan.colaboradores} colaboradores`}
+                </span>
+              </li>
+              <li>
+                <span class="feat-icon">🏢</span>
+                <span>
+                  {plan.empresas === null
+                    ? 'Empresas ilimitadas'
+                    : `${plan.empresas} empresas cliente`}
+                </span>
+              </li>
+              <li>
+                <span class="feat-icon">🏭</span>
+                <span>
+                  {plan.establecimientos === null
+                    ? 'Establecimientos ilimitados'
+                    : `${plan.establecimientos} establecimientos`}
+                </span>
+              </li>
+              <li>
+                <span class="feat-icon">📋</span>
+                <span>Gestiones: {plan.gestiones}</span>
+              </li>
+              <li><span class="feat-icon">✅</span><span>Módulo documental + vencimientos</span></li>
+              <li><span class="feat-icon">✅</span><span>Seguimiento de desvíos</span></li>
+              <li><span class="feat-icon">✅</span><span>Capacitaciones digitales</span></li>
+              <li><span class="feat-icon">✅</span><span>Soporte por WhatsApp</span></li>
+              {plan.empresa && (
+                <>
+                  <li><span class="feat-icon">✅</span><span>Onboarding personalizado</span></li>
+                  <li><span class="feat-icon">✅</span><span>SLA de soporte prioritario</span></li>
+                </>
+              )}
+            </ul>
+
+            <a
+              href={plan.cta_href}
+              class={`plan-cta ${plan.destacado ? 'plan-cta-primary' : 'plan-cta-outline'}`}
+              {...(plan.cta_external ? { target: '_blank', rel: 'noopener' } : {})}
+            >
+              {plan.cta_label}
+            </a>
+          </div>
+        ))}
+      </div>
+
+      <!-- Add-on note -->
+      <div class="addon-note">
+        <span class="addon-icon">➕</span>
+        <p>
+          ¿Necesitás más colaboradores? Podés agregar <strong>seats adicionales por $15.000 neto/mes</strong> cada uno en cualquier plan.
+        </p>
+      </div>
+
+      <!-- Preguntas frecuentes -->
+      <div class="faq-section">
+        <h2 class="faq-title">Preguntas frecuentes</h2>
+        <div class="faq-grid">
+          <div class="faq-item">
+            <h3>¿Cómo se paga?</h3>
+            <p>Por transferencia bancaria. Una vez que acreditamos el pago, activamos tu plan automáticamente. No usamos tarjeta de crédito (próximamente Mercado Pago).</p>
+          </div>
+          <div class="faq-item">
+            <h3>¿El IVA está incluido en el precio?</h3>
+            <p>No. Los precios mostrados son <strong>netos</strong>. Se suma IVA 21% en la factura. Tu factura siempre muestra el neto, el IVA y el total por separado.</p>
+          </div>
+          <div class="faq-item">
+            <h3>¿Qué pasa cuando se vence el trial?</h3>
+            <p>Tenés 7 días adicionales en modo solo lectura. Tus datos quedan intactos. Cuando contratás un plan, retomás desde donde estabas.</p>
+          </div>
+          <div class="faq-item">
+            <h3>¿Puedo cambiar de plan?</h3>
+            <p>Sí, en cualquier momento. El upgrade es inmediato. El downgrade aplica al inicio del siguiente período de facturación.</p>
+          </div>
+          <div class="faq-item">
+            <h3>¿Hay permanencia mínima?</h3>
+            <p>No. Los planes mensuales se pueden dar de baja en cualquier momento. El plan anual se cobra por adelantado por 12 meses.</p>
+          </div>
+          <div class="faq-item">
+            <h3>¿Los datos son propios?</h3>
+            <p>Completamente. Podés exportar toda tu información en cualquier momento. No retenemos datos si cancelás.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="cta-banner">
+        <h2>¿NO SÉS CUÁL PLAN <em>TE CONVIENE?</em></h2>
+        <p>Te ayudamos a elegir según el tamaño de tu cartera, la cantidad de técnicos y tus necesidades. Sin compromiso.</p>
+        <div class="cta-actions">
+          <a href="/contacto/?s=s4&funnel=precios-ayuda" class="btn-primary">Hablar con un asesor</a>
+          <a href="https://wa.me/5491123496789" class="btn-outline" target="_blank" rel="noopener">WhatsApp</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+.hero-sub {
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--gris-2);
+  line-height: 1.8;
+  max-width: 560px;
+  margin: 12px 0 24px;
+}
+
+/* Toggle mensual / anual */
+.billing-toggle {
+  display: inline-flex;
+  background: var(--borde);
+  border-radius: 8px;
+  padding: 3px;
+  gap: 2px;
+}
+.toggle-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+  font-size: .78rem;
+  font-weight: 600;
+  color: var(--gris-2);
+  padding: 7px 18px;
+  border-radius: 6px;
+  transition: all .18s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.toggle-btn.active {
+  background: #fff;
+  color: var(--gris-1);
+  box-shadow: 0 1px 4px rgba(0,0,0,.1);
+}
+.toggle-badge {
+  background: var(--verde);
+  color: #fff;
+  font-size: .6rem;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 10px;
+  letter-spacing: .3px;
+}
+
+/* Grid de planes */
+.planes-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+  margin-bottom: 32px;
+  align-items: start;
+}
+
+.plan-card {
+  background: var(--blanco);
+  border: 1.5px solid var(--borde);
+  border-radius: 12px;
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: relative;
+  transition: box-shadow .2s, border-color .2s;
+}
+.plan-card:hover {
+  box-shadow: 0 8px 28px rgba(0,0,0,.08);
+}
+.plan-destacado {
+  border-color: var(--verde);
+  box-shadow: 0 4px 20px rgba(76,175,80,.15);
+}
+.plan-empresa {
+  border-style: dashed;
+}
+
+.plan-badge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--verde);
+  color: #fff;
+  font-family: 'Montserrat', sans-serif;
+  font-size: .6rem;
+  font-weight: 700;
+  letter-spacing: .8px;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+.plan-header { margin-bottom: 16px; }
+.plan-nombre {
+  font-family: 'Montserrat', sans-serif;
+  font-size: .85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  color: var(--gris-1);
+  margin: 0 0 6px;
+}
+.plan-desc {
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--gris-2);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.plan-precio {
+  border-top: 1px solid var(--borde);
+  border-bottom: 1px solid var(--borde);
+  padding: 16px 0;
+  margin-bottom: 16px;
+  min-height: 72px;
+  display: flex;
+  align-items: center;
+}
+.precio-valor {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--gris-1);
+  line-height: 1;
+}
+.precio-periodo {
+  display: block;
+  font-size: .7rem;
+  color: var(--gris-2);
+  font-weight: 400;
+  margin-top: 4px;
+}
+.precio-anual-sub {
+  font-size: .65rem;
+  color: var(--verde-dark);
+  font-weight: 600;
+  margin-top: 3px;
+}
+.precio-consultar {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--gris-2);
+}
+.hidden { display: none !important; }
+
+.plan-features {
+  list-style: none;
+  margin: 0 0 20px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+.plan-features li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--gris-2);
+  font-weight: 300;
+  line-height: 1.4;
+}
+.feat-icon { font-size: .9rem; flex-shrink: 0; margin-top: 1px; }
+
+.plan-cta {
+  display: block;
+  text-align: center;
+  padding: 10px;
+  border-radius: 6px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all .18s;
+  margin-top: auto;
+}
+.plan-cta-primary {
+  background: var(--verde);
+  color: #fff;
+}
+.plan-cta-primary:hover { background: var(--verde-dark); }
+.plan-cta-outline {
+  border: 1.5px solid var(--borde);
+  color: var(--gris-2);
+}
+.plan-cta-outline:hover {
+  border-color: var(--verde-borde);
+  color: var(--verde);
+  background: var(--verde-light);
+}
+
+/* Add-on note */
+.addon-note {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--verde-light);
+  border: 1px solid var(--verde-borde);
+  border-radius: 8px;
+  padding: 14px 20px;
+  margin-bottom: 48px;
+}
+.addon-icon { font-size: 1.2rem; flex-shrink: 0; }
+.addon-note p {
+  margin: 0;
+  font-size: 13px;
+  color: var(--gris-2);
+  line-height: 1.5;
+}
+
+/* FAQ */
+.faq-section { margin-bottom: 48px; }
+.faq-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  color: var(--gris-1);
+  margin: 0 0 24px;
+}
+.faq-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.faq-item {
+  padding: 20px;
+  background: var(--blanco);
+  border: 1px solid var(--borde);
+  border-radius: 10px;
+}
+.faq-item h3 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: .82rem;
+  font-weight: 700;
+  color: var(--gris-1);
+  margin: 0 0 8px;
+}
+.faq-item p {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--gris-2);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .planes-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 900px) {
+  .planes-grid { grid-template-columns: repeat(2, 1fr); }
+  .faq-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .planes-grid { grid-template-columns: 1fr; }
+  .faq-grid { grid-template-columns: 1fr; }
+  .precio-valor { font-size: 1.4rem; }
+}
+</style>
+
+<script>
+const btnMensual = document.getElementById('btn-mensual');
+const btnAnual = document.getElementById('btn-anual');
+
+function setPeriod(period: string) {
+  const isMensual = period === 'mensual';
+  btnMensual?.classList.toggle('active', isMensual);
+  btnAnual?.classList.toggle('active', !isMensual);
+
+  document.querySelectorAll('[data-show="mensual"]').forEach(el => {
+    (el as HTMLElement).classList.toggle('hidden', !isMensual);
+  });
+  document.querySelectorAll('[data-show="anual"]').forEach(el => {
+    (el as HTMLElement).classList.toggle('hidden', isMensual);
+  });
+}
+
+btnMensual?.addEventListener('click', () => setPeriod('mensual'));
+btnAnual?.addEventListener('click', () => setPeriod('anual'));
+</script>

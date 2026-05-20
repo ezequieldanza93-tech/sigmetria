@@ -59,6 +59,38 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </div>
       </div>
 
+      <!-- Precios resumidos -->
+      <div class="precios-preview">
+        <div class="precios-preview-header">
+          <h2>PLANES Y <em>PRECIOS</em></h2>
+          <p>Sin permanencia mínima. Pagos por transferencia. IVA 21% discriminado.</p>
+        </div>
+        <div class="precios-preview-grid">
+          <div class="pp-card">
+            <span class="pp-nombre">Trial</span>
+            <span class="pp-precio">Gratis</span>
+            <span class="pp-detalle">14 días · 2 empresas</span>
+          </div>
+          <div class="pp-card">
+            <span class="pp-nombre">Prof. Independiente</span>
+            <span class="pp-precio">$16.900<small>/mes</small></span>
+            <span class="pp-detalle">20 empresas · 40 establec.</span>
+          </div>
+          <div class="pp-card pp-card-destacado">
+            <span class="pp-badge">Más elegido</span>
+            <span class="pp-nombre">Consultora Chica</span>
+            <span class="pp-precio">$26.320<small>/mes</small></span>
+            <span class="pp-detalle">3 colaboradores · 8 empresas</span>
+          </div>
+          <div class="pp-card">
+            <span class="pp-nombre">Consultora Grande</span>
+            <span class="pp-precio">$34.000<small>/mes</small></span>
+            <span class="pp-detalle">6 colaboradores · 45 empresas</span>
+          </div>
+        </div>
+        <a href="/precios/" class="precios-preview-cta">Ver todos los planes y comparar →</a>
+      </div>
+
       <div class="cta-banner">
         <h2>DEMO <em>PERSONALIZADA</em></h2>
         <p>Te mostramos la plataforma con datos de una empresa similar a la tuya. En 30 minutos sabés si sirve o no — sin compromiso.</p>
@@ -95,4 +127,90 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 .modulo-card p { font-size: 13px; font-weight: 300; color: var(--gris-2); line-height: 1.7; margin: 0; }
 @media (max-width: 900px) { .modulos-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 600px) { .modulos-grid { grid-template-columns: 1fr; } }
+
+/* Precios preview */
+.precios-preview {
+  background: var(--blanco);
+  border: 1px solid var(--borde);
+  border-radius: 12px;
+  padding: 32px 28px;
+  margin-bottom: 32px;
+}
+.precios-preview-header { margin-bottom: 24px; }
+.precios-preview-header h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  color: var(--gris-1);
+  margin: 0 0 6px;
+}
+.precios-preview-header h2 em { color: var(--verde); font-style: normal; }
+.precios-preview-header p { font-size: 13px; font-weight: 300; color: var(--gris-2); margin: 0; }
+
+.precios-preview-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.pp-card {
+  border: 1.5px solid var(--borde);
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  position: relative;
+  transition: border-color .2s, box-shadow .2s;
+}
+.pp-card:hover { border-color: var(--verde-borde); box-shadow: 0 4px 14px rgba(0,0,0,.06); }
+.pp-card-destacado { border-color: var(--verde); }
+.pp-badge {
+  position: absolute;
+  top: -10px; left: 12px;
+  background: var(--verde);
+  color: #fff;
+  font-family: 'Montserrat', sans-serif;
+  font-size: .55rem;
+  font-weight: 700;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 10px;
+}
+.pp-nombre {
+  font-family: 'Montserrat', sans-serif;
+  font-size: .72rem;
+  font-weight: 700;
+  color: var(--gris-1);
+  text-transform: uppercase;
+  letter-spacing: .3px;
+}
+.pp-precio {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--gris-1);
+  line-height: 1;
+  margin-top: 4px;
+}
+.pp-precio small { font-size: .65rem; font-weight: 400; color: var(--gris-2); margin-left: 2px; }
+.pp-detalle { font-size: 11px; color: var(--gris-2); font-weight: 300; }
+
+.precios-preview-cta {
+  display: inline-block;
+  font-family: 'Montserrat', sans-serif;
+  font-size: .75rem;
+  font-weight: 700;
+  color: var(--verde);
+  text-decoration: none;
+  letter-spacing: .3px;
+  transition: color .2s;
+}
+.precios-preview-cta:hover { color: var(--verde-dark); }
+
+@media (max-width: 900px) { .precios-preview-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .precios-preview-grid { grid-template-columns: 1fr; } }
 </style>
