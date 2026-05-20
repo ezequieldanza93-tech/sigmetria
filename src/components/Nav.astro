@@ -96,6 +96,26 @@ const blogGroups = [
 
     <a href="/nosotros/" class={`nav-link ${currentPath === '/nosotros/' ? 'active' : ''}`}>Nosotros</a>
 
+    <!-- PLATAFORMA — acceso directo a la demo -->
+    <div class="nav-item nav-has-dropdown">
+      <a
+        href="/plataforma/"
+        class={`nav-link ${currentPath.startsWith('/plataforma') ? 'active' : ''}`}
+        aria-haspopup="true"
+        aria-expanded="false"
+      >
+        Plataforma <span class="nav-arrow">▾</span>
+      </a>
+      <div class="nav-dropdown nav-plataforma-dropdown" role="menu">
+        <a href="/plataforma/" class="nav-dropdown-link" role="menuitem">Conocer la plataforma</a>
+        <div class="nav-submenu-divider"></div>
+        <a href="https://sigmetria-hys.vercel.app/" target="_blank" rel="noopener" class="nav-dropdown-link nav-dropdown-demo" role="menuitem">
+          🚀 Probar la demo
+        </a>
+        <a href="/contacto/?s=s4&funnel=demo-nav" class="nav-dropdown-link" role="menuitem">Solicitar presentación</a>
+      </div>
+    </div>
+
     <!-- BLOG H&S — dropdown agrupado por categoría S0 -->
     <div class="nav-item nav-has-dropdown">
       <a
@@ -152,6 +172,16 @@ const blogGroups = [
     </div>
   </div>
   <a href="/nosotros/" class="nav-mobile-link nav-mobile-root">Nosotros</a>
+  <div class="nav-mobile-item">
+    <button class="nav-mobile-toggle" id="mobile-plataforma-toggle" aria-expanded="false">
+      Plataforma <span class="mobile-arrow">▾</span>
+    </button>
+    <div class="nav-mobile-sub" id="mobile-plataforma-sub">
+      <a href="/plataforma/" class="nav-mobile-link">Conocer la plataforma</a>
+      <a href="https://sigmetria-hys.vercel.app/" target="_blank" rel="noopener" class="nav-mobile-link" style="color: var(--verde); font-weight: 600;">🚀 Probar la demo</a>
+      <a href="/contacto/?s=s4&funnel=demo-nav" class="nav-mobile-link">Solicitar presentación</a>
+    </div>
+  </div>
   <div class="nav-mobile-item">
     <button class="nav-mobile-toggle" id="mobile-blog-toggle" aria-expanded="false">
       Blog H&S <span class="mobile-arrow">▾</span>
@@ -303,6 +333,14 @@ nav.scrolled {
 .nav-dropdown-link:hover { color: var(--verde); background: var(--verde-light); }
 .nav-dropdown-cat { font-weight: 400; padding-left: 24px; font-size: .72rem; }
 .nav-dropdown-cat:hover { padding-left: 28px; }
+
+/* Plataforma dropdown */
+.nav-plataforma-dropdown { min-width: 220px; }
+.nav-dropdown-demo {
+  color: var(--verde) !important;
+  font-weight: 600 !important;
+}
+.nav-dropdown-demo:hover { background: var(--verde-light) !important; }
 
 /* Blog dropdown groups */
 .nav-blog-dropdown { min-width: 240px; }
@@ -489,6 +527,14 @@ serviciosToggle?.addEventListener('click', () => {
   const isOpen = serviciosSub?.classList.toggle('open');
   serviciosToggle.classList.toggle('open', isOpen);
   serviciosToggle.setAttribute('aria-expanded', String(isOpen));
+});
+
+const plataformaToggle = document.getElementById('mobile-plataforma-toggle');
+const plataformaSub = document.getElementById('mobile-plataforma-sub');
+plataformaToggle?.addEventListener('click', () => {
+  const isOpen = plataformaSub?.classList.toggle('open');
+  plataformaToggle.classList.toggle('open', isOpen);
+  plataformaToggle.setAttribute('aria-expanded', String(isOpen));
 });
 
 const blogToggle = document.getElementById('mobile-blog-toggle');

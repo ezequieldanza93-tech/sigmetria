@@ -1,10 +1,11 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+const APP_URL = 'https://sigmetria-hys.vercel.app/';
 ---
 
 <BaseLayout
-  title="Demo de la Plataforma — SIGMETRÍA HyS | Próximamente"
-  description="La demo interactiva de la plataforma de gestión HyS de SIGMETRÍA está en desarrollo. Mientras tanto, solicitá una presentación personalizada para tu organización."
+  title="Demo de la Plataforma — SIGMETRÍA HyS | Probá gratis"
+  description="Probá la plataforma de gestión HyS de SIGMETRÍA sin instalar nada. Accedé a la demo en vivo: gestión documental, seguimiento de desvíos, capacitaciones, reportes y más."
 >
   <section class="page-hero">
     <div class="page-hero-inner">
@@ -13,75 +14,91 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         <a href="/plataforma/">Plataforma</a><span>/</span>
         <span>Demo</span>
       </nav>
-      <div class="page-hero-badge">En desarrollo · Próximamente</div>
-      <h1>LA DEMO<br><em>YA VIENE.</em></h1>
-      <p class="hero-sub">Estamos preparando algo que vale la pena esperar — una demo real, interactiva, sin video grabado ni vendedor que te guíe. La vas a poder recorrer a tu ritmo.</p>
+      <div class="page-hero-badge">Demo disponible · Sin instalación · Gratis</div>
+      <h1>PROBÁ LA<br><em>PLATAFORMA.</em></h1>
+      <p class="hero-sub">Accedé a la demo en vivo y recorrela a tu ritmo — sin vendedor, sin video grabado, sin instalar nada. Gestión real de HyS en el navegador.</p>
     </div>
   </section>
 
   <section class="content-section">
     <div class="content-inner">
 
-      <div class="demo-estado">
-        <div class="demo-badge-wrap">
-          <span class="demo-badge">🛠️ En construcción</span>
+      <div class="demo-cta-main">
+        <div class="demo-cta-main-inner">
+          <span class="demo-live-badge">🟢 En vivo</span>
+          <h2>ACCEDÉ A LA DEMO AHORA</h2>
+          <p>La plataforma está disponible. Creá una cuenta gratuita y explorá todas las funcionalidades durante tu período de prueba — sin tarjeta de crédito.</p>
+          <a href={APP_URL} target="_blank" rel="noopener" class="btn-primary demo-btn-main">
+            Entrar a la demo →
+          </a>
+          <p class="demo-note">30 días de prueba gratis · Cancelá cuando quieras</p>
         </div>
-        <h2 class="demo-titulo">PRÓXIMAMENTE VAS A PODER<br><em>VER LA PLATAFORMA EN ACCIÓN</em></h2>
-        <p class="demo-desc">
-          Cuando esté lista, vas a encontrar acá una demo completa del sistema: gestión documental,
-          seguimiento de desvíos, matriz de riesgos, capacitaciones, app de campo y reportes ejecutivos —
-          todo funcionando en tiempo real, sin instalar nada.
-        </p>
+      </div>
 
+      <div class="demo-features-section">
+        <h3 class="demo-features-title">QUÉ VAS A ENCONTRAR</h3>
         <div class="demo-features">
           <div class="df-item">
             <span class="df-icon">📋</span>
-            <span>Gestión documental y vencimientos</span>
+            <div>
+              <strong>Gestión documental</strong>
+              <span>Cargá empresas, establecimientos y toda su documentación con control de vencimientos.</span>
+            </div>
           </div>
           <div class="df-item">
             <span class="df-icon">⚠️</span>
-            <span>Seguimiento de desvíos con trazabilidad</span>
+            <div>
+              <strong>Seguimiento de desvíos</strong>
+              <span>Registrá hallazgos, asigná responsables y cerrá con evidencias desde el campo.</span>
+            </div>
           </div>
           <div class="df-item">
             <span class="df-icon">📊</span>
-            <span>Matriz de riesgos dinámica</span>
-          </div>
-          <div class="df-item">
-            <span class="df-icon">📱</span>
-            <span>App de campo para operarios</span>
+            <div>
+              <strong>Registros de mediciones</strong>
+              <span>Ruido, iluminación, temperatura, gases — con protocolos listos para auditoría.</span>
+            </div>
           </div>
           <div class="df-item">
             <span class="df-icon">🎓</span>
-            <span>Capacitaciones digitales con evidencias</span>
+            <div>
+              <strong>Capacitaciones</strong>
+              <span>Planificá, ejecutá y registrá capacitaciones con asistencia y evaluaciones.</span>
+            </div>
           </div>
           <div class="df-item">
-            <span class="df-icon">📈</span>
-            <span>Reportes listos para auditoría</span>
+            <span class="df-icon">👥</span>
+            <div>
+              <strong>Gestión de personas</strong>
+              <span>Personal, horarios, siniestralidad y EPP asignado en un solo lugar.</span>
+            </div>
+          </div>
+          <div class="df-item">
+            <span class="df-icon">🏢</span>
+            <div>
+              <strong>Multi-empresa y multi-establecimiento</strong>
+              <span>Organizá varias empresas y sedes desde una sola cuenta de consultora.</span>
+            </div>
           </div>
         </div>
       </div>
 
       <div class="demo-cta-box">
         <div class="demo-cta-inner">
-          <h3>¿Ya sabés que esto es para tu organización?</h3>
+          <h3>¿NECESITÁS UNA PRESENTACIÓN PARA TU EQUIPO?</h3>
           <p>
-            No esperes la demo pública. Si tu empresa necesita digitalizar la gestión de HyS ahora,
-            te armamos una presentación personalizada — con los módulos relevantes para tu rubro
-            y tu tamaño de equipo.
-          </p>
-          <p class="demo-cta-nota">
-            Todos los que llegan desde acá son organizaciones con intención real de implementar.
-            Te respondemos en menos de 24 horas hábiles.
+            Si preferís ver la plataforma con tus casos reales o presentarla a tu dirección,
+            te armamos una demo personalizada — con los módulos relevantes para tu rubro y tu tamaño de equipo.
           </p>
           <a href="/contacto/?s=s4&funnel=bofu" class="btn-primary demo-btn">
-            Solicitar presentación personalizada →
+            Solicitar demo personalizada →
           </a>
           <p class="demo-wa">
-            O si preferís,
+            O escribinos por
             <a href="https://wa.me/5491123496789?text=Hola%2C%20quiero%20conocer%20la%20plataforma%20HyS%20de%20Sigmetr%C3%ADa" target="_blank" rel="noopener">
-              escribinos por WhatsApp
+              WhatsApp
             </a>
-            y lo coordinamos directamente.
+            y lo coordinamos directo.
           </p>
         </div>
       </div>
@@ -100,21 +117,20 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   margin-top: 12px;
 }
 
-/* Estado demo */
-.demo-estado {
+/* CTA principal */
+.demo-cta-main {
+  background: var(--verde);
+  border-radius: 20px;
+  padding: 56px 40px;
   text-align: center;
-  padding: 52px 24px;
-  border: 1px solid var(--borde);
-  border-radius: 16px;
-  background: var(--gris-bg);
-  margin-bottom: 48px;
+  margin-bottom: 56px;
 }
-.demo-badge-wrap { margin-bottom: 20px; }
-.demo-badge {
+.demo-cta-main-inner { max-width: 540px; margin: 0 auto; }
+.demo-live-badge {
   display: inline-block;
-  background: #fff7ed;
-  border: 1px solid #fed7aa;
-  color: #c2410c;
+  background: rgba(255,255,255,.15);
+  border: 1px solid rgba(255,255,255,.3);
+  color: #fff;
   font-family: 'Montserrat', sans-serif;
   font-size: .55rem;
   font-weight: 700;
@@ -122,46 +138,81 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   text-transform: uppercase;
   padding: 5px 14px;
   border-radius: 20px;
+  margin-bottom: 20px;
 }
-.demo-titulo {
-  font-size: clamp(22px, 3vw, 36px);
+.demo-cta-main h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(24px, 3.5vw, 40px);
+  font-weight: 900;
   letter-spacing: 2px;
-  color: var(--gris-1);
-  line-height: 1.1;
+  color: #fff;
   margin-bottom: 16px;
 }
-.demo-titulo em { font-style: normal; color: var(--verde); }
-.demo-desc {
+.demo-cta-main p {
   font-size: 15px;
   font-weight: 300;
-  color: var(--gris-2);
+  color: rgba(255,255,255,.9);
   line-height: 1.8;
-  max-width: 600px;
-  margin: 0 auto 32px;
+  margin-bottom: 28px;
+}
+.demo-btn-main {
+  background: #fff !important;
+  color: var(--verde) !important;
+  font-size: 16px;
+  padding: 16px 36px;
+  display: inline-block;
+  margin-bottom: 16px;
+}
+.demo-btn-main:hover { opacity: .92; }
+.demo-note {
+  font-size: 12px !important;
+  color: rgba(255,255,255,.7) !important;
+  margin: 0 !important;
+}
+
+/* Features */
+.demo-features-section { margin-bottom: 56px; }
+.demo-features-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: .6rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--verde-dark);
+  text-transform: uppercase;
+  margin-bottom: 24px;
+  text-align: center;
 }
 .demo-features {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-  max-width: 680px;
-  margin: 0 auto;
-  text-align: left;
+  gap: 16px;
 }
 .df-item {
   display: flex;
-  align-items: center;
-  gap: 10px;
-  background: var(--blanco);
+  align-items: flex-start;
+  gap: 14px;
+  background: var(--gris-bg);
   border: 1px solid var(--borde);
-  border-radius: 8px;
-  padding: 12px 14px;
+  border-radius: 12px;
+  padding: 18px 16px;
+}
+.df-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 2px; }
+.df-item strong {
+  display: block;
+  font-family: 'Montserrat', sans-serif;
+  font-size: .78rem;
+  font-weight: 700;
+  color: var(--gris-1);
+  margin-bottom: 4px;
+}
+.df-item span {
   font-size: 13px;
   font-weight: 300;
-  color: var(--gris-1);
+  color: var(--gris-2);
+  line-height: 1.6;
 }
-.df-icon { font-size: 1.1rem; flex-shrink: 0; }
 
-/* CTA box */
+/* CTA box inferior */
 .demo-cta-box {
   background: var(--verde-light);
   border: 1px solid var(--verde-borde);
@@ -172,7 +223,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 .demo-cta-inner { max-width: 520px; margin: 0 auto; }
 .demo-cta-box h3 {
   font-family: 'Montserrat', sans-serif;
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   font-weight: 800;
   letter-spacing: 1.5px;
   text-transform: uppercase;
@@ -186,29 +237,16 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   line-height: 1.8;
   margin-bottom: 12px;
 }
-.demo-cta-nota {
-  font-size: 12px !important;
-  color: var(--gris-3) !important;
-  font-style: italic;
-  margin-bottom: 24px !important;
-}
-.demo-btn {
-  font-size: 15px;
-  padding: 14px 28px;
-  margin-bottom: 20px;
-}
-.demo-wa {
-  font-size: 13px !important;
-  color: var(--gris-3) !important;
-  margin: 0 !important;
-}
+.demo-btn { font-size: 15px; padding: 14px 28px; margin-bottom: 20px; display: inline-block; }
+.demo-wa { font-size: 13px !important; color: var(--gris-3) !important; margin: 0 !important; }
 .demo-wa a { color: var(--verde); font-weight: 500; }
 
-@media (max-width: 700px) {
+@media (max-width: 900px) {
   .demo-features { grid-template-columns: 1fr 1fr; }
-  .demo-cta-box  { padding: 32px 20px; }
 }
-@media (max-width: 480px) {
+@media (max-width: 600px) {
+  .demo-cta-main { padding: 40px 20px; }
   .demo-features { grid-template-columns: 1fr; }
+  .demo-cta-box { padding: 32px 20px; }
 }
 </style>
