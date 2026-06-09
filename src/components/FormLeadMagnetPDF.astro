@@ -1,0 +1,399 @@
+---
+/**
+ * FormLeadMagnetPDF — gate de descarga con validación real-time.
+ *
+ * Flujo:
+ *   1. Valida nombre + apellido + email + acepta en tiempo real → habilita botón
+ *   2. Submit → guarda lead en Supabase `leads`
+ *   3. Intenta obtener signed URL de Supabase Storage (bucket: lead-magnets)
+ *   4. Si storage ok  → dispara descarga automática del PDF
+ *   5. Si storage off → muestra mensaje de envío por email
+ *
+ * Storage setup (hacer una vez):
+ *   - Crear bucket privado `lead-magnets` en Supabase Storage
+ *   - Subir el PDF como `plantilla-recorrida.pdf`
+ *   - Sin RLS en storage (acceso vía signed URL desde service_role o anon con bucket privado)
+ *
+ * TODO integración email-marketing:
+ *   Cuando se grabe el lead, llamar a subscribeToList(lead) con el proveedor
+ *   elegido (Brevo, Mailchimp, etc.). El hook está en el `on('INSERT')` de Supabase
+ *   o en un Edge Function que escuche la tabla `leads` filtrando por lead_magnet.
+ */
+
+interface Props {
+  titulo?: string;
+  subtitulo?: string;
+  cta?: string;
+  leadMagnetKey?: string;
+}
+
+const {
+  titulo    = 'Descargá la plantilla profesional de recorrida',
+  subtitulo = 'Dejanos tus datos y descargá gratis la plantilla profesional de recorrida de seguridad.',
+  cta       = 'Descargar la plantilla (PDF)',
+  leadMagnetKey = 'plantilla-recorrida',
+} = Astro.props;
+---
+
+<div class="lm-wrap" data-lm-key={leadMagnetKey}>
+
+  <!-- Estado de éxito -->
+  <div class="lm-success" role="status" aria-live="polite" style="display:none">
+    <span class="lm-success-icon" aria-hidden="true">✅</span>
+    <p class="lm-success-msg">
+      Listo, tu descarga ya empezó. Si no, <a href="#" class="lm-dl-link">tocá acá</a>.
+    </p>
+  </div>
+
+  <!-- Formulario -->
+  <form class="lm-form" novalidate aria-label="Formulario de descarga de plantilla">
+    <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
+
+    <h3 class="lm-titulo">{titulo}</h3>
+    <p  class="lm-sub">{subtitulo}</p>
+
+    <!-- Nombre + Apellido -->
+    <div class="lm-row-2">
+      <div class="lm-field">
+        <label for="lm-nombre" class="sr-only">Nombre</label>
+        <input
+          id="lm-nombre"
+          type="text"
+          name="nombre"
+          required
+          autocomplete="given-name"
+          placeholder="Nombre *"
+        />
+      </div>
+      <div class="lm-field">
+        <label for="lm-apellido" class="sr-only">Apellido</label>
+        <input
+          id="lm-apellido"
+          type="text"
+          name="apellido"
+          required
+          autocomplete="family-name"
+          placeholder="Apellido *"
+        />
+      </div>
+    </div>
+
+    <!-- Email -->
+    <div class="lm-field">
+      <label for="lm-email" class="sr-only">Email</label>
+      <input
+        id="lm-email"
+        type="email"
+        name="email"
+        required
+        autocomplete="email"
+        placeholder="Email *"
+      />
+    </div>
+
+    <!-- Acepta -->
+    <label class="lm-terms">
+      <input type="checkbox" name="acepta" required />
+      <span>
+        Acepto recibir comunicaciones de Sigmetría y la
+        <a href="/politica-de-privacidad/" target="_blank" rel="noopener">política de privacidad</a>
+      </span>
+    </label>
+
+    <p class="lm-error" role="alert" aria-live="assertive" style="display:none">
+      Completá todos los campos para continuar.
+    </p>
+
+    <button
+      type="submit"
+      class="lm-btn"
+      disabled
+      aria-disabled="true"
+    >{cta}</button>
+  </form>
+</div>
+
+<style>
+.lm-wrap {
+  background: var(--verde-light);
+  border: 2px solid var(--verde-borde);
+  border-left: 4px solid var(--verde);
+  border-radius: 12px;
+  padding: 32px 36px;
+  max-width: 560px;
+}
+
+.lm-titulo {
+  font-family: 'Montserrat', sans-serif;
+  font-size: .95rem;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--gris-1);
+  margin-bottom: 8px;
+}
+
+.lm-sub {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--gris-2);
+  line-height: 1.65;
+  margin-bottom: 20px;
+}
+
+.lm-form { display: flex; flex-direction: column; gap: 12px; }
+
+.lm-row-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.lm-field input {
+  width: 100%;
+  background: var(--blanco);
+  border: 1px solid var(--borde);
+  border-radius: 6px;
+  padding: 11px 14px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--gris-1);
+  outline: none;
+  transition: border-color .2s;
+}
+.lm-field input:focus { border-color: var(--verde); }
+.lm-field input:focus-visible { outline: 2px solid var(--verde); outline-offset: 2px; }
+
+.lm-terms {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--gris-2);
+  cursor: pointer;
+  line-height: 1.6;
+}
+.lm-terms input[type="checkbox"] {
+  width: 15px;
+  height: 15px;
+  min-width: 15px;
+  margin-top: 2px;
+  accent-color: var(--verde);
+  cursor: pointer;
+}
+.lm-terms a { color: var(--verde-dark, #2E7D33); }
+
+.lm-error {
+  font-size: 12px;
+  color: var(--rojo);
+  font-weight: 400;
+}
+
+/* Botón */
+.lm-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 13px 28px;
+  background: #2E7D33;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: .82rem;
+  letter-spacing: .6px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background .2s, opacity .2s;
+  margin-top: 4px;
+}
+.lm-btn:not([disabled]):hover { background: #1B5E20; }
+.lm-btn:focus-visible { outline: 2px solid #2E7D33; outline-offset: 3px; }
+
+.lm-btn[disabled],
+.lm-btn[aria-disabled="true"] {
+  background: #B0BEC5;
+  color: #78909C;
+  cursor: not-allowed;
+  opacity: .75;
+}
+
+/* Éxito */
+.lm-success {
+  text-align: center;
+  padding: 16px 0 8px;
+}
+.lm-success-icon {
+  font-size: 2.2rem;
+  display: block;
+  margin-bottom: 12px;
+}
+.lm-success-msg {
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--gris-2);
+  line-height: 1.7;
+}
+.lm-success-msg a {
+  color: #2E7D33;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+/* Screen-reader only */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: 520px) {
+  .lm-wrap   { padding: 24px 20px; }
+  .lm-row-2  { grid-template-columns: 1fr; }
+}
+</style>
+
+<script>
+  import { createClient } from '@supabase/supabase-js';
+
+  const supabase = createClient(
+    import.meta.env.PUBLIC_SUPABASE_URL,
+    import.meta.env.PUBLIC_SUPABASE_KEY
+  );
+
+  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  const p = new URLSearchParams(window.location.search);
+  const utm = {
+    utm_source:   p.get('utm_source'),
+    utm_medium:   p.get('utm_medium'),
+    utm_campaign: p.get('utm_campaign'),
+    utm_content:  p.get('utm_content'),
+  };
+
+  document.querySelectorAll<HTMLElement>('.lm-wrap').forEach(wrap => {
+    const leadMagnetKey = wrap.dataset.lmKey ?? 'plantilla-recorrida';
+
+    const form       = wrap.querySelector<HTMLFormElement>('.lm-form')!;
+    const success    = wrap.querySelector<HTMLElement>('.lm-success')!;
+    const successMsg = wrap.querySelector<HTMLElement>('.lm-success-msg')!;
+    const errMsg     = wrap.querySelector<HTMLElement>('.lm-error')!;
+    const btn        = wrap.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+    const dlLink     = wrap.querySelector<HTMLAnchorElement>('.lm-dl-link')!;
+
+    const nombreInput   = form.querySelector<HTMLInputElement>('[name="nombre"]')!;
+    const apellidoInput = form.querySelector<HTMLInputElement>('[name="apellido"]')!;
+    const emailInput    = form.querySelector<HTMLInputElement>('[name="email"]')!;
+    const aceptaInput   = form.querySelector<HTMLInputElement>('[name="acepta"]')!;
+
+    function syncBtn() {
+      const valid =
+        nombreInput.value.trim().length > 0 &&
+        apellidoInput.value.trim().length > 0 &&
+        EMAIL_RE.test(emailInput.value.trim()) &&
+        aceptaInput.checked;
+      btn.disabled = !valid;
+      btn.setAttribute('aria-disabled', String(!valid));
+    }
+
+    [nombreInput, apellidoInput, emailInput].forEach(el =>
+      el.addEventListener('input', syncBtn)
+    );
+    aceptaInput.addEventListener('change', syncBtn);
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      // Bloqueo defensivo por si el submit llega con button deshabilitado (Enter, etc.)
+      if (btn.disabled) return;
+
+      // Honeypot
+      const gotcha = form.querySelector<HTMLInputElement>('[name="_gotcha"]');
+      if (gotcha?.value) return;
+
+      const nombre   = nombreInput.value.trim();
+      const apellido = apellidoInput.value.trim();
+      const email    = emailInput.value.trim();
+
+      if (!nombre || !apellido || !EMAIL_RE.test(email) || !aceptaInput.checked) {
+        errMsg.style.display = 'block';
+        return;
+      }
+      errMsg.style.display = 'none';
+
+      const origLabel = btn.textContent ?? '';
+      btn.textContent = 'Enviando…';
+      btn.disabled = true;
+      btn.setAttribute('aria-disabled', 'true');
+
+      // 1. Guardar lead en Supabase
+      const { error: saveError } = await supabase.from('leads').insert({
+        nombre:                `${nombre} ${apellido}`,
+        email,
+        fuente:                'web',
+        primer_canal:          'web',
+        canales_visitados:     ['web'],
+        pagina_origen:         window.location.href,
+        etapa_funnel:          'tofu',
+        lead_magnet:           leadMagnetKey,
+        acepta_condiciones_at: new Date().toISOString(),
+        ...Object.fromEntries(Object.entries(utm).filter(([, v]) => v)),
+      });
+
+      if (saveError) {
+        console.error('[lm] save error:', saveError.message);
+        btn.textContent = origLabel;
+        btn.disabled = false;
+        btn.setAttribute('aria-disabled', 'false');
+        errMsg.textContent = 'Hubo un error. Intentá de nuevo o escribinos por WhatsApp.';
+        errMsg.style.display = 'block';
+        return;
+      }
+
+      // 2. Obtener signed URL del PDF (Supabase Storage, bucket privado "lead-magnets")
+      let downloadUrl: string | null = null;
+      try {
+        const { data, error: storageErr } = await supabase
+          .storage
+          .from('lead-magnets')
+          .createSignedUrl('plantilla-recorrida.pdf', 300); // 5 minutos
+        if (!storageErr && data?.signedUrl) {
+          downloadUrl = data.signedUrl;
+        }
+      } catch (_) {
+        // Storage no configurado todavía — fallback a mensaje por email
+      }
+
+      // 3. Mostrar éxito
+      form.style.display = 'none';
+      success.style.display = 'block';
+
+      if (downloadUrl) {
+        dlLink.href = downloadUrl;
+        // Dispara la descarga automáticamente
+        const a = document.createElement('a');
+        a.href = downloadUrl;
+        a.download = 'Sigmetria-Plantilla-Recorrida.pdf';
+        a.style.display = 'none';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      } else {
+        // Fallback: el PDF se enviará por email
+        successMsg.innerHTML =
+          '¡Listo! Te enviamos la plantilla a tu email. Si no llega en 5 minutos, revisá spam.';
+      }
+    });
+  });
+</script>

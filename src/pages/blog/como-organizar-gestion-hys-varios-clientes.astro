@@ -1,0 +1,412 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FormLeadMagnetPDF from '../../components/FormLeadMagnetPDF.astro';
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Cómo organizar la gestión de Higiene y Seguridad con varios clientes",
+  "description": "Cómo organizar la gestión de Higiene y Seguridad con varios clientes: un método para ordenar tu cartera, vencimientos y recorridas sin vivir en Excel.",
+  "image": "https://sigmetriahys.com/og-blog-organizar-gestion-hys.svg",
+  "author": {
+    "@type": "Organization",
+    "name": "SIGMETRÍA HyS",
+    "url": "https://sigmetriahys.com"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "SIGMETRÍA HyS",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://sigmetriahys.com/logo-sigmetria.svg"
+    }
+  },
+  "datePublished": "2026-06-09",
+  "dateModified":  "2026-06-09",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://sigmetriahys.com/blog/como-organizar-gestion-hys-varios-clientes/"
+  },
+  "keywords": [
+    "cómo organizar la gestión de higiene y seguridad",
+    "gestión de higiene y seguridad con varios clientes",
+    "organizar cartera higiene y seguridad",
+    "plantilla recorrida de seguridad",
+    "control de vencimientos seguridad e higiene",
+    "seguimiento de observaciones de seguridad",
+    "consultor higiene y seguridad"
+  ]
+};
+---
+
+<BaseLayout
+  title="Cómo organizar la gestión de Higiene y Seguridad con varios clientes — SIGMETRÍA HyS"
+  description="Cómo organizar la gestión de Higiene y Seguridad con varios clientes: un método para ordenar tu cartera, vencimientos y recorridas sin vivir en Excel."
+  canonical="https://sigmetriahys.com/blog/como-organizar-gestion-hys-varios-clientes/"
+  ogImage="/og-blog-organizar-gestion-hys.svg"
+  schema={schema}
+>
+  <section class="page-hero">
+    <nav aria-label="Breadcrumb" class="breadcrumb">
+      <a href="/">Inicio</a><span>/</span>
+      <a href="/blog/">Blog</a><span>/</span>
+      <span>Organizar la gestión de HyS con varios clientes</span>
+    </nav>
+    <div class="page-hero-inner">
+      <div class="page-hero-badge">Consultor HyS · Metodología · Cartera</div>
+      <h1>CÓMO ORGANIZAR LA GESTIÓN DE HIGIENE Y SEGURIDAD<br><em>CUANDO TENÉS VARIOS CLIENTES</em></h1>
+      <p>
+        El consultor de HyS no tiene un problema de conocimiento técnico. Tiene un problema de organización.
+        Un método para ordenar toda tu cartera sin depender de la memoria ni de quince archivos abiertos al mismo tiempo.
+      </p>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="content-inner article-wrap">
+
+      <div class="article-meta">
+        <span class="art-cat">Metodología HyS</span>
+        <span class="art-sep">·</span>
+        <span class="art-fecha">9 jun 2026</span>
+        <span class="art-sep">·</span>
+        <span class="art-tiempo">3 min lectura</span>
+      </div>
+
+      <figure class="art-featured-img">
+        <img
+          src="https://images.pexels.com/photos/8961448/pexels-photo-8961448.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+          alt="Consultor de higiene y seguridad revisando documentación de varios clientes"
+          loading="eager"
+          width="1260"
+          height="630"
+        />
+      </figure>
+
+      <div class="article-body">
+
+        <p class="article-lead">
+          Te toca un cliente nuevo. Abrís una planilla, copiás la del cliente anterior, le cambiás el nombre y
+          empezás de cero otra vez. Multiplicá eso por ocho carteras y vas a entender por qué a fin de mes
+          no sabés qué vencimiento se te pasó ni en qué obra quedó abierta esa observación que viste hace
+          dos semanas.
+        </p>
+
+        <p>
+          El consultor de HyS no tiene un problema de conocimiento técnico. Tiene un problema de organización.
+          Sabés hacer la recorrida, armar la matriz de riesgos y redactar el informe. Lo que no escala es
+          sostener todo eso, para varias empresas a la vez, con planillas sueltas, documentos en Drive
+          y observaciones que viven en el WhatsApp.
+        </p>
+
+        <p>
+          Acá va un método para ordenar toda tu cartera sin depender de la memoria ni de quince archivos
+          abiertos al mismo tiempo.
+        </p>
+
+        <h2>Por qué el Excel deja de alcanzar al cuarto cliente</h2>
+
+        <p>
+          Una planilla por cliente funciona cuando tenés uno o dos. Con el tercero empezás a duplicar trabajo:
+          la misma estructura, los mismos campos, pegados una y otra vez. Con el cuarto perdés la vista de conjunto.
+        </p>
+
+        <p>
+          El Excel no te avisa nada. No te dice que mañana vence una capacitación, que un EPP quedó sin renovar
+          o que esa observación de la semana pasada sigue abierta. Sos vos el que tiene que acordarse de abrir
+          el archivo, mirar la fecha y reaccionar. Mientras tanto, cada cliente es un mundo aparte y cambiar
+          de uno a otro te cuesta minutos de buscar dónde dejaste qué.
+        </p>
+
+        <div class="art-destacado">
+          <strong>El problema no es Excel como herramienta.</strong> Es que la gestión de varias empresas pide
+          algo que una planilla no puede dar: estructura repetible, alertas automáticas y una sola vista de todo.
+        </div>
+
+        <h2>Pensá tu cartera en niveles, no en archivos</h2>
+
+        <p>
+          El primer cambio mental es dejar de pensar en "un archivo por cliente" y empezar a pensar en
+          niveles jerárquicos. Toda tu cartera entra en tres capas:
+        </p>
+
+        <ul class="art-list">
+          <li>
+            <strong>Empresa-cliente:</strong> cada una de las empresas que gestionás.
+          </li>
+          <li>
+            <strong>Establecimiento:</strong> cada planta, obra o sede de esa empresa.
+            Una constructora puede tener tres obras activas; cada una es un establecimiento distinto
+            con sus propios riesgos.
+          </li>
+          <li>
+            <strong>Gestión diaria:</strong> las recorridas, observaciones, vencimientos y documentación
+            que ocurren en cada establecimiento.
+          </li>
+        </ul>
+
+        <p>
+          Cuando ordenás así, dejás de tener quince planillas inconexas y pasás a tener una estructura que
+          se repite igual para todos. Cargás un cliente nuevo y ya sabés exactamente dónde va cada cosa.
+          La cabeza deja de ser el índice de tu cartera.
+        </p>
+
+        <h2>Estandarizá la recorrida de una vez</h2>
+
+        <p>
+          La recorrida es el corazón de tu trabajo y, casi siempre, el mayor agujero de tiempo. Salís a
+          la obra, anotás en un cuaderno o sacás fotos con el celular, y después te sentás horas a pasar
+          todo en limpio para armar el informe que el cliente espera.
+        </p>
+
+        <p>
+          Estandarizar la recorrida significa definir una sola vez qué observás, cómo lo clasificás
+          (por ejemplo: condición insegura, acto inseguro, hallazgo positivo) y cómo lo registrás.
+          Con un formato fijo dejás de improvisar en cada visita y el informe se vuelve un calco:
+          misma estructura, distinto contenido.
+        </p>
+
+        <p>Si querés arrancar hoy mismo, al final de esta nota te dejo una plantilla de recorrida lista para usar.</p>
+
+        <h2>No persigas vencimientos: que el sistema los persiga por vos</h2>
+
+        <p>
+          Los vencimientos son lo que más reputación te cuesta cuando se pasan. Documentación, capacitaciones
+          obligatorias, renovación de EPP, legajos técnicos. Cada cliente tiene los suyos y dependés de acordarte.
+        </p>
+
+        <p>
+          La regla es simple: lo que depende de tu memoria, tarde o temprano se te va a pasar. En vez de
+          revisar planillas a mano, cargá cada vencimiento una vez con su fecha y dejá que un sistema te
+          avise con anticipación. El
+          <a href="/blog/control-vencimientos-seguridad-higiene/" rel="noopener">control de vencimientos en seguridad e higiene</a>
+          deja de ser una tarea semanal de revisión y pasa a ser una alerta que aparece sola cuando hace falta.
+        </p>
+
+        <h2>Cerrá el círculo de las observaciones</h2>
+
+        <p>
+          Detectar una condición insegura es la mitad del trabajo. La otra mitad es seguirla hasta que se
+          corrige. Una observación que abrís y no cerrás no sirve de nada en una auditoría, y es lo primero
+          que un auditor te va a pedir documentado.
+        </p>
+
+        <p>
+          Cada observación debería tener un ciclo claro: se abre con foto y fecha, se le hace seguimiento
+          (qué se acordó, con quién), y se cierra con evidencia de que se corrigió. Si ese recorrido queda
+          registrado, tenés trazabilidad real: podés demostrar qué viste, qué pediste y cuándo se resolvió.
+          Eso es lo que transforma una recorrida en un sistema de mejora, no en una lista de quejas.
+        </p>
+
+        <h2>De método a herramienta</h2>
+
+        <p>
+          Todo esto lo podés armar con disciplina y planillas bien hechas. Funciona, pero te consume horas
+          y depende de que vos sostengas el orden todos los días.
+        </p>
+
+        <p>
+          El paso siguiente es que la estructura trabaje por vos. Sigmetría nació justo de este problema:
+          organiza tu cartera por niveles (empresa, establecimiento, gestión), te avisa los vencimientos
+          antes de que se pasen, y el reporte de recorrida sale solo. Cargás la observación desde el celular
+          en la obra o con un clic desde la PC, y el informe se arma automáticamente, listo para mandarle
+          al cliente. Y si querés, tu cliente accede a su propio dashboard sin costo extra.
+        </p>
+
+        <p>
+          No es magia ni reemplaza tu criterio técnico. Es el orden que ya sabés que necesitás, automatizado.
+          Si querés ver cómo funciona en la práctica,
+          <a href="/" rel="noopener">conocé la plataforma y probala un mes gratis</a>.
+        </p>
+
+        <!-- ——— GATE DE DESCARGA ——— -->
+        <h2>Empezá hoy con la plantilla de recorrida</h2>
+
+        <p>
+          Para que arranques a ordenarte sin esperar nada, preparé una <strong>plantilla profesional de
+          recorrida de seguridad</strong> en PDF A4 editable. La completás en obra, te sirve de base para
+          estandarizar tus visitas y es el primer paso del método que vimos acá.
+        </p>
+
+        <div class="art-cta">
+          <FormLeadMagnetPDF
+            titulo="Descargá la plantilla de recorrida gratis"
+            subtitulo="Dejanos tus datos y descargá gratis la plantilla profesional de recorrida de seguridad."
+            cta="Descargar la plantilla (PDF)"
+            leadMagnetKey="plantilla-recorrida"
+          />
+          <p style="margin-top:18px;font-size:13px;font-weight:300;color:var(--gris-3)">
+            ¿Preferís hablar directamente?
+            <a href="https://wa.me/5491123496789" target="_blank" rel="noopener" style="color:#2E7D33">Escribinos por WhatsApp →</a>
+          </p>
+        </div>
+
+      </div><!-- /article-body -->
+    </div><!-- /content-inner -->
+  </section>
+
+</BaseLayout>
+
+<style>
+/* ---- Hero interior ---- */
+.page-hero-inner {
+  max-width: 860px;
+  animation: fadeUp .6s ease both;
+}
+.page-hero-badge {
+  display: inline-block;
+  font-family: 'Montserrat', sans-serif;
+  font-size: .6rem;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: #2E7D33;
+  border: 1px solid rgba(46,125,51,.3);
+  border-radius: 100px;
+  padding: 5px 14px;
+  margin-bottom: 18px;
+}
+.page-hero h1 {
+  font-size: clamp(1.6rem, 4vw, 2.5rem);
+  line-height: 1.08;
+  margin-bottom: 18px;
+  color: var(--gris-1);
+}
+.page-hero h1 em {
+  font-style: normal;
+  color: #2E7D33;
+}
+.page-hero p {
+  font-size: clamp(.9rem, 1.5vw, 1.05rem);
+  font-weight: 300;
+  color: var(--gris-2);
+  max-width: 640px;
+  line-height: 1.75;
+}
+
+/* ---- Article wrap ---- */
+.article-wrap { max-width: 740px; margin: 0 auto; padding: 48px 24px 80px; }
+
+/* ---- Meta ---- */
+.article-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: .62rem;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--gris-3);
+  margin-bottom: 28px;
+}
+.art-cat   { color: #2E7D33; }
+.art-sep   { color: var(--gris-3); }
+
+/* ---- Featured image ---- */
+.art-featured-img {
+  margin: 0 0 36px;
+  border-radius: 10px;
+  overflow: hidden;
+  line-height: 0;
+}
+.art-featured-img img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  aspect-ratio: 16/8;
+}
+
+/* ---- Body typography ---- */
+.article-body { font-size: 1rem; line-height: 1.85; color: var(--gris-1); }
+
+.article-lead {
+  font-size: 1.1rem;
+  font-weight: 400;
+  line-height: 1.75;
+  color: var(--gris-2);
+  border-left: 3px solid #2E7D33;
+  padding-left: 20px;
+  margin-bottom: 28px;
+}
+
+.article-body h2 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--gris-1);
+  margin: 44px 0 16px;
+  line-height: 1.25;
+}
+
+.article-body p {
+  margin-bottom: 18px;
+  font-weight: 300;
+}
+
+.article-body a {
+  color: #2E7D33;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.article-body a:hover { color: #1B5E20; }
+
+/* ---- Lista ---- */
+.art-list {
+  margin: 0 0 24px 0;
+  padding-left: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.art-list li {
+  padding-left: 22px;
+  position: relative;
+  font-weight: 300;
+  line-height: 1.75;
+}
+.art-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 7px;
+  height: 7px;
+  background: #2E7D33;
+  border-radius: 50%;
+}
+
+/* ---- Destacado ---- */
+.art-destacado {
+  background: var(--verde-light);
+  border-left: 4px solid #2E7D33;
+  border-radius: 0 8px 8px 0;
+  padding: 16px 20px;
+  font-size: .95rem;
+  font-weight: 300;
+  color: var(--gris-2);
+  margin: 24px 0;
+  line-height: 1.7;
+}
+.art-destacado strong { color: var(--gris-1); font-weight: 700; }
+
+/* ---- CTA block ---- */
+.art-cta {
+  background: var(--gris-bg);
+  border: 1px solid var(--borde);
+  border-radius: 12px;
+  padding: 32px;
+  margin-top: 48px;
+}
+
+/* ---- Content section ---- */
+.content-section { background: var(--blanco); }
+.content-inner    { width: 100%; }
+
+@media (max-width: 600px) {
+  .article-wrap { padding: 32px 16px 60px; }
+  .art-cta      { padding: 22px 18px; }
+  .page-hero    { padding: 105px 20px 48px; }
+}
+</style>

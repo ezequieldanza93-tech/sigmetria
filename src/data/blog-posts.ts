@@ -519,6 +519,17 @@ export const blogPosts: BlogPost[] = [
     sectores: ['Construcción', 'Empresas Industriales'],
   },
   {
+    slug: 'como-organizar-gestion-hys-varios-clientes',
+    titulo: 'Cómo organizar la gestión de Higiene y Seguridad cuando tenés varios clientes',
+    metaDescription: 'Cómo organizar la gestión de Higiene y Seguridad con varios clientes: un método para ordenar tu cartera, vencimientos y recorridas sin vivir en Excel.',
+    fecha: '2026-06-09',
+    categoria: 'Plataforma HyS',
+    tiempoLectura: '3 min',
+    resumen: 'El consultor de HyS no tiene un problema de conocimiento técnico. Tiene un problema de organización. Un método para ordenar toda tu cartera sin depender de la memoria.',
+    tags: ['consultor HyS', 'organización', 'recorrida', 'vencimientos', 'gestión de cartera'],
+    sectores: ['Consultor HyS', 'Empresas Industriales', 'Construcción'],
+  },
+  {
     slug: 'excel-vs-software-gestion-hys',
     titulo: 'Excel o software de gestión HyS: cuándo conviene cada uno (sin medias tintas)',
     metaDescription: 'Comparativa honesta entre Excel y software de gestión HyS: cuándo conviene cada uno y cómo tomar la decisión correcta para tu empresa.',
