@@ -1,4 +1,6 @@
 ---
+import { FEATURES } from '../config/site';
+
 const currentPath = Astro.url.pathname;
 
 const serviceGroups = [
@@ -71,7 +73,8 @@ const blogGroups = [
 
   <div class="nav-right">
 
-    <!-- SERVICIOS — mega-menu 3 columnas -->
+    <!-- SERVICIOS — oculto detrás del flag FEATURES.servicios (reactivable sin tocar código) -->
+    {FEATURES.servicios && (
     <div class="nav-item nav-has-dropdown">
       <a
         href="/servicios/"
@@ -93,8 +96,7 @@ const blogGroups = [
         ))}
       </div>
     </div>
-
-    <a href="/nosotros/" class={`nav-link ${currentPath === '/nosotros/' ? 'active' : ''}`}>Nosotros</a>
+    )}
 
     <!-- PLATAFORMA — acceso directo a la demo -->
     <div class="nav-item nav-has-dropdown">
@@ -116,6 +118,8 @@ const blogGroups = [
         <a href="/contacto/?s=s4&funnel=demo-nav" class="nav-dropdown-link" role="menuitem">Solicitar presentación</a>
       </div>
     </div>
+
+    <a href="/precios/" class={`nav-link ${currentPath.startsWith('/precios') ? 'active' : ''}`}>Precios</a>
 
     <!-- BLOG H&S — dropdown agrupado por categoría S0 -->
     <div class="nav-item nav-has-dropdown">
@@ -143,7 +147,9 @@ const blogGroups = [
       </div>
     </div>
 
-    <a href="/contacto/" class="nav-cta">Consultanos</a>
+    <a href="/nosotros/" class={`nav-link ${currentPath === '/nosotros/' ? 'active' : ''}`}>Nosotros</a>
+
+    <a href="https://sigmetria-hys.vercel.app/" target="_blank" rel="noopener" class="nav-cta">Probá gratis</a>
   </div>
 
   <button class="nav-hamburger" id="nav-toggle" aria-label="Abrir menú" aria-expanded="false">
@@ -153,6 +159,7 @@ const blogGroups = [
 
 <!-- Mobile menu -->
 <div class="nav-mobile" id="nav-mobile" role="navigation" aria-label="Menú mobile">
+  {FEATURES.servicios && (
   <div class="nav-mobile-item">
     <button class="nav-mobile-toggle" id="mobile-servicios-toggle" aria-expanded="false">
       Servicios <span class="mobile-arrow">▾</span>
@@ -172,7 +179,7 @@ const blogGroups = [
       ))}
     </div>
   </div>
-  <a href="/nosotros/" class="nav-mobile-link nav-mobile-root">Nosotros</a>
+  )}
   <div class="nav-mobile-item">
     <button class="nav-mobile-toggle" id="mobile-plataforma-toggle" aria-expanded="false">
       Plataforma <span class="mobile-arrow">▾</span>
@@ -184,6 +191,7 @@ const blogGroups = [
       <a href="/contacto/?s=s4&funnel=demo-nav" class="nav-mobile-link">Solicitar presentación</a>
     </div>
   </div>
+  <a href="/precios/" class="nav-mobile-link nav-mobile-root">Precios</a>
   <div class="nav-mobile-item">
     <button class="nav-mobile-toggle" id="mobile-blog-toggle" aria-expanded="false">
       Blog H&S <span class="mobile-arrow">▾</span>
@@ -204,7 +212,8 @@ const blogGroups = [
       ))}
     </div>
   </div>
-  <a href="/contacto/" class="btn-primary" style="margin-top:8px;">Consultanos</a>
+  <a href="/nosotros/" class="nav-mobile-link nav-mobile-root">Nosotros</a>
+  <a href="https://sigmetria-hys.vercel.app/" target="_blank" rel="noopener" class="btn-primary" style="margin-top:8px;">Probá gratis</a>
 </div>
 
 <style>
