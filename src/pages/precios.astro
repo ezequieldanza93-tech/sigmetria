@@ -24,8 +24,8 @@ const features: FeatureGroup[] = [
   {
     group: 'Precio',
     rows: [
-      { label: 'Precio mensual (neto + IVA 21%)',    values: ['Gratis',    '$16.450',   '$21.250',  '$26.650', 'A consultar'] },
-      { label: 'Precio anual mensualizado (−20%)',   values: ['—',         '$13.160',   '$17.000',  '$21.320', 'A consultar'] },
+      { label: 'Precio mensual (neto + IVA 21%)',    values: ['Gratis',    '$20.000',   '$68.000',  '$114.000', 'A consultar'] },
+      { label: 'Precio anual mensualizado (−20%)',   values: ['—',         '$16.000',   '$54.400',  '$91.200',  'A consultar'] },
       { label: 'Período de prueba gratuita',          values: ['14 días',  '14 días',   '14 días',  '14 días', '14 días'] },
     ],
   },
@@ -55,7 +55,7 @@ const features: FeatureGroup[] = [
     rows: [
       { label: 'Múltiples usuarios / colaboradores',     values: [false, false, true,  true,  true] },
       { label: 'Roles y permisos diferenciados',         values: [false, false, true,  true,  true] },
-      { label: 'Add-on seat extra (+$15.000 neto/mes)',  values: [false, false, true,  true,  true] },
+      { label: 'Add-on seat extra (+$22.700 neto/mes)',  values: [false, false, true,  true,  true] },
     ],
   },
   {
@@ -72,11 +72,11 @@ const features: FeatureGroup[] = [
 ];
 
 const precios = [
-  { mensual: null,   anual_mes: null,   gratis: true,  empresa: false },
-  { mensual: 16450,  anual_mes: 13160,  gratis: false, empresa: false },
-  { mensual: 21250,  anual_mes: 17000,  gratis: false, empresa: false },
-  { mensual: 26650,  anual_mes: 21320,  gratis: false, empresa: false },
-  { mensual: null,   anual_mes: null,   gratis: false, empresa: true  },
+  { mensual: null,    anual_mes: null,   gratis: true,  empresa: false },
+  { mensual: 20000,   anual_mes: 16000,  gratis: false, empresa: false },
+  { mensual: 68000,   anual_mes: 54400,  gratis: false, empresa: false },
+  { mensual: 114000,  anual_mes: 91200,  gratis: false, empresa: false },
+  { mensual: null,    anual_mes: null,   gratis: false, empresa: true  },
 ];
 
 const destacado = [false, false, true, false, false];
