@@ -1,0 +1,462 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FormLeadMagnetPDF from '../../components/FormLeadMagnetPDF.astro';
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Cómo hacer una recorrida de seguridad que sirva (y no junte polvo)",
+  "description": "Cómo hacer una recorrida de seguridad que dispare acciones y no termine en un PDF que nadie lee: qué observar, cómo clasificar y cómo cerrar cada observación con foto, responsable y plazo.",
+  "image": "https://sigmetriahys.com/logo-sigmetria.svg",
+  "author": {
+    "@type": "Organization",
+    "name": "SIGMETRÍA HyS",
+    "url": "https://sigmetriahys.com"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "SIGMETRÍA HyS",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://sigmetriahys.com/logo-sigmetria.svg"
+    }
+  },
+  "datePublished": "2026-08-12",
+  "dateModified":  "2026-08-12",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://sigmetriahys.com/blog/como-hacer-recorrida-seguridad-que-sirva/"
+  },
+  "keywords": [
+    "cómo hacer una recorrida de seguridad",
+    "recorrida de seguridad e higiene",
+    "inspección de seguridad en obra",
+    "observaciones de seguridad",
+    "condición insegura acto inseguro",
+    "reporte de recorrida automático",
+    "plantilla recorrida de seguridad"
+  ]
+};
+---
+
+<BaseLayout
+  title="Cómo hacer una recorrida de seguridad que sirva (y no junte polvo) — SIGMETRÍA HyS"
+  description="Cómo hacer una recorrida de seguridad que dispare acciones y no termine en un PDF que nadie lee: qué observar, cómo clasificar y cómo cerrar cada observación con foto, responsable y plazo."
+  canonical="https://sigmetriahys.com/blog/como-hacer-recorrida-seguridad-que-sirva/"
+  schema={schema}
+>
+  <section class="page-hero">
+    <nav aria-label="Breadcrumb" class="breadcrumb">
+      <a href="/">Inicio</a><span>/</span>
+      <a href="/blog/">Blog</a><span>/</span>
+      <span>Recorrida de seguridad que sirva</span>
+    </nav>
+    <div class="page-hero-inner">
+      <div class="page-hero-badge">Plataforma HyS · Recorridas · Método</div>
+      <h1>CÓMO HACER UNA RECORRIDA DE SEGURIDAD QUE SIRVA<br><em>(Y NO JUNTE POLVO EN UN CAJÓN)</em></h1>
+      <p>
+        La diferencia entre una recorrida que cambia algo y una que termina en un PDF que nadie lee
+        no está en lo que observás. Está en lo que pasa después. Acá va el método para que cada
+        hallazgo dispare una acción con responsable, plazo y cierre.
+      </p>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="content-inner article-wrap">
+
+      <div class="article-meta">
+        <span class="art-cat">Plataforma HyS</span>
+        <span class="art-sep">·</span>
+        <span class="art-fecha">12 ago 2026</span>
+        <span class="art-sep">·</span>
+        <span class="art-tiempo">7 min lectura</span>
+      </div>
+
+      <figure class="art-featured-img">
+        <img
+          src="https://images.pexels.com/photos/8961065/pexels-photo-8961065.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+          alt="Técnico de higiene y seguridad haciendo una recorrida en obra con casco y tablet"
+          loading="eager"
+          width="1260"
+          height="630"
+        />
+      </figure>
+
+      <div class="article-body">
+
+        <p class="article-lead">
+          Caminás la planta dos horas. Anotás trece cosas en una libreta, sacás veinte fotos con
+          el celular. Llegás a la oficina, te sentás a pasar todo en limpio, armás un informe
+          prolijo de seis páginas y se lo mandás al cliente. El cliente lo abre, dice "qué bueno,
+          gracias", lo guarda en una carpeta… y a la semana siguiente la escalera sigue sin baranda.
+          ¿Te suena?
+        </p>
+
+        <p>
+          Acá está la verdad incómoda: una recorrida no se mide por lo prolijo que quedó el PDF.
+          Se mide por cuántas de esas trece observaciones terminaron corregidas. Y la mayoría de
+          las recorridas que se hacen en Argentina mueren exactamente ahí: en un archivo lindo que
+          documenta el problema pero no lo resuelve.
+        </p>
+
+        <p>
+          La buena noticia es que la diferencia entre la recorrida que junta polvo y la que mueve
+          la aguja no es talento ni más horas. Es <strong>método</strong>. Vamos a verlo.
+        </p>
+
+        <h2>El error de fondo: confundir "documentar" con "gestionar"</h2>
+
+        <p>
+          Documentar es dejar constancia de que algo pasó. Gestionar es hacer que ese algo se
+          resuelva. Son dos cosas distintas y la mayoría de los informes de recorrida se quedan
+          en la primera.
+        </p>
+
+        <p>
+          Un PDF que enumera quince hallazgos sin responsable, sin fecha límite y sin un mecanismo
+          que verifique el cierre es, técnicamente, una lista de quejas bien tipeada. Documenta que
+          viste el problema —lo cual te cubre a vos— pero no genera ninguna obligación de actuar.
+          Y un riesgo que se detecta pero no se corrige sigue siendo, exactamente, un riesgo.
+        </p>
+
+        <div class="art-destacado">
+          <strong>Regla de oro:</strong> cada observación que abrís es una promesa de que vas a
+          seguirla hasta el final. Si no pensás cerrarla, no la abras. Una observación abierta y
+          olvidada es peor que no haberla anotado: ante un accidente, demuestra que sabías y no actuaste.
+        </div>
+
+        <h2>Paso 1: definí QUÉ vas a observar antes de salir</h2>
+
+        <p>
+          El mayor enemigo de una recorrida útil es la improvisación. Si cada visita la encarás
+          "a ojo", vas a mirar lo que te llame la atención ese día y vas a pasar de largo lo que
+          se volvió invisible por costumbre. La barrera que falta hace tres meses ya no la ves:
+          tu cerebro la normalizó.
+        </p>
+
+        <p>
+          Por eso una recorrida que sirve arranca con un foco definido de antemano. No tenés que
+          inventarlo cada vez: armalo una sola vez por tipo de establecimiento y reutilizalo. Un
+          buen recorrido cubre, como mínimo:
+        </p>
+
+        <ul class="art-list">
+          <li><strong>Condiciones del lugar:</strong> orden y limpieza, vías de circulación, escaleras y barandas, señalización, estado de pisos.</li>
+          <li><strong>Instalaciones y equipos:</strong> tableros eléctricos, máquinas con sus protecciones, matafuegos vigentes y accesibles, instalaciones de gas.</li>
+          <li><strong>Riesgos de la tarea:</strong> trabajo en altura, espacios confinados, manipulación de cargas, exposición a agentes (ruido, químicos).</li>
+          <li><strong>EPP:</strong> que esté entregado, que esté en buen estado y, sobre todo, que se esté usando de verdad.</li>
+          <li><strong>El factor humano:</strong> cómo trabaja la gente, no solo cómo está el lugar. Acá entran los actos inseguros.</li>
+        </ul>
+
+        <p>
+          Esto es, en esencia, estandarizar la recorrida: definir un formato fijo de qué se mira
+          y cómo se registra. Si querés profundizar en cómo se conecta con el resto del trabajo,
+          lo desarrollamos en
+          <a href="/blog/como-organizar-gestion-hys-varios-clientes/" rel="noopener">cómo organizar la gestión de HyS con varios clientes</a>.
+        </p>
+
+        <h2>Paso 2: clasificá lo que ves (y no es un detalle menor)</h2>
+
+        <p>
+          Acá está la mitad técnica del asunto. No todo lo que observás es lo mismo, y meterlo todo
+          en la misma bolsa hace que la recorrida pierda valor. Hay tres tipos de hallazgo y conviene
+          separarlos siempre:
+        </p>
+
+        <ul class="art-list">
+          <li><strong>Condición insegura:</strong> algo del entorno físico que puede causar un accidente. Un cable pelado, una baranda faltante, un matafuego vencido, una salida de emergencia bloqueada. El problema está en la cosa, no en la persona.</li>
+          <li><strong>Acto inseguro:</strong> un comportamiento riesgoso de una persona. Trabajar en altura sin arnés, usar una amoladora sin la protección, levantar una carga con la espalda en vez de las piernas. El problema está en cómo se hace la tarea.</li>
+          <li><strong>Hallazgo positivo:</strong> algo que está bien hecho y conviene reconocer. Un sector impecable, un operario que corrige a un compañero, una mejora que el equipo implementó solo.</li>
+        </ul>
+
+        <p>
+          ¿Por qué importa tanto separarlos? Porque cada uno se corrige de forma distinta. Una
+          condición insegura se resuelve con una acción técnica o una compra. Un acto inseguro se
+          corrige con capacitación, supervisión o un cambio de procedimiento. Si los mezclás, no
+          sabés si tu cliente tiene un problema de inversión o un problema de cultura.
+        </p>
+
+        <div class="art-destacado">
+          No te olvides del <strong>hallazgo positivo</strong>. Una recorrida que solo señala lo
+          malo entrena a la gente a esconder cosas cuando aparecés. Una que también reconoce lo
+          bueno construye confianza —y la confianza es lo que hace que te cuenten el casi-accidente
+          que de otra forma jamás te enterarías.
+        </div>
+
+        <h2>Paso 3: cada hallazgo necesita cuatro datos, no negociables</h2>
+
+        <p>
+          Una observación sin estos cuatro elementos no es una observación gestionable, es una nota
+          al margen. Cada una tiene que llevar:
+        </p>
+
+        <ul class="art-list">
+          <li><strong>Foto:</strong> la evidencia. Una imagen vale más que tres párrafos describiendo el cable pelado. Y al cierre, otra foto que pruebe que se corrigió.</li>
+          <li><strong>Responsable:</strong> un nombre. No "mantenimiento", no "la empresa". Una persona concreta que se hace cargo. Sin dueño, no hay acción.</li>
+          <li><strong>Plazo de corrección:</strong> una fecha. "Lo antes posible" no es una fecha. La urgencia tiene que ser proporcional al riesgo: un riesgo grave se corrige hoy, no el mes que viene.</li>
+          <li><strong>Estado y cierre:</strong> abierto → en proceso → cerrado, con la evidencia final. Si no se cierra con prueba, sigue abierto. Punto.</li>
+        </ul>
+
+        <p>
+          Estos cuatro datos son lo que transforma la recorrida en un ciclo de mejora real. La
+          observación nace con foto y fecha, se le hace seguimiento (qué se acordó, con quién) y
+          muere recién cuando hay evidencia de que se resolvió. Eso es trazabilidad: podés demostrar
+          qué viste, qué pediste y cuándo se corrigió. Es exactamente lo primero que te va a pedir
+          un auditor —y lo que te respalda si alguna vez tenés que defender tu trabajo.
+        </p>
+
+        <h2>Paso 4: el seguimiento es el trabajo, no el extra</h2>
+
+        <p>
+          Acá es donde casi todas las recorridas se caen. Hiciste la visita, mandaste el informe…
+          y la próxima vez que pisás el establecimiento, ¿cómo sabés cuáles de las observaciones
+          anteriores siguen abiertas? Si la respuesta es "me fijo en el PDF de la vez pasada y
+          comparo a mano", ya perdiste.
+        </p>
+
+        <p>
+          El seguimiento no puede depender de tu memoria ni de revisar archivos viejos. Las
+          observaciones abiertas tienen que estar vivas: visibles, con su plazo corriendo, y
+          avisándote cuando una se vence sin cerrarse. Una recorrida que no arrastra el estado
+          de la anterior empieza de cero cada vez, y por eso los mismos problemas reaparecen mes
+          tras mes.
+        </p>
+
+        <p>
+          Esto vale doble si tenés varios clientes. La trazabilidad de las observaciones es prima
+          hermana del
+          <a href="/blog/excel-vs-software-gestion-hys/" rel="noopener">eterno debate entre Excel y un software de gestión</a>:
+          una planilla puede listar lo que viste, pero no te persigue los pendientes ni te avisa
+          cuando se vencen.
+        </p>
+
+        <h2>De la libreta al reporte: dónde se va el tiempo (y cómo recuperarlo)</h2>
+
+        <p>
+          Sumá el tiempo real de una recorrida típica: dos horas caminando y… dos, tres, a veces
+          cuatro horas más sentado pasando notas en limpio, ordenando fotos, maquetando el informe
+          y mandándolo. La parte que aporta valor —observar y decidir— es la primera. El resto es
+          transcripción. Es trabajo administrativo disfrazado de trabajo técnico.
+        </p>
+
+        <p>
+          Ese es justamente el cuello de botella que nos llevó a construir Sigmetría. La idea es
+          simple: que cargues la observación una sola vez, en el momento, y que el reporte se arme
+          solo. Concretamente, la plataforma:
+        </p>
+
+        <ul class="art-list">
+          <li>Registra cada observación con <strong>foto → responsable → plazo de corrección → seguimiento → cierre con foto</strong>, todo en un mismo flujo.</li>
+          <li>Genera el <strong>reporte de recorrida automático</strong>: terminás de cargar y el informe ya está listo para mandarle al cliente. Cero transcripción.</li>
+          <li>Controla los <strong>vencimientos con alertas</strong>, así las observaciones con plazo no se te pasan ni dependen de que te acuerdes.</li>
+          <li>Ordena todo por <strong>tres niveles</strong> —empresa-cliente, establecimiento y gestión— para que cada recorrida quede en su lugar y no se mezclen las carteras.</li>
+          <li>Y si querés, <strong>tu cliente ve su propio dashboard sin costo extra</strong>: entra y ve sus observaciones abiertas, vencidas y cerradas, sin tener que pedirte nada.</li>
+        </ul>
+
+        <p>
+          Seamos honestos en una cosa: la plataforma no reemplaza tu ojo técnico. La decisión de
+          qué es un riesgo, cómo clasificarlo y qué prioridad darle sigue siendo tuya, y siempre
+          lo va a ser. Lo que hacemos es sacarte de encima la transcripción y el seguimiento manual
+          para que el tiempo lo gastes en lo que sabés hacer. Si querés verlo funcionando,
+          <a href="/plataforma/" rel="noopener">conocé la plataforma</a>.
+        </p>
+
+        <!-- ——— GATE DE DESCARGA ——— -->
+        <h2>Llevate la plantilla de recorrida y arrancá hoy</h2>
+
+        <p>
+          Para que empieces a ordenar tus recorridas sin esperar nada, preparamos una
+          <strong>plantilla profesional de recorrida de seguridad</strong> en PDF A4 editable.
+          Ya viene con la estructura de este método: el foco de qué observar, la clasificación
+          en condición insegura / acto inseguro / hallazgo positivo, y los campos de foto,
+          responsable, plazo y estado de cierre.
+        </p>
+
+        <p>
+          La completás en obra desde el primer día y te sirve de base para estandarizar todas tus
+          visitas. Es el paso cero del método que vimos acá.
+        </p>
+
+        <div class="art-cta">
+          <FormLeadMagnetPDF
+            titulo="Descargá la plantilla de recorrida gratis"
+            subtitulo="Dejanos tus datos y descargá gratis la plantilla profesional de recorrida de seguridad."
+            cta="Descargar la plantilla (PDF)"
+            leadMagnetKey="plantilla-recorrida"
+          />
+          <p style="margin-top:18px;font-size:13px;font-weight:300;color:var(--gris-3)">
+            ¿Preferís hablar directamente?
+            <a href="https://wa.me/5491123496789" target="_blank" rel="noopener" style="color:#2E7D33">Escribinos por WhatsApp →</a>
+          </p>
+        </div>
+
+      </div><!-- /article-body -->
+    </div><!-- /content-inner -->
+  </section>
+
+</BaseLayout>
+
+<style>
+/* ---- Hero interior ---- */
+.page-hero-inner {
+  max-width: 860px;
+  animation: fadeUp .6s ease both;
+}
+.page-hero-badge {
+  display: inline-block;
+  font-family: 'Montserrat', sans-serif;
+  font-size: .6rem;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: #2E7D33;
+  border: 1px solid rgba(46,125,51,.3);
+  border-radius: 100px;
+  padding: 5px 14px;
+  margin-bottom: 18px;
+}
+.page-hero h1 {
+  font-size: clamp(1.6rem, 4vw, 2.5rem);
+  line-height: 1.08;
+  margin-bottom: 18px;
+  color: var(--gris-1);
+}
+.page-hero h1 em {
+  font-style: normal;
+  color: #2E7D33;
+}
+.page-hero p {
+  font-size: clamp(.9rem, 1.5vw, 1.05rem);
+  font-weight: 300;
+  color: var(--gris-2);
+  max-width: 640px;
+  line-height: 1.75;
+}
+
+/* ---- Article wrap ---- */
+.article-wrap { max-width: 740px; margin: 0 auto; padding: 48px 24px 80px; }
+
+/* ---- Meta ---- */
+.article-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: .62rem;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--gris-3);
+  margin-bottom: 28px;
+}
+.art-cat   { color: #2E7D33; }
+.art-sep   { color: var(--gris-3); }
+
+/* ---- Featured image ---- */
+.art-featured-img {
+  margin: 0 0 36px;
+  border-radius: 10px;
+  overflow: hidden;
+  line-height: 0;
+}
+.art-featured-img img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  aspect-ratio: 16/8;
+}
+
+/* ---- Body typography ---- */
+.article-body { font-size: 1rem; line-height: 1.85; color: var(--gris-1); }
+
+.article-lead {
+  font-size: 1.1rem;
+  font-weight: 400;
+  line-height: 1.75;
+  color: var(--gris-2);
+  border-left: 3px solid #2E7D33;
+  padding-left: 20px;
+  margin-bottom: 28px;
+}
+
+.article-body h2 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--gris-1);
+  margin: 44px 0 16px;
+  line-height: 1.25;
+}
+
+.article-body p {
+  margin-bottom: 18px;
+  font-weight: 300;
+}
+
+.article-body a {
+  color: #2E7D33;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.article-body a:hover { color: #1B5E20; }
+
+/* ---- Lista ---- */
+.art-list {
+  margin: 0 0 24px 0;
+  padding-left: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.art-list li {
+  padding-left: 22px;
+  position: relative;
+  font-weight: 300;
+  line-height: 1.75;
+}
+.art-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 7px;
+  height: 7px;
+  background: #2E7D33;
+  border-radius: 50%;
+}
+
+/* ---- Destacado ---- */
+.art-destacado {
+  background: var(--verde-light);
+  border-left: 4px solid #2E7D33;
+  border-radius: 0 8px 8px 0;
+  padding: 16px 20px;
+  font-size: .95rem;
+  font-weight: 300;
+  color: var(--gris-2);
+  margin: 24px 0;
+  line-height: 1.7;
+}
+.art-destacado strong { color: var(--gris-1); font-weight: 700; }
+
+/* ---- CTA block ---- */
+.art-cta {
+  background: var(--gris-bg);
+  border: 1px solid var(--borde);
+  border-radius: 12px;
+  padding: 32px;
+  margin-top: 48px;
+}
+
+/* ---- Content section ---- */
+.content-section { background: var(--blanco); }
+.content-inner    { width: 100%; }
+
+@media (max-width: 600px) {
+  .article-wrap { padding: 32px 16px 60px; }
+  .art-cta      { padding: 22px 18px; }
+  .page-hero    { padding: 105px 20px 48px; }
+}
+</style>

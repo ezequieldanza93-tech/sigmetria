@@ -1,0 +1,494 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FormLeadMagnetPDF from '../../components/FormLeadMagnetPDF.astro';
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Requisitos de la ISO 45001: el checklist completo explicado sin sufrir",
+  "description": "Recorremos las 10 cláusulas de ISO 45001 con ejemplos reales y te decimos qué documento pide cada una. Checklist descargable incluido.",
+  "image": "https://sigmetriahys.com/logo-sigmetria.svg",
+  "author": {
+    "@type": "Organization",
+    "name": "SIGMETRÍA HyS",
+    "url": "https://sigmetriahys.com"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "SIGMETRÍA HyS",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://sigmetriahys.com/logo-sigmetria.svg"
+    }
+  },
+  "datePublished": "2026-10-14",
+  "dateModified":  "2026-10-14",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://sigmetriahys.com/blog/requisitos-iso-45001-checklist-completo/"
+  },
+  "keywords": [
+    "requisitos iso 45001",
+    "checklist iso 45001",
+    "cláusulas iso 45001",
+    "documentos iso 45001",
+    "qué pide iso 45001",
+    "requisitos documentados iso 45001",
+    "ISO 45001 explicada"
+  ]
+};
+---
+
+<BaseLayout
+  title="Requisitos de la ISO 45001: el checklist completo explicado sin sufrir — SIGMETRÍA HyS"
+  description="Recorremos las 10 cláusulas de ISO 45001 con ejemplos reales y te decimos qué documento pide cada una. Checklist descargable incluido."
+  canonical="https://sigmetriahys.com/blog/requisitos-iso-45001-checklist-completo/"
+  schema={schema}
+>
+  <section class="page-hero">
+    <nav aria-label="Breadcrumb" class="breadcrumb">
+      <a href="/">Inicio</a><span>/</span>
+      <a href="/blog/">Blog</a><span>/</span>
+      <span>Requisitos de ISO 45001: el checklist completo</span>
+    </nav>
+    <div class="page-hero-inner">
+      <div class="page-hero-badge">ISO 45001 · Requisitos · Checklist</div>
+      <h1>REQUISITOS DE LA ISO 45001<br><em>EL CHECKLIST COMPLETO SIN SUFRIR</em></h1>
+      <p>
+        Las 10 cláusulas de la norma, traducidas del "idioma auditor" al castellano de todos los días.
+        Qué pide cada una, con qué ejemplo, y qué documento te van a exigir. Spoiler: es menos terrible
+        de lo que te contaron.
+      </p>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="content-inner article-wrap">
+
+      <div class="article-meta">
+        <span class="art-cat">ISO 45001</span>
+        <span class="art-sep">·</span>
+        <span class="art-fecha">14 oct 2026</span>
+        <span class="art-sep">·</span>
+        <span class="art-tiempo">7 min lectura</span>
+      </div>
+
+      <figure class="art-featured-img">
+        <img
+          src="https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+          alt="Equipo de trabajo revisando una lista de verificación de requisitos de ISO 45001 sobre la mesa"
+          loading="eager"
+          width="1260"
+          height="630"
+        />
+      </figure>
+
+      <div class="article-body">
+
+        <p class="article-lead">
+          Abriste la norma. Página dos, y ya leíste "establecer, implementar, mantener y mejorar
+          continuamente un sistema de gestión de la SST, incluidos los procesos necesarios y sus
+          interacciones". La cerraste. Te serviste un café. Y pensaste: "esto lo entiende un robot".
+          Tranqui. Ese párrafo lo escribió un comité para que sirva igual en una panadería de Lanús
+          que en una refinería de Texas. Por eso suena a manual de lavarropas. Pero atrás de cada
+          frase hay algo concretísimo que te van a pedir.
+        </p>
+
+        <p>
+          La ISO 45001:2018 tiene 10 cláusulas. Las primeras 3 son introducción (alcance, referencias,
+          definiciones) y no te piden hacer nada. Las que importan, las que el auditor va a venir a
+          revisar carpeta por carpeta, son de la 4 a la 10. Siete cláusulas. Y todas siguen una lógica
+          que ya conocés sin saberlo: <strong>Planificar, Hacer, Verificar, Actuar</strong> — el famoso
+          ciclo PDCA. Pensalo como cocinar: primero planeás el menú, después cocinás, después probás si
+          quedó rico, y la próxima ajustás la sal.
+        </p>
+
+        <p>
+          Acá va el recorrido cláusula por cláusula. Sin chamuyo, con ejemplos reales y con la pregunta
+          que de verdad te interesa: <strong>¿qué documento me van a pedir?</strong>
+        </p>
+
+        <div class="art-destacado">
+          <strong>Antes de empezar, una verdad incómoda:</strong> la ISO 45001 no exige una montaña de
+          papeles. Exige un puñado de documentos que estén vivos, que alguien use y actualice. Una carpeta
+          hermosa que nadie tocó desde la última auditoría no cumple nada. El auditor lo huele a tres metros.
+        </p>
+
+        <h2>Cláusula 4: contexto — o sea, "decime quién sos y a quién le importás"</h2>
+
+        <p>
+          Antes de prometer que vas a cuidar a tu gente, la norma quiere que entiendas dónde estás parado.
+          ¿Sos una metalúrgica con prensas o una oficina de seguros? ¿Tenés sindicato? ¿Trabajás en CABA,
+          donde te aplica la Ley 5920, o en una obra donde manda el Dec. 911/96? Eso es "el contexto".
+        </p>
+
+        <p>
+          También te pide listar a tus <em>partes interesadas</em>: una forma elegante de decir "¿a quién
+          le mueve un pelo tu seguridad?". Trabajadores, la ART, la SRT, los clientes que te piden el
+          certificado para dejarte entrar a su planta, hasta el vecino de al lado si manejás químicos.
+        </p>
+
+        <ul class="art-list">
+          <li><strong>Lo que tenés que entregar:</strong> un análisis de contexto (interno y externo) y una matriz de partes interesadas con sus necesidades.</li>
+          <li><strong>Lo que define acá mismo:</strong> el <em>alcance</em> del sistema — qué procesos, plantas y trabajadores entran. Esto se documenta y tiene que estar disponible.</li>
+        </ul>
+
+        <h2>Cláusula 5: liderazgo — el dueño no puede mirar de afuera</h2>
+
+        <p>
+          Esta es la que más le pega a las PyMEs argentinas, y la voy a decir derecho: <strong>el jefe no
+          puede tercerizar el compromiso</strong>. La norma cambió el juego respecto a la vieja OHSAS 18001.
+          Ya no alcanza con que el gerente firme la política de seguridad y se vuelva a su escritorio.
+        </p>
+
+        <p>
+          El auditor va a buscar evidencia de que la dirección <em>se ensucia las manos</em>. Que conoce
+          los números del sistema, que aparece en el comité de seguridad y escucha, que asigna plata y
+          gente. ¿Ejemplo concreto que descalifica? El acta del comité donde la gerencia mandó a "Fulano"
+          y después le ignoró las tres propuestas. Eso no es liderazgo, es trámite.
+        </p>
+
+        <ul class="art-list">
+          <li><strong>Documento estrella:</strong> la Política de SST firmada, comunicada y entendida (no solo colgada en un pasillo).</li>
+          <li><strong>Lo que también revisan:</strong> roles y responsabilidades definidos, y evidencia de la consulta y participación de los trabajadores.</li>
+        </ul>
+
+        <h2>Cláusula 6: planificación — acá vive el corazón técnico</h2>
+
+        <p>
+          Si tuvieras que salvar una sola cláusula de un incendio, salvá esta. La 6 es donde la ISO 45001
+          se diferencia de cualquier otra norma de gestión. Te pide identificar TODOS los peligros, evaluar
+          los riesgos y definir controles siguiendo la <strong>jerarquía de controles</strong>: primero
+          eliminar el peligro, después sustituirlo, después controles de ingeniería, después administrativos
+          y, recién al final, el EPP.
+        </p>
+
+        <p>
+          Ojo con esto último, porque es el error clásico: muchos arrancan por el casco y los guantes. La
+          norma dice al revés. El EPP es el último recurso. ¿No se puede sacar la prensa peligrosa? Ponele
+          una guarda. ¿Tampoco? Procedimiento. ¿Tampoco? Ahí sí, EPP.
+        </p>
+
+        <p>
+          El documento que sale de todo esto es la <strong>matriz de riesgos</strong> (IPER / IPERC), y es
+          lo primero que cualquier auditor abre. Para armarla bien y que no te la objeten, mirá
+          <a href="/blog/matriz-de-riesgos-iso-45001-como-armarla/" rel="noopener">cómo armar la matriz de riesgos de ISO 45001 sin los errores que la invalidan</a>.
+        </p>
+
+        <ul class="art-list">
+          <li><strong>Documentos clave:</strong> la matriz de identificación de peligros y evaluación de riesgos, y el listado de requisitos legales aplicables (tu Ley 19.587, decretos, resoluciones SRT).</li>
+          <li><strong>El cierre lógico:</strong> objetivos de SST medibles, con responsable y fecha. "Reducir accidentes" no es un objetivo; "bajar el índice de frecuencia un 15% en 12 meses" sí lo es.</li>
+        </ul>
+
+        <h2>Cláusula 7: apoyo — los recursos, la gente capacitada y los papeles</h2>
+
+        <p>
+          La cláusula 7 es la caja de herramientas del sistema. Junta cuatro cosas que parecen sueltas pero
+          van de la mano: recursos, competencia, comunicación e información documentada.
+        </p>
+
+        <p>
+          En criollo: que tengas la plata y los equipos, que tu gente esté capacitada para la tarea que
+          hace (y que lo puedas demostrar con registros), que la información de seguridad circule en las
+          dos direcciones, y que controles tus documentos — versiones, fechas, quién los aprobó. El plan
+          anual de capacitaciones vive justo acá. Si todavía no tenés uno armado en serio, te conviene leer
+          <a href="/blog/plan-anual-capacitaciones-higiene-seguridad/" rel="noopener">cómo estructurar el plan anual de capacitaciones y qué documentación conservar</a>.
+        </p>
+
+        <ul class="art-list">
+          <li><strong>Documentos que piden:</strong> registros de capacitación firmados, matriz de competencias por puesto, y un procedimiento de control de la información documentada.</li>
+          <li><strong>Detalle que falla seguido:</strong> capacitaciones dadas pero sin registro firmado. Si no quedó por escrito, para la auditoría no pasó.</li>
+        </ul>
+
+        <h2>Cláusula 8: operación — donde la norma se baja a la cancha</h2>
+
+        <p>
+          Todo lo anterior fue planear. La cláusula 8 es <em>hacer</em>. Acá entran los procedimientos de
+          trabajo seguro, la gestión de cambios (¿comprás una máquina nueva?, ¿abrís un sector?, ¿qué
+          riesgos nuevos trae?), el control de los contratistas y la preparación ante emergencias.
+        </p>
+
+        <p>
+          La parte de emergencias es la que más se descuida y la más visible: el plan de evacuación, las
+          brigadas, los simulacros. Y atención con los contratistas, que en la industria y la construcción
+          argentina es donde más se cae el sistema: el riesgo del tercero que entra a tu planta también es
+          tu responsabilidad.
+        </p>
+
+        <ul class="art-list">
+          <li><strong>Documentos:</strong> procedimientos operativos, registros de gestión del cambio, plan de respuesta a emergencias e informes de simulacro.</li>
+          <li><strong>Evidencia que buscan:</strong> que los controles definidos en la cláusula 6 efectivamente se aplican en el día a día. No alcanza con tenerlos en papel.</li>
+        </ul>
+
+        <h2>Cláusula 9: evaluación del desempeño — "probá si lo que hacés sirve"</h2>
+
+        <p>
+          Llegamos al "Verificar" del PDCA. La cláusula 9 te pide medir: ¿funciona tu sistema o te estás
+          mintiendo? Tres patas la sostienen: el seguimiento y medición (tus indicadores), la auditoría
+          interna y la revisión por la dirección.
+        </p>
+
+        <p>
+          La auditoría interna es la práctica antes del examen: vos mismo te revisás antes de que venga el
+          de afuera. Y la revisión por la dirección es la reunión, al menos una vez al año, donde la gerencia
+          se sienta a mirar los números y decide qué cambiar. Sí, la misma dirección de la cláusula 5.
+          Por eso te decía que el jefe no puede mirar de afuera: la norma lo ata por todos lados.
+        </p>
+
+        <ul class="art-list">
+          <li><strong>Documentos:</strong> indicadores de desempeño, programa e informes de auditoría interna, y el acta de revisión por la dirección.</li>
+        </ul>
+
+        <h2>Cláusula 10: mejora — el sistema que no se estanca</h2>
+
+        <p>
+          La última cláusula es el "Actuar". Pasó un incidente, encontraste una no conformidad en la
+          auditoría, detectaste algo que se puede hacer mejor: la norma quiere que investigues la causa
+          raíz (no que tapes el agujero) y que tomes acciones para que no vuelva a pasar.
+        </p>
+
+        <p>
+          Acá la palabra clave es <em>mejora continua</em>. Un sistema ISO 45001 que el año dos está igual
+          que el año uno, en realidad no está funcionando. Y un detalle honesto: medir el costo real de lo
+          que pasa cuando NO mejorás es la mejor forma de convencer al directorio. Si necesitás esa munición,
+          mirá <a href="/blog/costo-real-accidente-laboral-iceberg/" rel="noopener">el costo real de un accidente laboral y el iceberg que el directorio no ve</a>.
+        </p>
+
+        <ul class="art-list">
+          <li><strong>Documentos:</strong> registros de investigación de incidentes con análisis de causa raíz, y el registro de no conformidades y acciones correctivas.</li>
+        </ul>
+
+        <h2>La trampa de la que nadie te avisa: tener los documentos no es tenerlos vivos</h2>
+
+        <p>
+          Mirá la lista completa de arriba: análisis de contexto, política, matriz de riesgos, registros de
+          capacitación, procedimientos, simulacros, auditorías, acciones correctivas. No son tantos. El
+          problema nunca es <em>generarlos</em> una vez. El problema es <strong>mantenerlos vivos</strong>:
+          que la matriz se actualice cuando entra una máquina nueva, que la capacitación tenga su registro
+          firmado el mismo día, que la observación de la recorrida se cierre y quede la evidencia.
+        </p>
+
+        <p>
+          Y ahí es donde casi todos se caen. No por falta de conocimiento técnico — sabés perfectamente qué
+          pide cada cláusula — sino porque sostener todo eso a mano, en quince planillas y carpetas de Drive,
+          es una pesadilla que depende de tu memoria. ¿Te suena? Es exactamente el dolor del que hablamos en
+          <a href="/blog/excel-vs-software-gestion-hys/" rel="noopener">Excel o software de gestión HyS: cuándo conviene cada uno</a>.
+        </p>
+
+        <div class="art-destacado">
+          <strong>Seamos honestos:</strong> ninguna app del mundo te certifica la ISO 45001. Eso lo logra el
+          trabajo humano, tu criterio técnico y la auditora. Lo que SÍ podés hacer es dejar de pelear con el
+          orden. Una plataforma como Sigmetría organiza tu sistema por niveles (empresa → establecimiento →
+          gestión), te avisa los vencimientos antes de que se pasen, registra cada observación con foto,
+          responsable, plazo y cierre con evidencia, y arma el reporte de recorrida solo. La carpeta deja de
+          depender de tu memoria.
+        </div>
+
+        <h2>El recorrido completo, en una frase</h2>
+
+        <p>
+          La 4 te ubica, la 5 compromete al jefe, la 6 identifica los riesgos, la 7 te da las herramientas,
+          la 8 baja todo a la operación, la 9 mide si sirve y la 10 mejora lo que falla. Ese es el sistema
+          entero. Si querés profundizar cada capítulo con más ejemplos técnicos, tenés
+          <a href="/blog/requisitos-iso-45001-los-10-capitulos/" rel="noopener">los 10 capítulos de ISO 45001 explicados con ejemplos reales</a>;
+          y cuando ya quieras pasar a la acción, este es
+          <a href="/blog/como-certificar-iso-45001-roadmap-completo/" rel="noopener">el roadmap completo para certificar ISO 45001 en Argentina, paso a paso</a>.
+        </p>
+
+        <!-- ——— GATE DE DESCARGA ——— -->
+        <h2>Llevate el checklist completo de las 10 cláusulas</h2>
+
+        <p>
+          Para que no tengas que volver a esta nota cada vez que dudes, armamos un
+          <strong>checklist descargable de ISO 45001</strong> en PDF: cláusula por cláusula, qué exige cada
+          una y qué documento corresponde. Lo imprimís, lo usás para tu auto-diagnóstico antes de la auditoría
+          y vas tachando lo que ya tenés cubierto.
+        </p>
+
+        <p>
+          Es el mismo recorrido que viste acá, pero en formato para tildar y tener a mano. Dejanos tus datos
+          y es tuyo.
+        </p>
+
+        <div class="art-cta">
+          <FormLeadMagnetPDF
+            titulo="Descargá el checklist de ISO 45001 gratis"
+            subtitulo="El recorrido completo de las 10 cláusulas con el documento que pide cada una, en un PDF para tildar."
+            cta="Descargar el checklist (PDF)"
+            leadMagnetKey="checklist-iso-45001"
+          />
+          <p style="margin-top:18px;font-size:13px;font-weight:300;color:var(--gris-3)">
+            ¿Preferís ver cómo se gestiona todo esto sin vivir en planillas?
+            <a href="/plataforma/" rel="noopener" style="color:#2E7D33">Conocé la plataforma →</a>
+          </p>
+        </div>
+
+      </div><!-- /article-body -->
+    </div><!-- /content-inner -->
+  </section>
+
+</BaseLayout>
+
+<style>
+/* ---- Hero interior ---- */
+.page-hero-inner {
+  max-width: 860px;
+  animation: fadeUp .6s ease both;
+}
+.page-hero-badge {
+  display: inline-block;
+  font-family: 'Montserrat', sans-serif;
+  font-size: .6rem;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: #2E7D33;
+  border: 1px solid rgba(46,125,51,.3);
+  border-radius: 100px;
+  padding: 5px 14px;
+  margin-bottom: 18px;
+}
+.page-hero h1 {
+  font-size: clamp(1.6rem, 4vw, 2.5rem);
+  line-height: 1.08;
+  margin-bottom: 18px;
+  color: var(--gris-1);
+}
+.page-hero h1 em {
+  font-style: normal;
+  color: #2E7D33;
+}
+.page-hero p {
+  font-size: clamp(.9rem, 1.5vw, 1.05rem);
+  font-weight: 300;
+  color: var(--gris-2);
+  max-width: 640px;
+  line-height: 1.75;
+}
+
+/* ---- Article wrap ---- */
+.article-wrap { max-width: 740px; margin: 0 auto; padding: 48px 24px 80px; }
+
+/* ---- Meta ---- */
+.article-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: .62rem;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--gris-3);
+  margin-bottom: 28px;
+}
+.art-cat   { color: #2E7D33; }
+.art-sep   { color: var(--gris-3); }
+
+/* ---- Featured image ---- */
+.art-featured-img {
+  margin: 0 0 36px;
+  border-radius: 10px;
+  overflow: hidden;
+  line-height: 0;
+}
+.art-featured-img img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  aspect-ratio: 16/8;
+}
+
+/* ---- Body typography ---- */
+.article-body { font-size: 1rem; line-height: 1.85; color: var(--gris-1); }
+
+.article-lead {
+  font-size: 1.1rem;
+  font-weight: 400;
+  line-height: 1.75;
+  color: var(--gris-2);
+  border-left: 3px solid #2E7D33;
+  padding-left: 20px;
+  margin-bottom: 28px;
+}
+
+.article-body h2 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--gris-1);
+  margin: 44px 0 16px;
+  line-height: 1.25;
+}
+
+.article-body p {
+  margin-bottom: 18px;
+  font-weight: 300;
+}
+
+.article-body a {
+  color: #2E7D33;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.article-body a:hover { color: #1B5E20; }
+
+/* ---- Lista ---- */
+.art-list {
+  margin: 0 0 24px 0;
+  padding-left: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.art-list li {
+  padding-left: 22px;
+  position: relative;
+  font-weight: 300;
+  line-height: 1.75;
+}
+.art-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 7px;
+  height: 7px;
+  background: #2E7D33;
+  border-radius: 50%;
+}
+
+/* ---- Destacado ---- */
+.art-destacado {
+  background: var(--verde-light);
+  border-left: 4px solid #2E7D33;
+  border-radius: 0 8px 8px 0;
+  padding: 16px 20px;
+  font-size: .95rem;
+  font-weight: 300;
+  color: var(--gris-2);
+  margin: 24px 0;
+  line-height: 1.7;
+}
+.art-destacado strong { color: var(--gris-1); font-weight: 700; }
+
+/* ---- CTA block ---- */
+.art-cta {
+  background: var(--gris-bg);
+  border: 1px solid var(--borde);
+  border-radius: 12px;
+  padding: 32px;
+  margin-top: 48px;
+}
+
+/* ---- Content section ---- */
+.content-section { background: var(--blanco); }
+.content-inner    { width: 100%; }
+
+@media (max-width: 600px) {
+  .article-wrap { padding: 32px 16px 60px; }
+  .art-cta      { padding: 22px 18px; }
+  .page-hero    { padding: 105px 20px 48px; }
+}
+</style>

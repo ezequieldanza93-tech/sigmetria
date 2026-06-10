@@ -1,0 +1,532 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Cómo sacarle el jugo a tu gestión de HyS digital (más allá de cargar datos)",
+  "description": "Cierre de año: de cargar datos a tomar decisiones. Cómo usar indicadores, cerrar el círculo de observaciones y planificar el año que viene ordenado con tu gestión de HyS digital.",
+  "image": "https://sigmetriahys.com/logo-sigmetria.svg",
+  "author": {
+    "@type": "Organization",
+    "name": "SIGMETRÍA HyS",
+    "url": "https://sigmetriahys.com"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "SIGMETRÍA HyS",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://sigmetriahys.com/logo-sigmetria.svg"
+    }
+  },
+  "datePublished": "2026-11-25",
+  "dateModified":  "2026-11-25",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://sigmetriahys.com/blog/sacarle-maximo-gestion-hys-digital/"
+  },
+  "keywords": [
+    "gestión de higiene y seguridad digital",
+    "software de gestión hys",
+    "indicadores de seguridad e higiene",
+    "seguimiento de observaciones de seguridad",
+    "control de vencimientos seguridad e higiene",
+    "cierre de año seguridad e higiene",
+    "planificación anual hys"
+  ]
+};
+---
+
+<BaseLayout
+  title="Cómo sacarle el jugo a tu gestión de HyS digital (más allá de cargar datos) — SIGMETRÍA HyS"
+  description="Cierre de año: de cargar datos a tomar decisiones. Cómo usar indicadores, cerrar el círculo de observaciones y planificar el año que viene ordenado con tu gestión de HyS digital."
+  canonical="https://sigmetriahys.com/blog/sacarle-maximo-gestion-hys-digital/"
+  schema={schema}
+>
+  <section class="page-hero">
+    <nav aria-label="Breadcrumb" class="breadcrumb">
+      <a href="/">Inicio</a><span>/</span>
+      <a href="/blog/">Blog</a><span>/</span>
+      <span>Sacarle el jugo a tu gestión de HyS digital</span>
+    </nav>
+    <div class="page-hero-inner">
+      <div class="page-hero-badge">Plataforma HyS · Cierre de año · Decisiones</div>
+      <h1>CARGAR DATOS NO ES GESTIONAR<br><em>ASÍ LE SACÁS EL JUGO A TU HYS DIGITAL</em></h1>
+      <p>
+        Tenés todo cargado: vencimientos, recorridas, observaciones, capacitaciones. Y sin embargo seguís
+        decidiendo de memoria. El cierre del año es el mejor momento para dar el salto de "tengo los datos"
+        a "decido con los datos". Te mostramos cómo.
+      </p>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="content-inner article-wrap">
+
+      <div class="article-meta">
+        <span class="art-cat">Plataforma HyS</span>
+        <span class="art-sep">·</span>
+        <span class="art-fecha">25 nov 2026</span>
+        <span class="art-sep">·</span>
+        <span class="art-tiempo">7 min lectura</span>
+      </div>
+
+      <figure class="art-featured-img">
+        <img
+          src="https://images.pexels.com/photos/3183153/pexels-photo-3183153.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+          alt="Equipo de higiene y seguridad analizando indicadores y datos de gestión en una pantalla para tomar decisiones"
+          loading="eager"
+          width="1260"
+          height="630"
+        />
+      </figure>
+
+      <div class="article-body">
+
+        <p class="article-lead">
+          Es 23 de diciembre. Cerrás la notebook, pensás "este año cargué TODO en el sistema" y te das una
+          palmadita en la espalda. Hiciste las recorridas, registraste las observaciones, subiste los
+          certificados. Y entonces el dueño te pregunta: "¿Estamos mejor o peor que el año pasado?". Y te
+          quedás mirando la pantalla con cara de pregunta de examen final que no estudiaste.
+        </p>
+
+        <p>
+          Acá está la verdad incómoda: <strong>cargar datos no es gestionar</strong>. Es la materia prima,
+          nada más. Es como tener la heladera llena y seguir pidiendo delivery porque no sabés cocinar.
+          Tenés el ingrediente más caro del mundo —información real de tu operación— y lo estás usando como
+          archivo muerto.
+        </p>
+
+        <p>
+          La buena noticia: el cierre de año es el momento perfecto para dar vuelta esto. No para sumar más
+          tareas, sino para que todo lo que ya cargaste empiece a trabajar para vos. Vamos paso a paso.
+        </p>
+
+        <h2>El síntoma: tenés un Excel digital carísimo</h2>
+
+        <p>
+          Mucha gente digitaliza su HyS y termina con lo mismo que tenía antes, pero en lindo. Antes era una
+          planilla; ahora es una pantalla con colores. El comportamiento no cambió: seguís reaccionando, no
+          anticipando. Seguís buscando información cuando alguien la pide, en vez de tenerla servida.
+        </p>
+
+        <p>
+          Si esto te suena, no es culpa tuya ni de la herramienta. Es que nadie te dijo que el software es
+          la mitad del trato. La otra mitad es el método. Si te interesa el debate de fondo, lo desarrollamos
+          en
+          <a href="/blog/excel-vs-software-gestion-hys/" rel="noopener">Excel vs. software de gestión de HyS</a>:
+          el problema nunca fue Excel, fue pedirle a una planilla que haga algo que una planilla no puede hacer.
+        </p>
+
+        <div class="art-destacado">
+          <strong>La diferencia entre datos y gestión es una sola palabra: decisión.</strong> Si lo que cargaste
+          no cambia lo que vas a hacer mañana, es solo un registro. Lindo, ordenado, pero inerte.
+        </div>
+
+        <h2>Paso 1: mirá indicadores, no eventos sueltos</h2>
+
+        <p>
+          Un evento suelto es "hoy detecté una condición insegura en el sector de carga". Un indicador es
+          "el 60% de mis observaciones del año son del sector de carga". ¿Ves la diferencia? El primero te
+          hace correr a apagar un incendio. El segundo te dice DÓNDE está el problema estructural.
+        </p>
+
+        <p>
+          No necesitás un tablero de la NASA. Con cuatro o cinco indicadores que mires todos los meses
+          alcanza para empezar a decidir con cabeza fría:
+        </p>
+
+        <ul class="art-list">
+          <li>
+            <strong>Observaciones abiertas vs. cerradas:</strong> si abrís muchas y cerrás pocas, no tenés
+            un sistema de mejora, tenés una lista de quejas que se acumula.
+          </li>
+          <li>
+            <strong>Tiempo promedio de cierre:</strong> ¿cuántos días pasan entre que detectás algo y se
+            corrige? Si ese número crece, algo se está trabando.
+          </li>
+          <li>
+            <strong>Vencimientos vencidos o por vencer:</strong> documentación, capacitaciones obligatorias,
+            renovación de EPP. El número que NO querés ver crecer.
+          </li>
+          <li>
+            <strong>Cumplimiento de capacitaciones:</strong> planificadas vs. ejecutadas. Te dice si tu
+            plan anual fue un plan o fue una expresión de deseo.
+          </li>
+          <li>
+            <strong>Concentración por establecimiento o sector:</strong> dónde se juntan los problemas. Ahí
+            va tu atención el año que viene.
+          </li>
+        </ul>
+
+        <p>
+          Cuáles indicadores mirar según tu realidad lo charlamos en
+          <a href="/blog/indicadores-seguridad-higiene-cuales-mirar/" rel="noopener">qué indicadores de seguridad e higiene conviene mirar</a>.
+          La regla de oro: pocos, claros y que te muevan a actuar. Un indicador que mirás y no hacés nada con
+          él es decoración.
+        </p>
+
+        <h2>Paso 2: cerrá el círculo de las observaciones (de verdad)</h2>
+
+        <p>
+          Acá es donde la mayoría se cae. Detectar una condición insegura es la mitad fácil. Lo difícil
+          —y lo que realmente importa— es seguirla hasta que se corrige y dejar constancia de que se corrigió.
+          Una observación que abrís y nunca cerrás no protege a nadie, y es lo primero que un auditor te va
+          a pedir documentado.
+        </p>
+
+        <p>
+          El círculo completo tiene cuatro momentos, y cada uno tiene que quedar registrado:
+        </p>
+
+        <ul class="art-list">
+          <li><strong>Detección:</strong> qué viste, dónde, con foto y fecha.</li>
+          <li><strong>Asignación:</strong> quién es el responsable de corregirlo y para cuándo.</li>
+          <li><strong>Seguimiento:</strong> qué se hizo, en qué quedó, sin que tengas que perseguir a nadie por WhatsApp.</li>
+          <li><strong>Cierre:</strong> evidencia de que se corrigió, con foto del antes y el después.</li>
+        </ul>
+
+        <p>
+          Cuando ese recorrido queda guardado, dejás de tener una recorrida y empezás a tener trazabilidad
+          real: podés demostrar qué viste, qué pediste y cuándo se resolvió. Eso es exactamente lo que
+          transforma una visita a planta en un sistema de mejora continua. Si querés afinar el músculo de
+          la recorrida en sí, mirá
+          <a href="/blog/como-hacer-recorrida-seguridad-que-sirva/" rel="noopener">cómo hacer una recorrida de seguridad que sirva</a>.
+        </p>
+
+        <div class="art-destacado">
+          Una observación sin cierre es como un partido sin gol: jugaste 90 minutos para nada. El cierre
+          —con foto y fecha— es lo único que prueba que tu trabajo movió la aguja.
+        </div>
+
+        <h2>Paso 3: dejá de perseguir vencimientos, que te persigan a vos</h2>
+
+        <p>
+          Los vencimientos son lo que más reputación te cuesta cuando se pasan, y son 100% evitables. Lo
+          que depende de tu memoria, tarde o temprano se te escapa. No porque seas desprolijo, sino porque
+          sos humano y tenés cuarenta cosas en la cabeza.
+        </p>
+
+        <p>
+          La movida es simple: cargás cada vencimiento una vez, con su fecha, y dejás que el sistema te
+          avise con anticipación. Dejás de revisar planillas todos los lunes y pasás a que la alerta aparezca
+          sola cuando hace falta. El
+          <a href="/blog/control-vencimientos-seguridad-higiene/" rel="noopener">control de vencimientos en seguridad e higiene</a>
+          deja de ser una tarea y se vuelve un seguro automático contra el "uy, se me pasó".
+        </p>
+
+        <h2>Paso 4: planificá el año que viene con datos, no con intuición</h2>
+
+        <p>
+          Ahora viene la parte linda, la que justifica todo lo anterior. Cuando tenés indicadores y el
+          círculo de observaciones cerrado, planificar el año siguiente deja de ser adivinar y pasa a ser
+          leer. Los datos te dicen solos dónde poner la energía.
+        </p>
+
+        <p>
+          Hacé este ejercicio de cierre, te lleva una tarde y vale por mil reuniones:
+        </p>
+
+        <ul class="art-list">
+          <li>
+            <strong>¿Dónde se concentraron los problemas?</strong> Ese sector o establecimiento se lleva
+            recorridas más frecuentes el año que viene.
+          </li>
+          <li>
+            <strong>¿Qué capacitaciones quedaron flojas?</strong> Las que tuvieron bajo cumplimiento van
+            primero en el calendario del año nuevo.
+          </li>
+          <li>
+            <strong>¿Qué se repitió una y otra vez?</strong> Una observación que aparece todos los meses no
+            es un evento: es un problema de raíz que pide una solución de fondo, no un parche.
+          </li>
+          <li>
+            <strong>¿Qué vencimientos del año que viene ya conocés?</strong> Cargalos ahora, en diciembre,
+            y arrancás enero con el calendario armado en vez de corriendo.
+          </li>
+        </ul>
+
+        <p>
+          Con eso armás tu plan anual sobre evidencia, no sobre corazonadas. Si querés un esqueleto para el
+          eje de formación, tenemos la guía del
+          <a href="/blog/plan-anual-capacitaciones-higiene-seguridad/" rel="noopener">plan anual de capacitaciones de higiene y seguridad</a>.
+        </p>
+
+        <h2>El método Sigmetría, en una frase</h2>
+
+        <p>
+          Todo esto que venimos diciendo es, en el fondo, una sola idea repetida: <strong>cargá una vez,
+          decidí siempre</strong>. Sigmetría nació justo de este problema. No para que tengas un Excel más
+          lindo, sino para que la estructura trabaje por vos. ¿Cómo lo hace en la práctica?
+        </p>
+
+        <ul class="art-list">
+          <li>
+            <strong>Ordena por tres niveles:</strong> empresa-cliente → establecimiento → gestión. Toda tu
+            operación entra en una sola estructura repetible, sin quince planillas inconexas.
+          </li>
+          <li>
+            <strong>Cierra el círculo de cada observación:</strong> foto → responsable → plazo de corrección
+            → seguimiento → cierre con foto. Trazabilidad completa, lista para auditoría.
+          </li>
+          <li>
+            <strong>Genera el reporte de recorrida automático:</strong> cargás en la obra desde el celular o
+            desde la PC, y el informe se arma solo, listo para mandar.
+          </li>
+          <li>
+            <strong>Controla los vencimientos con alertas:</strong> te avisa antes de que se pasen. Nunca
+            más el "se me había pasado".
+          </li>
+          <li>
+            <strong>Te da el dashboard:</strong> los indicadores de los que hablamos, servidos, sin que
+            tengas que armar tablas dinámicas a mano.
+          </li>
+          <li>
+            <strong>Tu cliente ve su propio dashboard gratis:</strong> si sos consultor, tu empresa-cliente
+            entra y ve su estado sin costo extra. Profesionalismo que se nota.
+          </li>
+        </ul>
+
+        <p>
+          Seamos honestos: nada de esto reemplaza tu criterio técnico, y no hace magia. Es el orden que ya
+          sabés que necesitás, automatizado, para que dejes de ser el índice viviente de tu operación. Si
+          gestionás varias empresas a la vez, el método completo está en
+          <a href="/blog/como-organizar-gestion-hys-varios-clientes/" rel="noopener">cómo organizar la gestión de HyS con varios clientes</a>.
+        </p>
+
+        <h2>El cierre de año no es para descansar (todavía)</h2>
+
+        <p>
+          Diciembre tiene fama de mes muerto, y es exactamente al revés: es el mejor mes para ordenar. Nadie
+          te pide nada urgente, tenés un año entero de datos arriba de la mesa y la cabeza despejada para
+          mirar el conjunto. Es el momento de cerrar lo que quedó abierto, leer tus indicadores y dibujar el
+          año que viene sobre evidencia real.
+        </p>
+
+        <p>
+          El que arranca enero con el calendario armado, las observaciones cerradas y los vencimientos
+          cargados juega otro campeonato. No corre detrás de la urgencia: la ve venir y la esquiva. Esa es
+          toda la diferencia entre sobrevivir el año y gestionarlo.
+        </p>
+
+        <p>
+          Y si estás evaluando dar el salto, este es buen momento: las
+          <a href="/precios/" rel="noopener">condiciones de los primeros usuarios (cupos Fundadores)</a>
+          tienen ventajas que no van a estar para siempre. Arrancá el año nuevo con el sistema ya andando.
+        </p>
+
+        <div class="art-cta-final">
+          <p class="cta-final-texto">Cargá una vez, decidí siempre. Tu HyS deja de ser un archivo y empieza a ser un sistema.</p>
+          <a href="/plataforma/" class="cta-final-btn">Conocé la plataforma →</a>
+          <p class="cta-final-sub">Probala 1 mes gratis. Sin tarjeta.</p>
+        </div>
+
+      </div><!-- /article-body -->
+    </div><!-- /content-inner -->
+  </section>
+
+</BaseLayout>
+
+<style>
+/* ---- Hero interior ---- */
+.page-hero-inner {
+  max-width: 860px;
+  animation: fadeUp .6s ease both;
+}
+.page-hero-badge {
+  display: inline-block;
+  font-family: 'Montserrat', sans-serif;
+  font-size: .6rem;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: #2E7D33;
+  border: 1px solid rgba(46,125,51,.3);
+  border-radius: 100px;
+  padding: 5px 14px;
+  margin-bottom: 18px;
+}
+.page-hero h1 {
+  font-size: clamp(1.6rem, 4vw, 2.5rem);
+  line-height: 1.08;
+  margin-bottom: 18px;
+  color: var(--gris-1);
+}
+.page-hero h1 em {
+  font-style: normal;
+  color: #2E7D33;
+}
+.page-hero p {
+  font-size: clamp(.9rem, 1.5vw, 1.05rem);
+  font-weight: 300;
+  color: var(--gris-2);
+  max-width: 640px;
+  line-height: 1.75;
+}
+
+/* ---- Article wrap ---- */
+.article-wrap { max-width: 740px; margin: 0 auto; padding: 48px 24px 80px; }
+
+/* ---- Meta ---- */
+.article-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: .62rem;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--gris-3);
+  margin-bottom: 28px;
+}
+.art-cat   { color: #2E7D33; }
+.art-sep   { color: var(--gris-3); }
+
+/* ---- Featured image ---- */
+.art-featured-img {
+  margin: 0 0 36px;
+  border-radius: 10px;
+  overflow: hidden;
+  line-height: 0;
+}
+.art-featured-img img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  aspect-ratio: 16/8;
+}
+
+/* ---- Body typography ---- */
+.article-body { font-size: 1rem; line-height: 1.85; color: var(--gris-1); }
+
+.article-lead {
+  font-size: 1.1rem;
+  font-weight: 400;
+  line-height: 1.75;
+  color: var(--gris-2);
+  border-left: 3px solid #2E7D33;
+  padding-left: 20px;
+  margin-bottom: 28px;
+}
+
+.article-body h2 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--gris-1);
+  margin: 44px 0 16px;
+  line-height: 1.25;
+}
+
+.article-body p {
+  margin-bottom: 18px;
+  font-weight: 300;
+}
+
+.article-body a {
+  color: #2E7D33;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.article-body a:hover { color: #1B5E20; }
+
+/* ---- Lista ---- */
+.art-list {
+  margin: 0 0 24px 0;
+  padding-left: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.art-list li {
+  padding-left: 22px;
+  position: relative;
+  font-weight: 300;
+  line-height: 1.75;
+}
+.art-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 7px;
+  height: 7px;
+  background: #2E7D33;
+  border-radius: 50%;
+}
+
+/* ---- Destacado ---- */
+.art-destacado {
+  background: var(--verde-light);
+  border-left: 4px solid #2E7D33;
+  border-radius: 0 8px 8px 0;
+  padding: 16px 20px;
+  font-size: .95rem;
+  font-weight: 300;
+  color: var(--gris-2);
+  margin: 24px 0;
+  line-height: 1.7;
+}
+.art-destacado strong { color: var(--gris-1); font-weight: 700; }
+
+/* ---- CTA block ---- */
+.art-cta {
+  background: var(--gris-bg);
+  border: 1px solid var(--borde);
+  border-radius: 12px;
+  padding: 32px;
+  margin-top: 48px;
+}
+
+/* ---- CTA final ---- */
+.art-cta-final {
+  background: var(--gris-bg);
+  border: 1px solid var(--borde);
+  border-radius: 12px;
+  padding: 32px;
+  text-align: center;
+  margin-top: 48px;
+}
+.cta-final-texto {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--gris-1);
+  margin-bottom: 18px;
+  letter-spacing: -.2px;
+}
+.cta-final-btn {
+  display: inline-block;
+  background: #2E7D33;
+  color: #fff !important;
+  padding: 13px 32px;
+  border-radius: 12px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: .85rem;
+  letter-spacing: .5px;
+  text-decoration: none !important;
+  transition: background .2s;
+}
+.cta-final-btn:hover { background: #1B5E20; }
+.cta-final-sub {
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--gris-3);
+  margin-top: 12px;
+}
+
+/* ---- Content section ---- */
+.content-section { background: var(--blanco); }
+.content-inner    { width: 100%; }
+
+@media (max-width: 600px) {
+  .article-wrap { padding: 32px 16px 60px; }
+  .art-cta      { padding: 22px 18px; }
+  .art-cta-final { padding: 22px 18px; }
+  .page-hero    { padding: 105px 20px 48px; }
+}
+</style>

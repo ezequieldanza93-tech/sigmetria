@@ -1,0 +1,429 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FormLeadMagnetPDF from '../../components/FormLeadMagnetPDF.astro';
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "ISO 45001: por qué tu gestión diaria ya te acerca más de lo que creés",
+  "description": "ISO 45001 no es papeleo, es gestión. Mucho de lo que ya hacés (observaciones, matriz de riesgos, capacitaciones, vencimientos) cubre requisitos de la norma. Te lo mostramos punto por punto.",
+  "image": "https://sigmetriahys.com/logo-sigmetria.svg",
+  "author": {
+    "@type": "Organization",
+    "name": "SIGMETRÍA HyS",
+    "url": "https://sigmetriahys.com"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "SIGMETRÍA HyS",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://sigmetriahys.com/logo-sigmetria.svg"
+    }
+  },
+  "datePublished": "2026-10-07",
+  "dateModified":  "2026-10-07",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://sigmetriahys.com/blog/iso-45001-tu-gestion-ya-te-acerca/"
+  },
+  "keywords": [
+    "iso 45001",
+    "iso 45001 no es papeleo",
+    "requisitos iso 45001",
+    "sistema de gestión de seguridad y salud",
+    "cómo empezar iso 45001",
+    "checklist iso 45001",
+    "gestión de higiene y seguridad"
+  ]
+};
+---
+
+<BaseLayout
+  title="ISO 45001: tu gestión diaria ya te acerca más de lo que creés — SIGMETRÍA HyS"
+  description="ISO 45001 no es papeleo, es gestión. Mucho de lo que ya hacés (observaciones, matriz, capacitaciones, vencimientos) cubre requisitos. Te lo mostramos punto por punto."
+  canonical="https://sigmetriahys.com/blog/iso-45001-tu-gestion-ya-te-acerca/"
+  schema={schema}
+>
+  <section class="page-hero">
+    <nav aria-label="Breadcrumb" class="breadcrumb">
+      <a href="/">Inicio</a><span>/</span>
+      <a href="/blog/">Blog</a><span>/</span>
+      <span>ISO 45001: tu gestión ya te acerca</span>
+    </nav>
+    <div class="page-hero-inner">
+      <div class="page-hero-badge">ISO 45001 · Gestión · Primeros pasos</div>
+      <h1>ISO 45001 NO ES UN MONSTRUO DE PAPELES<br><em>Y TU GESTIÓN DIARIA YA TE ACERCA</em></h1>
+      <p>
+        Lo que te vendieron como una montaña de carpetas, procedimientos y auditores con cara seria
+        es, en el fondo, ordenar lo que ya hacés todos los días. Spoiler: estás más cerca de lo que creés.
+      </p>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="content-inner article-wrap">
+
+      <div class="article-meta">
+        <span class="art-cat">ISO 45001</span>
+        <span class="art-sep">·</span>
+        <span class="art-fecha">7 oct 2026</span>
+        <span class="art-sep">·</span>
+        <span class="art-tiempo">7 min lectura</span>
+      </div>
+
+      <figure class="art-featured-img">
+        <img
+          src="https://images.pexels.com/photos/8853502/pexels-photo-8853502.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+          alt="Responsable de higiene y seguridad revisando una checklist en una planta industrial"
+          loading="eager"
+          width="1260"
+          height="630"
+        />
+      </figure>
+
+      <div class="article-body">
+
+        <p class="article-lead">
+          Alguien tira la frase en una reunión: "el cliente nuevo pide ISO 45001". Y ahí, en la cabeza
+          de todos, aparece la misma película: pilas de carpetas, un manual de 200 páginas, un consultor
+          carísimo y seis meses de no dormir. Respirá. Esa película es mentira. Te la vendieron mal.
+        </p>
+
+        <p>
+          Acá va la verdad incómoda que casi nadie te dice: <strong>ISO 45001 no es papeleo, es gestión.</strong>
+          Y si vos ya hacés recorridas, levantás observaciones, tenés una matriz de riesgos y controlás
+          vencimientos de capacitaciones… no estás empezando de cero. Estás más cerca de lo que te imaginás.
+          El problema no es que te falte hacer cosas. El problema es que las hacés sin que queden registradas
+          de forma que un auditor las pueda ver.
+        </p>
+
+        <p>
+          Vamos a desarmar el monstruo pieza por pieza. Y al final te dejo una checklist para que midas,
+          con honestidad brutal, cuánto del camino ya tenés andado.
+        </p>
+
+        <h2>¿Qué es ISO 45001, en una sola frase sin humo?</h2>
+
+        <p>
+          ISO 45001:2018 es la norma internacional de sistemas de gestión de seguridad y salud en el trabajo.
+          Reemplazó a la vieja OHSAS 18001 en marzo de 2018. ¿Y qué pide, en criollo? Que tengas un
+          <em>método</em>: una forma ordenada y repetible de identificar peligros, controlarlos, demostrar
+          que los controlás y mejorar con el tiempo.
+        </p>
+
+        <p>
+          Fijate la palabra clave: <strong>método</strong>. No dice "tené 80 procedimientos escritos". Dice
+          "demostrá que gestionás esto en serio, no a los manotazos". La norma se organiza en 10 capítulos,
+          y los que generan obligaciones concretas son del 4 al 10. Si querés el detalle de cada uno, lo
+          desarmamos completo en
+          <a href="/blog/que-es-iso-45001-explicacion-completa/" rel="noopener">qué es ISO 45001, la explicación completa</a>.
+          Pero para lo de hoy, quedate con esto: la norma premia el orden, no la cantidad de hojas.
+        </p>
+
+        <div class="art-destacado">
+          <strong>El mito que arruina todo:</strong> creer que ISO 45001 es "documentar por documentar".
+          La norma no quiere papeles. Quiere evidencia de que gestionás. Un papel sin gestión atrás es un
+          papel muerto. Una gestión bien registrada es, casi sin que te des cuenta, media norma cumplida.
+        </p>
+
+        <h2>El secreto: ya estás cumpliendo requisitos sin saberlo</h2>
+
+        <p>
+          Esta es la parte que te va a hacer levantar una ceja. Tomá las cosas que hacés cada semana como
+          responsable de HyS y mirá del otro lado del mostrador cómo las lee la norma:
+        </p>
+
+        <ul class="art-list">
+          <li>
+            <strong>Tu recorrida con observaciones</strong> es, ni más ni menos, control operacional y mejora
+            continua (el corazón de los capítulos 8 y 10). Cada condición insegura que detectás y corregís
+            es PDCA puro: planificar, hacer, verificar, actuar.
+          </li>
+          <li>
+            <strong>Tu matriz de riesgos</strong> cubre la planificación del capítulo 6: identificación de
+            peligros y evaluación de riesgos. Si ya la tenés armada, tenés uno de los pilares más pesados de
+            la norma. Y si todavía la estás peleando, mirá
+            <a href="/blog/matriz-de-riesgos-iso-45001-como-armarla/" rel="noopener">cómo armar la matriz de riesgos</a>.
+          </li>
+          <li>
+            <strong>Tu plan de capacitaciones</strong> responde directo al capítulo 7 (apoyo y competencia).
+            Que la gente sepa lo que tiene que saber, y que puedas probarlo, es exactamente lo que pide la norma.
+          </li>
+          <li>
+            <strong>El control de vencimientos</strong> (capacitaciones, EPP, habilitaciones, exámenes médicos)
+            alimenta el cumplimiento legal del capítulo 9. Lo que no se te vence es lo que después no te explota
+            en una auditoría.
+          </li>
+          <li>
+            <strong>Investigar un incidente</strong> y dejar registrado qué pasó y qué hiciste para que no se
+            repita es el capítulo 10 en vivo y en directo: no conformidad y acción correctiva.
+          </li>
+        </ul>
+
+        <p>
+          ¿Ves la jugada? No te falta <em>trabajo</em>. Te falta que ese trabajo deje rastro ordenado. La
+          diferencia entre "lo hago" y "puedo demostrar que lo hago" es lo único que te separa de tener
+          medio sistema de gestión funcionando.
+        </p>
+
+        <h2>Entonces, ¿qué te falta de verdad?</h2>
+
+        <p>
+          Seamos honestos, porque la idea no es venderte humo. Lo que ISO 45001 suma por encima de tu día
+          a día son básicamente tres cosas, y ninguna es ciencia espacial:
+        </p>
+
+        <ul class="art-list">
+          <li>
+            <strong>El compromiso de la dirección (capítulo 5).</strong> Que el dueño o gerente firme la
+            política, ponga recursos y se involucre. No alcanza con que el de seguridad empuje solo. Esto no
+            se compra: se conversa.
+          </li>
+          <li>
+            <strong>El contexto y las partes interesadas (capítulo 4).</strong> Sentarte una vez a escribir
+            quién le importa a la empresa en materia de seguridad (trabajadores, clientes, ART, sindicato,
+            reguladores) y qué riesgos del entorno te pegan. Es una hoja, no una novela.
+          </li>
+          <li>
+            <strong>La trazabilidad.</strong> Y acá está el verdadero cuello de botella. No es que no gestiones.
+            Es que tu gestión vive en un cuaderno, en el WhatsApp del capataz y en seis Excel que solo vos
+            entendés. El auditor no te va a creer porque sos buena gente: te va a pedir evidencia.
+          </li>
+        </ul>
+
+        <div class="art-destacado">
+          <strong>Dato que duele:</strong> la mayoría de los responsables de HyS no fallan la auditoría por
+          hacer mal su trabajo. La fallan porque <em>no pueden probar</em> que lo hicieron. La observación que
+          cerraste no quedó registrada, la capacitación no tiene la lista firmada, el seguimiento se hizo "de
+          palabra". Trabajo invisible = trabajo que no cuenta.
+        </p>
+
+        <h2>De cuaderno y WhatsApp a evidencia de verdad</h2>
+
+        <p>
+          Acá es donde el orden deja de ser una virtud personal y pasa a ser una herramienta. Porque podés
+          sostener todo a fuerza de disciplina y planillas perfectas… hasta que un día te enfermás, te vas de
+          vacaciones, o sumás el quinto cliente y la cabeza ya no da. El sistema no debería depender de tu memoria.
+        </p>
+
+        <p>
+          Sigmetría nació justo de este dolor. La plataforma organiza tu gestión por niveles
+          (empresa-cliente → establecimiento → cada gestión), registra cada observación con foto, responsable
+          y plazo de corrección, le hace el seguimiento y la cierra con foto de evidencia. Controla los
+          vencimientos y te avisa antes de que se pasen. Y el reporte de recorrida sale solo, listo para
+          mandarle al cliente. Es decir: convierte tu trabajo invisible en evidencia ordenada, que es
+          exactamente el lenguaje que habla un auditor.
+        </p>
+
+        <p>
+          Ahora, la parte honesta —porque acá no inventamos—: <strong>la app no certifica ISO 45001.</strong>
+          Certificar requiere trabajo humano: un especialista que arme el sistema, capacite a la gente, haga
+          las auditorías internas y acompañe la auditoría de certificación. Eso es un servicio de implementación,
+          no un botón. Lo que la plataforma hace —y lo hace muy bien— es <em>documentar y ordenar</em> toda la
+          gestión que el sistema necesita para sostenerse. Construís evidencia todos los días, sin esfuerzo extra,
+          y cuando llega el momento de certificar tenés medio camino recorrido en vez de arrancar de cero.
+        </p>
+
+        <p>
+          Si querés ver cómo se ve eso en la práctica,
+          <a href="/plataforma/" rel="noopener">conocé la plataforma</a>. Spoiler número dos: tu cliente
+          accede a su propio dashboard sin costo extra.
+        </p>
+
+        <h2>El primer paso no es contratar a nadie. Es medirte.</h2>
+
+        <p>
+          Antes de gastar un peso en consultorías o de prometerle nada a tu cliente, hacé algo gratis: medí
+          dónde estás parado. Cuánto de la norma ya cubrís sin saberlo y qué te falta de verdad. Te apuesto a
+          que el resultado te sorprende para bien.
+        </p>
+
+        <p>
+          Para eso armamos una <strong>checklist de autoevaluación ISO 45001</strong> en PDF: vas marcando,
+          requisito por requisito, qué tenés resuelto, qué a medias y qué te falta. Es la foto realista de tu
+          punto de partida. Sin vendedores, sin compromiso, sin susto. Solo vos y tu gestión real frente a la norma.
+        </p>
+
+        <div class="art-cta">
+          <FormLeadMagnetPDF
+            titulo="Descargá la checklist de autoevaluación ISO 45001"
+            subtitulo="Dejanos tus datos y descargá gratis la checklist para medir, requisito por requisito, cuánto te falta para ISO 45001."
+            cta="Descargar la checklist (PDF)"
+            leadMagnetKey="checklist-iso-45001"
+          />
+          <p style="margin-top:18px;font-size:13px;font-weight:300;color:var(--gris-3)">
+            ¿Preferís que te asesoremos directo?
+            <a href="/contacto/" rel="noopener" style="color:#2E7D33">Escribinos y lo vemos juntos →</a>
+          </p>
+        </div>
+
+      </div><!-- /article-body -->
+    </div><!-- /content-inner -->
+  </section>
+
+</BaseLayout>
+
+<style>
+/* ---- Hero interior ---- */
+.page-hero-inner {
+  max-width: 860px;
+  animation: fadeUp .6s ease both;
+}
+.page-hero-badge {
+  display: inline-block;
+  font-family: 'Montserrat', sans-serif;
+  font-size: .6rem;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: #2E7D33;
+  border: 1px solid rgba(46,125,51,.3);
+  border-radius: 100px;
+  padding: 5px 14px;
+  margin-bottom: 18px;
+}
+.page-hero h1 {
+  font-size: clamp(1.6rem, 4vw, 2.5rem);
+  line-height: 1.08;
+  margin-bottom: 18px;
+  color: var(--gris-1);
+}
+.page-hero h1 em {
+  font-style: normal;
+  color: #2E7D33;
+}
+.page-hero p {
+  font-size: clamp(.9rem, 1.5vw, 1.05rem);
+  font-weight: 300;
+  color: var(--gris-2);
+  max-width: 640px;
+  line-height: 1.75;
+}
+
+/* ---- Article wrap ---- */
+.article-wrap { max-width: 740px; margin: 0 auto; padding: 48px 24px 80px; }
+
+/* ---- Meta ---- */
+.article-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: .62rem;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--gris-3);
+  margin-bottom: 28px;
+}
+.art-cat   { color: #2E7D33; }
+.art-sep   { color: var(--gris-3); }
+
+/* ---- Featured image ---- */
+.art-featured-img {
+  margin: 0 0 36px;
+  border-radius: 10px;
+  overflow: hidden;
+  line-height: 0;
+}
+.art-featured-img img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  aspect-ratio: 16/8;
+}
+
+/* ---- Body typography ---- */
+.article-body { font-size: 1rem; line-height: 1.85; color: var(--gris-1); }
+
+.article-lead {
+  font-size: 1.1rem;
+  font-weight: 400;
+  line-height: 1.75;
+  color: var(--gris-2);
+  border-left: 3px solid #2E7D33;
+  padding-left: 20px;
+  margin-bottom: 28px;
+}
+
+.article-body h2 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--gris-1);
+  margin: 44px 0 16px;
+  line-height: 1.25;
+}
+
+.article-body p {
+  margin-bottom: 18px;
+  font-weight: 300;
+}
+
+.article-body a {
+  color: #2E7D33;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.article-body a:hover { color: #1B5E20; }
+
+/* ---- Lista ---- */
+.art-list {
+  margin: 0 0 24px 0;
+  padding-left: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.art-list li {
+  padding-left: 22px;
+  position: relative;
+  font-weight: 300;
+  line-height: 1.75;
+}
+.art-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 7px;
+  height: 7px;
+  background: #2E7D33;
+  border-radius: 50%;
+}
+
+/* ---- Destacado ---- */
+.art-destacado {
+  background: var(--verde-light);
+  border-left: 4px solid #2E7D33;
+  border-radius: 0 8px 8px 0;
+  padding: 16px 20px;
+  font-size: .95rem;
+  font-weight: 300;
+  color: var(--gris-2);
+  margin: 24px 0;
+  line-height: 1.7;
+}
+.art-destacado strong { color: var(--gris-1); font-weight: 700; }
+
+/* ---- CTA block ---- */
+.art-cta {
+  background: var(--gris-bg);
+  border: 1px solid var(--borde);
+  border-radius: 12px;
+  padding: 32px;
+  margin-top: 48px;
+}
+
+/* ---- Content section ---- */
+.content-section { background: var(--blanco); }
+.content-inner    { width: 100%; }
+
+@media (max-width: 600px) {
+  .article-wrap { padding: 32px 16px 60px; }
+  .art-cta      { padding: 22px 18px; }
+  .page-hero    { padding: 105px 20px 48px; }
+}
+</style>

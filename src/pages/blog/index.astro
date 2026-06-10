@@ -11,6 +11,10 @@ const sections = [
 
 const catToSectionId: Record<string, string> = {};
 sections.forEach(s => s.categorias.forEach(cat => { catToSectionId[cat] = s.id; }));
+
+// Solo se listan los posts no ocultos. Los blogs programados (calendario editorial)
+// se cargan con `oculto: true` y se activan cambiando el flag cuando llega su fecha.
+const visiblePosts = blogPosts.filter(p => !p.oculto);
 ---
 
 <BaseLayout
@@ -46,7 +50,7 @@ sections.forEach(s => s.categorias.forEach(cat => { catToSectionId[cat] = s.id; 
             spellcheck="false"
           />
         </div>
-        <span class="blog-count" id="blog-count">{blogPosts.length} artículos</span>
+        <span class="blog-count" id="blog-count">{visiblePosts.length} artículos</span>
       </div>
 
       <!-- Filtro de secciones (dropdown) -->
@@ -75,7 +79,7 @@ sections.forEach(s => s.categorias.forEach(cat => { catToSectionId[cat] = s.id; 
 
       <!-- Grid -->
       <div class="blog-grid" id="blog-grid">
-        {blogPosts.map(post => (
+        {visiblePosts.map(post => (
           <article
             class="blog-card"
             data-cat={post.categoria}

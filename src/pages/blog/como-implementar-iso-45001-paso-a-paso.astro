@@ -1,0 +1,486 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Cómo implementar ISO 45001 paso a paso (y no morir en el intento)",
+  "description": "Roadmap de ISO 45001 por fases: diagnóstico, contexto, política, matriz, operación, auditoría interna y certificación. Qué hace el software y qué es trabajo humano.",
+  "image": "https://sigmetriahys.com/logo-sigmetria.svg",
+  "author": {
+    "@type": "Organization",
+    "name": "SIGMETRÍA HyS",
+    "url": "https://sigmetriahys.com"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "SIGMETRÍA HyS",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://sigmetriahys.com/logo-sigmetria.svg"
+    }
+  },
+  "datePublished": "2026-10-21",
+  "dateModified":  "2026-10-21",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://sigmetriahys.com/blog/como-implementar-iso-45001-paso-a-paso/"
+  },
+  "keywords": [
+    "cómo implementar iso 45001 paso a paso",
+    "implementación iso 45001 fases",
+    "roadmap iso 45001",
+    "diagnóstico gap iso 45001",
+    "auditoría interna iso 45001",
+    "sistema de gestión sst",
+    "iso 45001 argentina"
+  ]
+};
+---
+
+<BaseLayout
+  title="Cómo implementar ISO 45001 paso a paso (y no morir en el intento) — SIGMETRÍA HyS"
+  description="Roadmap de ISO 45001 por fases: diagnóstico, contexto, política, matriz, operación, auditoría interna y certificación. Qué hace el software y qué es trabajo humano."
+  canonical="https://sigmetriahys.com/blog/como-implementar-iso-45001-paso-a-paso/"
+  schema={schema}
+>
+  <section class="page-hero">
+    <nav aria-label="Breadcrumb" class="breadcrumb">
+      <a href="/">Inicio</a><span>/</span>
+      <a href="/blog/">Blog</a><span>/</span>
+      <span>Implementar ISO 45001 paso a paso</span>
+    </nav>
+    <div class="page-hero-inner">
+      <div class="page-hero-badge">ISO 45001 · Implementación · Roadmap</div>
+      <h1>CÓMO IMPLEMENTAR ISO 45001 PASO A PASO<br><em>(Y NO MORIR EN EL INTENTO)</em></h1>
+      <p>
+        La norma no se implementa en una reunión ni con una carpeta llena de procedimientos lindos.
+        Se implementa por fases, en orden, y cada fase tiene su trampa. Acá está el mapa completo:
+        qué hacés vos, qué hace el software y dónde la gente se pega el palo.
+      </p>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="content-inner article-wrap">
+
+      <div class="article-meta">
+        <span class="art-cat">ISO 45001</span>
+        <span class="art-sep">·</span>
+        <span class="art-fecha">21 oct 2026</span>
+        <span class="art-sep">·</span>
+        <span class="art-tiempo">7 min lectura</span>
+      </div>
+
+      <figure class="art-featured-img">
+        <img
+          src="https://images.pexels.com/photos/8853502/pexels-photo-8853502.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+          alt="Responsable de higiene y seguridad planificando la implementación de un sistema de gestión sobre un plano de obra"
+          loading="eager"
+          width="1260"
+          height="630"
+        />
+      </figure>
+
+      <div class="article-body">
+
+        <p class="article-lead">
+          La escena la viste mil veces. La gerencia decide que "este año sí o sí sacamos la ISO 45001",
+          alguien arma una carpeta gigante de procedimientos en un fin de semana, todos firman, la carpeta
+          se guarda en un cajón… y seis meses después llega el auditor, abre la carpeta, pregunta "¿esto lo
+          hacen de verdad?" y se hace un silencio que se podría cortar con un cuchillo.
+        </p>
+
+        <p>
+          Acá está la verdad incómoda: la ISO 45001 no se implementa con papelería. Se implementa con un
+          <strong>sistema que funciona en la realidad</strong>, y eso se construye por fases, en orden, una
+          arriba de la otra. Como una casa: no podés poner el techo antes que las columnas. Y cada fase tiene
+          su trampa específica donde la gente se cae.
+        </p>
+
+        <p>
+          Si todavía no sabés qué es la norma o qué te pide cada cláusula, primero leé
+          <a href="/blog/que-es-iso-45001-explicacion-completa/" rel="noopener">qué es la ISO 45001</a> y
+          <a href="/blog/requisitos-iso-45001-los-10-capitulos/" rel="noopener">los 10 capítulos explicados</a>.
+          Acá vamos directo al <em>cómo</em>: el roadmap real, fase por fase.
+        </p>
+
+        <h2>Fase 0: el diagnóstico (o cómo saber dónde estás parado)</h2>
+
+        <p>
+          Antes de mover un dedo, necesitás una foto honesta de tu situación actual. Se llama
+          <strong>diagnóstico de brecha</strong> (gap analysis) y es la fase que más gente se saltea… y
+          después se pregunta por qué el proyecto se les fue de las manos en plazos y plata.
+        </p>
+
+        <p>
+          Es simple: agarrás la norma, cláusula por cláusula, y te preguntás "¿esto ya lo tengo, lo tengo a
+          medias, o no existe?". El resultado es una lista de tareas con prioridad. Sin esa lista, estás
+          construyendo a ciegas. Es como llamar al albañil sin saber si el problema es una grieta o que se
+          está por caer la pared.
+        </p>
+
+        <div class="art-destacado">
+          <strong>La trampa de esta fase:</strong> mentirte a vos mismo. "Sí, la política de seguridad la
+          tenemos" cuando lo único que tenés es un PDF de 2019 que nadie leyó. El gap solo sirve si sos brutal
+          con la realidad. Un diagnóstico optimista es un proyecto que después explota.
+        </div>
+
+        <h2>Fase 1: contexto y partes interesadas (la fase que todos odian)</h2>
+
+        <p>
+          La cláusula 4 te pide entender el <strong>contexto</strong> de tu organización: qué factores externos
+          (clientes, regulaciones, la ART, los vecinos) e internos (cultura, recursos, cómo trabaja realmente la
+          gente) afectan tu sistema. Y quiénes son las partes interesadas: trabajadores, sindicato, contratistas,
+          comunidad.
+        </p>
+
+        <p>
+          ¿Por qué todos la odian? Porque parece filosofía pura y dura. "¿Qué tiene que ver el vecino con que
+          un operario no use el arnés?" Tiene todo que ver: si no entendés el contexto, vas a diseñar controles
+          que no encajan con cómo trabaja tu gente de verdad. Es el plano antes del ladrillo. Aburrido, sí. Pero
+          si lo salteás, todo lo de arriba queda torcido.
+        </p>
+
+        <h2>Fase 2: la política y el liderazgo (que no sea un cuadrito en la pared)</h2>
+
+        <p>
+          La cláusula 5 pide una <strong>política de SST</strong> firmada por el máximo responsable y, sobre
+          todo, <strong>liderazgo activo</strong> de la dirección. Acá viene el detalle que cambia todo: la norma
+          no se conforma con que el gerente firme un papel. Pide que participe, que vaya a los comités, que revise
+          el sistema. Y exige que los trabajadores puedan participar de verdad en identificar peligros e investigar
+          accidentes.
+        </p>
+
+        <div class="art-destacado">
+          <strong>La trampa:</strong> la política colgada en un marco al lado del reloj de fichaje. Si le
+          preguntás a tres operarios qué dice la política de seguridad y ninguno tiene idea, no tenés política:
+          tenés decoración. El auditor lo huele en cinco minutos.
+        </div>
+
+        <h2>Fase 3: la matriz de riesgos (acá empieza lo técnico de verdad)</h2>
+
+        <p>
+          La cláusula 6 es el corazón del sistema: identificar peligros, evaluar riesgos y definir controles.
+          Es donde tu criterio técnico vale oro y donde NO hay atajo que valga. Cada puesto, cada tarea, cada
+          área tiene sus peligros, y vos tenés que mapearlos, evaluarlos y decidir cómo los controlás.
+        </p>
+
+        <p>
+          Si nunca armaste una, tenemos la guía completa de
+          <a href="/blog/matriz-de-riesgos-iso-45001-como-armarla/" rel="noopener">cómo armar la matriz de riesgos para ISO 45001</a>
+          y el <a href="/blog/mapa-de-riesgos-laborales/" rel="noopener">mapa de riesgos laborales</a> para visualizarlo
+          por sectores. La matriz es trabajo humano puro: ningún software la piensa por vos. Lo que sí puede hacer
+          un software es <strong>guardarla viva</strong>, asociar cada riesgo a su control y avisarte cuando un
+          control vence o queda sin verificar.
+        </p>
+
+        <h2>Fase 4: operación (donde el sistema deja de ser teoría)</h2>
+
+        <p>
+          La cláusula 8 es el día a día: que los controles que definiste en la matriz <strong>se ejecuten de
+          verdad</strong>. Recorridas, observaciones, control de contratistas, gestión del cambio. Es donde la
+          mayoría de los sistemas se mueren en silencio: hermosos en el papel, inexistentes en la planta.
+        </p>
+
+        <p>
+          ¿Por qué se mueren? Porque sostener la operación a mano es agotador. Recorrés, anotás en un cuaderno,
+          sacás fotos con el celular, después te sentás dos horas a pasar todo en limpio, mandás un mail pidiendo
+          que corrijan algo… y nadie lleva la cuenta de si se corrigió. Multiplicalo por varias plantas y entendés
+          por qué el sistema se cae solo.
+        </p>
+
+        <p>
+          Acá es donde un software de gestión hace la diferencia. Sigmetría registra cada observación con
+          <strong>foto → responsable → plazo de corrección → seguimiento → cierre con foto</strong>, y el reporte
+          de recorrida sale solo, listo para mandar. No reemplaza tu ojo en la obra: te saca de encima las dos
+          horas de pasar todo en limpio y te asegura que ninguna observación quede abierta y olvidada. Eso es
+          exactamente lo que el auditor te va a pedir en la próxima fase: trazabilidad.
+        </p>
+
+        <ul class="art-list">
+          <li>
+            <strong>Lo que es trabajo humano:</strong> detectar el peligro, definir el control, decidir el plazo,
+            verificar en planta que se corrigió bien.
+          </li>
+          <li>
+            <strong>Lo que hace el software:</strong> documentar cada paso, recordarte vencimientos, armar el reporte
+            automático y dejar todo trazable para la auditoría.
+          </li>
+        </ul>
+
+        <h2>Fase 5: la auditoría interna (el ensayo general antes del examen)</h2>
+
+        <p>
+          La cláusula 9 te obliga a <strong>auditarte a vos mismo</strong> antes de que venga el de afuera. Es el
+          ensayo general: alguien de tu organización (que no sea quien armó el sistema) revisa si todo lo que
+          definiste se está cumpliendo, encuentra las no conformidades y las cierra. Después viene la revisión por
+          la dirección, donde la gerencia mira los resultados y toma decisiones.
+        </p>
+
+        <p>
+          La auditoría interna no es un trámite: es tu oportunidad de encontrar los problemas <em>antes</em> de que
+          los encuentre el auditor de certificación, cuando todavía tenés tiempo de arreglarlos sin que cuesten una
+          no conformidad mayor. Acá es donde tener todo registrado y trazable de la fase anterior te salva la vida:
+          si las observaciones, los cierres y los vencimientos están en un solo lado, la auditoría interna se hace
+          en horas en vez de en semanas de revolver carpetas.
+        </p>
+
+        <h2>Fase 6: la certificación (y un par de verdades sin vueltas)</h2>
+
+        <p>
+          Recién acá, con todas las fases anteriores funcionando, llamás al organismo certificador acreditado
+          (IRAM, Bureau Veritas, SGS, TÜV, DNV, entre otros). La auditoría de certificación tiene dos etapas: una
+          revisión documental y una auditoría en sitio. Si el sistema funciona de verdad, sale. Si era papelería
+          de cajón, no.
+        </p>
+
+        <div class="art-destacado">
+          <strong>Sin vueltas:</strong> ningún software te certifica la ISO 45001. La certificación la da un
+          organismo acreditado después de auditarte, y la implementación es trabajo humano y de consultoría. Lo
+          que un sistema de gestión hace es <strong>sostener el día a día</strong> para que cuando llegue el
+          auditor, el sistema esté vivo y documentado. La herramienta es el andamio; la obra la levantás vos.
+        </div>
+
+        <p>
+          Y una aclaración que repetimos siempre: tener ISO 45001 <strong>no te exime</strong> de cumplir la
+          normativa argentina (Ley 19.587 y su Decreto 351/79, más lo que pida la SRT). La certificación es un
+          complemento, no un reemplazo del piso legal. Podés tener el certificado colgado y aun así estar en falta
+          si te falta el <a href="/blog/que-es-el-legajo-tecnico-srt/" rel="noopener">legajo técnico</a> o las
+          <a href="/blog/mediciones-obligatorias-srt-cuales-son-y-cuando/" rel="noopener">mediciones obligatorias</a>
+          al día.
+        </p>
+
+        <h2>El orden importa más que la velocidad</h2>
+
+        <p>
+          Si te llevás una sola cosa de toda esta nota, que sea esta: el problema de la mayoría de las
+          implementaciones no es la falta de conocimiento técnico. Es el desorden. Arrancan por la fase 3 sin haber
+          hecho el diagnóstico, escriben procedimientos antes de entender el contexto, y dejan la operación librada
+          a la memoria de una persona.
+        </p>
+
+        <p>
+          ¿Cuánto tarda todo esto? Para una PyME, entre 6 y 12 meses bien llevados. Si querés el detalle por tamaño
+          de empresa, te lo contamos en
+          <a href="/blog/como-implementar-iso-45001-pyme/" rel="noopener">cómo implementar ISO 45001 en una PyME</a>,
+          y el camino completo hasta el certificado en
+          <a href="/blog/como-certificar-iso-45001-roadmap-completo/" rel="noopener">el roadmap de certificación paso a paso</a>.
+          Y si todavía estás peleando con planillas sueltas para sostener todo esto,
+          <a href="/blog/excel-vs-software-gestion-hys/" rel="noopener">acá comparamos Excel contra un software de gestión</a>.
+        </p>
+
+        <div class="art-cta-final">
+          <p class="cta-final-texto">La ISO 45001 se sostiene en el día a día, no en una carpeta. Que el sistema trabaje por vos.</p>
+          <a href="/plataforma/" class="cta-final-btn">Conocé la plataforma →</a>
+          <p class="cta-final-sub">Probala 1 mes gratis. Sin tarjeta.</p>
+        </div>
+
+      </div><!-- /article-body -->
+    </div><!-- /content-inner -->
+  </section>
+
+</BaseLayout>
+
+<style>
+/* ---- Hero interior ---- */
+.page-hero-inner {
+  max-width: 860px;
+  animation: fadeUp .6s ease both;
+}
+.page-hero-badge {
+  display: inline-block;
+  font-family: 'Montserrat', sans-serif;
+  font-size: .6rem;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: #2E7D33;
+  border: 1px solid rgba(46,125,51,.3);
+  border-radius: 100px;
+  padding: 5px 14px;
+  margin-bottom: 18px;
+}
+.page-hero h1 {
+  font-size: clamp(1.6rem, 4vw, 2.5rem);
+  line-height: 1.08;
+  margin-bottom: 18px;
+  color: var(--gris-1);
+}
+.page-hero h1 em {
+  font-style: normal;
+  color: #2E7D33;
+}
+.page-hero p {
+  font-size: clamp(.9rem, 1.5vw, 1.05rem);
+  font-weight: 300;
+  color: var(--gris-2);
+  max-width: 640px;
+  line-height: 1.75;
+}
+
+/* ---- Article wrap ---- */
+.article-wrap { max-width: 740px; margin: 0 auto; padding: 48px 24px 80px; }
+
+/* ---- Meta ---- */
+.article-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: .62rem;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--gris-3);
+  margin-bottom: 28px;
+}
+.art-cat   { color: #2E7D33; }
+.art-sep   { color: var(--gris-3); }
+
+/* ---- Featured image ---- */
+.art-featured-img {
+  margin: 0 0 36px;
+  border-radius: 10px;
+  overflow: hidden;
+  line-height: 0;
+}
+.art-featured-img img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  aspect-ratio: 16/8;
+}
+
+/* ---- Body typography ---- */
+.article-body { font-size: 1rem; line-height: 1.85; color: var(--gris-1); }
+
+.article-lead {
+  font-size: 1.1rem;
+  font-weight: 400;
+  line-height: 1.75;
+  color: var(--gris-2);
+  border-left: 3px solid #2E7D33;
+  padding-left: 20px;
+  margin-bottom: 28px;
+}
+
+.article-body h2 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--gris-1);
+  margin: 44px 0 16px;
+  line-height: 1.25;
+}
+
+.article-body p {
+  margin-bottom: 18px;
+  font-weight: 300;
+}
+
+.article-body a {
+  color: #2E7D33;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.article-body a:hover { color: #1B5E20; }
+
+/* ---- Lista ---- */
+.art-list {
+  margin: 0 0 24px 0;
+  padding-left: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.art-list li {
+  padding-left: 22px;
+  position: relative;
+  font-weight: 300;
+  line-height: 1.75;
+}
+.art-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 7px;
+  height: 7px;
+  background: #2E7D33;
+  border-radius: 50%;
+}
+
+/* ---- Destacado ---- */
+.art-destacado {
+  background: var(--verde-light);
+  border-left: 4px solid #2E7D33;
+  border-radius: 0 8px 8px 0;
+  padding: 16px 20px;
+  font-size: .95rem;
+  font-weight: 300;
+  color: var(--gris-2);
+  margin: 24px 0;
+  line-height: 1.7;
+}
+.art-destacado strong { color: var(--gris-1); font-weight: 700; }
+
+/* ---- CTA block ---- */
+.art-cta {
+  background: var(--gris-bg);
+  border: 1px solid var(--borde);
+  border-radius: 12px;
+  padding: 32px;
+  margin-top: 48px;
+}
+
+/* ---- CTA final (sin lead magnet) ---- */
+.art-cta-final {
+  background: var(--gris-bg);
+  border: 1px solid var(--borde);
+  border-radius: 12px;
+  padding: 32px;
+  text-align: center;
+  margin-top: 48px;
+}
+.cta-final-texto {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--gris-1);
+  margin-bottom: 18px;
+  letter-spacing: -.2px;
+}
+.cta-final-btn {
+  display: inline-block;
+  background: #2E7D33;
+  color: #fff !important;
+  padding: 13px 32px;
+  border-radius: 12px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: .85rem;
+  letter-spacing: .5px;
+  text-decoration: none !important;
+  transition: background .2s;
+}
+.cta-final-btn:hover { background: #1B5E20; }
+.cta-final-sub {
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--gris-3);
+  margin-top: 12px;
+}
+
+/* ---- Content section ---- */
+.content-section { background: var(--blanco); }
+.content-inner    { width: 100%; }
+
+@media (max-width: 600px) {
+  .article-wrap { padding: 32px 16px 60px; }
+  .art-cta      { padding: 22px 18px; }
+  .art-cta-final { padding: 22px 18px; }
+  .page-hero    { padding: 105px 20px 48px; }
+}
+</style>

@@ -367,7 +367,7 @@ const {
         const { data, error: storageErr } = await supabase
           .storage
           .from('lead-magnets')
-          .createSignedUrl('plantilla-recorrida.pdf', 300); // 5 minutos
+          .createSignedUrl(`${leadMagnetKey}.pdf`, 300); // 5 minutos
         if (!storageErr && data?.signedUrl) {
           downloadUrl = data.signedUrl;
         }
@@ -384,7 +384,7 @@ const {
         // Dispara la descarga automáticamente
         const a = document.createElement('a');
         a.href = downloadUrl;
-        a.download = 'Sigmetria-Plantilla-Recorrida.pdf';
+        a.download = `Sigmetria-${leadMagnetKey}.pdf`;
         a.style.display = 'none';
         document.body.appendChild(a);
         a.click();

@@ -1,0 +1,484 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FormLeadMagnetPDF from '../../components/FormLeadMagnetPDF.astro';
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Cómo hacer una matriz de riesgos (IPER) paso a paso, sin que sea un Excel muerto",
+  "description": "Cómo hacer una matriz de riesgos (IPER) paso a paso: identificar el peligro, evaluar el riesgo, definir controles y seguirlos. Por qué el Excel queda viejo y cómo armar una matriz que el auditor no objete.",
+  "image": "https://sigmetriahys.com/logo-sigmetria.svg",
+  "author": {
+    "@type": "Organization",
+    "name": "SIGMETRÍA HyS",
+    "url": "https://sigmetriahys.com"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "SIGMETRÍA HyS",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://sigmetriahys.com/logo-sigmetria.svg"
+    }
+  },
+  "datePublished": "2026-09-02",
+  "dateModified":  "2026-09-02",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://sigmetriahys.com/blog/como-hacer-matriz-riesgos-iper-paso-a-paso/"
+  },
+  "keywords": [
+    "cómo hacer una matriz de riesgos",
+    "matriz IPER paso a paso",
+    "identificación de peligros y evaluación de riesgos",
+    "probabilidad por consecuencia",
+    "plantilla IPER",
+    "matriz de riesgos en Excel",
+    "evaluación de riesgos laborales"
+  ]
+};
+---
+
+<BaseLayout
+  title="Cómo hacer una matriz de riesgos (IPER) paso a paso — SIGMETRÍA HyS"
+  description="Cómo hacer una matriz de riesgos (IPER) paso a paso: identificar el peligro, evaluar el riesgo, definir controles y seguirlos. Por qué el Excel queda viejo y cómo armar una matriz viva."
+  canonical="https://sigmetriahys.com/blog/como-hacer-matriz-riesgos-iper-paso-a-paso/"
+  schema={schema}
+>
+  <section class="page-hero">
+    <nav aria-label="Breadcrumb" class="breadcrumb">
+      <a href="/">Inicio</a><span>/</span>
+      <a href="/blog/">Blog</a><span>/</span>
+      <span>Cómo hacer una matriz de riesgos (IPER) paso a paso</span>
+    </nav>
+    <div class="page-hero-inner">
+      <div class="page-hero-badge">Plataforma HyS · Evaluación de riesgos · IPER</div>
+      <h1>CÓMO HACER UNA MATRIZ DE RIESGOS (IPER) PASO A PASO<br><em>SIN QUE TERMINE SIENDO UN EXCEL MUERTO</em></h1>
+      <p>
+        Peligro, riesgo, probabilidad por consecuencia, controles y seguimiento. El método completo, explicado
+        en criollo, y por qué la planilla que armaste hace dos años es justo lo primero que el auditor te va a objetar.
+      </p>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="content-inner article-wrap">
+
+      <div class="article-meta">
+        <span class="art-cat">Plataforma HyS</span>
+        <span class="art-sep">·</span>
+        <span class="art-fecha">2 sep 2026</span>
+        <span class="art-sep">·</span>
+        <span class="art-tiempo">7 min lectura</span>
+      </div>
+
+      <figure class="art-featured-img">
+        <img
+          src="https://images.pexels.com/photos/3862627/pexels-photo-3862627.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+          alt="Profesional de higiene y seguridad evaluando riesgos en una planta industrial con tablet en mano"
+          loading="eager"
+          width="1260"
+          height="630"
+        />
+      </figure>
+
+      <div class="article-body">
+
+        <p class="article-lead">
+          Abrís la matriz de riesgos que armaste hace dos años para presentarla en la auditoría. La fecha de la
+          última revisión dice "marzo 2024". Hay una columna de "responsable" con un nombre que ya no trabaja en
+          la empresa, una observación que figura "en proceso" desde la primavera pasada, y un riesgo que ponés
+          en verde aunque la máquina nueva que entró en julio nadie la evaluó. El auditor mira, levanta la ceja,
+          y vos ya sabés lo que viene.
+        </p>
+
+        <p>
+          Acá está la verdad incómoda: la mayoría de las matrices de riesgo no fallan porque estén mal hechas.
+          Fallan porque están <strong>muertas</strong>. Se arman una vez, se imprimen, se firman, y quedan
+          adentro de una carpeta esperando que llegue alguien a desempolvarlas. Y una matriz que no respira no
+          sirve para evaluar nada: sirve para decorar un legajo.
+        </p>
+
+        <p>
+          La buena noticia es que armar una matriz de riesgos (la famosa IPER: Identificación de Peligros y
+          Evaluación de Riesgos) no es complicado. Es un método de cuatro movimientos. Vamos paso a paso y, al
+          final, te dejo una plantilla lista para usar.
+        </p>
+
+        <h2>Primero lo primero: peligro NO es lo mismo que riesgo</h2>
+
+        <p>
+          Y no, no es purismo de manual. Esta confusión es la que arruina el 80% de las matrices que veo. Si
+          mezclás los dos conceptos, todo el resto se desmorona.
+        </p>
+
+        <ul class="art-list">
+          <li>
+            <strong>Peligro:</strong> la fuente con potencial de causar daño. Una escalera, un químico, una
+            máquina sin resguardo, un piso mojado. El peligro <em>existe</em>, está ahí.
+          </li>
+          <li>
+            <strong>Riesgo:</strong> la combinación entre qué tan probable es que ese peligro te lastime y qué
+            tan grave sería el daño. El riesgo es lo que <em>medís</em>.
+          </li>
+        </ul>
+
+        <p>
+          Pensalo así: un tiburón es un peligro. Un tiburón en la pecera de un acuario, detrás de un vidrio de
+          quince centímetros, es un riesgo bajo. El mismo tiburón mientras nadás en mar abierto sangrando es
+          un riesgo altísimo. Mismo peligro, riesgo completamente distinto. <strong>El peligro lo identificás;
+          el riesgo lo calculás.</strong>
+        </p>
+
+        <h2>Paso 1 — Identificá los peligros (recorré, no inventes)</h2>
+
+        <p>
+          El primer paso es salir a buscar los peligros donde están: en el establecimiento. No en tu cabeza,
+          no copiando la matriz de otro cliente. Recorrés cada área, cada puesto, cada tarea, y vas anotando
+          toda fuente con potencial de daño.
+        </p>
+
+        <p>
+          Para no dejarte nada afuera, conviene clasificar por tipo de peligro: mecánico (máquinas, herramientas),
+          físico (ruido, temperatura, iluminación), químico (sustancias, vapores), ergonómico (posturas, cargas),
+          eléctrico, locativo (pisos, escaleras, orden y limpieza) y psicosocial. Si tenés un
+          <a href="/blog/mapa-de-riesgos-laborales/" rel="noopener">mapa de riesgos laborales</a> bien armado,
+          ya tenés medio camino hecho: el mapa te muestra dónde están, la matriz te dice cuánto pesan.
+        </p>
+
+        <div class="art-destacado">
+          <strong>Regla de oro:</strong> un peligro que no recorriste no existe en tu matriz. Y un peligro que
+          no está en tu matriz es exactamente el que te va a generar el accidente que después nadie entiende
+          cómo pasó.
+        </div>
+
+        <h2>Paso 2 — Evaluá el riesgo: probabilidad × consecuencia</h2>
+
+        <p>
+          Acá viene el corazón del método y, por suerte, es pura matemática de primaria. Cada riesgo se evalúa
+          cruzando dos variables:
+        </p>
+
+        <ul class="art-list">
+          <li>
+            <strong>Probabilidad:</strong> qué tan factible es que el daño ocurra. Influye la frecuencia de
+            exposición, la cantidad de gente expuesta y si ya hubo incidentes parecidos.
+          </li>
+          <li>
+            <strong>Consecuencia (o severidad):</strong> qué tan grave sería el daño si ocurre. Desde una
+            molestia leve hasta una lesión incapacitante o una fatalidad.
+          </li>
+        </ul>
+
+        <p>
+          Le ponés un valor a cada una (lo más común es una escala del 1 al 5, o baja-media-alta) y los
+          multiplicás. <strong>Riesgo = probabilidad × consecuencia.</strong> Ese número te da el nivel de
+          riesgo, que solés representar con colores en una matriz de doble entrada: verde (tolerable),
+          amarillo (moderado), rojo (no tolerable, hay que actuar ya).
+        </p>
+
+        <p>
+          Lo lindo de cuantificar es que dejás de discutir por sensaciones. No es "a mí me parece peligroso":
+          es un 4 de probabilidad por un 5 de consecuencia, da 20, está en rojo, hay que intervenir. Si te
+          interesa el detalle de cómo se construye esta tabla en el marco de un sistema de gestión, lo
+          desarrollamos en
+          <a href="/blog/matriz-de-riesgos-iso-45001-como-armarla/" rel="noopener">cómo armar la matriz de riesgos en ISO 45001</a>.
+        </p>
+
+        <h2>Paso 3 — Definí controles (y respetá la jerarquía)</h2>
+
+        <p>
+          Identificaste el peligro, calculaste el riesgo, lo pintaste de rojo. ¿Ahora qué? Ahora bajás ese
+          riesgo con controles. Pero no cualquier control: hay un orden de prioridad que no es opcional, es
+          el que cualquier auditor espera ver. La jerarquía de controles va de lo más efectivo a lo menos:
+        </p>
+
+        <ul class="art-list">
+          <li><strong>Eliminación:</strong> sacar el peligro de raíz. Lo mejor que podés hacer.</li>
+          <li><strong>Sustitución:</strong> reemplazar por algo menos peligroso (un químico tóxico por uno que no lo es).</li>
+          <li><strong>Controles de ingeniería:</strong> resguardos, ventilación, aislamiento, automatización.</li>
+          <li><strong>Controles administrativos:</strong> procedimientos, señalización, capacitación, rotación.</li>
+          <li><strong>EPP:</strong> el equipo de protección personal. La última línea, nunca la primera.</li>
+        </ul>
+
+        <p>
+          El error clásico es saltar directo al EPP porque es lo más barato y rápido: "le doy los guantes y
+          listo". No. El EPP protege a una persona si todo lo demás falla; no elimina el peligro. Una matriz
+          que resuelve todo con EPP es una matriz que no entendió la jerarquía, y eso un auditor lo huele a
+          distancia. La capacitación, además, es un control que tenés que sostener en el tiempo: por eso conviene
+          que esté atada a un
+          <a href="/blog/plan-anual-capacitaciones-higiene-seguridad/" rel="noopener">plan anual de capacitaciones</a>
+          y no a la improvisación.
+        </p>
+
+        <h2>Paso 4 — Seguimiento: acá es donde el Excel se muere</h2>
+
+        <p>
+          Y llegamos al punto que separa una matriz viva de una de adorno. Definir el control no es el final:
+          es el principio. Alguien tiene que <strong>ejecutar</strong> ese control, en un <strong>plazo</strong>,
+          y vos tenés que <strong>verificar</strong> que se hizo. Eso es trazabilidad, y es lo primero que te
+          pide cualquier auditoría seria.
+        </p>
+
+        <p>
+          ¿Y por qué el Excel se muere justo acá? Porque la planilla no te avisa nada. El control que pusiste
+          con plazo "30 días" no te manda un recordatorio cuando se cumplen los 30 días. La columna "estado"
+          dice "en proceso" eternamente porque nadie la actualizó. El responsable que asignaste renunció y la
+          tarea quedó huérfana. Y cuando reabrís el archivo seis meses después, no tenés idea de qué se corrigió
+          y qué no. La matriz mostró el riesgo, pero nadie cerró el círculo.
+        </p>
+
+        <div class="art-destacado">
+          <strong>El auditor no objeta tu Excel porque sea Excel.</strong> Lo objeta porque no puede ver la
+          película: cuándo se detectó el riesgo, qué se decidió, quién lo ejecutó, en qué fecha se verificó.
+          Una foto estática no demuestra gestión. La trazabilidad sí.
+        </div>
+
+        <h2>Por qué la matriz en Excel envejece tan rápido</h2>
+
+        <p>
+          El Excel es una herramienta genial. Para una matriz de riesgos, es como usar un destornillador para
+          clavar un clavo: te las arreglás, pero no es lo que necesitás. Estos son los tres problemas que se
+          repiten siempre:
+        </p>
+
+        <ul class="art-list">
+          <li>
+            <strong>No tiene memoria del tiempo.</strong> No conoce los plazos, no avisa vencimientos, no
+            distingue entre "lo hice ayer" y "lo tenía que hacer hace tres meses".
+          </li>
+          <li>
+            <strong>No guarda evidencia.</strong> No podés adjuntar la foto del antes y el después, ni demostrar
+            con un registro que la observación se cerró de verdad.
+          </li>
+          <li>
+            <strong>Se duplica y se desactualiza.</strong> Tenés la versión del Drive, la del mail, la que te
+            mandó el cliente. ¿Cuál es la vigente? Nadie sabe. Si esto te suena, leé
+            <a href="/blog/excel-vs-software-gestion-hys/" rel="noopener">Excel vs. software de gestión de HyS</a>,
+            que va a fondo con la comparación.
+          </li>
+        </ul>
+
+        <h2>Cómo se ve una matriz IPER que está viva</h2>
+
+        <p>
+          Una matriz viva no es un documento: es un proceso que se mueve solo. Identificás el peligro, evaluás
+          el riesgo, asignás el control con un responsable y un plazo, y a partir de ahí el sistema te persigue
+          a vos (no al revés). Te avisa cuando un plazo está por vencer, te muestra de un vistazo qué riesgos
+          siguen en rojo, y guarda el historial completo de cada decisión.
+        </p>
+
+        <p>
+          Eso es exactamente lo que hace Sigmetría. Cargás cada peligro en el establecimiento, le ponés su
+          probabilidad y su consecuencia, y la matriz se calcula y se pinta sola. Cuando definís un control,
+          le asignás responsable y plazo, y la plataforma controla el vencimiento con alertas automáticas.
+          Registrás la observación con foto desde el celular en la misma recorrida, le hacés seguimiento, y la
+          cerrás con la foto de la corrección. Todo queda trazado, fechado y firmado: cuando llega la auditoría,
+          le mostrás la película completa, no una planilla congelada. Y si tu cliente quiere ver el estado de
+          su matriz, accede gratis a su propio dashboard.
+        </p>
+
+        <p>
+          No es magia ni reemplaza tu criterio técnico: el que decide qué es peligro y cuánto pesa cada riesgo
+          seguís siendo vos. Lo que cambia es que la matriz deja de envejecer en una carpeta y empieza a trabajar
+          todos los días. Si querés verlo funcionando,
+          <a href="/plataforma/" rel="noopener">conocé la plataforma y probala un mes gratis</a>.
+        </p>
+
+        <!-- ——— GATE DE DESCARGA ——— -->
+        <h2>Empezá hoy con la plantilla IPER</h2>
+
+        <p>
+          Para que arranques a armar tu matriz sin pelearte con celdas ni fórmulas, preparé una
+          <strong>plantilla profesional de matriz IPER</strong> en PDF A4 editable. Trae las columnas que
+          importan (peligro, riesgo, probabilidad, consecuencia, nivel, control, responsable y plazo) y la
+          jerarquía de controles a mano para que no te saltes ningún paso.
+        </p>
+
+        <p>
+          Es el punto de partida del método que vimos acá. Descargala, completá tu primera matriz y, cuando
+          quieras que respire sola, ya sabés dónde estamos.
+        </p>
+
+        <div class="art-cta">
+          <FormLeadMagnetPDF
+            titulo="Descargá la plantilla IPER gratis"
+            subtitulo="Dejanos tus datos y descargá gratis la plantilla profesional de matriz de riesgos (IPER)."
+            cta="Descargar la plantilla (PDF)"
+            leadMagnetKey="plantilla-iper"
+          />
+          <p style="margin-top:18px;font-size:13px;font-weight:300;color:var(--gris-3)">
+            ¿Preferís hablar directamente?
+            <a href="https://wa.me/5491123496789" target="_blank" rel="noopener" style="color:#2E7D33">Escribinos por WhatsApp →</a>
+          </p>
+        </div>
+
+      </div><!-- /article-body -->
+    </div><!-- /content-inner -->
+  </section>
+
+</BaseLayout>
+
+<style>
+/* ---- Hero interior ---- */
+.page-hero-inner {
+  max-width: 860px;
+  animation: fadeUp .6s ease both;
+}
+.page-hero-badge {
+  display: inline-block;
+  font-family: 'Montserrat', sans-serif;
+  font-size: .6rem;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: #2E7D33;
+  border: 1px solid rgba(46,125,51,.3);
+  border-radius: 100px;
+  padding: 5px 14px;
+  margin-bottom: 18px;
+}
+.page-hero h1 {
+  font-size: clamp(1.6rem, 4vw, 2.5rem);
+  line-height: 1.08;
+  margin-bottom: 18px;
+  color: var(--gris-1);
+}
+.page-hero h1 em {
+  font-style: normal;
+  color: #2E7D33;
+}
+.page-hero p {
+  font-size: clamp(.9rem, 1.5vw, 1.05rem);
+  font-weight: 300;
+  color: var(--gris-2);
+  max-width: 640px;
+  line-height: 1.75;
+}
+
+/* ---- Article wrap ---- */
+.article-wrap { max-width: 740px; margin: 0 auto; padding: 48px 24px 80px; }
+
+/* ---- Meta ---- */
+.article-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: .62rem;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--gris-3);
+  margin-bottom: 28px;
+}
+.art-cat   { color: #2E7D33; }
+.art-sep   { color: var(--gris-3); }
+
+/* ---- Featured image ---- */
+.art-featured-img {
+  margin: 0 0 36px;
+  border-radius: 10px;
+  overflow: hidden;
+  line-height: 0;
+}
+.art-featured-img img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  aspect-ratio: 16/8;
+}
+
+/* ---- Body typography ---- */
+.article-body { font-size: 1rem; line-height: 1.85; color: var(--gris-1); }
+
+.article-lead {
+  font-size: 1.1rem;
+  font-weight: 400;
+  line-height: 1.75;
+  color: var(--gris-2);
+  border-left: 3px solid #2E7D33;
+  padding-left: 20px;
+  margin-bottom: 28px;
+}
+
+.article-body h2 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--gris-1);
+  margin: 44px 0 16px;
+  line-height: 1.25;
+}
+
+.article-body p {
+  margin-bottom: 18px;
+  font-weight: 300;
+}
+
+.article-body a {
+  color: #2E7D33;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.article-body a:hover { color: #1B5E20; }
+
+/* ---- Lista ---- */
+.art-list {
+  margin: 0 0 24px 0;
+  padding-left: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.art-list li {
+  padding-left: 22px;
+  position: relative;
+  font-weight: 300;
+  line-height: 1.75;
+}
+.art-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 7px;
+  height: 7px;
+  background: #2E7D33;
+  border-radius: 50%;
+}
+
+/* ---- Destacado ---- */
+.art-destacado {
+  background: var(--verde-light);
+  border-left: 4px solid #2E7D33;
+  border-radius: 0 8px 8px 0;
+  padding: 16px 20px;
+  font-size: .95rem;
+  font-weight: 300;
+  color: var(--gris-2);
+  margin: 24px 0;
+  line-height: 1.7;
+}
+.art-destacado strong { color: var(--gris-1); font-weight: 700; }
+
+/* ---- CTA block ---- */
+.art-cta {
+  background: var(--gris-bg);
+  border: 1px solid var(--borde);
+  border-radius: 12px;
+  padding: 32px;
+  margin-top: 48px;
+}
+
+/* ---- Content section ---- */
+.content-section { background: var(--blanco); }
+.content-inner    { width: 100%; }
+
+@media (max-width: 600px) {
+  .article-wrap { padding: 32px 16px 60px; }
+  .art-cta      { padding: 22px 18px; }
+  .page-hero    { padding: 105px 20px 48px; }
+}
+</style>
