@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { FEATURES } from '../config/site';
+import Icon from '../components/Icon.astro';
 
 const schema = {
   "@context": "https://schema.org",
@@ -23,7 +24,7 @@ const schema = {
 const servicios = [
   {
     href: '/servicios/hys-construccion-caba/',
-    icon: '🏗️',
+    icon: 'hard-hat',
     badge: 'Decreto 911/96 · CABA · GBA',
     name: 'HyS Industrias y Construcciones',
     desc: 'Matriculado disponible, plan firmado y app de campo. Obra documentada en 7 días, lista para AGC, GCBA o SRT.',
@@ -31,7 +32,7 @@ const servicios = [
   },
   {
     href: '/servicios/iso-45001/implementacion/',
-    icon: '📋',
+    icon: 'clipboard-list',
     badge: 'ISO 45001:2018 · 6 meses',
     name: 'Implementación ISO 45001',
     desc: 'Desde cero a certificado en 6 meses. Roadmap por cláusula y plataforma que sobrevive al consultor.',
@@ -39,7 +40,7 @@ const servicios = [
   },
   {
     href: '/plataforma/',
-    icon: '💻',
+    icon: 'monitor',
     badge: 'SaaS · Onboarding en 30 días',
     name: 'Plataforma SaaS HyS',
     desc: 'Planificá, ejecutá, controlá y medí tu sistema completo. Vencimientos automáticos y reportes listos para auditoría.',
@@ -47,7 +48,7 @@ const servicios = [
   },
   {
     href: '/servicios/mediciones/',
-    icon: '📐',
+    icon: 'ruler',
     badge: 'Protocolos SRT · CABA · GBA',
     name: 'Mediciones Técnicas',
     desc: 'Iluminación, ruido, carga térmica, puesta a tierra y ergonomía. Informes firmados y carga directa al sistema.',
@@ -55,7 +56,7 @@ const servicios = [
   },
   {
     href: '/servicios/capacitaciones/',
-    icon: '🎓',
+    icon: 'graduation-cap',
     badge: 'In company · Registro digital',
     name: 'Capacitaciones In Company',
     desc: 'Trabajo en altura, espacios confinados, riesgo eléctrico y más. Constancias digitales listas para auditoría.',
@@ -63,7 +64,7 @@ const servicios = [
   },
   {
     href: '/servicios/auditorias/',
-    icon: '🔍',
+    icon: 'search',
     badge: 'Gap analysis · Auditoría sombra',
     name: 'Auditorías y Gap Analysis',
     desc: 'Sabé exactamente en qué estado estás antes de la auditoría externa. Gap analysis, auditoría interna y sombra.',
@@ -71,7 +72,7 @@ const servicios = [
   },
   {
     href: '/servicios/iso-45001/mantenimiento/',
-    icon: '🔄',
+    icon: 'refresh-cw',
     badge: 'Post-certificación · SaaS',
     name: 'Mantenimiento ISO 45001',
     desc: 'Mantenemos vivo tu sistema post-certificación sin que dependa de nosotros. SaaS + soporte + seguimiento.',
@@ -79,7 +80,7 @@ const servicios = [
   },
   {
     href: '/enterprise/',
-    icon: '🖥️',
+    icon: 'server',
     badge: 'Enterprise · ERP · IA',
     name: 'Enterprise + Dashboards',
     desc: 'HyS integrado a tu modelo operativo. Dashboards multi-sitio, integraciones con ERP y IA aplicada.',
@@ -89,12 +90,12 @@ const servicios = [
 
 // Módulos reales de la app (se muestran cuando FEATURES.servicios = false)
 const modulos = [
-  { icon: '📋', badge: 'Grupo › categoría › gestión', name: 'Gestiones y agenda', desc: 'Planificás cada gestión por establecimiento y la ejecutás desde el celular en obra. Nada se te pasa.', items: ['Planificación por establecimiento', 'Ejecución desde el celular', 'Clasificadas por grupo y categoría', 'Agenda con recordatorios'] },
-  { icon: '📸', badge: 'Foto · responsable · plazo · cierre', name: 'Observaciones con seguimiento', desc: 'Detectás un desvío, lo registrás con foto, le ponés responsable y plazo, le hacés seguimiento y lo cerrás con otra foto.', items: ['Registro con foto en obra', 'Responsable y plazo de corrección', 'Seguimiento hasta el cierre', 'Cierre con evidencia fotográfica'] },
-  { icon: '📐', badge: 'Protocolos SRT con PDF', name: 'Mediciones con informe automático', desc: 'Medís y cargás en el celular; cuando terminás, el informe sale solo. Se terminó el papel y el Excel.', items: ['Ruido (SRT 85/2012)', 'Iluminación (SRT 84/2012)', 'Puesta a tierra (SRT 900/2015)', 'Carga térmica (SRT 30/2023)'] },
-  { icon: '📁', badge: 'Alertas automáticas', name: 'Documentación y vencimientos', desc: 'Cargás cada vencimiento una vez y el sistema te avisa antes de que se pase. Dejá de perseguir fechas.', items: ['Documentación centralizada', 'Alertas antes del vencimiento', 'Capacitaciones y EPP', 'Legajo técnico con QR'] },
-  { icon: '⚠️', badge: 'IPER dinámica', name: 'Matriz de riesgos', desc: 'Tu matriz IPER viva y versionada, no un Excel muerto que el auditor te objeta.', items: ['Identificación de peligros', 'Evaluación de riesgo', 'Controles y seguimiento', 'Siempre actualizada'] },
-  { icon: '📊', badge: 'Consultora › empresa › establecimiento', name: 'Dashboard a 3 niveles', desc: 'Toda tu cartera en una vista. Y tu cliente entra a ver su propio dashboard, gratis.', items: ['Vista por consultora, empresa y sitio', 'KPIs en tiempo real', 'Reportes listos para auditoría', 'Tu cliente lo ve gratis'] },
+  { icon: 'clipboard-list', badge: 'Grupo › categoría › gestión', name: 'Gestiones y agenda', desc: 'Planificás cada gestión por establecimiento y la ejecutás desde el celular en obra. Nada se te pasa.', items: ['Planificación por establecimiento', 'Ejecución desde el celular', 'Clasificadas por grupo y categoría', 'Agenda con recordatorios'] },
+  { icon: 'camera', badge: 'Foto · responsable · plazo · cierre', name: 'Observaciones con seguimiento', desc: 'Detectás un desvío, lo registrás con foto, le ponés responsable y plazo, le hacés seguimiento y lo cerrás con otra foto.', items: ['Registro con foto en obra', 'Responsable y plazo de corrección', 'Seguimiento hasta el cierre', 'Cierre con evidencia fotográfica'] },
+  { icon: 'ruler', badge: 'Protocolos SRT con PDF', name: 'Mediciones con informe automático', desc: 'Medís y cargás en el celular; cuando terminás, el informe sale solo. Se terminó el papel y el Excel.', items: ['Ruido (SRT 85/2012)', 'Iluminación (SRT 84/2012)', 'Puesta a tierra (SRT 900/2015)', 'Carga térmica (SRT 30/2023)'] },
+  { icon: 'calendar-clock', badge: 'Alertas automáticas', name: 'Documentación y vencimientos', desc: 'Cargás cada vencimiento una vez y el sistema te avisa antes de que se pase. Dejá de perseguir fechas.', items: ['Documentación centralizada', 'Alertas antes del vencimiento', 'Capacitaciones y EPP', 'Legajo técnico con QR'] },
+  { icon: 'triangle-alert', badge: 'IPER dinámica', name: 'Matriz de riesgos', desc: 'Tu matriz IPER viva y versionada, no un Excel muerto que el auditor te objeta.', items: ['Identificación de peligros', 'Evaluación de riesgo', 'Controles y seguimiento', 'Siempre actualizada'] },
+  { icon: 'layout-dashboard', badge: 'Consultora › empresa › establecimiento', name: 'Dashboard a 3 niveles', desc: 'Toda tu cartera en una vista. Y tu cliente entra a ver su propio dashboard, gratis.', items: ['Vista por consultora, empresa y sitio', 'KPIs en tiempo real', 'Reportes listos para auditoría', 'Tu cliente lo ve gratis'] },
 ];
 ---
 
@@ -222,7 +223,7 @@ const modulos = [
         {(FEATURES.servicios ? servicios : modulos).map(s => (
           <article class="sector-card">
             <div class="sector-card-top">
-              <span class="sector-icon" aria-hidden="true">{s.icon}</span>
+              <span class="sector-icon"><Icon name={s.icon} size={30} /></span>
               <div class="sector-badge">{s.badge}</div>
             </div>
             <h3 class="sector-name">{s.name}</h3>
@@ -520,7 +521,7 @@ const modulos = [
   justify-content: space-between;
   margin-bottom: 12px;
 }
-.sector-icon { font-size: 1.8rem; }
+.sector-icon { color: var(--verde-dark); display: inline-flex; margin-bottom: 4px; }
 .sector-badge {
   font-family: 'Montserrat', sans-serif;
   font-size: .48rem;

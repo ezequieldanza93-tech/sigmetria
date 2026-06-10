@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import FormConsulta from '../../components/FormConsulta.astro';
+import FormLeadMagnetPDF from '../../components/FormLeadMagnetPDF.astro';
 ---
 
 <BaseLayout
@@ -113,14 +114,11 @@ import FormConsulta from '../../components/FormConsulta.astro';
         <p>El mayor obstáculo en la transición no es técnico: es cultural. El equipo que lleva años trabajando con Excel tiende a volver a él ante la primera dificultad con el sistema nuevo. Por eso es crítico que la implementación incluya acompañamiento real durante las primeras semanas de uso, no solo una sesión de capacitación inicial y un manual de usuario.</p>
 
         <div class="art-cta">
-          <FormConsulta
-            servicios={['s4']}
-            funnel="mofu"
-            leadMagnet="comparativa-excel-vs-software-hys"
-            titulo="Descargá la comparativa sin cargo"
-            subtitulo="Excel vs. software de gestión de H&S — cuándo cada herramienta tiene sentido y qué criterios usar para tomar la decisión."
-            cta="Quiero la comparativa"
-            successMsg="¡Listo! Te enviamos el recurso a tu email. Si no llega en 5 minutos, revisá spam."
+          <FormLeadMagnetPDF
+            titulo="Descargá el e-book gratis"
+            subtitulo="«Digitalizá tu gestión de Higiene y Seguridad»: las 5 cosas que perdés en Excel y el método para ordenar tu cartera de una vez."
+            cta="Descargar el e-book (PDF)"
+            leadMagnetKey="ebook-digitalizar"
           />
           <p style="margin-top:20px;font-size:13px;font-weight:300;color:var(--gris-3)">
             ¿Preferís hablar directamente?

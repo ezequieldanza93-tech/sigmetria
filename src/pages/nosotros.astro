@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '../components/Icon.astro';
 ---
 
 <BaseLayout
@@ -24,13 +25,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <!-- MISIÓN Y VISIÓN -->
       <div class="mv-grid">
         <div class="mv-card">
-          <div class="mv-icon">🎯</div>
+          <div class="mv-icon"><Icon name="target" size={30} /></div>
           <div class="page-hero-badge">Misión</div>
           <h2>NUESTRA <em>MISIÓN</em></h2>
           <p>Que dejes de perder horas en tareas administrativas y las uses en lo que de verdad importa: prevenir. Ordenamos tu gestión de HyS en una plataforma para que cumplas mejor, más rápido y con trazabilidad real.</p>
         </div>
         <div class="mv-card">
-          <div class="mv-icon">🔭</div>
+          <div class="mv-icon"><Icon name="eye" size={30} /></div>
           <div class="page-hero-badge">Visión</div>
           <h2>NUESTRA <em>VISIÓN</em></h2>
           <p>Ser la plataforma de gestión de Higiene y Seguridad de referencia en Argentina: simple en el campo, potente en los datos, y que tu equipo realmente usa.</p>
@@ -45,32 +46,32 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </header>
         <div class="valores-grid">
           <div class="valor-card">
-            <span class="valor-icon">🤝</span>
+            <span class="valor-icon"><Icon name="circle-check" size={26} /></span>
             <h3>Compromiso</h3>
             <p>Cumplimos lo que prometemos. Si decimos que cargás la recorrida y el reporte sale en un toque, es exactamente así.</p>
           </div>
           <div class="valor-card">
-            <span class="valor-icon">📋</span>
+            <span class="valor-icon"><Icon name="shield-check" size={26} /></span>
             <h3>Responsabilidad</h3>
             <p>Tus datos son tuyos, trazables y seguros. Toda tu gestión queda registrada y disponible cuando la necesitás — para una auditoría o para dormir tranquilo.</p>
           </div>
           <div class="valor-card">
-            <span class="valor-icon">💡</span>
+            <span class="valor-icon"><Icon name="lightbulb" size={26} /></span>
             <h3>Innovación</h3>
             <p>Integramos tecnología y procesos modernos para mejorar la gestión normativa y ofrecer soluciones más eficientes.</p>
           </div>
           <div class="valor-card">
-            <span class="valor-icon">⚡</span>
+            <span class="valor-icon"><Icon name="zap" size={26} /></span>
             <h3>Eficiencia</h3>
             <p>Optimizamos recursos y tiempos para que el cumplimiento normativo no frene tu operación sino que la potencie.</p>
           </div>
           <div class="valor-card">
-            <span class="valor-icon">⚖️</span>
+            <span class="valor-icon"><Icon name="scale" size={26} /></span>
             <h3>Equilibrio</h3>
             <p>Encontramos el punto entre cumplimiento estricto y operatividad real. Soluciones que funcionan en el día a día.</p>
           </div>
           <div class="valor-card">
-            <span class="valor-icon">💚</span>
+            <span class="valor-icon"><Icon name="heart" size={26} /></span>
             <h3>Bienestar</h3>
             <p>El objetivo final es que las personas trabajen seguras. La normativa es el medio; el bienestar de tu equipo, el fin.</p>
           </div>
@@ -129,7 +130,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   border-color: var(--verde-borde);
   box-shadow: 0 8px 28px rgba(0,0,0,.07);
 }
-.mv-icon { font-size: 2rem; margin-bottom: 12px; }
+.mv-icon { font-size: 2rem; margin-bottom: 12px; color: var(--verde-dark); display: inline-flex; align-items: center; }
 .mv-card .page-hero-badge { margin-bottom: 10px; }
 .mv-card h2 {
   font-size: clamp(20px, 2.5vw, 30px);
@@ -174,7 +175,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   transform: translateY(-3px);
   box-shadow: 0 8px 24px rgba(0,0,0,.07);
 }
-.valor-card .valor-icon { font-size: 1.6rem; display: block; margin-bottom: 10px; }
+.valor-card .valor-icon { font-size: 1.6rem; display: inline-flex; align-items: center; margin-bottom: 10px; color: var(--verde-dark); }
 .valor-card h3 {
   font-family: 'Montserrat', sans-serif;
   font-size: 13px;

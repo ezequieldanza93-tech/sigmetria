@@ -1,5 +1,6 @@
 ---
 import { FEATURES } from '../config/site';
+import Icon from './Icon.astro';
 
 const servicios = [
   { href: '/servicios/construccion/',   label: 'Industrias y Construcciones' },
@@ -61,19 +62,19 @@ const servicios = [
       <h3 class="footer-heading">Contacto</h3>
       <address>
         <p class="nap-item">
-          <span class="nap-icon">📍</span>
+          <span class="nap-icon"><Icon name="map-pin" size={16} /></span>
           CABA y provincia de Buenos Aires, Argentina
         </p>
         <p class="nap-item">
-          <span class="nap-icon">📞</span>
+          <span class="nap-icon"><Icon name="phone" size={16} /></span>
           <a href="tel:+5491123496789">+54 9 11 2349-6789</a>
         </p>
         <p class="nap-item">
-          <span class="nap-icon">💬</span>
+          <span class="nap-icon"><Icon name="message-circle" size={16} /></span>
           <a href="https://wa.me/5491123496789" target="_blank" rel="noopener">WhatsApp</a>
         </p>
         <p class="nap-item">
-          <span class="nap-icon">✉️</span>
+          <span class="nap-icon"><Icon name="mail" size={16} /></span>
           <a href="mailto:ezequiel@sigmetriahys.com">ezequiel@sigmetriahys.com</a>
         </p>
       </address>
@@ -170,7 +171,7 @@ address { font-style: normal; display: flex; flex-direction: column; gap: 10px; 
   color: var(--gris-2);
   line-height: 1.5;
 }
-.nap-icon { flex-shrink: 0; font-size: .85rem; }
+.nap-icon { flex-shrink: 0; display: inline-flex; align-items: center; color: var(--verde-dark); }
 .nap-item a { color: var(--gris-2); text-decoration: none; transition: color .2s; }
 .nap-item a:hover { color: var(--verde); }
 

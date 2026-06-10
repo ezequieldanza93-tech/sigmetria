@@ -1,6 +1,7 @@
 ﻿---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { FEATURES } from '../config/site';
+import Icon from '../components/Icon.astro';
 ---
 
 <BaseLayout
@@ -112,7 +113,7 @@ import { FEATURES } from '../config/site';
           <h2 class="contacto-h2">OTRAS FORMAS DE CONTACTO</h2>
 
           <div class="contact-method">
-            <span class="contact-method-icon">💬</span>
+            <span class="contact-method-icon"><Icon name="message-circle" size={22} /></span>
             <div>
               <h3>WhatsApp</h3>
               <p>La forma más rápida. Respondemos en menos de 2 horas en horario laboral.</p>
@@ -121,7 +122,7 @@ import { FEATURES } from '../config/site';
           </div>
 
           <div class="contact-method">
-            <span class="contact-method-icon">📞</span>
+            <span class="contact-method-icon"><Icon name="phone" size={22} /></span>
             <div>
               <h3>Teléfono</h3>
               <a href="tel:+5491123496789" class="contact-phone">+54 9 11 2349-6789</a>
@@ -129,7 +130,7 @@ import { FEATURES } from '../config/site';
           </div>
 
           <div class="contact-method">
-            <span class="contact-method-icon">📍</span>
+            <span class="contact-method-icon"><Icon name="map-pin" size={22} /></span>
             <div>
               <h3>Dónde llegamos</h3>
               <address class="contact-address">
@@ -140,7 +141,7 @@ import { FEATURES } from '../config/site';
           </div>
 
           <div class="contact-method">
-            <span class="contact-method-icon">🕐</span>
+            <span class="contact-method-icon"><Icon name="clock" size={22} /></span>
             <div>
               <h3>Horario de atención</h3>
               <p>Lunes a viernes · 8:00 a 18:00 hs</p>
@@ -207,7 +208,7 @@ import { FEATURES } from '../config/site';
 /* Métodos contacto */
 .contacto-info { display: flex; flex-direction: column; gap: 24px; }
 .contact-method { display: flex; gap: 14px; align-items: flex-start; }
-.contact-method-icon { font-size: 1.5rem; flex-shrink: 0; margin-top: 2px; }
+.contact-method-icon { display: inline-flex; align-items: center; flex-shrink: 0; margin-top: 2px; color: var(--verde-dark); }
 .contact-method h3 {
   font-family: 'Montserrat', sans-serif;
   font-size: 13px;

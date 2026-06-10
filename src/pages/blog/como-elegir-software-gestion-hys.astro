@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import FormLeadMagnetPDF from '../../components/FormLeadMagnetPDF.astro';
 
 const schema = {
   "@context": "https://schema.org",
@@ -275,6 +276,17 @@ const schema = {
           escales tu cartera sin vivir adentro de quince planillas. Si querés ver cómo funciona en tu propio
           trabajo, lo mejor es probarlo.
         </p>
+
+        <h2>Descargá el e-book gratis</h2>
+        <p>Antes de elegir, llevate el método completo: <strong>«Digitalizá tu gestión de Higiene y Seguridad»</strong> — las 5 cosas que perdés en Excel y cómo ordenar tu cartera sin vivir en planillas.</p>
+        <div class="art-cta">
+          <FormLeadMagnetPDF
+            titulo="Descargá el e-book gratis"
+            subtitulo="Dejanos tus datos y descargá «Digitalizá tu gestión de Higiene y Seguridad» (PDF)."
+            cta="Descargar el e-book (PDF)"
+            leadMagnetKey="ebook-digitalizar"
+          />
+        </div>
 
         <div class="art-cta-final">
           <p class="cta-final-texto">Probá las 7 preguntas con una herramienta que no le tiene miedo a ninguna.</p>
