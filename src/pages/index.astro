@@ -1,34 +1,22 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { FEATURES } from '../config/site';
 
 const schema = {
   "@context": "https://schema.org",
-  "@type": "ProfessionalService",
+  "@type": "SoftwareApplication",
   "name": "SIGMETRÍA HyS",
-  "description": "Sistema de gestión operativa basado en HyS, ISO 45001, automatización e IA. Planificamos, ejecutamos, controlamos y medimos en tiempo real — con plataforma propia y presencia en obra.",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web",
+  "description": "Plataforma SaaS para gestionar Higiene y Seguridad: cargás la recorrida desde el celular, el reporte sale con un botón y ves toda tu cartera de clientes y establecimientos en una sola vista.",
   "url": "https://sigmetriahys.com",
-  "telephone": "+5491123496789",
-  "email": "ezequiel@sigmetriahys.com",
-  "areaServed": ["Ciudad Autónoma de Buenos Aires", "Gran Buenos Aires", "Argentina"],
-  "address": {
-    "@type": "PostalAddress",
-    "addressRegion": "Ciudad Autónoma de Buenos Aires",
-    "addressCountry": "AR"
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "ARS",
+    "description": "1 mes de prueba gratis, sin tarjeta"
   },
-  "hasOfferCatalog": {
-    "@type": "OfferCatalog",
-    "name": "Servicios de Gestión HyS",
-    "itemListElement": [
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "HyS para Industrias y Construcciones — CABA y GBA" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Implementación ISO 45001:2018" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Plataforma SaaS de Gestión HyS" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Mediciones Técnicas en Planta y Obra" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Capacitaciones HyS In Company" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Auditorías y Gap Analysis ISO 45001" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Mantenimiento ISO 45001 Post-Certificación" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Sistemas Enterprise y Dashboards Ejecutivos" } }
-    ]
-  },
+  "areaServed": "Argentina",
   "sameAs": []
 };
 
@@ -98,11 +86,21 @@ const servicios = [
     items: ['Integración SAP / Oracle / Dynamics', 'Dashboards multi-planta en tiempo real', 'KPIs consolidados por planta', 'Alertas automáticas con escalado', 'Soporte enterprise 24/7 con SLA'],
   },
 ];
+
+// Módulos reales de la app (se muestran cuando FEATURES.servicios = false)
+const modulos = [
+  { icon: '📋', badge: 'Grupo › categoría › gestión', name: 'Gestiones y agenda', desc: 'Planificás cada gestión por establecimiento y la ejecutás desde el celular en obra. Nada se te pasa.', items: ['Planificación por establecimiento', 'Ejecución desde el celular', 'Clasificadas por grupo y categoría', 'Agenda con recordatorios'] },
+  { icon: '📸', badge: 'Foto · responsable · plazo · cierre', name: 'Observaciones con seguimiento', desc: 'Detectás un desvío, lo registrás con foto, le ponés responsable y plazo, le hacés seguimiento y lo cerrás con otra foto.', items: ['Registro con foto en obra', 'Responsable y plazo de corrección', 'Seguimiento hasta el cierre', 'Cierre con evidencia fotográfica'] },
+  { icon: '📐', badge: 'Protocolos SRT con PDF', name: 'Mediciones con informe automático', desc: 'Medís y cargás en el celular; cuando terminás, el informe sale solo. Se terminó el papel y el Excel.', items: ['Ruido (SRT 85/2012)', 'Iluminación (SRT 84/2012)', 'Puesta a tierra (SRT 900/2015)', 'Carga térmica (SRT 30/2023)'] },
+  { icon: '📁', badge: 'Alertas automáticas', name: 'Documentación y vencimientos', desc: 'Cargás cada vencimiento una vez y el sistema te avisa antes de que se pase. Dejá de perseguir fechas.', items: ['Documentación centralizada', 'Alertas antes del vencimiento', 'Capacitaciones y EPP', 'Legajo técnico con QR'] },
+  { icon: '⚠️', badge: 'IPER dinámica', name: 'Matriz de riesgos', desc: 'Tu matriz IPER viva y versionada, no un Excel muerto que el auditor te objeta.', items: ['Identificación de peligros', 'Evaluación de riesgo', 'Controles y seguimiento', 'Siempre actualizada'] },
+  { icon: '📊', badge: 'Consultora › empresa › establecimiento', name: 'Dashboard a 3 niveles', desc: 'Toda tu cartera en una vista. Y tu cliente entra a ver su propio dashboard, gratis.', items: ['Vista por consultora, empresa y sitio', 'KPIs en tiempo real', 'Reportes listos para auditoría', 'Tu cliente lo ve gratis'] },
+];
 ---
 
 <BaseLayout
-  title="SIGMETRÍA HyS — Sistema de Gestión HyS | ISO 45001 · Plataforma · CABA y GBA"
-  description="No somos una consultora. Somos el sistema de gestión operativa basado en HyS, ISO 45001, automatización e IA. No entregamos carpetas. Dejamos sistema."
+  title="SIGMETRÍA HyS — La app para gestionar Higiene y Seguridad | Probala gratis"
+  description="Plataforma SaaS de gestión de HyS: cargás la recorrida desde el celular, el reporte sale con un botón y ves toda tu cartera en una vista. Probala un mes gratis, sin tarjeta."
   schema={schema}
 >
 
@@ -110,65 +108,63 @@ const servicios = [
   <section class="hero">
     <div class="hero-layout">
       <div class="hero-left">
-        <div class="kicker kicker--left">SISTEMA · NO CONSULTORÍA · CABA Y GBA</div>
+        <div class="kicker kicker--left">PLATAFORMA DE GESTIÓN HyS · SaaS</div>
         <h1 class="hero-title">
-          <span class="hero-hys">HIGIENE Y<br>SEGURIDAD</span>
-          <span class="hero-claim">QUE PLANIFICA,<br>CONTROLA Y <em>MIDE</em></span>
+          <span class="hero-hys">TODA TU<br>GESTIÓN DE HyS</span>
+          <span class="hero-claim">EN UNA SOLA <em>APP</em></span>
         </h1>
-        <p class="hero-sub">No somos una consultora. Somos el sistema de gestión operativa basado en HyS, ISO 45001, automatización e IA. <strong>No entregamos carpetas. Dejamos sistema.</strong></p>
+        <p class="hero-sub">Cargás la recorrida desde el celular, el reporte sale con un botón y ves toda tu cartera de clientes y establecimientos en una sola vista. <strong>Probala un mes gratis, sin tarjeta.</strong></p>
         <div class="hero-actions">
-          <a href="/contacto/" class="btn-primary">Diagnóstico gratuito</a>
-          <a href="/servicios/" class="btn-outline">Ver servicios</a>
+          <a href="https://sigmetria-hys.vercel.app/" target="_blank" rel="noopener" class="btn-primary">Probá gratis</a>
+          <a href="/plataforma/" class="btn-outline">Cómo funciona</a>
         </div>
       </div>
       <div class="hero-right">
         <div class="hero-card">
-          <p class="hero-card-label">SIGMETRÍA HyS · RESULTADOS</p>
+          <p class="hero-card-label">LA RECORRIDA, DE PUNTA A PUNTA</p>
           <div class="hero-stats">
             <div class="hero-stat">
-              <span class="hero-stat-num">6<span class="hero-stat-unit">m</span></span>
-              <span class="hero-stat-text">ISO 45001 desde cero a certificado</span>
+              <span class="hero-stat-num">1<span class="hero-stat-unit">mes</span></span>
+              <span class="hero-stat-text">de prueba gratis, sin tarjeta</span>
             </div>
             <div class="hero-stat">
-              <span class="hero-stat-num">7<span class="hero-stat-unit">d</span></span>
-              <span class="hero-stat-text">obra documentada lista para AGC</span>
+              <span class="hero-stat-num">3<span class="hero-stat-unit">niveles</span></span>
+              <span class="hero-stat-text">consultora › empresa › establecimiento</span>
             </div>
             <div class="hero-stat">
-              <span class="hero-stat-num">30<span class="hero-stat-unit">d</span></span>
-              <span class="hero-stat-text">onboarding de plataforma</span>
+              <span class="hero-stat-num">1<span class="hero-stat-unit">clic</span></span>
+              <span class="hero-stat-text">y el reporte de recorrida sale solo</span>
             </div>
           </div>
           <div class="hero-branches">
             <div class="hero-branch">
               <div class="hero-branch-head">
-                <span class="hero-branch-icon">🏗️</span>
-                <span class="hero-branch-name">Cumplimiento operativo</span>
+                <span class="hero-branch-icon">①</span>
+                <span class="hero-branch-name">Planificás y ejecutás</span>
               </div>
-              <ul class="hero-branch-list">
-                <li><a href="/servicios/construccion/">Industrias y Construcciones</a></li>
-                <li><a href="/servicios/mediciones/">Mediciones Técnicas</a></li>
-                <li><a href="/servicios/capacitaciones/">Capacitaciones</a></li>
+              <ul class="hero-branch-list hero-branch-list--flow">
+                <li>Planificás la gestión por establecimiento</li>
+                <li>La ejecutás en obra desde el celular</li>
               </ul>
             </div>
             <div class="hero-branch">
               <div class="hero-branch-head">
-                <span class="hero-branch-icon">📋</span>
-                <span class="hero-branch-name">ISO 45001</span>
+                <span class="hero-branch-icon">②</span>
+                <span class="hero-branch-name">Observás con foto</span>
               </div>
-              <ul class="hero-branch-list">
-                <li><a href="/servicios/iso-45001/implementacion/">Implementación</a></li>
-                <li><a href="/servicios/auditorias/">Auditorías y Gap Analysis</a></li>
-                <li><a href="/servicios/iso-45001/mantenimiento/">Mantenimiento post-cert.</a></li>
+              <ul class="hero-branch-list hero-branch-list--flow">
+                <li>Registrás el desvío con foto</li>
+                <li>Asignás responsable y plazo de corrección</li>
               </ul>
             </div>
             <div class="hero-branch">
               <div class="hero-branch-head">
-                <span class="hero-branch-icon">💻</span>
-                <span class="hero-branch-name">Plataforma y tecnología</span>
+                <span class="hero-branch-icon">③</span>
+                <span class="hero-branch-name">Seguís y cerrás</span>
               </div>
-              <ul class="hero-branch-list">
-                <li><a href="/plataforma/">Plataforma SaaS HyS</a></li>
-                <li><a href="/enterprise/">Enterprise + Dashboards</a></li>
+              <ul class="hero-branch-list hero-branch-list--flow">
+                <li>Seguimiento hasta que se corrige</li>
+                <li>Cerrás con foto: todo queda registrado</li>
               </ul>
             </div>
           </div>
@@ -209,15 +205,21 @@ const servicios = [
     </div>
   </section>
 
-  <!-- SERVICIOS -->
-  <section class="sectores-section" id="servicios" aria-label="Servicios y soluciones">
+  <!-- MÓDULOS DE LA PLATAFORMA · los servicios quedan detrás del flag FEATURES.servicios -->
+  <section class="sectores-section" id="servicios" aria-label="Qué hace la plataforma">
     <div class="sectores-inner">
       <header class="sectores-header">
-        <h2 class="sectores-title">SERVICIOS Y <em>SOLUCIONES</em></h2>
-        <p class="sectores-sub">Ocho servicios integrados en un solo sistema — no aislados, sino partes de una plataforma.</p>
+        <h2 class="sectores-title">
+          {FEATURES.servicios ? (<>SERVICIOS Y <em>SOLUCIONES</em></>) : (<>TODO TU SISTEMA DE HyS, <em>EN UNA APP</em></>)}
+        </h2>
+        <p class="sectores-sub">
+          {FEATURES.servicios
+            ? 'Ocho servicios integrados en un solo sistema — no aislados, sino partes de una plataforma.'
+            : 'Cada cosa que hoy hacés en planillas sueltas, ordenada en una sola plataforma — y conectada de punta a punta.'}
+        </p>
       </header>
-      <div class="sectores-grid">
-        {servicios.map(s => (
+      <div class={`sectores-grid ${FEATURES.servicios ? '' : 'sectores-grid--mod'}`}>
+        {(FEATURES.servicios ? servicios : modulos).map(s => (
           <article class="sector-card">
             <div class="sector-card-top">
               <span class="sector-icon" aria-hidden="true">{s.icon}</span>
@@ -228,7 +230,7 @@ const servicios = [
             <ul class="sector-list" aria-label={`Detalle — ${s.name}`}>
               {s.items.map(item => <li>{item}</li>)}
             </ul>
-            <a href={s.href} class="sector-cta">Ver detalle →</a>
+            {s.href && <a href={s.href} class="sector-cta">Ver detalle →</a>}
           </article>
         ))}
       </div>
@@ -255,8 +257,8 @@ const servicios = [
         </div>
         <div class="porque-item">
           <div class="porque-num">03</div>
-          <h3>Velocidad real</h3>
-          <p>Obra documentada en 7 días. ISO 45001 desde cero en 6 meses. Onboarding de plataforma en 30 días. Promesas con roadmap, no marketing.</p>
+          <h3>Empezás hoy</h3>
+          <p>Cargás tu primer cliente en minutos y la recorrida sale en un toque. Sin migración eterna ni implementación de meses: arrancás con un cliente y lo usás en serio.</p>
         </div>
         <div class="porque-item">
           <div class="porque-num">04</div>
@@ -445,6 +447,7 @@ const servicios = [
   transition: color .15s;
 }
 .hero-branch-list a:hover { color: var(--verde); }
+.hero-branch-list--flow li { color: rgba(255,255,255,.5); font-size: 11px; font-weight: 300; line-height: 1.5; }
 
 /* SERVICIOS */
 .sectores-section {
@@ -483,6 +486,7 @@ const servicios = [
   grid-template-columns: repeat(4, 1fr);
   gap: 14px;
 }
+.sectores-grid--mod { grid-template-columns: repeat(3, 1fr); }
 .sector-card {
   background: var(--blanco);
   border: 1px solid var(--borde);
