@@ -24,9 +24,9 @@ const features: FeatureGroup[] = [
   {
     group: 'Precio',
     rows: [
-      { label: 'Precio mensual (neto + IVA 21%)',    values: ['Gratis',    '$20.000',   '$68.000',  '$114.000', 'A consultar'] },
-      { label: 'Precio anual mensualizado (−20%)',   values: ['—',         '$16.000',   '$54.400',  '$91.200',  'A consultar'] },
-      { label: 'Período de prueba gratuita',          values: ['14 días',  '14 días',   '14 días',  '14 días', '14 días'] },
+      { label: 'Precio mensual (neto + IVA 21%)',    values: ['Gratis',    '$24.000',   '$69.000',  '$114.000', 'A consultar'] },
+      { label: 'Precio anual mensualizado (−20%)',   values: ['—',         '$19.200',   '$55.200',  '$91.200',  'A consultar'] },
+      { label: 'Período de prueba gratuita',          values: ['1 mes',    '1 mes',     '1 mes',    '1 mes',   '1 mes'] },
     ],
   },
   {
@@ -55,7 +55,7 @@ const features: FeatureGroup[] = [
     rows: [
       { label: 'Múltiples usuarios / colaboradores',     values: [false, false, true,  true,  true] },
       { label: 'Roles y permisos diferenciados',         values: [false, false, true,  true,  true] },
-      { label: 'Add-on seat extra (+$22.700 neto/mes)',  values: [false, false, true,  true,  true] },
+      { label: 'Add-on seat extra',  values: [false, false, '$23.000/seat', '$22.800/seat', 'A consultar'] },
     ],
   },
   {
@@ -72,11 +72,11 @@ const features: FeatureGroup[] = [
 ];
 
 const precios = [
-  { mensual: null,    anual_mes: null,   gratis: true,  empresa: false },
-  { mensual: 20000,   anual_mes: 16000,  gratis: false, empresa: false },
-  { mensual: 68000,   anual_mes: 54400,  gratis: false, empresa: false },
-  { mensual: 114000,  anual_mes: 91200,  gratis: false, empresa: false },
-  { mensual: null,    anual_mes: null,   gratis: false, empresa: true  },
+  { mensual: null,    anual_mes: null,   porUsuario: null,  colab: null, gratis: true,  empresa: false },
+  { mensual: 24000,   anual_mes: 19200,  porUsuario: 24000, colab: 1,    gratis: false, empresa: false },
+  { mensual: 69000,   anual_mes: 55200,  porUsuario: 23000, colab: 3,    gratis: false, empresa: false },
+  { mensual: 114000,  anual_mes: 91200,  porUsuario: 22800, colab: 5,    gratis: false, empresa: false },
+  { mensual: null,    anual_mes: null,   porUsuario: null,  colab: null, gratis: false, empresa: true  },
 ];
 
 const destacado = [false, false, true, false, false];
@@ -108,7 +108,7 @@ function fmt(n: number) {
       </nav>
       <div class="page-hero-badge">Pagos por transferencia · IVA 21% discriminado · Sin permanencia mínima</div>
       <h1>PLANES Y<br><em>PRECIOS</em></h1>
-      <p class="hero-sub">Elegí el plan que se adapta a tu consultora. Todos incluyen 14 días de prueba gratuita y acceso completo a la plataforma.</p>
+      <p class="hero-sub">Elegí el plan que se adapta a tu consultora. Todos incluyen 1 mes de prueba gratuita y acceso completo a la plataforma.</p>
 
       <div class="billing-toggle" id="billing-toggle">
         <button class="toggle-btn active" id="btn-mensual">Mensual</button>
@@ -148,6 +148,11 @@ function fmt(n: number) {
                         </span>
                         <span class="precio-periodo precio-mensual-val" data-show="mensual">/mes + IVA</span>
                         <span class="precio-periodo precio-anual-val hidden" data-show="anual">/mes + IVA</span>
+                        {precios[i].porUsuario && (
+                          <span class="precio-usuario">
+                            ${fmt(precios[i].porUsuario!)} /usuario{precios[i].colab! > 1 ? ` · ${precios[i].colab} colab.` : ''}
+                          </span>
+                        )}
                       </>
                     )}
                   </div>
@@ -207,7 +212,7 @@ function fmt(n: number) {
       <div class="addon-note">
         <span class="addon-icon">➕</span>
         <p>
-          ¿Necesitás más colaboradores? Podés agregar <strong>seats adicionales por $15.000 neto/mes</strong> cada uno en los planes Consultora Chica, Grande y Empresa.
+          ¿Necesitás más colaboradores? Podés agregar <strong>seats adicionales</strong> en los planes Consultora Chica ($23.000 neto/seat/mes), Grande ($22.800 neto/seat/mes) y Empresa.
         </p>
       </div>
 
@@ -341,6 +346,9 @@ function fmt(n: number) {
 .precio-consultar { font-size: .9rem; font-weight: 700; color: var(--gris-2); }
 .precio-periodo {
   display: block; font-size: .65rem; color: var(--gris-2); font-weight: 400; margin-top: 3px;
+}
+.precio-usuario {
+  display: block; font-size: .62rem; color: var(--gris-3); font-weight: 600; margin-top: 5px; letter-spacing: .2px;
 }
 
 .th-cta {
