@@ -519,6 +519,17 @@ export const blogPosts: BlogPost[] = [
     sectores: ['Construcción', 'Empresas Industriales'],
   },
   {
+    slug: 'construi-una-app-hys-historia-sigmetria',
+    titulo: 'Construí una app de HyS porque no existía la que necesitaba',
+    metaDescription: 'La historia del fundador de Sigmetría: de tres carpetas desordenadas en una constructora a certificar ISO 45001 y construir la herramienta que faltaba.',
+    fecha: '2026-06-10',
+    categoria: 'Plataforma HyS',
+    tiempoLectura: '6 min',
+    resumen: 'La historia completa detrás del post de LinkedIn: el caos inicial, la apuesta del CEO, la certificación ISO 45001 y la decisión de construir la app que necesitaba desde el día uno.',
+    tags: ['historia', 'fundador', 'ISO 45001', 'plataforma', 'gestión HyS', 'constructora'],
+    sectores: ['Consultor HyS', 'Empresas Industriales', 'Construcción'],
+  },
+  {
     slug: 'como-organizar-gestion-hys-varios-clientes',
     titulo: 'Cómo organizar la gestión de Higiene y Seguridad cuando tenés varios clientes',
     metaDescription: 'Cómo organizar la gestión de Higiene y Seguridad con varios clientes: un método para ordenar tu cartera, vencimientos y recorridas sin vivir en Excel.',
