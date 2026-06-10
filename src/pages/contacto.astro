@@ -1,10 +1,11 @@
 ﻿---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { FEATURES } from '../config/site';
 ---
 
 <BaseLayout
-  title="Contacto — SIGMETRÍA HyS | Consultora de Higiene y Seguridad Laboral"
-  description="Contactate con SIGMETRÍA HyS para servicios de Higiene y Seguridad Laboral en CABA y GBA. WhatsApp, formulario o teléfono. Respuesta en el día."
+  title="Contacto — SIGMETRÍA HyS | Probá la plataforma o escribinos"
+  description="¿Querés ver la plataforma con tus datos o tenés dudas sobre los planes? Escribinos por WhatsApp o formulario y te respondemos en el día. O probala gratis un mes."
 >
   <section class="page-hero">
     <div class="page-hero-inner">
@@ -13,8 +14,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <span>Contacto</span>
       </nav>
       <div class="page-hero-badge">Respuesta en el día</div>
-      <h1>HABLEMOS<br><em>DE TU EMPRESA</em></h1>
-      <p>Contanos en qué rubro trabaja tu empresa y cuántos empleados tiene. Te armamos una propuesta personalizada sin cargo.</p>
+      <h1>HABLEMOS<br><em>DE TU GESTIÓN</em></h1>
+      <p>¿Querés ver la plataforma con tus datos o tenés dudas sobre los planes? Escribinos y te respondemos en el día. ¿Querés arrancar ya? Probala gratis un mes, sin esperar a nadie.</p>
     </div>
   </section>
 
@@ -60,27 +61,34 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             </div>
 
             <div class="form-group">
-              <label>¿Qué servicios te interesan? *</label>
+              <label>¿Qué te interesa? *</label>
               <div class="servicios-grid">
+                <div class="servicio-categoria">
+                  <span class="categoria-label">La plataforma</span>
+                  <label class="check-label"><input type="checkbox" name="servicios" value="s4" /> Probar la plataforma (1 mes gratis)</label>
+                  <label class="check-label"><input type="checkbox" name="servicios" value="demo" /> Demo guiada con mis datos</label>
+                  <label class="check-label"><input type="checkbox" name="servicios" value="precios" /> Dudas sobre planes y precios</label>
+                  <label class="check-label"><input type="checkbox" name="servicios" value="migracion" /> Migrar mi gestión desde Excel</label>
+                  <label class="check-label"><input type="checkbox" name="servicios" value="s8" /> Enterprise / multi-sitio</label>
+                </div>
+                {FEATURES.servicios && (
                 <div class="servicio-categoria">
                   <span class="categoria-label">Cumplimiento operativo</span>
                   <label class="check-label"><input type="checkbox" name="servicios" value="s1" /> HyS en Construcción</label>
                   <label class="check-label"><input type="checkbox" name="servicios" value="s6" /> Mediciones Técnicas</label>
                   <label class="check-label"><input type="checkbox" name="servicios" value="s7" /> Capacitaciones</label>
                 </div>
+                )}
+                {FEATURES.servicios && (
                 <div class="servicio-categoria">
                   <span class="categoria-label">Sistemas ISO 45001</span>
                   <label class="check-label"><input type="checkbox" name="servicios" value="s2" /> Implementación ISO 45001</label>
                   <label class="check-label"><input type="checkbox" name="servicios" value="s3" /> Mantenimiento ISO 45001</label>
                   <label class="check-label"><input type="checkbox" name="servicios" value="s5" /> Auditorías HyS y SIG</label>
                 </div>
-                <div class="servicio-categoria">
-                  <span class="categoria-label">Plataforma digital</span>
-                  <label class="check-label"><input type="checkbox" name="servicios" value="s4" /> Software HyS (SaaS)</label>
-                  <label class="check-label"><input type="checkbox" name="servicios" value="s8" /> Enterprise / ERP</label>
-                </div>
+                )}
               </div>
-              <p id="servicios-error" class="field-error" style="display:none">Seleccioná al menos un servicio.</p>
+              <p id="servicios-error" class="field-error" style="display:none">Seleccioná al menos una opción.</p>
             </div>
 
             <div class="form-group">
@@ -123,10 +131,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <div class="contact-method">
             <span class="contact-method-icon">📍</span>
             <div>
-              <h3>Área de cobertura</h3>
+              <h3>Dónde llegamos</h3>
               <address class="contact-address">
-                Ciudad Autónoma de Buenos Aires (CABA)<br>
-                Gran Buenos Aires (GBA)
+                La plataforma es 100% online: la usás desde cualquier punto de Argentina.<br>
+                Onboarding y soporte remoto.
               </address>
             </div>
           </div>
