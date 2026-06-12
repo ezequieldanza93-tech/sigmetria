@@ -102,6 +102,10 @@ import Icon from '../components/Icon.astro';
                 <input type="checkbox" id="acepta" name="acepta" required />
                 Acepto la <a href="/politica-de-privacidad/" target="_blank" rel="noopener">política de privacidad</a> y el tratamiento de mis datos de contacto.
               </label>
+              <label class="check-label check-label--terms">
+                <input type="checkbox" id="optin" name="optin" />
+                Quiero recibir novedades y contenido de HyS por email (opcional).
+              </label>
             </div>
 
             <button type="submit" class="btn-primary" style="width:100%;justify-content:center;">Enviar consulta</button>
@@ -411,6 +415,12 @@ import Icon from '../components/Icon.astro';
       alert('Hubo un error. Por favor intentá de nuevo o escribinos por WhatsApp.');
       return;
     }
+
+    // CRM: consentimientos (best-effort)
+    const cOptin = !!(document.getElementById('optin') as HTMLInputElement | null)?.checked;
+    const cConsents: any[] = [{ email: str('email'), tipo: 'privacidad', otorgado: true, texto_version: 'pp-2026-06', pagina: window.location.href, user_agent: navigator.userAgent }];
+    if (cOptin) cConsents.push({ email: str('email'), tipo: 'email_marketing', otorgado: true, texto_version: 'pp-2026-06', pagina: window.location.href, user_agent: navigator.userAgent });
+    supabase.from('consentimientos').insert(cConsents);
 
     form.style.display = 'none';
     success.style.display = 'block';

@@ -95,9 +95,12 @@ const {
     <label class="lm-terms">
       <input type="checkbox" name="acepta" required />
       <span>
-        Acepto recibir comunicaciones de Sigmetría y la
-        <a href="/politica-de-privacidad/" target="_blank" rel="noopener">política de privacidad</a>
+        Acepto la <a href="/politica-de-privacidad/" target="_blank" rel="noopener">política de privacidad</a> *
       </span>
+    </label>
+    <label class="lm-terms">
+      <input type="checkbox" name="optin" />
+      <span>Quiero recibir novedades y contenido de HyS por email (opcional)</span>
     </label>
 
     <p class="lm-error" role="alert" aria-live="assertive" style="display:none">
@@ -360,6 +363,15 @@ const {
         errMsg.style.display = 'block';
         return;
       }
+
+      // CRM: registrar descarga + consentimientos (best-effort; no bloquea ni rompe la descarga)
+      const lmSlug = window.location.pathname.replace(/\/+$/, '').split('/').pop() || null;
+      const lmOptin = !!(form.querySelector<HTMLInputElement>('[name="optin"]'))?.checked;
+      const lmUtm = Object.fromEntries(Object.entries(utm).filter(([, v]) => v));
+      supabase.from('lead_magnet_descargas').insert({ email, lead_magnet_key: leadMagnetKey, origen_pagina: window.location.href, origen_slug: lmSlug, canal: 'web', etapa_funnel: 'tofu', ...lmUtm });
+      const lmConsents: any[] = [{ email, tipo: 'privacidad', otorgado: true, texto_version: 'pp-2026-06', pagina: window.location.href, user_agent: navigator.userAgent }];
+      if (lmOptin) lmConsents.push({ email, tipo: 'email_marketing', otorgado: true, texto_version: 'pp-2026-06', pagina: window.location.href, user_agent: navigator.userAgent });
+      supabase.from('consentimientos').insert(lmConsents);
 
       // 2. Obtener signed URL del PDF (Supabase Storage, bucket privado "lead-magnets")
       let downloadUrl: string | null = null;

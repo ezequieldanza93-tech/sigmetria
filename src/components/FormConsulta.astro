@@ -68,6 +68,10 @@ const {
       <input type="checkbox" name="acepta" required />
       <span>Acepto la <a href="/politica-de-privacidad/" target="_blank" rel="noopener">política de privacidad</a></span>
     </label>
+    <label class="fc-terms">
+      <input type="checkbox" name="optin" />
+      <span>Quiero recibir novedades por email (opcional)</span>
+    </label>
 
     <p class="fc-error" style="display:none">Completá todos los campos para continuar.</p>
 
@@ -228,6 +232,15 @@ const {
         errMsg.style.display = 'block';
         return;
       }
+
+      // CRM: descarga (si es lead magnet) + consentimientos (best-effort)
+      const fcSlug = window.location.pathname.replace(/\/+$/, '').split('/').pop() || null;
+      const fcOptin = !!(form.querySelector<HTMLInputElement>('[name="optin"]'))?.checked;
+      const fcUtm = Object.fromEntries(Object.entries(utm).filter(([, v]) => v));
+      if (leadMagnet) supabase.from('lead_magnet_descargas').insert({ email, lead_magnet_key: leadMagnet, origen_pagina: window.location.href, origen_slug: fcSlug, canal: 'web', etapa_funnel: funnel, ...fcUtm });
+      const fcConsents: any[] = [{ email, tipo: 'privacidad', otorgado: true, texto_version: 'pp-2026-06', pagina: window.location.href, user_agent: navigator.userAgent }];
+      if (fcOptin) fcConsents.push({ email, tipo: 'email_marketing', otorgado: true, texto_version: 'pp-2026-06', pagina: window.location.href, user_agent: navigator.userAgent });
+      supabase.from('consentimientos').insert(fcConsents);
 
       form.style.display   = 'none';
       success.style.display = 'block';
