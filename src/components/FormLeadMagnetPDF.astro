@@ -427,34 +427,29 @@ const {
       }
     }
 
-    // ── Escuchar cambio de estado auth (retorno del magic link) ───────────────
+    // ── Auth state: INITIAL_SESSION decide qué mostrar al montar ────────────
+    // getSession() devuelve null cuando el token expiró y Supabase lo refresca
+    // en background. INITIAL_SESSION es el evento correcto: se dispara una sola
+    // vez cuando el cliente terminó de leer localStorage / refrescar el token.
+    show(elLoading);
+
     supabase.auth.onAuthStateChange(async (event, session) => {
-      if (event === 'SIGNED_IN' && session) {
+      if (event === 'INITIAL_SESSION') {
+        if (session) {
+          await handleSession(session);
+        } else {
+          const knownEmail = localStorage.getItem('sigm_email');
+          if (knownEmail) {
+            if (knownEmailEl) knownEmailEl.textContent = knownEmail;
+            show(elKnown);
+          } else {
+            show(elForm);
+          }
+        }
+      } else if ((event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') && session) {
         await handleSession(session);
       }
     });
-
-    // ── Inicializar: qué estado mostrar al montar ─────────────────────────────
-    async function init() {
-      show(elLoading);
-
-      const { data: { session } } = await supabase.auth.getSession();
-
-      if (session) {
-        await handleSession(session);
-        return;
-      }
-
-      const knownEmail = localStorage.getItem('sigm_email');
-      if (knownEmail) {
-        if (knownEmailEl) knownEmailEl.textContent = knownEmail;
-        show(elKnown);
-      } else {
-        show(elForm);
-      }
-    }
-
-    init();
 
     // ── Estado 2: enviar magic link desde email conocido ─────────────────────
     const sendMagicBtn = wrap.querySelector<HTMLButtonElement>('.lm-send-magic-btn');
