@@ -1,0 +1,302 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Accedé a tu cuenta — SIGMETRÍA HyS"
+  description="Ingresá tu email y te enviamos un link de acceso instantáneo. Sin contraseña, sin complicaciones."
+  canonical="https://sigmetriahys.com/acceso/"
+>
+  <section class="acceso-wrap">
+    <div class="acceso-card">
+
+      <!-- Estado: form (inicial) -->
+      <div id="ac-form-state">
+        <div class="ac-icon" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2E7D33" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+          </svg>
+        </div>
+        <h1 class="ac-title">Accedé a tu cuenta</h1>
+        <p class="ac-sub">Ingresá tu email y te enviamos un link de acceso instantáneo. Sin contraseña.</p>
+
+        <form id="ac-form" novalidate>
+          <div class="ac-field">
+            <label for="ac-email">Email</label>
+            <input
+              id="ac-email"
+              type="email"
+              name="email"
+              required
+              autocomplete="email"
+              placeholder="tu@email.com"
+            />
+          </div>
+          <p class="ac-error" id="ac-error" role="alert" style="display:none">Ingresá un email válido.</p>
+          <button type="submit" class="ac-btn" id="ac-submit">Enviar link de acceso</button>
+        </form>
+
+        <p class="ac-hint">
+          ¿Todavía no descargaste ningún material?
+          <a href="/blog/">Explorá el blog</a> y accedé gratis a plantillas y guías.
+        </p>
+      </div>
+
+      <!-- Estado: loading -->
+      <div id="ac-loading-state" style="display:none">
+        <div class="ac-spinner-wrap">
+          <span class="ac-spinner" aria-hidden="true"></span>
+          <p>Enviando link…</p>
+        </div>
+      </div>
+
+      <!-- Estado: éxito -->
+      <div id="ac-success-state" style="display:none">
+        <div class="ac-success-icon" aria-hidden="true">✅</div>
+        <h2 class="ac-title">¡Listo! Revisá tu casilla</h2>
+        <p class="ac-sub">
+          Te enviamos un link de acceso a <strong id="ac-email-confirm"></strong>.
+          Hacé clic en el link del email para ingresar.
+        </p>
+        <p class="ac-hint">No lo encontrás? Revisá en spam o <button class="ac-link-btn" id="ac-retry-btn">volvé a intentarlo</button>.</p>
+      </div>
+
+      <!-- Estado: ya logueado -->
+      <div id="ac-logged-state" style="display:none">
+        <div class="ac-success-icon" aria-hidden="true">👋</div>
+        <h2 class="ac-title">Ya estás adentro</h2>
+        <p class="ac-sub" id="ac-logged-msg">Estás autenticado.</p>
+        <a href="/blog/" class="ac-btn ac-btn-outline">Ir al blog</a>
+        <p class="ac-hint">
+          ¿No sos vos? <button class="ac-link-btn" id="ac-signout-btn">Cerrar sesión</button>
+        </p>
+      </div>
+
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+.acceso-wrap {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 120px 20px 80px;
+  background: var(--gris-bg, #F9FAFB);
+}
+.acceso-card {
+  background: var(--blanco, #fff);
+  border: 1px solid var(--borde, #E5E7EB);
+  border-radius: 16px;
+  padding: 48px 40px;
+  max-width: 420px;
+  width: 100%;
+  box-shadow: 0 4px 24px rgba(0,0,0,.06);
+  text-align: center;
+}
+.ac-icon {
+  width: 56px;
+  height: 56px;
+  background: #E8F5E9;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+}
+.ac-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--gris-1, #1A1A1A);
+  margin-bottom: 8px;
+}
+.ac-sub {
+  font-size: .95rem;
+  font-weight: 300;
+  color: var(--gris-2, #555);
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+.ac-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-align: left;
+  margin-bottom: 14px;
+}
+.ac-field label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--gris-2);
+  letter-spacing: .4px;
+}
+.ac-field input {
+  background: var(--blanco);
+  border: 1px solid var(--borde);
+  border-radius: 8px;
+  padding: 11px 14px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--gris-1);
+  outline: none;
+  transition: border-color .2s;
+}
+.ac-field input:focus { border-color: #2E7D33; }
+.ac-field input:focus-visible { outline: 2px solid #2E7D33; outline-offset: 2px; }
+.ac-error {
+  font-size: 12px;
+  color: var(--rojo, #D32F2F);
+  margin-bottom: 10px;
+  text-align: left;
+}
+.ac-btn {
+  display: block;
+  width: 100%;
+  padding: 13px 20px;
+  background: #2E7D33;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: .85rem;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background .2s;
+  text-decoration: none;
+  text-align: center;
+}
+.ac-btn:hover { background: #1B5E20; }
+.ac-btn:focus-visible { outline: 2px solid #2E7D33; outline-offset: 3px; }
+.ac-btn-outline {
+  background: transparent;
+  color: #2E7D33;
+  border: 2px solid #2E7D33;
+}
+.ac-btn-outline:hover { background: #E8F5E9; }
+.ac-hint {
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--gris-3, #9CA3AF);
+  margin-top: 16px;
+  line-height: 1.6;
+}
+.ac-hint a, .ac-link-btn {
+  color: #2E7D33;
+  font-weight: 500;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: inherit;
+  padding: 0;
+  text-decoration: underline;
+}
+.ac-spinner-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 0;
+  color: var(--gris-3);
+  font-size: 14px;
+  font-weight: 300;
+}
+.ac-spinner {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  border: 3px solid rgba(46,125,51,.2);
+  border-top-color: #2E7D33;
+  border-radius: 50%;
+  animation: spin .7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.ac-success-icon { font-size: 2.5rem; margin-bottom: 12px; }
+
+@media (max-width: 480px) {
+  .acceso-card { padding: 32px 20px; }
+}
+</style>
+
+<script>
+  import { createClient } from '@supabase/supabase-js';
+
+  const supabase = createClient(
+    import.meta.env.PUBLIC_SUPABASE_URL,
+    import.meta.env.PUBLIC_SUPABASE_KEY
+  );
+
+  const formState    = document.getElementById('ac-form-state')!;
+  const loadingState = document.getElementById('ac-loading-state')!;
+  const successState = document.getElementById('ac-success-state')!;
+  const loggedState  = document.getElementById('ac-logged-state')!;
+  const form         = document.getElementById('ac-form') as HTMLFormElement;
+  const emailInput   = document.getElementById('ac-email') as HTMLInputElement;
+  const errMsg       = document.getElementById('ac-error')!;
+  const emailConfirm = document.getElementById('ac-email-confirm')!;
+  const loggedMsg    = document.getElementById('ac-logged-msg')!;
+
+  function show(el: HTMLElement) {
+    [formState, loadingState, successState, loggedState].forEach(s => s.style.display = 'none');
+    el.style.display = 'block';
+  }
+
+  async function init() {
+    const { data: { session } } = await supabase.auth.getSession();
+    if (session) {
+      loggedMsg.textContent = `Autenticado como ${session.user.email}.`;
+      show(loggedState);
+      return;
+    }
+    const saved = localStorage.getItem('sigm_email');
+    if (saved && emailInput) emailInput.value = saved;
+    show(formState);
+  }
+
+  supabase.auth.onAuthStateChange((_event, session) => {
+    if (session) {
+      loggedMsg.textContent = `Autenticado como ${session.user.email}.`;
+      show(loggedState);
+    }
+  });
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = emailInput.value.trim();
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      errMsg.style.display = 'block';
+      return;
+    }
+    errMsg.style.display = 'none';
+    show(loadingState);
+
+    const redirectTo = `${window.location.origin}/acceso/`;
+    const { error } = await supabase.auth.signInWithOtp({ email, options: { emailRedirectTo: redirectTo } });
+
+    if (error) {
+      show(formState);
+      errMsg.textContent = 'Hubo un error. Intentá de nuevo.';
+      errMsg.style.display = 'block';
+      return;
+    }
+
+    localStorage.setItem('sigm_email', email);
+    emailConfirm.textContent = email;
+    show(successState);
+  });
+
+  document.getElementById('ac-retry-btn')?.addEventListener('click', () => show(formState));
+
+  document.getElementById('ac-signout-btn')?.addEventListener('click', async () => {
+    await supabase.auth.signOut();
+    localStorage.removeItem('sigm_email');
+    show(formState);
+  });
+
+  init();
+</script>

@@ -149,6 +149,7 @@ const blogGroups = [
 
     <a href="/nosotros/" class={`nav-link ${currentPath === '/nosotros/' ? 'active' : ''}`}>Nosotros</a>
 
+    <a href="/acceso/" class={`nav-link nav-link-acceso ${currentPath.startsWith('/acceso') ? 'active' : ''}`}>Accedé</a>
     <a href="https://sigmetria-hys.vercel.app/" target="_blank" rel="noopener" class="nav-cta">Probá gratis</a>
   </div>
 
@@ -213,6 +214,7 @@ const blogGroups = [
     </div>
   </div>
   <a href="/nosotros/" class="nav-mobile-link nav-mobile-root">Nosotros</a>
+  <a href="/acceso/" class="nav-mobile-link nav-mobile-root">Accedé</a>
   <a href="https://sigmetria-hys.vercel.app/" target="_blank" rel="noopener" class="btn-primary" style="margin-top:8px;">Probá gratis</a>
 </div>
 
@@ -284,6 +286,14 @@ nav.scrolled {
 }
 .nav-link:hover, .nav-link.active { color: var(--verde); }
 .nav-arrow { font-size: .6rem; opacity: .7; transition: transform .2s; }
+
+.nav-link-acceso {
+  border: 1px solid var(--borde);
+  border-radius: 4px;
+  color: var(--gris-2);
+}
+.nav-link-acceso:hover { border-color: var(--verde); color: var(--verde); background: transparent; }
+.nav-link-acceso.active { border-color: var(--verde); color: var(--verde); }
 
 .nav-cta {
   background: var(--verde);
