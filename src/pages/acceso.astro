@@ -246,36 +246,39 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     el.style.display = 'block';
   }
 
-  async function init() {
-    const { data: { session } } = await supabase.auth.getSession();
-    if (session) {
-      loggedMsg.textContent = `Autenticado como ${session.user.email}.`;
-      show(loggedState);
-      return;
+  async function handleSession(session: any) {
+    const email = session.user.email ?? '';
+    await supabase.rpc('upsert_web_profile', { p_email: email });
+    const { data: profile } = await supabase
+      .from('web_profiles')
+      .select('onboarding_completado')
+      .eq('auth_user_id', session.user.id)
+      .maybeSingle();
+    const nextParam = new URLSearchParams(window.location.search).get('next') ?? '/blog/';
+    if (!profile?.onboarding_completado) {
+      window.location.href = `/bienvenida/?next=${encodeURIComponent(nextParam)}`;
+    } else {
+      window.location.href = nextParam;
     }
-    const saved = localStorage.getItem('sigm_email');
-    if (saved && emailInput) emailInput.value = saved;
-    show(formState);
   }
 
-  supabase.auth.onAuthStateChange(async (_event, session) => {
-    if (session) {
-      const email = session.user.email ?? '';
-      // upsert del perfil
-      await supabase.rpc('upsert_web_profile', { p_email: email });
-      // verificar si completó onboarding
-      const { data: profile } = await supabase
-        .from('web_profiles')
-        .select('onboarding_completado')
-        .eq('auth_user_id', session.user.id)
-        .maybeSingle();
-      const nextParam = new URLSearchParams(window.location.search).get('next') ?? '/blog/';
-      if (!profile?.onboarding_completado) {
-        const dest = `/bienvenida/?next=${encodeURIComponent(nextParam)}`;
-        window.location.href = dest;
-      } else {
-        window.location.href = nextParam;
+  // INITIAL_SESSION resuelve el estado inicial sin getSession().
+  // SIGNED_IN es el evento del magic link — ahí redirigimos.
+  // No redirigimos en INITIAL_SESSION: si el usuario ya está logueado y
+  // navega manualmente a /acceso/, mostramos "Ya estás adentro".
+  const saved = localStorage.getItem('sigm_email');
+  if (saved && emailInput) emailInput.value = saved;
+  show(formState);
+
+  supabase.auth.onAuthStateChange(async (event, session) => {
+    if (event === 'INITIAL_SESSION') {
+      if (session) {
+        loggedMsg.textContent = `Autenticado como ${session.user.email}.`;
+        show(loggedState);
       }
+      // sin sesión: el form ya está visible (default)
+    } else if ((event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') && session) {
+      await handleSession(session);
     }
   });
 
@@ -289,12 +292,16 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     errMsg.style.display = 'none';
     show(loadingState);
 
-    const redirectTo = `${window.location.origin}/acceso/`;
+    const next = new URLSearchParams(window.location.search).get('next') ?? '/blog/';
+    const redirectTo = `${window.location.origin}/acceso/?next=${encodeURIComponent(next)}`;
     const { error } = await supabase.auth.signInWithOtp({ email, options: { emailRedirectTo: redirectTo } });
 
     if (error) {
       show(formState);
-      errMsg.textContent = 'Hubo un error. Intentá de nuevo.';
+      const isRateLimit = error.status === 429 || error.message?.toLowerCase().includes('rate');
+      errMsg.textContent = isRateLimit
+        ? 'Límite de envíos alcanzado. Esperá unos minutos y volvé a intentarlo.'
+        : `Error: ${error.message}`;
       errMsg.style.display = 'block';
       return;
     }
@@ -312,5 +319,4 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     show(formState);
   });
 
-  init();
 </script>
