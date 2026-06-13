@@ -1,12 +1,11 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import FormLeadMagnetPDF from '../../components/FormLeadMagnetPDF.astro';
 
 const schema = {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
-  "headline": "Cómo elegir un software de gestión de HyS sin arrepentirte a los 3 meses",
-  "description": "Checklist honesto para elegir un software de gestión de Higiene y Seguridad: carga desde el celular en obra, reporte automático, precio por usuario, dashboard para el cliente y multiempresa.",
+  "headline": "Cómo elegir el mejor software de higiene y seguridad sin arrepentirte a los 3 meses",
+  "description": "Guía para elegir el mejor software de higiene y seguridad: 7 preguntas que separan la herramienta correcta de la que te va a complicar la vida.",
   "image": "https://sigmetriahys.com/logo-sigmetria.svg",
   "author": {
     "@type": "Organization",
@@ -40,8 +39,8 @@ const schema = {
 ---
 
 <BaseLayout
-  title="Cómo elegir un software de gestión de HyS sin arrepentirte a los 3 meses — SIGMETRÍA HyS"
-  description="Checklist honesto para elegir un software de gestión de Higiene y Seguridad: carga desde el celular en obra, reporte automático, precio por usuario, dashboard para el cliente y multiempresa."
+  title="Cómo elegir el mejor software de higiene y seguridad sin arrepentirte a los 3 meses — SIGMETRÍA HyS"
+  description="Guía para elegir el mejor software de higiene y seguridad: 7 preguntas que separan la herramienta correcta de la que te va a complicar la vida."
   canonical="https://sigmetriahys.com/blog/como-elegir-software-gestion-hys/"
   schema={schema}
 >
@@ -53,7 +52,7 @@ const schema = {
     </nav>
     <div class="page-hero-inner">
       <div class="page-hero-badge">Prevención 4.0 · Checklist · Decisión de compra</div>
-      <h1>CÓMO ELEGIR UN SOFTWARE DE GESTIÓN DE HyS<br><em>SIN ARREPENTIRTE A LOS 3 MESES</em></h1>
+      <h1>CÓMO ELEGIR EL MEJOR SOFTWARE DE HIGIENE Y SEGURIDAD<br><em>SIN ARREPENTIRTE A LOS 3 MESES</em></h1>
       <p>
         Todas las demos se ven hermosas. El problema aparece después, cuando ya cargaste medio cliente
         y descubrís que la herramienta no hace lo que de verdad necesitabas. Acá va el checklist honesto
@@ -93,7 +92,7 @@ const schema = {
         </p>
 
         <p>
-          Elegir un software de gestión de Higiene y Seguridad es como contratar a alguien para el equipo:
+          Elegir el mejor software de higiene y seguridad es como contratar a alguien para el equipo:
           la entrevista siempre sale bien. El tema es cómo rinde en obra, un martes de lluvia, con el celular
           embarrado y el cliente esperando el reporte para ayer.
         </p>
@@ -236,7 +235,7 @@ const schema = {
           una recorrida en trazabilidad real. Sin él, tu sistema es una lista de quejas sin final.
         </p>
 
-        <h2>El resumen: las 7 preguntas para llevar a la demo</h2>
+        <h2>Las 7 preguntas para elegir el mejor software de higiene y seguridad</h2>
 
         <p>
           Antes de firmar nada, imprimite esto mental o literalmente y hacé que el vendedor te lo conteste con un
@@ -276,17 +275,6 @@ const schema = {
           escales tu cartera sin vivir adentro de quince planillas. Si querés ver cómo funciona en tu propio
           trabajo, lo mejor es probarlo.
         </p>
-
-        <h2>Descargá el e-book gratis</h2>
-        <p>Antes de elegir, llevate el método completo: <strong>«Digitalizá tu gestión de Higiene y Seguridad»</strong> — las 5 cosas que perdés en Excel y cómo ordenar tu cartera sin vivir en planillas.</p>
-        <div class="art-cta">
-          <FormLeadMagnetPDF
-            titulo="Descargá el e-book gratis"
-            subtitulo="Dejanos tus datos y descargá «Digitalizá tu gestión de Higiene y Seguridad» (PDF)."
-            cta="Descargar el e-book (PDF)"
-            leadMagnetKey="ebook-digitalizar"
-          />
-        </div>
 
         <div class="art-cta-final">
           <p class="cta-final-texto">Probá las 7 preguntas con una herramienta que no le tiene miedo a ninguna.</p>
@@ -444,16 +432,7 @@ const schema = {
 }
 .art-destacado strong { color: var(--gris-1); font-weight: 700; }
 
-/* ---- CTA block ---- */
-.art-cta {
-  background: var(--gris-bg);
-  border: 1px solid var(--borde);
-  border-radius: 12px;
-  padding: 32px;
-  margin-top: 48px;
-}
-
-/* ---- CTA final (sin lead magnet) ---- */
+/* ---- CTA final ---- */
 .art-cta-final {
   background: var(--gris-bg);
   border: 1px solid var(--borde);
