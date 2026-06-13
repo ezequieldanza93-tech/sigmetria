@@ -1,18 +1,13 @@
 ---
 /**
- * FormConsulta — formulario inline para lead magnets y páginas de servicio.
+ * FormConsulta — formulario inline para consultas y lead magnets.
  *
- * Uso en lead magnet (Opción B):
- *   <FormConsulta
- *     servicios={['s2']}
- *     funnel="mofu"
- *     leadMagnet="implementar-iso-45001-sin-burocracia"
- *     titulo="Descargá la guía sin cargo"
- *     subtitulo="Cómo implementar ISO 45001 sin burocracia — PDF gratuito"
- *     cta="Quiero la guía"
- *   />
+ * Modo lead magnet (leadMagnet prop presente):
+ *   Autenticado  → descarga directa sin formulario.
+ *   No autenticado → CTA "Acceder y descargar" → /acceso/?next=URL
  *
- * Uso en página de servicio con CTA de demo/diagnóstico → usar link a /contacto/?s=s2&funnel=bofu
+ * Modo consulta (sin leadMagnet):
+ *   Muestra siempre el formulario de contacto.
  */
 
 interface Props {
@@ -42,26 +37,72 @@ const {
   data-funnel={funnel}
   data-lm={leadMagnet ?? ''}
 >
-  <!-- Estado de éxito -->
+
+  {/* ── MODO LEAD MAGNET: estados de auth ── */}
+  {leadMagnet && (
+    <>
+      {/* Loading */}
+      <div class="fc-lm-loading">
+        <div class="fc-lm-spinner" aria-hidden="true"></div>
+        <p>Verificando acceso…</p>
+      </div>
+
+      {/* Autenticado → descarga */}
+      <div class="fc-lm-auth" style="display:none">
+        <div class="fc-lm-lock" aria-hidden="true">✅</div>
+        {titulo && <h3 class="fc-titulo">{titulo}</h3>}
+        <p class="fc-sub">¡Ya tenés acceso! Tu descarga comienza automáticamente.</p>
+        <button class="fc-btn fc-lm-download-btn" type="button">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+            <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+          </svg>
+          {cta}
+        </button>
+        <p class="fc-signout-hint">¿No sos vos? <button class="fc-link-btn fc-signout-btn" type="button">Cerrar sesión</button></p>
+      </div>
+
+      {/* No autenticado → CTA */}
+      <div class="fc-lm-cta" style="display:none">
+        <div class="fc-lm-lock" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2E7D33" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+          </svg>
+        </div>
+        {titulo    && <h3 class="fc-titulo">{titulo}</h3>}
+        {subtitulo && <p  class="fc-sub">{subtitulo}</p>}
+        <p class="fc-cta-note">📥 Es gratis — solo necesitás una cuenta.</p>
+        <button class="fc-btn fc-lm-login-btn" type="button">Acceder y descargar →</button>
+        <p class="fc-signout-hint">¿Ya tenés cuenta? El mismo botón te lleva al login.</p>
+      </div>
+
+      {/* Éxito descarga */}
+      <div class="fc-lm-success" style="display:none" role="status" aria-live="polite">
+        <span class="fc-success-icon">✅</span>
+        <p>¡Tu descarga ya empezó! Si no, <a href="#" class="fc-lm-dl-link">tocá acá</a>.</p>
+      </div>
+    </>
+  )}
+
+  {/* ── MODO CONSULTA: form siempre visible ── */}
   <div class="fc-success" style="display:none">
     <span class="fc-success-icon">✅</span>
     <p>{successMsg}</p>
   </div>
 
-  <!-- Formulario -->
-  <form class="fc-form" novalidate>
+  <form class="fc-form" style={leadMagnet ? 'display:none' : ''} novalidate>
     <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
 
     {titulo    && <h3 class="fc-titulo">{titulo}</h3>}
     {subtitulo && <p  class="fc-sub">{subtitulo}</p>}
 
     <div class="fc-group">
-      <input type="text" name="nombre" required placeholder="Nombre y apellido *" />
+      <input type="text" name="nombre" required placeholder="Nombre y apellido *" autocomplete="name" />
     </div>
 
     <div class="fc-row">
-      <input type="tel"   name="telefono" required placeholder="WhatsApp +549 11..." />
-      <input type="email" name="email"    required placeholder="Email *" />
+      <input type="tel"   name="telefono" required placeholder="WhatsApp +549 11..." autocomplete="tel" />
+      <input type="email" name="email"    required placeholder="Email *" autocomplete="email" />
     </div>
 
     <label class="fc-terms">
@@ -75,7 +116,7 @@ const {
 
     <p class="fc-error" style="display:none">Completá todos los campos para continuar.</p>
 
-    <button type="submit" class="btn-primary fc-btn">{cta}</button>
+    <button type="submit" class="fc-btn">{cta}</button>
   </form>
 </div>
 
@@ -103,6 +144,60 @@ const {
   margin-bottom: 16px;
   line-height: 1.6;
 }
+
+/* Loading (modo lead magnet) */
+.fc-lm-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 20px 0 12px;
+  font-size: 13px;
+  color: var(--gris-3);
+}
+.fc-lm-spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(46,125,51,.2);
+  border-top-color: #2E7D33;
+  border-radius: 50%;
+  animation: spin .7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Lock icon */
+.fc-lm-lock {
+  font-size: 1.5rem;
+  margin-bottom: 12px;
+}
+.fc-lm-lock svg { display: block; }
+
+/* CTA note */
+.fc-cta-note {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--verde, #2E7D33);
+  margin-bottom: 12px;
+}
+.fc-signout-hint {
+  text-align: center;
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--gris-3);
+  margin-top: 10px;
+}
+.fc-link-btn {
+  background: none;
+  border: none;
+  color: #2E7D33;
+  font-size: 12px;
+  font-weight: 500;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 0;
+  font-family: inherit;
+}
+
 .fc-form { display: flex; flex-direction: column; gap: 12px; }
 .fc-group input,
 .fc-row input {
@@ -116,6 +211,7 @@ const {
   color: var(--gris-1);
   outline: none;
   width: 100%;
+  box-sizing: border-box;
   transition: border-color .2s;
 }
 .fc-group input:focus,
@@ -136,21 +232,45 @@ const {
 }
 .fc-terms input { width: 14px; height: 14px; min-width: 14px; margin-top: 2px; accent-color: var(--verde); }
 .fc-terms a { color: var(--verde); }
-.fc-btn { width: 100%; justify-content: center; margin-top: 4px; }
 .fc-error { font-size: 12px; color: #ef4444; }
 
+/* Botón */
+.fc-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 13px 20px;
+  background: #2E7D33;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: .82rem;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background .2s;
+  margin-top: 4px;
+}
+.fc-btn:hover { background: #1B5E20; }
+.fc-btn:focus-visible { outline: 2px solid #2E7D33; outline-offset: 3px; }
+
 /* Éxito */
-.fc-success {
+.fc-success, .fc-lm-success {
   text-align: center;
   padding: 12px 0;
 }
 .fc-success-icon { font-size: 2rem; display: block; margin-bottom: 10px; }
-.fc-success p {
+.fc-success p, .fc-lm-success p {
   font-size: 14px;
   font-weight: 300;
   color: var(--gris-2);
   line-height: 1.7;
 }
+.fc-lm-success a { color: #2E7D33; font-weight: 600; text-decoration: underline; }
 
 @media (max-width: 520px) {
   .fc-wrap { padding: 22px 18px; }
@@ -166,7 +286,6 @@ const {
     import.meta.env.PUBLIC_SUPABASE_KEY
   );
 
-  // Capturar UTMs una sola vez (aplica a todos los forms de la página)
   const p = new URLSearchParams(window.location.search);
   const utm = {
     utm_source:   p.get('utm_source'),
@@ -180,17 +299,110 @@ const {
     const funnel     = wrap.dataset.funnel  || null;
     const leadMagnet = wrap.dataset.lm      || null;
 
+    // ── MODO LEAD MAGNET ────────────────────────────────────────────────────
+    if (leadMagnet) {
+      const elLoading = wrap.querySelector<HTMLElement>('.fc-lm-loading')!;
+      const elAuth    = wrap.querySelector<HTMLElement>('.fc-lm-auth')!;
+      const elCta     = wrap.querySelector<HTMLElement>('.fc-lm-cta')!;
+      const elSuccess = wrap.querySelector<HTMLElement>('.fc-lm-success')!;
+      const dlLink    = wrap.querySelector<HTMLAnchorElement>('.fc-lm-dl-link');
+
+      const ALL_LM = [elLoading, elAuth, elCta, elSuccess];
+      function showLm(el: HTMLElement) {
+        ALL_LM.forEach(s => { if (s) s.style.display = 'none'; });
+        if (el) el.style.display = 'block';
+      }
+
+      async function getSignedUrl(): Promise<string | null> {
+        try {
+          const { data, error } = await supabase.storage
+            .from('lead-magnets')
+            .createSignedUrl(`${leadMagnet}.pdf`, 300);
+          if (!error && data?.signedUrl) return data.signedUrl;
+        } catch (_) {}
+        return null;
+      }
+
+      function triggerDownload(url: string) {
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `Sigmetria-${leadMagnet}.pdf`;
+        a.style.display = 'none';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      }
+
+      async function handleSession(session: any) {
+        const email = session.user.email as string;
+        await supabase.rpc('link_lead_to_auth_user', { p_email: email }).catch(() => {});
+        localStorage.setItem('sigm_email', email);
+
+        const url = await getSignedUrl();
+        if (url) {
+          if (dlLink) dlLink.href = url;
+          showLm(elSuccess);
+          triggerDownload(url);
+          const slug = window.location.pathname.replace(/\/+$/, '').split('/').pop() || null;
+          supabase.from('lead_magnet_descargas').insert({ email, lead_magnet_key: leadMagnet, auth_user_id: session.user.id, origen_pagina: window.location.href, origen_slug: slug, canal: 'web', etapa_funnel: funnel });
+        } else {
+          showLm(elAuth);
+          const downloadBtn = wrap.querySelector<HTMLButtonElement>('.fc-lm-download-btn');
+          if (downloadBtn) {
+            downloadBtn.onclick = async () => {
+              const u = await getSignedUrl();
+              if (u) triggerDownload(u);
+            };
+          }
+        }
+      }
+
+      supabase.auth.onAuthStateChange(async (event, session) => {
+        if (event === 'INITIAL_SESSION') {
+          if (session) await handleSession(session);
+          else showLm(elCta);
+        } else if ((event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') && session) {
+          await handleSession(session);
+        }
+      });
+
+      // CTA → login
+      const loginBtn = wrap.querySelector<HTMLButtonElement>('.fc-lm-login-btn');
+      if (loginBtn) {
+        loginBtn.addEventListener('click', () => {
+          const next = encodeURIComponent(window.location.href);
+          window.location.href = `/acceso/?next=${next}`;
+        });
+      }
+
+      // Cerrar sesión
+      const signOutBtn = wrap.querySelector<HTMLButtonElement>('.fc-signout-btn');
+      if (signOutBtn) {
+        signOutBtn.addEventListener('click', async () => {
+          localStorage.removeItem('sigm_email');
+          await supabase.auth.signOut();
+          showLm(elCta);
+        });
+      }
+
+      return; // no continuar con el modo consulta
+    }
+
+    // ── MODO CONSULTA ───────────────────────────────────────────────────────
     const form    = wrap.querySelector<HTMLFormElement>('.fc-form')!;
     const success = wrap.querySelector<HTMLElement>('.fc-success')!;
     const errMsg  = wrap.querySelector<HTMLElement>('.fc-error')!;
 
-    form.addEventListener('submit', async (e) => {
+    // Pre-cargar email desde localStorage si está disponible
+    const savedEmail = localStorage.getItem('sigm_email');
+    const emailInput = form?.querySelector<HTMLInputElement>('[name="email"]');
+    if (savedEmail && emailInput) emailInput.value = savedEmail;
+
+    form?.addEventListener('submit', async (e) => {
       e.preventDefault();
 
-      // Honeypot
       if ((form.querySelector<HTMLInputElement>('input[name="_gotcha"]'))?.value) return;
 
-      // Validación básica
       const nombre   = (form.querySelector<HTMLInputElement>('[name="nombre"]')!).value.trim();
       const telefono = (form.querySelector<HTMLInputElement>('[name="telefono"]')!).value.trim();
       const email    = (form.querySelector<HTMLInputElement>('[name="email"]')!).value.trim();
@@ -219,13 +431,11 @@ const {
         canales_visitados:     ['web'],
         pagina_origen:         window.location.href,
         etapa_funnel:          funnel,
-        lead_magnet:           leadMagnet || null,
         acepta_condiciones_at: new Date().toISOString(),
         ...Object.fromEntries(Object.entries(utm).filter(([, v]) => v)),
       });
 
       if (error) {
-        console.error(error.message);
         btn.textContent = lbl;
         btn.disabled = false;
         errMsg.textContent = 'Hubo un error. Intentá de nuevo o escribinos por WhatsApp.';
@@ -233,16 +443,15 @@ const {
         return;
       }
 
-      // CRM: descarga (si es lead magnet) + consentimientos (best-effort)
-      const fcSlug = window.location.pathname.replace(/\/+$/, '').split('/').pop() || null;
-      const fcOptin = !!(form.querySelector<HTMLInputElement>('[name="optin"]'))?.checked;
+      const slug = window.location.pathname.replace(/\/+$/, '').split('/').pop() || null;
+      const optin = !!(form.querySelector<HTMLInputElement>('[name="optin"]'))?.checked;
       const fcUtm = Object.fromEntries(Object.entries(utm).filter(([, v]) => v));
-      if (leadMagnet) supabase.from('lead_magnet_descargas').insert({ email, lead_magnet_key: leadMagnet, origen_pagina: window.location.href, origen_slug: fcSlug, canal: 'web', etapa_funnel: funnel, ...fcUtm });
       const fcConsents: any[] = [{ email, tipo: 'privacidad', otorgado: true, texto_version: 'pp-2026-06', pagina: window.location.href, user_agent: navigator.userAgent }];
-      if (fcOptin) fcConsents.push({ email, tipo: 'email_marketing', otorgado: true, texto_version: 'pp-2026-06', pagina: window.location.href, user_agent: navigator.userAgent });
+      if (optin) fcConsents.push({ email, tipo: 'email_marketing', otorgado: true, texto_version: 'pp-2026-06', pagina: window.location.href, user_agent: navigator.userAgent });
       supabase.from('consentimientos').insert(fcConsents);
 
-      form.style.display   = 'none';
+      localStorage.setItem('sigm_email', email);
+      form.style.display    = 'none';
       success.style.display = 'block';
     });
   });

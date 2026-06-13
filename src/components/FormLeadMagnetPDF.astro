@@ -1,15 +1,12 @@
 ---
 /**
- * FormLeadMagnetPDF — gate de descarga con auth por magic link.
+ * FormLeadMagnetPDF — gate de descarga autenticado.
  *
- * 3 estados (evaluados en JS al montar):
- *   1. Sesión activa (Supabase Auth)  → botón de descarga directo, sin formulario.
- *   2. Email conocido (localStorage)  → email pre-cargado + un clic para recibir magic link.
- *   3. Visitante nuevo                → formulario completo → guarda lead → descarga inmediata
- *                                        + envía magic link para futuros accesos sin formulario.
- *
- * Al volver de un magic link, onAuthStateChange dispara SIGNED_IN
- * → llama link_lead_to_auth_user() RPC → descarga automática.
+ * Estados:
+ *   1. Loading     → verificando sesión via INITIAL_SESSION
+ *   2. Autenticado → descarga automática + botón manual
+ *   3. No auth     → CTA para iniciar sesión / crear cuenta
+ *   4. Éxito       → descarga empezó
  */
 
 interface Props {
@@ -21,15 +18,15 @@ interface Props {
 
 const {
   titulo        = 'Descargá la plantilla profesional de recorrida',
-  subtitulo     = 'Dejanos tus datos y descargá gratis la plantilla profesional de recorrida de seguridad.',
-  cta           = 'Descargar la plantilla (PDF)',
+  subtitulo     = 'Accedé gratis con tu cuenta a esta plantilla profesional de recorrida de seguridad.',
+  cta           = 'Descargar (PDF)',
   leadMagnetKey = 'plantilla-recorrida',
 } = Astro.props;
 ---
 
 <div class="lm-wrap" data-lm-key={leadMagnetKey}>
 
-  <!-- Estado 0: cargando (verificando sesión) -->
+  <!-- Estado 0: cargando -->
   <div class="lm-loading">
     <div class="lm-spinner" aria-hidden="true"></div>
     <p style="margin:0;font-size:13px;color:var(--gris-3)">Verificando acceso…</p>
@@ -50,73 +47,26 @@ const {
     </p>
   </div>
 
-  <!-- Estado 2: email conocido — pedir magic link -->
-  <div class="lm-known" style="display:none">
-    <h3 class="lm-titulo">{titulo}</h3>
-    <p class="lm-sub">Ya te conocemos. Te mandamos el enlace de descarga a tu email.</p>
-    <div class="lm-known-email-wrap">
-      <span class="lm-known-email-display"></span>
+  <!-- Estado 2: no autenticado — CTA para acceder -->
+  <div class="lm-cta" style="display:none">
+    <div class="lm-cta-lock" aria-hidden="true">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2E7D33" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+        <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+      </svg>
     </div>
-    <button class="lm-btn lm-send-magic-btn" type="button">Enviame el enlace →</button>
-    <button class="lm-link-btn lm-use-other-btn" type="button">Usar otro email</button>
-  </div>
-
-  <!-- Estado 3: formulario completo (visitante nuevo) -->
-  <form class="lm-form" style="display:none" novalidate aria-label="Formulario de descarga de plantilla">
-    <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
-
     <h3 class="lm-titulo">{titulo}</h3>
     <p class="lm-sub">{subtitulo}</p>
-
-    <div class="lm-row-2">
-      <div class="lm-field">
-        <label for="lm-nombre" class="sr-only">Nombre</label>
-        <input id="lm-nombre" type="text" name="nombre" required autocomplete="given-name" placeholder="Nombre *" />
-      </div>
-      <div class="lm-field">
-        <label for="lm-apellido" class="sr-only">Apellido</label>
-        <input id="lm-apellido" type="text" name="apellido" required autocomplete="family-name" placeholder="Apellido *" />
-      </div>
-    </div>
-
-    <div class="lm-field">
-      <label for="lm-email" class="sr-only">Email</label>
-      <input id="lm-email" type="email" name="email" required autocomplete="email" placeholder="Email *" />
-    </div>
-
-    <label class="lm-terms">
-      <input type="checkbox" name="acepta" required />
-      <span>Acepto la <a href="/politica-de-privacidad/" target="_blank" rel="noopener">política de privacidad</a> *</span>
-    </label>
-    <label class="lm-terms">
-      <input type="checkbox" name="optin" />
-      <span>Quiero recibir novedades y contenido de HyS por email (opcional)</span>
-    </label>
-
-    <p class="lm-error" role="alert" aria-live="assertive" style="display:none">Completá todos los campos para continuar.</p>
-
-    <button type="submit" class="lm-btn" disabled aria-disabled="true">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
-        <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/>
-      </svg>
-      {cta}
-    </button>
-  </form>
-
-  <!-- Estado 4: magic link enviado (desde estado "email conocido") -->
-  <div class="lm-magic-sent" style="display:none" role="status" aria-live="polite">
-    <span class="lm-success-icon" aria-hidden="true">📩</span>
-    <p class="lm-success-msg">Revisá tu email — te mandamos el enlace de acceso.</p>
-    <p class="lm-hint">El enlace expira en 24 horas. Si no llega, revisá spam o<br>
-      <button class="lm-link-btn lm-retry-btn" type="button">reintentá acá</button>.
-    </p>
+    <p class="lm-cta-note">📥 Es gratis — solo necesitás una cuenta.</p>
+    <button class="lm-btn lm-cta-btn" type="button">Acceder y descargar →</button>
+    <p class="lm-cta-hint">¿Ya tenés cuenta? El mismo botón te lleva al login.</p>
   </div>
 
-  <!-- Estado 5: descarga disparada (éxito) -->
+  <!-- Estado 3: descarga disparada (éxito) -->
   <div class="lm-success" style="display:none" role="status" aria-live="polite">
     <span class="lm-success-icon" aria-hidden="true">✅</span>
-    <p class="lm-success-msg lm-success-text">
-      Listo, tu descarga ya empezó. Si no, <a href="#" class="lm-dl-link">tocá acá</a>.
+    <p class="lm-success-msg">
+      ¡Tu descarga ya empezó! Si no, <a href="#" class="lm-dl-link">tocá acá</a>.
     </p>
   </div>
 
@@ -150,7 +100,7 @@ const {
 }
 @keyframes spin { to { transform: rotate(360deg); } }
 
-/* Títulos y subtítulos */
+/* Títulos */
 .lm-titulo {
   font-family: 'Montserrat', sans-serif;
   font-size: .95rem;
@@ -168,67 +118,31 @@ const {
   margin-bottom: 20px;
 }
 
-/* Estado "conocido" */
-.lm-known-email-wrap {
-  background: var(--blanco);
-  border: 1px solid var(--borde);
-  border-radius: 6px;
-  padding: 10px 14px;
-  font-size: 14px;
-  font-weight: 400;
-  color: var(--gris-1);
+/* CTA (no autenticado) */
+.lm-cta { display: flex; flex-direction: column; }
+.lm-cta-lock {
+  width: 48px;
+  height: 48px;
+  background: #fff;
+  border: 1.5px solid var(--verde-borde);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+.lm-cta-note {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--verde, #2E7D33);
   margin-bottom: 14px;
 }
-
-/* Formulario */
-.lm-form { display: flex; flex-direction: column; gap: 12px; }
-
-.lm-row-2 {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-}
-
-.lm-field input {
-  width: 100%;
-  background: var(--blanco);
-  border: 1px solid var(--borde);
-  border-radius: 6px;
-  padding: 11px 14px;
-  font-family: 'Poppins', sans-serif;
-  font-size: 14px;
-  font-weight: 300;
-  color: var(--gris-1);
-  outline: none;
-  transition: border-color .2s;
-}
-.lm-field input:focus         { border-color: var(--verde); }
-.lm-field input:focus-visible  { outline: 2px solid var(--verde); outline-offset: 2px; }
-
-.lm-terms {
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
+.lm-cta-hint {
+  text-align: center;
   font-size: 12px;
   font-weight: 300;
-  color: var(--gris-2);
-  cursor: pointer;
-  line-height: 1.6;
-}
-.lm-terms input[type="checkbox"] {
-  width: 15px;
-  height: 15px;
-  min-width: 15px;
-  margin-top: 2px;
-  accent-color: var(--verde);
-  cursor: pointer;
-}
-.lm-terms a { color: var(--verde-dark, #2E7D33); }
-
-.lm-error {
-  font-size: 12px;
-  color: var(--rojo);
-  font-weight: 400;
+  color: var(--gris-3);
+  margin-top: 10px;
 }
 
 /* Botón principal */
@@ -257,7 +171,7 @@ const {
 .lm-btn[disabled],
 .lm-btn[aria-disabled="true"]   { background: #B0BEC5; color: #78909C; cursor: not-allowed; opacity: .75; }
 
-/* Botón-link (texto) */
+/* Botón-link */
 .lm-link-btn {
   background: none;
   border: none;
@@ -280,17 +194,9 @@ const {
   margin-top: 12px;
 }
 
-/* Éxito / magic-sent */
-.lm-success,
-.lm-magic-sent {
-  text-align: center;
-  padding: 16px 0 8px;
-}
-.lm-success-icon {
-  font-size: 2.2rem;
-  display: block;
-  margin-bottom: 12px;
-}
+/* Éxito */
+.lm-success { text-align: center; padding: 16px 0 8px; }
+.lm-success-icon { font-size: 2.2rem; display: block; margin-bottom: 12px; }
 .lm-success-msg {
   font-size: 15px;
   font-weight: 400;
@@ -298,30 +204,9 @@ const {
   line-height: 1.7;
 }
 .lm-success-msg a { color: #2E7D33; font-weight: 600; text-decoration: underline; }
-.lm-hint {
-  font-size: 12px;
-  font-weight: 300;
-  color: var(--gris-3);
-  margin-top: 10px;
-  line-height: 1.6;
-}
-
-/* Screen-reader only */
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0,0,0,0);
-  white-space: nowrap;
-  border: 0;
-}
 
 @media (max-width: 520px) {
-  .lm-wrap   { padding: 24px 20px; }
-  .lm-row-2  { grid-template-columns: 1fr; }
+  .lm-wrap { padding: 24px 20px; }
 }
 </style>
 
@@ -334,40 +219,23 @@ const {
     { auth: { detectSessionInUrl: true, persistSession: true } }
   );
 
-  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-  const p = new URLSearchParams(window.location.search);
-  const utm = {
-    utm_source:   p.get('utm_source'),
-    utm_medium:   p.get('utm_medium'),
-    utm_campaign: p.get('utm_campaign'),
-    utm_content:  p.get('utm_content'),
-  };
-
   document.querySelectorAll<HTMLElement>('.lm-wrap').forEach(wrap => {
     const leadMagnetKey = wrap.dataset.lmKey ?? 'plantilla-recorrida';
 
-    // ── Elementos de cada estado ─────────────────────────────────────────────
-    const elLoading    = wrap.querySelector<HTMLElement>('.lm-loading')!;
-    const elAuth       = wrap.querySelector<HTMLElement>('.lm-authenticated')!;
-    const elKnown      = wrap.querySelector<HTMLElement>('.lm-known')!;
-    const elForm       = wrap.querySelector<HTMLFormElement>('.lm-form')!;
-    const elMagicSent  = wrap.querySelector<HTMLElement>('.lm-magic-sent')!;
-    const elSuccess    = wrap.querySelector<HTMLElement>('.lm-success')!;
+    const elLoading = wrap.querySelector<HTMLElement>('.lm-loading')!;
+    const elAuth    = wrap.querySelector<HTMLElement>('.lm-authenticated')!;
+    const elCta     = wrap.querySelector<HTMLElement>('.lm-cta')!;
+    const elSuccess = wrap.querySelector<HTMLElement>('.lm-success')!;
+    const dlLink    = wrap.querySelector<HTMLAnchorElement>('.lm-dl-link')!;
+    const welcomeMsg = wrap.querySelector<HTMLElement>('.lm-welcome-msg')!;
 
-    const dlLink       = wrap.querySelector<HTMLAnchorElement>('.lm-dl-link')!;
-    const welcomeMsg   = wrap.querySelector<HTMLElement>('.lm-welcome-msg')!;
-    const knownEmailEl = wrap.querySelector<HTMLElement>('.lm-known-email-display')!;
-    const successText  = wrap.querySelector<HTMLElement>('.lm-success-text')!;
-
-    const ALL_STATES = [elLoading, elAuth, elKnown, elForm, elMagicSent, elSuccess];
-
+    const ALL = [elLoading, elAuth, elCta, elSuccess];
     function show(el: HTMLElement) {
-      ALL_STATES.forEach(s => { if (s) s.style.display = 'none'; });
+      ALL.forEach(s => { if (s) s.style.display = 'none'; });
       el.style.display = 'block';
     }
 
-    // ── Storage helpers ───────────────────────────────────────────────────────
+    // ── Storage ─────────────────────────────────────────────────────────────
     async function getSignedUrl(): Promise<string | null> {
       try {
         const { data, error } = await supabase.storage
@@ -398,15 +266,12 @@ const {
         origen_slug: slug,
         canal: 'web',
         etapa_funnel: 'tofu',
-        ...Object.fromEntries(Object.entries(utm).filter(([, v]) => v)),
       });
     }
 
-    // ── Estado 1: tiene sesión activa ────────────────────────────────────────
+    // ── Sesión activa ────────────────────────────────────────────────────────
     async function handleSession(session: any) {
       const email = session.user.email as string;
-
-      // Vincula el usuario de auth al lead del CRM
       await supabase.rpc('link_lead_to_auth_user', { p_email: email });
       localStorage.setItem('sigm_email', email);
 
@@ -417,20 +282,17 @@ const {
         triggerDownload(url);
         trackDownload(email, session.user.id);
       } else {
-        // Storage no configurado: mostrar botón manual
-        if (welcomeMsg) welcomeMsg.textContent = `¡Ya tenés acceso! Tocá para descargar.`;
+        if (welcomeMsg) welcomeMsg.textContent = '¡Ya tenés acceso! Tocá para descargar.';
         show(elAuth);
-        // Botón de descarga muestra el nombre correcto aunque no haya URL todavía
         const authBtn = wrap.querySelector<HTMLButtonElement>('.lm-auth-download-btn')!;
-        authBtn.textContent = 'La descarga no está disponible aún';
-        authBtn.disabled = true;
+        authBtn.onclick = async () => {
+          const u = await getSignedUrl();
+          if (u) { triggerDownload(u); trackDownload(email, session.user.id); }
+        };
       }
     }
 
-    // ── Auth state: INITIAL_SESSION decide qué mostrar al montar ────────────
-    // getSession() devuelve null cuando el token expiró y Supabase lo refresca
-    // en background. INITIAL_SESSION es el evento correcto: se dispara una sola
-    // vez cuando el cliente terminó de leer localStorage / refrescar el token.
+    // ── INITIAL_SESSION resuelve el estado inicial ──────────────────────────
     show(elLoading);
 
     supabase.auth.onAuthStateChange(async (event, session) => {
@@ -438,58 +300,19 @@ const {
         if (session) {
           await handleSession(session);
         } else {
-          const knownEmail = localStorage.getItem('sigm_email');
-          if (knownEmail) {
-            if (knownEmailEl) knownEmailEl.textContent = knownEmail;
-            show(elKnown);
-          } else {
-            show(elForm);
-          }
+          show(elCta);
         }
       } else if ((event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') && session) {
         await handleSession(session);
       }
     });
 
-    // ── Estado 2: enviar magic link desde email conocido ─────────────────────
-    const sendMagicBtn = wrap.querySelector<HTMLButtonElement>('.lm-send-magic-btn');
-    if (sendMagicBtn) {
-      sendMagicBtn.addEventListener('click', async () => {
-        const email = localStorage.getItem('sigm_email');
-        if (!email) { show(elForm); return; }
-
-        sendMagicBtn.disabled = true;
-        sendMagicBtn.textContent = 'Enviando…';
-
-        await supabase.auth.signInWithOtp({
-          email,
-          options: { emailRedirectTo: window.location.origin + '/acceso/?next=' + encodeURIComponent(window.location.href) },
-        });
-
-        show(elMagicSent);
-      });
-    }
-
-    // ── "Usar otro email" ─────────────────────────────────────────────────────
-    const useOtherBtn = wrap.querySelector<HTMLButtonElement>('.lm-use-other-btn');
-    if (useOtherBtn) {
-      useOtherBtn.addEventListener('click', () => {
-        localStorage.removeItem('sigm_email');
-        show(elForm);
-      });
-    }
-
-    // ── Reintentar (desde magic-sent) ────────────────────────────────────────
-    const retryBtn = wrap.querySelector<HTMLButtonElement>('.lm-retry-btn');
-    if (retryBtn) {
-      retryBtn.addEventListener('click', () => {
-        const email = localStorage.getItem('sigm_email');
-        if (email) {
-          if (knownEmailEl) knownEmailEl.textContent = email;
-          show(elKnown);
-        } else {
-          show(elForm);
-        }
+    // ── CTA: ir a login ──────────────────────────────────────────────────────
+    const ctaBtn = wrap.querySelector<HTMLButtonElement>('.lm-cta-btn');
+    if (ctaBtn) {
+      ctaBtn.addEventListener('click', () => {
+        const next = encodeURIComponent(window.location.href);
+        window.location.href = `/acceso/?next=${next}`;
       });
     }
 
@@ -499,128 +322,8 @@ const {
       signOutBtn.addEventListener('click', async () => {
         localStorage.removeItem('sigm_email');
         await supabase.auth.signOut();
-        show(elForm);
+        show(elCta);
       });
     }
-
-    // ── Botón descarga directa (estado auth, fallback sin storage) ────────────
-    const authDownloadBtn = wrap.querySelector<HTMLButtonElement>('.lm-auth-download-btn');
-    if (authDownloadBtn) {
-      authDownloadBtn.addEventListener('click', async () => {
-        const url = await getSignedUrl();
-        if (url) triggerDownload(url);
-      });
-    }
-
-    // ── Formulario completo: validación + submit ──────────────────────────────
-    const nombreInput   = elForm.querySelector<HTMLInputElement>('[name="nombre"]')!;
-    const apellidoInput = elForm.querySelector<HTMLInputElement>('[name="apellido"]')!;
-    const emailInput    = elForm.querySelector<HTMLInputElement>('[name="email"]')!;
-    const aceptaInput   = elForm.querySelector<HTMLInputElement>('[name="acepta"]')!;
-    const errMsg        = elForm.querySelector<HTMLElement>('.lm-error')!;
-    const submitBtn     = elForm.querySelector<HTMLButtonElement>('button[type="submit"]')!;
-
-    function syncSubmitBtn() {
-      const valid =
-        nombreInput.value.trim().length > 0 &&
-        apellidoInput.value.trim().length > 0 &&
-        EMAIL_RE.test(emailInput.value.trim()) &&
-        aceptaInput.checked;
-      submitBtn.disabled = !valid;
-      submitBtn.setAttribute('aria-disabled', String(!valid));
-    }
-
-    [nombreInput, apellidoInput, emailInput].forEach(el =>
-      el.addEventListener('input', syncSubmitBtn)
-    );
-    aceptaInput.addEventListener('change', syncSubmitBtn);
-
-    elForm.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      if (submitBtn.disabled) return;
-
-      const gotcha = elForm.querySelector<HTMLInputElement>('[name="_gotcha"]');
-      if (gotcha?.value) return;
-
-      const nombre   = nombreInput.value.trim();
-      const apellido = apellidoInput.value.trim();
-      const email    = emailInput.value.trim();
-      const optin    = !!(elForm.querySelector<HTMLInputElement>('[name="optin"]'))?.checked;
-
-      if (!nombre || !apellido || !EMAIL_RE.test(email) || !aceptaInput.checked) {
-        errMsg.style.display = 'block';
-        return;
-      }
-      errMsg.style.display = 'none';
-
-      const origLabel = submitBtn.innerHTML;
-      submitBtn.innerHTML = 'Enviando…';
-      submitBtn.disabled = true;
-      submitBtn.setAttribute('aria-disabled', 'true');
-
-      // 1. Guardar lead en CRM
-      const { error: saveError } = await supabase.from('leads').insert({
-        nombre:                `${nombre} ${apellido}`,
-        email,
-        fuente:                'web',
-        primer_canal:          'web',
-        canales_visitados:     ['web'],
-        pagina_origen:         window.location.href,
-        etapa_funnel:          'tofu',
-        lead_magnet:           leadMagnetKey,
-        acepta_condiciones_at: new Date().toISOString(),
-        ...Object.fromEntries(Object.entries(utm).filter(([, v]) => v)),
-      });
-
-      if (saveError) {
-        console.error('[lm] save error:', saveError.message);
-        submitBtn.innerHTML = origLabel;
-        submitBtn.disabled = false;
-        submitBtn.setAttribute('aria-disabled', 'false');
-        errMsg.textContent = 'Hubo un error. Intentá de nuevo o escribinos por WhatsApp.';
-        errMsg.style.display = 'block';
-        return;
-      }
-
-      // 2. Registrar descarga y consentimientos (best-effort)
-      const slug = window.location.pathname.replace(/\/+$/, '').split('/').pop() || null;
-      supabase.from('lead_magnet_descargas').insert({
-        email,
-        lead_magnet_key: leadMagnetKey,
-        origen_pagina:  window.location.href,
-        origen_slug:    slug,
-        canal:          'web',
-        etapa_funnel:   'tofu',
-        ...Object.fromEntries(Object.entries(utm).filter(([, v]) => v)),
-      });
-      const consents: any[] = [
-        { email, tipo: 'privacidad', otorgado: true, texto_version: 'pp-2026-06', pagina: window.location.href, user_agent: navigator.userAgent },
-      ];
-      if (optin) consents.push({ email, tipo: 'email_marketing', otorgado: true, texto_version: 'pp-2026-06', pagina: window.location.href, user_agent: navigator.userAgent });
-      supabase.from('consentimientos').insert(consents);
-
-      // 3. Guardar email en localStorage y enviar magic link (para futuros accesos)
-      localStorage.setItem('sigm_email', email);
-      supabase.auth.signInWithOtp({
-        email,
-        options: { emailRedirectTo: window.location.origin + '/acceso/?next=' + encodeURIComponent(window.location.href) },
-      }); // fire-and-forget — no bloqueamos la descarga
-
-      // 4. Intentar descarga inmediata (misma UX de antes)
-      const url = await getSignedUrl();
-      if (url) {
-        if (dlLink) dlLink.href = url;
-        if (successText) successText.innerHTML =
-          `Listo, tu descarga ya empezó. Si no, <a href="${url}" class="lm-dl-link">tocá acá</a>.<br>
-          <small style="font-size:12px;color:var(--gris-3)">También te mandamos un enlace al email para descargar sin formulario la próxima vez.</small>`;
-        show(elSuccess);
-        triggerDownload(url);
-      } else {
-        // Fallback: la descarga se enviará por email (magic link)
-        show(elMagicSent);
-        const msgEl = wrap.querySelector<HTMLElement>('.lm-magic-sent .lm-success-msg');
-        if (msgEl) msgEl.textContent = '¡Listo! Te enviamos el material a tu email. Si no llega en 5 minutos, revisá spam.';
-      }
-    });
   });
 </script>

@@ -9,228 +9,239 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <div class="onboarding-wrapper">
     <div class="wizard-card">
 
-      <!-- Progress bar -->
+      <!-- Barra de progreso -->
       <div class="progress-container">
-        <div class="progress-bar" id="progress-bar"></div>
+        <div class="progress-bar" id="progress-bar" style="width:0%"></div>
       </div>
-      <p class="progress-label" id="progress-label">Paso 1 de 8</p>
+      <div class="progress-meta">
+        <p class="progress-label" id="progress-label"></p>
+        <p class="progress-pct" id="progress-pct"></p>
+      </div>
 
-      <!-- ===== PASO 1 — Nombre ===== -->
-      <div class="step active" id="step-1">
-        <div class="step-emoji">👋</div>
-        <h1 class="step-title">¡Bienvenido/a!<br>¿Cómo te llamamos?</h1>
+      <!-- ====== SECCIÓN 1 — ¿Quién sos? ====== -->
+      <div class="step" id="step-1">
+        <div class="step-header">
+          <span class="step-emoji">👋</span>
+          <div>
+            <h1 class="step-title">¡Bienvenido/a!</h1>
+            <p class="step-subtitle">Contanos un poco sobre vos. Son 3 preguntas rápidas.</p>
+          </div>
+        </div>
+
         <div class="field-group">
-          <input
-            type="text"
-            id="input-nombre"
-            class="text-input"
-            placeholder="Tu nombre o apodo"
-            maxlength="60"
-            autocomplete="given-name"
-          />
+          <label class="field-label" for="input-nombre">¿Cómo te llamamos?</label>
+          <input type="text" id="input-nombre" class="text-input" placeholder="Tu nombre o apodo" maxlength="60" autocomplete="given-name" />
         </div>
-        <button class="btn-primary" id="btn-1-next">Continuar →</button>
-        <button class="btn-skip" id="btn-1-skip">Saltar</button>
-      </div>
 
-      <!-- ===== PASO 2 — Gestión actual ===== -->
-      <div class="step" id="step-2">
-        <div class="step-emoji">📋</div>
-        <h2 class="step-title">¿Cómo organizás tu gestión de HyS hoy?</h2>
-        <div class="cards-radio" id="cards-gestion">
-          <div class="card-option" data-value="excel">
-            <span class="card-icon">📊</span>
-            <span class="card-label">Excel o Google Sheets</span>
-          </div>
-          <div class="card-option" data-value="papel">
-            <span class="card-icon">📝</span>
-            <span class="card-label">Planillas en papel</span>
-          </div>
-          <div class="card-option" data-value="app_terceros">
-            <span class="card-icon">📱</span>
-            <span class="card-label">Con otra app o software</span>
-          </div>
-          <div class="card-option" data-value="sistema_propio">
-            <span class="card-icon">🖥️</span>
-            <span class="card-label">Sistema desarrollado a medida</span>
-          </div>
-          <div class="card-option" data-value="nada">
-            <span class="card-icon">🙅</span>
-            <span class="card-label">No tengo un método definido</span>
-          </div>
-        </div>
-        <button class="btn-primary" id="btn-2-next">Continuar →</button>
-        <button class="btn-skip" id="btn-2-skip">Saltar</button>
-      </div>
-
-      <!-- ===== PASO 3 — Competidores ===== -->
-      <div class="step" id="step-3">
-        <div class="step-emoji">🔍</div>
-        <h2 class="step-title">¿Conocés o usaste alguna de estas herramientas?</h2>
-        <div class="chips-container" id="chips-competidores">
-          <button class="chip" data-value="ISOTools">ISOTools</button>
-          <button class="chip" data-value="SafetyCulture / iAuditor">SafetyCulture / iAuditor</button>
-          <button class="chip" data-value="Intelex">Intelex</button>
-          <button class="chip" data-value="Cority">Cority</button>
-          <button class="chip" data-value="EHS Insight">EHS Insight</button>
-          <button class="chip" data-value="HSETool">HSETool</button>
-          <button class="chip" data-value="Enablon">Enablon</button>
-          <button class="chip" data-value="Ninguna de estas">Ninguna de estas</button>
-        </div>
-        <button class="btn-primary" id="btn-3-next">Continuar →</button>
-        <button class="btn-skip" id="btn-3-skip">Saltar</button>
-      </div>
-
-      <!-- ===== PASO 4 — Tipo de trabajo ===== -->
-      <div class="step" id="step-4">
-        <div class="step-emoji">💼</div>
-        <h2 class="step-title">¿Cómo ejercés tu profesión?</h2>
-        <div class="cards-radio cards-large" id="cards-trabajo">
-          <div class="card-option card-large" data-value="independiente">
-            <span class="card-icon">🧑‍💼</span>
-            <span class="card-label">Soy independiente</span>
-          </div>
-          <div class="card-option card-large" data-value="consultora">
-            <span class="card-icon">🏢</span>
-            <span class="card-label">Trabajo en una consultora</span>
-          </div>
-          <div class="card-option card-large" data-value="dependencia">
-            <span class="card-icon">👔</span>
-            <span class="card-label">Relación de dependencia</span>
-          </div>
-        </div>
-        <button class="btn-primary" id="btn-4-next">Continuar →</button>
-        <button class="btn-skip" id="btn-4-skip">Saltar</button>
-      </div>
-
-      <!-- ===== PASO 5 — Nivel de formación ===== -->
-      <div class="step" id="step-5">
-        <div class="step-emoji">🎓</div>
-        <h2 class="step-title">¿Cuál es tu nivel de formación en HyS?</h2>
-        <div class="cards-radio" id="cards-nivel">
-          <div class="card-option" data-value="estudiando">
-            <span class="card-icon">📚</span>
-            <span class="card-label">Estoy estudiando</span>
-          </div>
-          <div class="card-option" data-value="tecnico">
-            <span class="card-icon">🎓</span>
-            <span class="card-label">Técnico/a en HyS</span>
-          </div>
-          <div class="card-option" data-value="licenciado">
-            <span class="card-icon">🏅</span>
-            <span class="card-label">Licenciado/a</span>
-          </div>
-          <div class="card-option" data-value="posgrado">
-            <span class="card-icon">✨</span>
-            <span class="card-label">Posgrado o especialización</span>
-          </div>
-        </div>
-        <button class="btn-primary" id="btn-5-next">Continuar →</button>
-        <button class="btn-skip" id="btn-5-skip">Saltar</button>
-      </div>
-
-      <!-- ===== PASO 6 — Ubicación ===== -->
-      <div class="step" id="step-6">
-        <div class="step-emoji">📍</div>
-        <h2 class="step-title">¿De dónde nos escribís?</h2>
         <div class="field-group">
           <label class="field-label" for="select-pais">País</label>
           <select id="select-pais" class="select-input">
-            <option value="Argentina" selected>Argentina</option>
-            <option value="Uruguay">Uruguay</option>
-            <option value="Chile">Chile</option>
-            <option value="Paraguay">Paraguay</option>
-            <option value="Bolivia">Bolivia</option>
-            <option value="Brasil">Brasil</option>
-            <option value="Otro">Otro</option>
+            <option value="Argentina" selected>🇦🇷 Argentina</option>
+            <option value="Uruguay">🇺🇾 Uruguay</option>
+            <option value="Chile">🇨🇱 Chile</option>
+            <option value="Paraguay">🇵🇾 Paraguay</option>
+            <option value="Bolivia">🇧🇴 Bolivia</option>
+            <option value="Brasil">🇧🇷 Brasil</option>
+            <option value="Otro">🌎 Otro</option>
           </select>
         </div>
-        <div class="field-group" id="provincia-group" style="display:block">
-          <label class="field-label" for="select-provincia">Provincia</label>
-          <select id="select-provincia" class="select-input">
-            <option value="">Seleccioná tu provincia</option>
-            <option>Buenos Aires</option>
-            <option>Ciudad Autónoma de Buenos Aires</option>
-            <option>Catamarca</option>
-            <option>Chaco</option>
-            <option>Chubut</option>
-            <option>Córdoba</option>
-            <option>Corrientes</option>
-            <option>Entre Ríos</option>
-            <option>Formosa</option>
-            <option>Jujuy</option>
-            <option>La Pampa</option>
-            <option>La Rioja</option>
-            <option>Mendoza</option>
-            <option>Misiones</option>
-            <option>Neuquén</option>
-            <option>Río Negro</option>
-            <option>Salta</option>
-            <option>San Juan</option>
-            <option>San Luis</option>
-            <option>Santa Cruz</option>
-            <option>Santa Fe</option>
-            <option>Santiago del Estero</option>
-            <option>Tierra del Fuego</option>
-            <option>Tucumán</option>
-          </select>
+
+        <div id="arg-fields">
+          <div class="field-group">
+            <label class="field-label" for="select-provincia">Provincia</label>
+            <select id="select-provincia" class="select-input">
+              <option value="">Seleccioná tu provincia</option>
+              <option>Buenos Aires</option>
+              <option>Ciudad Autónoma de Buenos Aires</option>
+              <option>Catamarca</option><option>Chaco</option><option>Chubut</option>
+              <option>Córdoba</option><option>Corrientes</option><option>Entre Ríos</option>
+              <option>Formosa</option><option>Jujuy</option><option>La Pampa</option>
+              <option>La Rioja</option><option>Mendoza</option><option>Misiones</option>
+              <option>Neuquén</option><option>Río Negro</option><option>Salta</option>
+              <option>San Juan</option><option>San Luis</option><option>Santa Cruz</option>
+              <option>Santa Fe</option><option>Santiago del Estero</option>
+              <option>Tierra del Fuego</option><option>Tucumán</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="input-localidad">Ciudad o localidad</label>
+            <input type="text" id="input-localidad" class="text-input" placeholder="Ej: Mar del Plata" maxlength="80" />
+          </div>
         </div>
+
         <div class="field-group">
-          <label class="field-label" for="input-localidad">Localidad</label>
-          <input
-            type="text"
-            id="input-localidad"
-            class="text-input"
-            placeholder="Tu ciudad o localidad"
-            maxlength="80"
-          />
+          <label class="field-label" for="input-fecha-nac">Fecha de nacimiento <span class="optional">(opcional)</span></label>
+          <input type="date" id="input-fecha-nac" class="text-input" min="1940-01-01" max="2026-06-13" />
         </div>
-        <button class="btn-primary" id="btn-6-next">Continuar →</button>
-        <button class="btn-skip" id="btn-6-skip">Saltar</button>
+
+        <button class="btn-primary" id="btn-1-next">Continuar →</button>
+        <button class="btn-skip" id="btn-1-skip">Saltar esta sección</button>
       </div>
 
-      <!-- ===== PASO 7 — Fecha de nacimiento ===== -->
-      <div class="step" id="step-7">
-        <div class="step-emoji">🎂</div>
-        <h2 class="step-title">¿Cuándo es tu cumpleaños?<br><span class="step-optional">(opcional)</span></h2>
-        <p class="step-subtitle">Solo para conocer mejor a nuestra comunidad.</p>
-        <div class="field-group">
-          <input
-            type="date"
-            id="input-fecha-nac"
-            class="text-input"
-            min="1940-01-01"
-            max="2026-06-13"
-          />
+      <!-- ====== SECCIÓN 2 — Tu trabajo ====== -->
+      <div class="step" id="step-2">
+        <div class="step-header">
+          <span class="step-emoji">💼</span>
+          <div>
+            <h2 class="step-title">Tu trabajo en HyS</h2>
+            <p class="step-subtitle">3 preguntas sobre cómo ejercés tu profesión.</p>
+          </div>
         </div>
-        <button class="btn-primary" id="btn-7-next">Continuar →</button>
-        <button class="btn-skip" id="btn-7-skip">Saltar</button>
+
+        <div class="field-group">
+          <label class="field-label">¿Cómo ejercés tu profesión?</label>
+          <div class="cards-radio cards-large" id="cards-trabajo">
+            <div class="card-option card-large" data-value="independiente">
+              <span class="card-icon">🧑‍💼</span>
+              <span class="card-label">Independiente</span>
+            </div>
+            <div class="card-option card-large" data-value="consultora">
+              <span class="card-icon">🏢</span>
+              <span class="card-label">Consultora</span>
+            </div>
+            <div class="card-option card-large" data-value="dependencia">
+              <span class="card-icon">👔</span>
+              <span class="card-label">Relación de dependencia</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label">Nivel de formación</label>
+          <div class="cards-radio" id="cards-nivel">
+            <div class="card-option" data-value="estudiando">
+              <span class="card-icon">📚</span>
+              <span class="card-label">Estoy estudiando</span>
+            </div>
+            <div class="card-option" data-value="tecnico">
+              <span class="card-icon">🎓</span>
+              <span class="card-label">Técnico/a en HyS</span>
+            </div>
+            <div class="card-option" data-value="licenciado">
+              <span class="card-icon">🏅</span>
+              <span class="card-label">Licenciado/a</span>
+            </div>
+            <div class="card-option" data-value="posgrado">
+              <span class="card-icon">✨</span>
+              <span class="card-label">Posgrado / especialización</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label">¿Cómo organizás tu gestión de HyS hoy?</label>
+          <div class="cards-radio" id="cards-gestion">
+            <div class="card-option" data-value="excel">
+              <span class="card-icon">📊</span>
+              <span class="card-label">Excel o Google Sheets</span>
+            </div>
+            <div class="card-option" data-value="papel">
+              <span class="card-icon">📝</span>
+              <span class="card-label">Planillas en papel</span>
+            </div>
+            <div class="card-option" data-value="app_terceros">
+              <span class="card-icon">📱</span>
+              <span class="card-label">Con otra app o software</span>
+            </div>
+            <div class="card-option" data-value="sistema_propio">
+              <span class="card-icon">🖥️</span>
+              <span class="card-label">Sistema a medida</span>
+            </div>
+            <div class="card-option" data-value="nada">
+              <span class="card-icon">🙅</span>
+              <span class="card-label">Sin método definido</span>
+            </div>
+          </div>
+        </div>
+
+        <button class="btn-primary" id="btn-2-next">Continuar →</button>
+        <button class="btn-skip" id="btn-2-skip">Saltar esta sección</button>
       </div>
 
-      <!-- ===== PASO 8 — Descripción libre ===== -->
-      <div class="step" id="step-8">
-        <div class="step-emoji">💬</div>
-        <h2 class="step-title">¿Querés contarnos algo más?<br><span class="step-optional">(opcional)</span></h2>
-        <p class="step-subtitle">¿Qué desafíos tenés hoy en tu gestión? ¿Qué te gustaría mejorar?</p>
+      <!-- ====== SECCIÓN 3 — Herramientas y más ====== -->
+      <div class="step" id="step-3">
+        <div class="step-header">
+          <span class="step-emoji">🔍</span>
+          <div>
+            <h2 class="step-title">Última sección</h2>
+            <p class="step-subtitle">Herramientas que conocés y algo más (si querés).</p>
+          </div>
+        </div>
+
         <div class="field-group">
+          <label class="field-label">¿Conocés o usaste alguna de estas herramientas? <span class="optional">(multi-selección)</span></label>
+          <div class="chips-container" id="chips-competidores">
+            <button class="chip" data-value="ISOTools" type="button">ISOTools</button>
+            <button class="chip" data-value="SafetyCulture / iAuditor" type="button">SafetyCulture / iAuditor</button>
+            <button class="chip" data-value="Intelex" type="button">Intelex</button>
+            <button class="chip" data-value="Cority" type="button">Cority</button>
+            <button class="chip" data-value="EHS Insight" type="button">EHS Insight</button>
+            <button class="chip" data-value="HSETool" type="button">HSETool</button>
+            <button class="chip" data-value="Enablon" type="button">Enablon</button>
+            <button class="chip" data-value="Ninguna de estas" type="button">Ninguna de estas</button>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label" for="input-descripcion">¿Querés contarnos algo? <span class="optional">(opcional)</span></label>
+          <p class="field-hint">¿Qué desafíos tenés hoy en tu gestión? ¿Qué te gustaría mejorar?</p>
           <textarea
             id="input-descripcion"
             class="textarea-input"
-            placeholder="Contanos lo que quieras..."
+            placeholder="Escribí lo que quieras..."
             maxlength="1000"
-            rows="4"
+            rows="3"
           ></textarea>
           <p class="char-counter"><span id="char-count">0</span> / 1000</p>
         </div>
-        <button class="btn-primary" id="btn-8-finish">Terminar →</button>
-        <button class="btn-skip" id="btn-8-skip">Saltar y terminar</button>
+
+        <button class="btn-primary" id="btn-3-next">Continuar →</button>
+        <button class="btn-skip" id="btn-3-skip">Saltar y terminar</button>
       </div>
 
-      <!-- ===== PANTALLA FINAL ===== -->
+      <!-- ====== SECCIÓN 4 — Contraseña ====== -->
+      <div class="step" id="step-4">
+        <div class="step-header">
+          <span class="step-emoji">🔐</span>
+          <div>
+            <h2 class="step-title">Creá tu contraseña</h2>
+            <p class="step-subtitle">La próxima vez entrás directo con email + contraseña. Sin link al mail.</p>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label" for="input-password">Contraseña</label>
+          <div class="password-wrap">
+            <input type="password" id="input-password" class="text-input" placeholder="Mínimo 8 caracteres" autocomplete="new-password" />
+            <button class="toggle-pwd" type="button" id="toggle-pwd" aria-label="Mostrar contraseña">
+              <svg id="eye-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label" for="input-password-confirm">Repetir contraseña</label>
+          <input type="password" id="input-password-confirm" class="text-input" placeholder="Repetí tu contraseña" autocomplete="new-password" />
+        </div>
+
+        <div class="pwd-strength" id="pwd-strength" style="display:none">
+          <div class="strength-bar" id="strength-bar"></div>
+          <p class="strength-label" id="strength-label"></p>
+        </div>
+
+        <p class="pwd-error" id="pwd-error" role="alert" style="display:none"></p>
+
+        <button class="btn-primary" id="btn-4-finish">Crear contraseña y entrar →</button>
+        <button class="btn-skip" id="btn-4-skip">Saltar (podés hacerlo después)</button>
+      </div>
+
+      <!-- ====== PANTALLA FINAL ====== -->
       <div class="step" id="step-done">
-        <div class="step-emoji">🚀</div>
-        <h2 class="step-title">¡Listo! Tu perfil está completo.</h2>
-        <p class="step-subtitle">Gracias por compartir tu experiencia. Ahora vas al contenido...</p>
+        <div class="step-emoji" style="text-align:center">🚀</div>
+        <h2 class="step-title" style="text-align:center">¡Listo! Tu perfil está completo.</h2>
+        <p class="step-subtitle" style="text-align:center">Gracias por compartir tu experiencia. Llevándote al contenido…</p>
         <div class="spinner" aria-label="Cargando..."></div>
       </div>
 
@@ -239,7 +250,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 </BaseLayout>
 
 <style>
-  /* ========= Variables de paleta ========= */
   :root {
     --verde: #2E7D33;
     --verde-dark: #1B5E20;
@@ -250,325 +260,242 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     --borde: #E5E7EB;
   }
 
-  /* ========= Wrapper ========= */
   .onboarding-wrapper {
     min-height: 100vh;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
-    padding: 2rem 1rem;
+    padding: 2rem 1rem 3rem;
     background: #f9fafb;
   }
 
-  /* ========= Wizard card ========= */
   .wizard-card {
     background: #fff;
     border-radius: 20px;
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
-    padding: 2.5rem 2rem;
+    box-shadow: 0 4px 24px rgba(0,0,0,.08);
+    padding: 2rem 2rem 2.5rem;
     width: 100%;
-    max-width: 520px;
-    position: relative;
+    max-width: 560px;
+    margin-top: 80px;
   }
 
-  /* ========= Progress bar ========= */
+  /* Progress */
   .progress-container {
     height: 6px;
     background: var(--borde);
     border-radius: 99px;
-    margin-bottom: 0.5rem;
     overflow: hidden;
+    margin-bottom: 6px;
   }
-
   .progress-bar {
     height: 100%;
-    background: var(--verde);
+    background: linear-gradient(90deg, var(--verde), #66BB6A);
     border-radius: 99px;
-    width: 12.5%;
-    transition: width 0.4s ease;
+    transition: width .4s ease;
   }
-
-  .progress-label {
-    font-family: 'Poppins', sans-serif;
-    font-size: 0.75rem;
-    color: var(--gris-3);
-    text-align: right;
-    margin: 0 0 2rem;
-  }
-
-  /* ========= Steps ========= */
-  .step {
-    display: none;
-    flex-direction: column;
-    gap: 1rem;
-    animation: fadeIn 0.15s ease;
-  }
-
-  .step.active {
+  .progress-meta {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
   }
-
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(6px); }
-    to   { opacity: 1; transform: translateY(0); }
+  .progress-label, .progress-pct {
+    font-family: 'Poppins', sans-serif;
+    font-size: .75rem;
+    color: var(--gris-3);
+    margin: 0;
   }
+  .progress-pct { font-weight: 600; color: var(--verde); }
 
-  .step-emoji {
-    font-size: 2.5rem;
-    text-align: center;
+  /* Steps */
+  .step { display: none; flex-direction: column; gap: 1.25rem; animation: fadeIn .2s ease; }
+  .step.active { display: flex; }
+  @keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+
+  .step-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: .25rem;
   }
-
+  .step-emoji { font-size: 2rem; flex-shrink: 0; margin-top: 2px; }
   .step-title {
     font-family: 'Montserrat', sans-serif;
-    font-size: 1.35rem;
+    font-size: 1.25rem;
     font-weight: 700;
     color: var(--gris-1);
-    text-align: center;
-    margin: 0;
-    line-height: 1.35;
+    margin: 0 0 4px;
+    line-height: 1.3;
   }
-
-  .step-optional {
-    font-size: 0.9rem;
-    font-weight: 400;
-    color: var(--gris-3);
-  }
-
   .step-subtitle {
     font-family: 'Poppins', sans-serif;
-    font-size: 0.875rem;
+    font-size: .875rem;
     color: var(--gris-2);
-    text-align: center;
-    margin: -0.25rem 0 0;
+    margin: 0;
   }
 
-  /* ========= Field group ========= */
-  .field-group {
-    display: flex;
-    flex-direction: column;
-    gap: 0.375rem;
-  }
-
+  /* Fields */
+  .field-group { display: flex; flex-direction: column; gap: .4rem; }
   .field-label {
     font-family: 'Poppins', sans-serif;
-    font-size: 0.8125rem;
-    font-weight: 500;
+    font-size: .8125rem;
+    font-weight: 600;
     color: var(--gris-2);
   }
+  .field-hint { font-size: .75rem; color: var(--gris-3); margin: 0; }
+  .optional { font-weight: 400; color: var(--gris-3); }
 
-  .text-input,
-  .select-input {
+  .text-input, .select-input {
     font-family: 'Poppins', sans-serif;
-    font-size: 0.9375rem;
+    font-size: .9375rem;
     color: var(--gris-1);
     border: 2px solid var(--borde);
     border-radius: 10px;
-    padding: 0.65rem 0.875rem;
+    padding: .65rem .875rem;
     outline: none;
-    transition: border-color 0.2s;
+    transition: border-color .2s;
     background: #fff;
     width: 100%;
     box-sizing: border-box;
   }
-
-  .text-input:focus,
-  .select-input:focus {
-    border-color: var(--verde);
-  }
+  .text-input:focus, .select-input:focus { border-color: var(--verde); }
 
   .textarea-input {
     font-family: 'Poppins', sans-serif;
-    font-size: 0.9375rem;
+    font-size: .9375rem;
     color: var(--gris-1);
     border: 2px solid var(--borde);
     border-radius: 10px;
-    padding: 0.65rem 0.875rem;
+    padding: .65rem .875rem;
     outline: none;
-    transition: border-color 0.2s;
+    transition: border-color .2s;
     resize: vertical;
     width: 100%;
     box-sizing: border-box;
-    min-height: 110px;
+    min-height: 90px;
   }
+  .textarea-input:focus { border-color: var(--verde); }
+  .char-counter { font-size: .72rem; color: var(--gris-3); text-align: right; margin: 0; }
 
-  .textarea-input:focus {
-    border-color: var(--verde);
-  }
-
-  .char-counter {
-    font-family: 'Poppins', sans-serif;
-    font-size: 0.75rem;
-    color: var(--gris-3);
-    text-align: right;
-    margin: 0;
-  }
-
-  /* ========= Radio cards ========= */
-  .cards-radio {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
+  /* Cards radio */
+  .cards-radio { display: flex; flex-direction: column; gap: .4rem; }
   .card-option {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: .75rem;
     border: 2px solid var(--borde);
-    border-radius: 12px;
-    padding: 0.75rem 1rem;
+    border-radius: 10px;
+    padding: .65rem 1rem;
     cursor: pointer;
-    transition: border-color 0.15s, background 0.15s;
+    transition: border-color .15s, background .15s;
     user-select: none;
   }
+  .card-option:hover { border-color: var(--verde); background: var(--verde-light); }
+  .card-option.selected { border-color: var(--verde); background: var(--verde-light); }
+  .card-icon { font-size: 1.15rem; flex-shrink: 0; }
+  .card-label { font-family: 'Poppins', sans-serif; font-size: .9rem; color: var(--gris-1); font-weight: 500; }
 
-  .card-option:hover {
-    border-color: var(--verde);
-    background: var(--verde-light);
-  }
+  .cards-large { flex-direction: row; flex-wrap: wrap; }
+  .card-large { flex: 1 1 130px; flex-direction: column; align-items: center; text-align: center; padding: 1rem .75rem; gap: .4rem; }
+  .card-large .card-icon { font-size: 1.5rem; }
 
-  .card-option.selected {
-    border-color: var(--verde);
-    background: var(--verde-light);
-  }
-
-  .card-icon {
-    font-size: 1.25rem;
-    flex-shrink: 0;
-  }
-
-  .card-label {
-    font-family: 'Poppins', sans-serif;
-    font-size: 0.9375rem;
-    color: var(--gris-1);
-    font-weight: 500;
-  }
-
-  /* Cards grandes (paso 4) */
-  .cards-large {
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
-
-  .card-large {
-    flex: 1 1 140px;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 1.25rem 0.75rem;
-    text-align: center;
-    gap: 0.5rem;
-  }
-
-  .card-large .card-icon {
-    font-size: 1.75rem;
-  }
-
-  /* ========= Chips ========= */
-  .chips-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-  }
-
+  /* Chips */
+  .chips-container { display: flex; flex-wrap: wrap; gap: .4rem; }
   .chip {
     font-family: 'Poppins', sans-serif;
-    font-size: 0.8125rem;
+    font-size: .8125rem;
     font-weight: 500;
     color: var(--gris-2);
     border: 2px solid var(--borde);
     border-radius: 99px;
-    padding: 0.4rem 0.875rem;
+    padding: .35rem .875rem;
     background: #fff;
     cursor: pointer;
-    transition: border-color 0.15s, background 0.15s, color 0.15s;
+    transition: border-color .15s, background .15s, color .15s;
   }
+  .chip:hover { border-color: var(--verde); background: var(--verde-light); color: var(--verde-dark); }
+  .chip.selected { border-color: var(--verde); background: var(--verde-light); color: var(--verde-dark); }
 
-  .chip:hover {
-    border-color: var(--verde);
-    background: var(--verde-light);
-    color: var(--verde-dark);
+  /* Password */
+  .password-wrap { position: relative; }
+  .password-wrap .text-input { padding-right: 44px; }
+  .toggle-pwd {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--gris-3);
+    padding: 0;
+    display: flex;
+    align-items: center;
   }
+  .toggle-pwd:hover { color: var(--gris-2); }
 
-  .chip.selected {
-    border-color: var(--verde);
-    background: var(--verde-light);
-    color: var(--verde-dark);
+  /* Password strength */
+  .pwd-strength { display: flex; flex-direction: column; gap: 4px; }
+  .strength-bar {
+    height: 4px;
+    border-radius: 99px;
+    background: var(--borde);
+    transition: width .3s, background .3s;
   }
+  .strength-label { font-size: .72rem; color: var(--gris-3); margin: 0; }
 
-  /* ========= Buttons ========= */
+  .pwd-error { font-size: .8125rem; color: #D32F2F; margin: 0; }
+
+  /* Buttons */
   .btn-primary {
     font-family: 'Montserrat', sans-serif;
-    font-size: 0.875rem;
+    font-size: .875rem;
     font-weight: 700;
-    letter-spacing: 0.05em;
+    letter-spacing: .05em;
     text-transform: uppercase;
     color: #fff;
     background: var(--verde);
     border: none;
     border-radius: 12px;
-    padding: 0.875rem 1.5rem;
+    padding: .9rem 1.5rem;
     width: 100%;
     cursor: pointer;
-    transition: background 0.2s;
-    margin-top: 0.25rem;
+    transition: background .2s;
+    margin-top: .25rem;
   }
-
-  .btn-primary:hover {
-    background: var(--verde-dark);
-  }
+  .btn-primary:hover { background: var(--verde-dark); }
+  .btn-primary:disabled { background: #B0BEC5; cursor: not-allowed; }
 
   .btn-skip {
     font-family: 'Poppins', sans-serif;
-    font-size: 0.8125rem;
+    font-size: .8125rem;
     color: var(--gris-3);
     background: none;
     border: none;
     cursor: pointer;
     text-align: center;
-    padding: 0.25rem;
-    transition: color 0.15s;
+    padding: .25rem;
+    transition: color .15s;
   }
+  .btn-skip:hover { color: var(--gris-2); }
 
-  .btn-skip:hover {
-    color: var(--gris-2);
-  }
-
-  /* ========= Spinner ========= */
+  /* Spinner */
   .spinner {
     width: 36px;
     height: 36px;
     border: 3px solid var(--verde-light);
     border-top-color: var(--verde);
     border-radius: 50%;
-    animation: spin 0.75s linear infinite;
+    animation: spin .75s linear infinite;
     margin: 1rem auto 0;
   }
+  @keyframes spin { to { transform: rotate(360deg); } }
 
-  @keyframes spin {
-    to { transform: rotate(360deg); }
-  }
-
-  /* ========= Responsive ========= */
   @media (max-width: 560px) {
-    .wizard-card {
-      padding: 2rem 1.25rem;
-      border-radius: 16px;
-    }
-
-    .step-title {
-      font-size: 1.15rem;
-    }
-
-    .cards-large {
-      flex-direction: column;
-    }
-
-    .card-large {
-      flex-direction: row;
-      justify-content: flex-start;
-      text-align: left;
-    }
+    .wizard-card { padding: 1.5rem 1.25rem 2rem; margin-top: 60px; border-radius: 16px; }
+    .step-title { font-size: 1.1rem; }
+    .cards-large { flex-direction: column; }
+    .card-large { flex-direction: row; justify-content: flex-start; text-align: left; }
   }
 </style>
 
@@ -580,281 +507,241 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     import.meta.env.PUBLIC_SUPABASE_KEY,
   );
 
-  // ===================== ESTADO =====================
-  const TOTAL_STEPS = 8;
-  let currentStep = 1;
+  const TOTAL_SECTIONS = 4;
+  let currentSection = 1;
   const answers: Record<string, unknown> = {};
+  let authedSession: any = null;
 
-  // ===================== HELPERS =====================
-  function showStep(n: number): void {
-    const current = document.querySelector('.step.active');
-    if (current) {
-      current.classList.remove('active');
-    }
-
-    const next = document.getElementById(`step-${n}`);
-    if (next) {
-      // pequeño delay para que el fadeIn se note
-      requestAnimationFrame(() => {
-        next.classList.add('active');
-      });
-    }
-
-    currentStep = n;
-    updateProgress();
+  // ── HELPERS ─────────────────────────────────────────────────────────────────
+  function showSection(n: number) {
+    document.querySelector('.step.active')?.classList.remove('active');
+    const el = document.getElementById(`step-${n}`);
+    if (el) requestAnimationFrame(() => el.classList.add('active'));
+    currentSection = n;
+    updateProgress(n);
   }
 
-  function showDone(): void {
-    const current = document.querySelector('.step.active');
-    if (current) current.classList.remove('active');
-
+  function showDone() {
+    document.querySelector('.step.active')?.classList.remove('active');
     const done = document.getElementById('step-done');
     if (done) done.classList.add('active');
-
-    const bar = document.getElementById('progress-bar');
-    if (bar) bar.style.width = '100%';
-
-    const label = document.getElementById('progress-label');
-    if (label) label.textContent = 'Completado';
+    document.getElementById('progress-bar')!.style.width = '100%';
+    document.getElementById('progress-label')!.textContent = '¡Listo!';
+    document.getElementById('progress-pct')!.textContent = '100%';
   }
 
-  function updateProgress(): void {
-    const pct = (currentStep / TOTAL_STEPS) * 100;
-    const bar = document.getElementById('progress-bar');
-    if (bar) bar.style.width = `${pct}%`;
-
-    const label = document.getElementById('progress-label');
-    if (label) label.textContent = `Paso ${currentStep} de ${TOTAL_STEPS}`;
+  function updateProgress(n: number) {
+    const pct = Math.round(((n - 1) / TOTAL_SECTIONS) * 100);
+    document.getElementById('progress-bar')!.style.width = `${pct}%`;
+    const labels = ['', '¿Quién sos?', 'Tu trabajo', 'Herramientas', 'Contraseña'];
+    document.getElementById('progress-label')!.textContent = labels[n] ?? '';
+    document.getElementById('progress-pct')!.textContent = `${pct}%`;
   }
 
-  function nextStep(): void {
-    if (currentStep < TOTAL_STEPS) {
-      showStep(currentStep + 1);
-    }
+  function getNextParam() {
+    return new URLSearchParams(window.location.search).get('next') ?? '/blog/';
   }
 
-  function getNextParam(): string {
-    const params = new URLSearchParams(window.location.search);
-    return params.get('next') ?? '/';
-  }
-
-  // ===================== GUARDAR Y REDIRIGIR =====================
-  async function saveAndRedirect(): Promise<void> {
+  // ── GUARDAR PERFIL ───────────────────────────────────────────────────────────
+  async function saveProfile(password?: string) {
     showDone();
-
     try {
-      const { data: { session } } = await supabase.auth.getSession();
-
+      const session = authedSession;
       if (session?.user) {
+        if (password) {
+          await supabase.auth.updateUser({ password });
+        }
         await supabase.from('web_profiles').upsert(
           {
-            auth_user_id: session.user.id,
-            email: session.user.email,
-            nombre: answers.nombre as string | undefined,
-            perfil_gestion: answers.perfil_gestion as string | undefined,
-            perfil_competidores: answers.perfil_competidores as string[] | undefined,
-            perfil_tipo_trabajo: answers.perfil_tipo_trabajo as string | undefined,
+            auth_user_id:         session.user.id,
+            email:                session.user.email,
+            nombre:               answers.nombre as string | undefined,
+            perfil_gestion:       answers.perfil_gestion as string | undefined,
+            perfil_competidores:  answers.perfil_competidores as string[] | undefined,
+            perfil_tipo_trabajo:  answers.perfil_tipo_trabajo as string | undefined,
             perfil_nivel_estudio: answers.perfil_nivel_estudio as string | undefined,
-            perfil_pais: answers.perfil_pais as string | undefined,
-            perfil_provincia: answers.perfil_provincia as string | undefined,
-            perfil_localidad: answers.perfil_localidad as string | undefined,
-            perfil_fecha_nac: answers.perfil_fecha_nac as string | undefined,
-            perfil_descripcion: answers.perfil_descripcion as string | undefined,
+            perfil_pais:          answers.perfil_pais as string | undefined,
+            perfil_provincia:     answers.perfil_provincia as string | undefined,
+            perfil_localidad:     answers.perfil_localidad as string | undefined,
+            perfil_fecha_nac:     answers.perfil_fecha_nac as string | undefined,
+            perfil_descripcion:   answers.perfil_descripcion as string | undefined,
             onboarding_completado: true,
-            updated_at: new Date().toISOString(),
+            updated_at:           new Date().toISOString(),
           },
           { onConflict: 'auth_user_id' },
         );
       }
     } catch (err) {
-      // Silencioso — si falla el guardado, igual redirigimos
-      console.error('Error al guardar perfil:', err);
+      console.error('[bienvenida] save error:', err);
     }
-
-    setTimeout(() => {
-      window.location.href = getNextParam();
-    }, 1500);
+    setTimeout(() => { window.location.href = getNextParam(); }, 1200);
   }
 
-  // ===================== INIT: VERIFICAR SESIÓN =====================
-  async function init(): Promise<void> {
-    const { data: { session } } = await supabase.auth.getSession();
+  // ── SESIÓN ───────────────────────────────────────────────────────────────────
+  supabase.auth.onAuthStateChange(async (event, session) => {
+    if (event === 'INITIAL_SESSION') {
+      if (!session) {
+        const nextUrl = encodeURIComponent('/bienvenida/' + window.location.search);
+        window.location.href = `/acceso/?next=${nextUrl}`;
+        return;
+      }
+      authedSession = session;
 
-    if (!session) {
-      // Sin sesión → redirect a /acceso/ con next=bienvenida+búsqueda actual
-      const nextUrl = encodeURIComponent('/bienvenida/' + window.location.search);
-      window.location.href = `/acceso/?next=${nextUrl}`;
-      return;
+      // Pre-cargar nombre si ya existe en web_profiles
+      const { data: profile } = await supabase
+        .from('web_profiles')
+        .select('onboarding_completado, nombre')
+        .eq('auth_user_id', session.user.id)
+        .maybeSingle();
+
+      if (profile?.onboarding_completado) {
+        window.location.href = getNextParam();
+        return;
+      }
+
+      if (profile?.nombre) {
+        (document.getElementById('input-nombre') as HTMLInputElement).value = profile.nombre;
+      }
+
+      showSection(1);
+    } else if (event === 'SIGNED_IN' && session) {
+      authedSession = session;
     }
-
-    // Verificar si ya completó el onboarding
-    const { data: profile } = await supabase
-      .from('web_profiles')
-      .select('onboarding_completado')
-      .eq('auth_user_id', session.user.id)
-      .single();
-
-    if (profile?.onboarding_completado) {
-      window.location.href = getNextParam();
-      return;
-    }
-
-    // Todo OK — mostrar el wizard
-    showStep(1);
-  }
-
-  // ===================== PASO 1 — Nombre =====================
-  document.getElementById('btn-1-next')?.addEventListener('click', () => {
-    const val = (document.getElementById('input-nombre') as HTMLInputElement)?.value.trim();
-    if (val) answers.nombre = val;
-    nextStep();
   });
 
-  document.getElementById('btn-1-skip')?.addEventListener('click', () => {
-    nextStep();
-  });
-
-  // ===================== PASO 2 — Gestión =====================
-  document.querySelectorAll<HTMLElement>('#cards-gestion .card-option').forEach((card) => {
-    card.addEventListener('click', () => {
-      document.querySelectorAll('#cards-gestion .card-option').forEach((c) =>
-        c.classList.remove('selected'),
-      );
-      card.classList.add('selected');
-    });
-  });
-
-  document.getElementById('btn-2-next')?.addEventListener('click', () => {
-    const selected = document.querySelector<HTMLElement>(
-      '#cards-gestion .card-option.selected',
-    );
-    if (selected?.dataset.value) answers.perfil_gestion = selected.dataset.value;
-    nextStep();
-  });
-
-  document.getElementById('btn-2-skip')?.addEventListener('click', () => {
-    nextStep();
-  });
-
-  // ===================== PASO 3 — Competidores =====================
-  document.querySelectorAll<HTMLButtonElement>('#chips-competidores .chip').forEach((chip) => {
-    chip.addEventListener('click', () => {
-      chip.classList.toggle('selected');
-    });
-  });
-
-  document.getElementById('btn-3-next')?.addEventListener('click', () => {
-    const selected = Array.from(
-      document.querySelectorAll<HTMLButtonElement>('#chips-competidores .chip.selected'),
-    ).map((c) => c.dataset.value ?? c.textContent?.trim() ?? '');
-
-    if (selected.length > 0) answers.perfil_competidores = selected;
-    nextStep();
-  });
-
-  document.getElementById('btn-3-skip')?.addEventListener('click', () => {
-    nextStep();
-  });
-
-  // ===================== PASO 4 — Tipo trabajo =====================
-  document.querySelectorAll<HTMLElement>('#cards-trabajo .card-option').forEach((card) => {
-    card.addEventListener('click', () => {
-      document.querySelectorAll('#cards-trabajo .card-option').forEach((c) =>
-        c.classList.remove('selected'),
-      );
-      card.classList.add('selected');
-    });
-  });
-
-  document.getElementById('btn-4-next')?.addEventListener('click', () => {
-    const selected = document.querySelector<HTMLElement>(
-      '#cards-trabajo .card-option.selected',
-    );
-    if (selected?.dataset.value) answers.perfil_tipo_trabajo = selected.dataset.value;
-    nextStep();
-  });
-
-  document.getElementById('btn-4-skip')?.addEventListener('click', () => {
-    nextStep();
-  });
-
-  // ===================== PASO 5 — Nivel estudio =====================
-  document.querySelectorAll<HTMLElement>('#cards-nivel .card-option').forEach((card) => {
-    card.addEventListener('click', () => {
-      document.querySelectorAll('#cards-nivel .card-option').forEach((c) =>
-        c.classList.remove('selected'),
-      );
-      card.classList.add('selected');
-    });
-  });
-
-  document.getElementById('btn-5-next')?.addEventListener('click', () => {
-    const selected = document.querySelector<HTMLElement>(
-      '#cards-nivel .card-option.selected',
-    );
-    if (selected?.dataset.value) answers.perfil_nivel_estudio = selected.dataset.value;
-    nextStep();
-  });
-
-  document.getElementById('btn-5-skip')?.addEventListener('click', () => {
-    nextStep();
-  });
-
-  // ===================== PASO 6 — Ubicación =====================
+  // ── SECCIÓN 1 ────────────────────────────────────────────────────────────────
   const selectPais = document.getElementById('select-pais') as HTMLSelectElement;
-  const provinciaGroup = document.getElementById('provincia-group');
+  const argFields  = document.getElementById('arg-fields')!;
 
   selectPais?.addEventListener('change', () => {
-    if (provinciaGroup) {
-      provinciaGroup.style.display = selectPais.value === 'Argentina' ? 'block' : 'none';
-    }
+    argFields.style.display = selectPais.value === 'Argentina' ? 'block' : 'none';
   });
 
-  document.getElementById('btn-6-next')?.addEventListener('click', () => {
-    const pais = (document.getElementById('select-pais') as HTMLSelectElement)?.value;
+  document.getElementById('btn-1-next')?.addEventListener('click', () => {
+    const nombre    = (document.getElementById('input-nombre') as HTMLInputElement).value.trim();
+    const pais      = (document.getElementById('select-pais') as HTMLSelectElement).value;
     const provincia = (document.getElementById('select-provincia') as HTMLSelectElement)?.value;
-    const localidad = (document.getElementById('input-localidad') as HTMLInputElement)?.value.trim();
+    const localidad = (document.getElementById('input-localidad') as HTMLInputElement).value.trim();
+    const fechaNac  = (document.getElementById('input-fecha-nac') as HTMLInputElement).value;
 
-    if (pais) answers.perfil_pais = pais;
+    if (nombre)   answers.nombre = nombre;
+    if (pais)     answers.perfil_pais = pais;
     if (pais === 'Argentina' && provincia) answers.perfil_provincia = provincia;
     if (localidad) answers.perfil_localidad = localidad;
+    if (fechaNac)  answers.perfil_fecha_nac = fechaNac;
 
-    nextStep();
+    showSection(2);
+  });
+  document.getElementById('btn-1-skip')?.addEventListener('click', () => showSection(2));
+
+  // ── SECCIÓN 2 ────────────────────────────────────────────────────────────────
+  function initCards(containerId: string, answerKey: string) {
+    document.querySelectorAll<HTMLElement>(`#${containerId} .card-option`).forEach(card => {
+      card.addEventListener('click', () => {
+        document.querySelectorAll(`#${containerId} .card-option`).forEach(c => c.classList.remove('selected'));
+        card.classList.add('selected');
+      });
+    });
+    return () => {
+      const sel = document.querySelector<HTMLElement>(`#${containerId} .card-option.selected`);
+      return sel?.dataset.value;
+    };
+  }
+
+  const getTrabajo = initCards('cards-trabajo', 'perfil_tipo_trabajo');
+  const getNivel   = initCards('cards-nivel',   'perfil_nivel_estudio');
+  const getGestion = initCards('cards-gestion', 'perfil_gestion');
+
+  document.getElementById('btn-2-next')?.addEventListener('click', () => {
+    const t = getTrabajo(); if (t) answers.perfil_tipo_trabajo  = t;
+    const n = getNivel();   if (n) answers.perfil_nivel_estudio = n;
+    const g = getGestion(); if (g) answers.perfil_gestion       = g;
+    showSection(3);
+  });
+  document.getElementById('btn-2-skip')?.addEventListener('click', () => showSection(3));
+
+  // ── SECCIÓN 3 ────────────────────────────────────────────────────────────────
+  document.querySelectorAll<HTMLButtonElement>('#chips-competidores .chip').forEach(chip => {
+    chip.addEventListener('click', () => chip.classList.toggle('selected'));
   });
 
-  document.getElementById('btn-6-skip')?.addEventListener('click', () => {
-    nextStep();
-  });
-
-  // ===================== PASO 7 — Fecha nacimiento =====================
-  document.getElementById('btn-7-next')?.addEventListener('click', () => {
-    const val = (document.getElementById('input-fecha-nac') as HTMLInputElement)?.value;
-    if (val) answers.perfil_fecha_nac = val;
-    nextStep();
-  });
-
-  document.getElementById('btn-7-skip')?.addEventListener('click', () => {
-    nextStep();
-  });
-
-  // ===================== PASO 8 — Descripción =====================
-  const textarea = document.getElementById('input-descripcion') as HTMLTextAreaElement;
+  const textarea  = document.getElementById('input-descripcion') as HTMLTextAreaElement;
   const charCount = document.getElementById('char-count');
-
   textarea?.addEventListener('input', () => {
     if (charCount) charCount.textContent = String(textarea.value.length);
   });
 
-  document.getElementById('btn-8-finish')?.addEventListener('click', async () => {
-    const val = textarea?.value.trim();
-    if (val) answers.perfil_descripcion = val;
-    await saveAndRedirect();
+  document.getElementById('btn-3-next')?.addEventListener('click', () => {
+    const selected = Array.from(document.querySelectorAll<HTMLButtonElement>('#chips-competidores .chip.selected'))
+      .map(c => c.dataset.value ?? c.textContent?.trim() ?? '');
+    if (selected.length) answers.perfil_competidores = selected;
+    const desc = textarea?.value.trim();
+    if (desc) answers.perfil_descripcion = desc;
+    showSection(4);
+  });
+  document.getElementById('btn-3-skip')?.addEventListener('click', async () => {
+    await saveProfile();
   });
 
-  document.getElementById('btn-8-skip')?.addEventListener('click', async () => {
-    await saveAndRedirect();
+  // ── SECCIÓN 4 — Contraseña ───────────────────────────────────────────────────
+  const pwdInput     = document.getElementById('input-password') as HTMLInputElement;
+  const pwdConfirm   = document.getElementById('input-password-confirm') as HTMLInputElement;
+  const pwdError     = document.getElementById('pwd-error')!;
+  const pwdStrength  = document.getElementById('pwd-strength')!;
+  const strengthBar  = document.getElementById('strength-bar')!;
+  const strengthLbl  = document.getElementById('strength-label')!;
+
+  // Mostrar/ocultar contraseña
+  document.getElementById('toggle-pwd')?.addEventListener('click', () => {
+    const isText = pwdInput.type === 'text';
+    pwdInput.type = isText ? 'password' : 'text';
   });
 
-  // ===================== ARRANCAR =====================
-  init();
+  // Indicador de fortaleza
+  pwdInput?.addEventListener('input', () => {
+    const v = pwdInput.value;
+    if (!v) { pwdStrength.style.display = 'none'; return; }
+    pwdStrength.style.display = 'flex';
+    let score = 0;
+    if (v.length >= 8)  score++;
+    if (v.length >= 12) score++;
+    if (/[A-Z]/.test(v)) score++;
+    if (/[0-9]/.test(v)) score++;
+    if (/[^A-Za-z0-9]/.test(v)) score++;
+    const levels = [
+      { pct: '20%',  color: '#EF5350', label: 'Muy débil' },
+      { pct: '40%',  color: '#FF7043', label: 'Débil' },
+      { pct: '60%',  color: '#FFA726', label: 'Aceptable' },
+      { pct: '80%',  color: '#66BB6A', label: 'Fuerte' },
+      { pct: '100%', color: '#2E7D33', label: '¡Excelente!' },
+    ];
+    const lvl = levels[Math.min(score, 4)];
+    strengthBar.style.width = lvl.pct;
+    strengthBar.style.background = lvl.color;
+    strengthLbl.textContent = lvl.label;
+    strengthLbl.style.color = lvl.color;
+  });
+
+  document.getElementById('btn-4-finish')?.addEventListener('click', async () => {
+    const pwd  = pwdInput.value;
+    const conf = pwdConfirm.value;
+    pwdError.style.display = 'none';
+
+    if (pwd.length < 8) {
+      pwdError.textContent = 'La contraseña debe tener al menos 8 caracteres.';
+      pwdError.style.display = 'block';
+      return;
+    }
+    if (pwd !== conf) {
+      pwdError.textContent = 'Las contraseñas no coinciden.';
+      pwdError.style.display = 'block';
+      return;
+    }
+
+    await saveProfile(pwd);
+  });
+
+  document.getElementById('btn-4-skip')?.addEventListener('click', async () => {
+    await saveProfile();
+  });
 </script>
