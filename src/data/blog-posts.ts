@@ -654,7 +654,7 @@ export const blogPosts: BlogPost[] = [
   {
     slug: "como-hacer-recorrida-seguridad-que-sirva",
     titulo: "Cómo hacer una recorrida de seguridad que sirva (y no junte polvo en un cajón)",
-    metaDescription: "Cómo hacer una recorrida de seguridad que dispare acciones y no termine en un PDF que nadie lee: qué observar, cómo clasificar y cómo cerrar cada hallazgo.",
+    metaDescription: "Cómo hacer una recorrida de seguridad que dispare acciones y no termine en un PDF: qué observar, cómo clasificar cada hallazgo y cómo cerrarlo.",
     fecha: "2026-08-12",
     categoria: "Plataforma HyS",
     tiempoLectura: "7 min",
