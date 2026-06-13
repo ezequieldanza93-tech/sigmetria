@@ -3,10 +3,10 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { blogPosts } from '../../data/blog-posts';
 
 const sections = [
-  { id: 'cumplimiento',  label: '🏗️ Cumplimiento operativo', categorias: ['Industrias y Construcciones', 'Mediciones', 'Capacitaciones'] },
-  { id: 'iso45001',      label: '📋 ISO 45001',               categorias: ['ISO 45001', 'Auditorías'] },
-  { id: 'plataforma',    label: '💻 Plataforma y tecnología',  categorias: ['Plataforma HyS'] },
-  { id: 'medioambiente', label: '🌿 Medio Ambiente',           categorias: ['Medio Ambiente'] },
+  { id: 'gestion',      label: '📋 Gestión HyS',       categorias: ['Industrias y Construcciones', 'Mediciones', 'Capacitaciones'] },
+  { id: 'iso45001',     label: '✅ ISO 45001',           categorias: ['ISO 45001', 'Auditorías'] },
+  { id: 'prevencion40', label: '🚀 Prevención 4.0',      categorias: ['Prevención 4.0'] },
+  { id: 'ambiente',     label: '🌿 Medio Ambiente',      categorias: ['Medio Ambiente'] },
 ];
 
 const catToSectionId: Record<string, string> = {};
@@ -30,7 +30,7 @@ const visiblePosts = blogPosts.filter(p => !p.oculto && new Date(p.fecha) <= tod
     </nav>
     <div class="page-hero-inner blog-hero-inner">
       <div class="blog-hero-left">
-        <div class="page-hero-badge">Construcción · ISO 45001 · Mediciones · Capacitaciones</div>
+        <div class="page-hero-badge">Gestión HyS · ISO 45001 · Prevención 4.0 · Normativa SRT</div>
         <h1>BLOG DE<br><em>H&amp;S LABORAL</em></h1>
       </div>
       <p class="blog-hero-desc">Artículos prácticos escritos por profesionales. Sin tecnicismos innecesarios — lo que necesitás saber para cumplir y proteger a tu equipo.</p>
@@ -427,13 +427,21 @@ searchInput.addEventListener('input', () => {
 
 // Hash routing desde nav (ej: /blog/#mediciones)
 const hashMap: Record<string, { cat: string; sec: string }> = {
-  'industrias-y-construcciones': { cat: 'Industrias y Construcciones', sec: 'cumplimiento' },
-  'mediciones':                  { cat: 'Mediciones',                  sec: 'cumplimiento' },
-  'capacitaciones':              { cat: 'Capacitaciones',              sec: 'cumplimiento' },
+  // Gestión HyS
+  'gestion-operativa':           { cat: 'Industrias y Construcciones', sec: 'gestion'      },
+  'industrias-y-construcciones': { cat: 'Industrias y Construcciones', sec: 'gestion'      },
+  'mediciones':                  { cat: 'Mediciones',                  sec: 'gestion'      },
+  'capacitaciones':              { cat: 'Capacitaciones',              sec: 'gestion'      },
+  // ISO 45001
   'iso-45001':                   { cat: 'ISO 45001',                   sec: 'iso45001'     },
   'auditorias':                  { cat: 'Auditorías',                  sec: 'iso45001'     },
-  'plataforma-hys':              { cat: 'Plataforma HyS',              sec: 'plataforma'   },
-  'medio-ambiente':              { cat: 'Medio Ambiente',              sec: 'medioambiente'},
+  // Prevención 4.0
+  'prevencion-40':               { cat: 'Prevención 4.0',              sec: 'prevencion40' },
+  'res-srt-48-2025':             { cat: 'Prevención 4.0',              sec: 'prevencion40' },
+  'disp-srt-15-2026':            { cat: 'Prevención 4.0',              sec: 'prevencion40' },
+  'plataforma-hys':              { cat: 'Prevención 4.0',              sec: 'prevencion40' },
+  // Medio Ambiente
+  'medio-ambiente':              { cat: 'Medio Ambiente',              sec: 'ambiente'     },
 };
 
 function activateFromHash() {
