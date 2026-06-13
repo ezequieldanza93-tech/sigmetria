@@ -6,3 +6,6 @@ node_modules/
 .DS_Store
 .astro/
 .claude/
+docs/
+sigmetría_app_mkt/
+supabase/.temp/
