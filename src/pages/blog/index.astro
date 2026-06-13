@@ -12,9 +12,11 @@ const sections = [
 const catToSectionId: Record<string, string> = {};
 sections.forEach(s => s.categorias.forEach(cat => { catToSectionId[cat] = s.id; }));
 
-// Solo se listan los posts no ocultos. Los blogs programados (calendario editorial)
-// se cargan con `oculto: true` y se activan cambiando el flag cuando llega su fecha.
-const visiblePosts = blogPosts.filter(p => !p.oculto);
+// Posts visibles: no ocultos Y con fecha <= hoy (evaluado en build time).
+// Para auto-publicar posts programados, Vercel se rebuilda diariamente vía
+// GitHub Actions (.github/workflows/daily-rebuild.yml).
+const today = new Date();
+const visiblePosts = blogPosts.filter(p => !p.oculto && new Date(p.fecha) <= today);
 ---
 
 <BaseLayout

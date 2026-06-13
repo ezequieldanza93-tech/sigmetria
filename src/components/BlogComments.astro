@@ -1,0 +1,450 @@
+---
+/**
+ * BlogComments — sección de comentarios para posts del blog.
+ *
+ * - Carga comentarios aprobados desde Supabase (cliente-side).
+ * - Formulario de nuevo comentario: nombre + email + texto.
+ * - Si hay sesión activa de Supabase Auth, pre-llena los campos con los datos
+ *   del lead (nombre + email) para que no tenga que tipear nada.
+ * - Los comentarios se guardan con aprobado=false → el dueño los aprueba
+ *   desde el panel de Supabase o el CRM.
+ * - El email capturado se puede cruzar con la tabla leads en el CRM.
+ */
+
+interface Props {
+  postSlug: string;
+}
+
+const { postSlug } = Astro.props;
+---
+
+<section class="comments-section" data-post-slug={postSlug}>
+  <div class="comments-inner">
+
+    <h2 class="comments-title">Comentarios</h2>
+
+    <!-- Lista de comentarios aprobados -->
+    <div class="comments-list" id="comments-list">
+      <div class="comments-loading">
+        <span class="comments-spinner" aria-hidden="true"></span>
+        <span>Cargando comentarios…</span>
+      </div>
+    </div>
+
+    <!-- Formulario de nuevo comentario -->
+    <div class="comment-form-wrap">
+      <h3 class="form-title">Dejá tu comentario</h3>
+      <p class="form-subtitle">Tu comentario será revisado antes de publicarse.</p>
+
+      <form class="comment-form" novalidate>
+        <div class="cf-row-2">
+          <div class="cf-field">
+            <label for="cf-nombre">Nombre *</label>
+            <input id="cf-nombre" type="text" name="nombre" required autocomplete="given-name" placeholder="Tu nombre" />
+          </div>
+          <div class="cf-field">
+            <label for="cf-email">Email *</label>
+            <input id="cf-email" type="email" name="email" required autocomplete="email" placeholder="tu@email.com" />
+          </div>
+        </div>
+        <div class="cf-field">
+          <label for="cf-texto">Comentario *</label>
+          <textarea id="cf-texto" name="texto" required minlength="10" maxlength="1000" rows="4" placeholder="Escribí tu comentario acá…"></textarea>
+          <span class="cf-counter"><span class="cf-count">0</span>/1000</span>
+        </div>
+        <p class="cf-privacy">
+          Al enviar aceptás la <a href="/politica-de-privacidad/" target="_blank" rel="noopener">política de privacidad</a>.
+          Tu email no se muestra públicamente.
+        </p>
+        <p class="cf-error" role="alert" aria-live="assertive" style="display:none">Completá todos los campos para continuar.</p>
+        <button type="submit" class="cf-btn" disabled aria-disabled="true">Enviar comentario</button>
+      </form>
+
+      <!-- Estado éxito -->
+      <div class="cf-success" style="display:none" role="status" aria-live="polite">
+        <span class="cf-success-icon" aria-hidden="true">✅</span>
+        <p>¡Gracias! Tu comentario fue recibido y será publicado una vez que lo revisemos.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+.comments-section {
+  background: var(--gris-bg, #F9FAFB);
+  border-top: 1px solid var(--borde, #E5E7EB);
+  padding: 56px 24px 72px;
+}
+.comments-inner {
+  max-width: 740px;
+  margin: 0 auto;
+}
+
+/* Título sección */
+.comments-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--gris-1);
+  margin-bottom: 32px;
+  padding-bottom: 14px;
+  border-bottom: 2px solid var(--borde);
+}
+
+/* Loading */
+.comments-loading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--gris-3);
+  padding: 16px 0;
+}
+.comments-spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(46,125,51,.2);
+  border-top-color: #2E7D33;
+  border-radius: 50%;
+  animation: spin .7s linear infinite;
+  flex-shrink: 0;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Sin comentarios */
+.comments-empty {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--gris-3);
+  padding: 8px 0 24px;
+}
+
+/* Comentario individual */
+.comment-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--borde);
+}
+.comment-item:last-child { border-bottom: none; }
+
+.comment-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.comment-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #2E7D33;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: .75rem;
+  flex-shrink: 0;
+}
+.comment-meta { display: flex; flex-direction: column; gap: 1px; }
+.comment-nombre {
+  font-size: .9rem;
+  font-weight: 600;
+  color: var(--gris-1);
+}
+.comment-fecha {
+  font-size: .75rem;
+  font-weight: 300;
+  color: var(--gris-3);
+}
+.comment-texto {
+  font-size: .95rem;
+  font-weight: 300;
+  color: var(--gris-2);
+  line-height: 1.75;
+  padding-left: 44px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* Formulario */
+.comment-form-wrap {
+  margin-top: 40px;
+  padding-top: 32px;
+  border-top: 2px solid var(--borde);
+}
+.form-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--gris-1);
+  margin-bottom: 4px;
+}
+.form-subtitle {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--gris-3);
+  margin-bottom: 20px;
+}
+
+.comment-form { display: flex; flex-direction: column; gap: 14px; }
+
+.cf-row-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.cf-field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  position: relative;
+}
+.cf-field label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--gris-2);
+  letter-spacing: .4px;
+}
+.cf-field input,
+.cf-field textarea {
+  background: var(--blanco);
+  border: 1px solid var(--borde);
+  border-radius: 6px;
+  padding: 10px 14px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--gris-1);
+  outline: none;
+  transition: border-color .2s;
+  resize: vertical;
+}
+.cf-field input:focus,
+.cf-field textarea:focus  { border-color: #2E7D33; }
+.cf-field input:focus-visible,
+.cf-field textarea:focus-visible { outline: 2px solid #2E7D33; outline-offset: 2px; }
+
+.cf-counter {
+  position: absolute;
+  right: 0;
+  bottom: -18px;
+  font-size: 11px;
+  font-weight: 300;
+  color: var(--gris-3);
+}
+
+.cf-privacy {
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--gris-3);
+  line-height: 1.6;
+  margin-top: 4px;
+}
+.cf-privacy a { color: #2E7D33; }
+
+.cf-error {
+  font-size: 12px;
+  color: var(--rojo, #D32F2F);
+  font-weight: 400;
+}
+
+.cf-btn {
+  align-self: flex-start;
+  padding: 11px 28px;
+  background: #2E7D33;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: .78rem;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background .2s;
+}
+.cf-btn:not([disabled]):hover { background: #1B5E20; }
+.cf-btn:focus-visible { outline: 2px solid #2E7D33; outline-offset: 3px; }
+.cf-btn[disabled],
+.cf-btn[aria-disabled="true"] { background: #B0BEC5; color: #78909C; cursor: not-allowed; }
+
+/* Éxito */
+.cf-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+  padding: 24px 0;
+}
+.cf-success-icon { font-size: 2rem; }
+.cf-success p { font-size: 15px; font-weight: 300; color: var(--gris-2); line-height: 1.7; }
+
+@media (max-width: 520px) {
+  .cf-row-2 { grid-template-columns: 1fr; }
+  .comment-texto { padding-left: 0; }
+}
+</style>
+
+<script>
+  import { createClient } from '@supabase/supabase-js';
+
+  const supabase = createClient(
+    import.meta.env.PUBLIC_SUPABASE_URL,
+    import.meta.env.PUBLIC_SUPABASE_KEY
+  );
+
+  const section = document.querySelector<HTMLElement>('.comments-section')!;
+  if (!section) throw new Error('[comments] no section found');
+
+  const postSlug   = section.dataset.postSlug ?? '';
+  const listEl     = section.querySelector<HTMLElement>('#comments-list')!;
+  const form       = section.querySelector<HTMLFormElement>('.comment-form')!;
+  const formWrap   = section.querySelector<HTMLElement>('.comment-form-wrap')!;
+  const successEl  = section.querySelector<HTMLElement>('.cf-success')!;
+  const errMsg     = section.querySelector<HTMLElement>('.cf-error')!;
+  const submitBtn  = section.querySelector<HTMLButtonElement>('.cf-btn')!;
+  const nombreInput = section.querySelector<HTMLInputElement>('[name="nombre"]')!;
+  const emailInput  = section.querySelector<HTMLInputElement>('[name="email"]')!;
+  const textoInput  = section.querySelector<HTMLTextAreaElement>('[name="texto"]')!;
+  const countEl     = section.querySelector<HTMLElement>('.cf-count')!;
+
+  // ── Cargar comentarios aprobados ──────────────────────────────────────────
+  async function loadComments() {
+    const { data, error } = await supabase
+      .from('blog_comments')
+      .select('id, nombre, texto, created_at')
+      .eq('post_slug', postSlug)
+      .eq('aprobado', true)
+      .order('created_at', { ascending: true });
+
+    if (error || !data) {
+      listEl.innerHTML = '<p class="comments-empty">No se pudieron cargar los comentarios.</p>';
+      return;
+    }
+
+    if (data.length === 0) {
+      listEl.innerHTML = '<p class="comments-empty">Todavía no hay comentarios. ¡Sé el primero!</p>';
+      return;
+    }
+
+    listEl.innerHTML = data.map(c => {
+      const inicial = (c.nombre as string).trim().charAt(0).toUpperCase();
+      const fecha   = new Date(c.created_at as string).toLocaleDateString('es-AR', {
+        day: 'numeric', month: 'long', year: 'numeric'
+      });
+      const texto   = (c.texto as string)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+      return `
+        <div class="comment-item">
+          <div class="comment-header">
+            <div class="comment-avatar" aria-hidden="true">${inicial}</div>
+            <div class="comment-meta">
+              <span class="comment-nombre">${(c.nombre as string).replace(/</g,'&lt;')}</span>
+              <span class="comment-fecha">${fecha}</span>
+            </div>
+          </div>
+          <p class="comment-texto">${texto}</p>
+        </div>
+      `;
+    }).join('');
+  }
+
+  loadComments();
+
+  // ── Pre-llenar si hay sesión activa ──────────────────────────────────────
+  async function prefillFromSession() {
+    const { data: { session } } = await supabase.auth.getSession();
+    if (!session) {
+      // Intentar con localStorage
+      const email = localStorage.getItem('sigm_email');
+      if (email && emailInput) emailInput.value = email;
+      return;
+    }
+
+    // Tenemos sesión: traer nombre del lead si existe
+    if (emailInput) emailInput.value = session.user.email ?? '';
+    const { data: lead } = await supabase
+      .from('leads')
+      .select('nombre')
+      .eq('auth_user_id', session.user.id)
+      .maybeSingle();
+    if (lead?.nombre && nombreInput) {
+      // El nombre en leads es "Nombre Apellido" — tomamos el primer token
+      nombreInput.value = (lead.nombre as string).split(' ')[0];
+    }
+    syncBtn();
+  }
+
+  prefillFromSession();
+
+  // ── Validación en tiempo real ─────────────────────────────────────────────
+  function syncBtn() {
+    const valid =
+      nombreInput.value.trim().length > 0 &&
+      /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value.trim()) &&
+      textoInput.value.trim().length >= 10;
+    submitBtn.disabled = !valid;
+    submitBtn.setAttribute('aria-disabled', String(!valid));
+  }
+
+  [nombreInput, emailInput, textoInput].forEach(el =>
+    el.addEventListener('input', syncBtn)
+  );
+
+  // Contador de caracteres
+  textoInput.addEventListener('input', () => {
+    if (countEl) countEl.textContent = String(textoInput.value.length);
+  });
+
+  // ── Submit ────────────────────────────────────────────────────────────────
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (submitBtn.disabled) return;
+
+    const nombre = nombreInput.value.trim();
+    const email  = emailInput.value.trim();
+    const texto  = textoInput.value.trim();
+
+    if (!nombre || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || texto.length < 10) {
+      errMsg.style.display = 'block';
+      return;
+    }
+    errMsg.style.display = 'none';
+
+    submitBtn.textContent = 'Enviando…';
+    submitBtn.disabled = true;
+
+    const { data: { session } } = await supabase.auth.getSession();
+
+    const { error } = await supabase.from('blog_comments').insert({
+      post_slug:    postSlug,
+      nombre,
+      email,
+      texto,
+      auth_user_id: session?.user?.id ?? null,
+    });
+
+    if (error) {
+      console.error('[comments] insert error:', error.message);
+      submitBtn.textContent = 'Enviar comentario';
+      submitBtn.disabled = false;
+      errMsg.textContent = 'Hubo un error al enviar. Intentá de nuevo.';
+      errMsg.style.display = 'block';
+      return;
+    }
+
+    // Guardar email para reconocimiento futuro
+    localStorage.setItem('sigm_email', email);
+
+    form.style.display = 'none';
+    successEl.style.display = 'flex';
+  });
+</script>
