@@ -468,7 +468,7 @@ const {
 
         await supabase.auth.signInWithOtp({
           email,
-          options: { emailRedirectTo: window.location.href },
+          options: { emailRedirectTo: window.location.origin + '/acceso/?next=' + encodeURIComponent(window.location.href) },
         });
 
         show(elMagicSent);
@@ -608,7 +608,7 @@ const {
       localStorage.setItem('sigm_email', email);
       supabase.auth.signInWithOtp({
         email,
-        options: { emailRedirectTo: window.location.href },
+        options: { emailRedirectTo: window.location.origin + '/acceso/?next=' + encodeURIComponent(window.location.href) },
       }); // fire-and-forget — no bloqueamos la descarga
 
       // 4. Intentar descarga inmediata (misma UX de antes)

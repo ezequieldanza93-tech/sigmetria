@@ -1,0 +1,860 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Bienvenido/a a Sigmetría HyS"
+  description="Completá tu perfil para acceder a todo el contenido gratuito de Sigmetría HyS."
+>
+  <div class="onboarding-wrapper">
+    <div class="wizard-card">
+
+      <!-- Progress bar -->
+      <div class="progress-container">
+        <div class="progress-bar" id="progress-bar"></div>
+      </div>
+      <p class="progress-label" id="progress-label">Paso 1 de 8</p>
+
+      <!-- ===== PASO 1 — Nombre ===== -->
+      <div class="step active" id="step-1">
+        <div class="step-emoji">👋</div>
+        <h1 class="step-title">¡Bienvenido/a!<br>¿Cómo te llamamos?</h1>
+        <div class="field-group">
+          <input
+            type="text"
+            id="input-nombre"
+            class="text-input"
+            placeholder="Tu nombre o apodo"
+            maxlength="60"
+            autocomplete="given-name"
+          />
+        </div>
+        <button class="btn-primary" id="btn-1-next">Continuar →</button>
+        <button class="btn-skip" id="btn-1-skip">Saltar</button>
+      </div>
+
+      <!-- ===== PASO 2 — Gestión actual ===== -->
+      <div class="step" id="step-2">
+        <div class="step-emoji">📋</div>
+        <h2 class="step-title">¿Cómo organizás tu gestión de HyS hoy?</h2>
+        <div class="cards-radio" id="cards-gestion">
+          <div class="card-option" data-value="excel">
+            <span class="card-icon">📊</span>
+            <span class="card-label">Excel o Google Sheets</span>
+          </div>
+          <div class="card-option" data-value="papel">
+            <span class="card-icon">📝</span>
+            <span class="card-label">Planillas en papel</span>
+          </div>
+          <div class="card-option" data-value="app_terceros">
+            <span class="card-icon">📱</span>
+            <span class="card-label">Con otra app o software</span>
+          </div>
+          <div class="card-option" data-value="sistema_propio">
+            <span class="card-icon">🖥️</span>
+            <span class="card-label">Sistema desarrollado a medida</span>
+          </div>
+          <div class="card-option" data-value="nada">
+            <span class="card-icon">🙅</span>
+            <span class="card-label">No tengo un método definido</span>
+          </div>
+        </div>
+        <button class="btn-primary" id="btn-2-next">Continuar →</button>
+        <button class="btn-skip" id="btn-2-skip">Saltar</button>
+      </div>
+
+      <!-- ===== PASO 3 — Competidores ===== -->
+      <div class="step" id="step-3">
+        <div class="step-emoji">🔍</div>
+        <h2 class="step-title">¿Conocés o usaste alguna de estas herramientas?</h2>
+        <div class="chips-container" id="chips-competidores">
+          <button class="chip" data-value="ISOTools">ISOTools</button>
+          <button class="chip" data-value="SafetyCulture / iAuditor">SafetyCulture / iAuditor</button>
+          <button class="chip" data-value="Intelex">Intelex</button>
+          <button class="chip" data-value="Cority">Cority</button>
+          <button class="chip" data-value="EHS Insight">EHS Insight</button>
+          <button class="chip" data-value="HSETool">HSETool</button>
+          <button class="chip" data-value="Enablon">Enablon</button>
+          <button class="chip" data-value="Ninguna de estas">Ninguna de estas</button>
+        </div>
+        <button class="btn-primary" id="btn-3-next">Continuar →</button>
+        <button class="btn-skip" id="btn-3-skip">Saltar</button>
+      </div>
+
+      <!-- ===== PASO 4 — Tipo de trabajo ===== -->
+      <div class="step" id="step-4">
+        <div class="step-emoji">💼</div>
+        <h2 class="step-title">¿Cómo ejercés tu profesión?</h2>
+        <div class="cards-radio cards-large" id="cards-trabajo">
+          <div class="card-option card-large" data-value="independiente">
+            <span class="card-icon">🧑‍💼</span>
+            <span class="card-label">Soy independiente</span>
+          </div>
+          <div class="card-option card-large" data-value="consultora">
+            <span class="card-icon">🏢</span>
+            <span class="card-label">Trabajo en una consultora</span>
+          </div>
+          <div class="card-option card-large" data-value="dependencia">
+            <span class="card-icon">👔</span>
+            <span class="card-label">Relación de dependencia</span>
+          </div>
+        </div>
+        <button class="btn-primary" id="btn-4-next">Continuar →</button>
+        <button class="btn-skip" id="btn-4-skip">Saltar</button>
+      </div>
+
+      <!-- ===== PASO 5 — Nivel de formación ===== -->
+      <div class="step" id="step-5">
+        <div class="step-emoji">🎓</div>
+        <h2 class="step-title">¿Cuál es tu nivel de formación en HyS?</h2>
+        <div class="cards-radio" id="cards-nivel">
+          <div class="card-option" data-value="estudiando">
+            <span class="card-icon">📚</span>
+            <span class="card-label">Estoy estudiando</span>
+          </div>
+          <div class="card-option" data-value="tecnico">
+            <span class="card-icon">🎓</span>
+            <span class="card-label">Técnico/a en HyS</span>
+          </div>
+          <div class="card-option" data-value="licenciado">
+            <span class="card-icon">🏅</span>
+            <span class="card-label">Licenciado/a</span>
+          </div>
+          <div class="card-option" data-value="posgrado">
+            <span class="card-icon">✨</span>
+            <span class="card-label">Posgrado o especialización</span>
+          </div>
+        </div>
+        <button class="btn-primary" id="btn-5-next">Continuar →</button>
+        <button class="btn-skip" id="btn-5-skip">Saltar</button>
+      </div>
+
+      <!-- ===== PASO 6 — Ubicación ===== -->
+      <div class="step" id="step-6">
+        <div class="step-emoji">📍</div>
+        <h2 class="step-title">¿De dónde nos escribís?</h2>
+        <div class="field-group">
+          <label class="field-label" for="select-pais">País</label>
+          <select id="select-pais" class="select-input">
+            <option value="Argentina" selected>Argentina</option>
+            <option value="Uruguay">Uruguay</option>
+            <option value="Chile">Chile</option>
+            <option value="Paraguay">Paraguay</option>
+            <option value="Bolivia">Bolivia</option>
+            <option value="Brasil">Brasil</option>
+            <option value="Otro">Otro</option>
+          </select>
+        </div>
+        <div class="field-group" id="provincia-group" style="display:block">
+          <label class="field-label" for="select-provincia">Provincia</label>
+          <select id="select-provincia" class="select-input">
+            <option value="">Seleccioná tu provincia</option>
+            <option>Buenos Aires</option>
+            <option>Ciudad Autónoma de Buenos Aires</option>
+            <option>Catamarca</option>
+            <option>Chaco</option>
+            <option>Chubut</option>
+            <option>Córdoba</option>
+            <option>Corrientes</option>
+            <option>Entre Ríos</option>
+            <option>Formosa</option>
+            <option>Jujuy</option>
+            <option>La Pampa</option>
+            <option>La Rioja</option>
+            <option>Mendoza</option>
+            <option>Misiones</option>
+            <option>Neuquén</option>
+            <option>Río Negro</option>
+            <option>Salta</option>
+            <option>San Juan</option>
+            <option>San Luis</option>
+            <option>Santa Cruz</option>
+            <option>Santa Fe</option>
+            <option>Santiago del Estero</option>
+            <option>Tierra del Fuego</option>
+            <option>Tucumán</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <label class="field-label" for="input-localidad">Localidad</label>
+          <input
+            type="text"
+            id="input-localidad"
+            class="text-input"
+            placeholder="Tu ciudad o localidad"
+            maxlength="80"
+          />
+        </div>
+        <button class="btn-primary" id="btn-6-next">Continuar →</button>
+        <button class="btn-skip" id="btn-6-skip">Saltar</button>
+      </div>
+
+      <!-- ===== PASO 7 — Fecha de nacimiento ===== -->
+      <div class="step" id="step-7">
+        <div class="step-emoji">🎂</div>
+        <h2 class="step-title">¿Cuándo es tu cumpleaños?<br><span class="step-optional">(opcional)</span></h2>
+        <p class="step-subtitle">Solo para conocer mejor a nuestra comunidad.</p>
+        <div class="field-group">
+          <input
+            type="date"
+            id="input-fecha-nac"
+            class="text-input"
+            min="1940-01-01"
+            max="2026-06-13"
+          />
+        </div>
+        <button class="btn-primary" id="btn-7-next">Continuar →</button>
+        <button class="btn-skip" id="btn-7-skip">Saltar</button>
+      </div>
+
+      <!-- ===== PASO 8 — Descripción libre ===== -->
+      <div class="step" id="step-8">
+        <div class="step-emoji">💬</div>
+        <h2 class="step-title">¿Querés contarnos algo más?<br><span class="step-optional">(opcional)</span></h2>
+        <p class="step-subtitle">¿Qué desafíos tenés hoy en tu gestión? ¿Qué te gustaría mejorar?</p>
+        <div class="field-group">
+          <textarea
+            id="input-descripcion"
+            class="textarea-input"
+            placeholder="Contanos lo que quieras..."
+            maxlength="1000"
+            rows="4"
+          ></textarea>
+          <p class="char-counter"><span id="char-count">0</span> / 1000</p>
+        </div>
+        <button class="btn-primary" id="btn-8-finish">Terminar →</button>
+        <button class="btn-skip" id="btn-8-skip">Saltar y terminar</button>
+      </div>
+
+      <!-- ===== PANTALLA FINAL ===== -->
+      <div class="step" id="step-done">
+        <div class="step-emoji">🚀</div>
+        <h2 class="step-title">¡Listo! Tu perfil está completo.</h2>
+        <p class="step-subtitle">Gracias por compartir tu experiencia. Ahora vas al contenido...</p>
+        <div class="spinner" aria-label="Cargando..."></div>
+      </div>
+
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  /* ========= Variables de paleta ========= */
+  :root {
+    --verde: #2E7D33;
+    --verde-dark: #1B5E20;
+    --verde-light: #E8F5E9;
+    --gris-1: #1A1A1A;
+    --gris-2: #555;
+    --gris-3: #9CA3AF;
+    --borde: #E5E7EB;
+  }
+
+  /* ========= Wrapper ========= */
+  .onboarding-wrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+    background: #f9fafb;
+  }
+
+  /* ========= Wizard card ========= */
+  .wizard-card {
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+    padding: 2.5rem 2rem;
+    width: 100%;
+    max-width: 520px;
+    position: relative;
+  }
+
+  /* ========= Progress bar ========= */
+  .progress-container {
+    height: 6px;
+    background: var(--borde);
+    border-radius: 99px;
+    margin-bottom: 0.5rem;
+    overflow: hidden;
+  }
+
+  .progress-bar {
+    height: 100%;
+    background: var(--verde);
+    border-radius: 99px;
+    width: 12.5%;
+    transition: width 0.4s ease;
+  }
+
+  .progress-label {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.75rem;
+    color: var(--gris-3);
+    text-align: right;
+    margin: 0 0 2rem;
+  }
+
+  /* ========= Steps ========= */
+  .step {
+    display: none;
+    flex-direction: column;
+    gap: 1rem;
+    animation: fadeIn 0.15s ease;
+  }
+
+  .step.active {
+    display: flex;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .step-emoji {
+    font-size: 2.5rem;
+    text-align: center;
+  }
+
+  .step-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--gris-1);
+    text-align: center;
+    margin: 0;
+    line-height: 1.35;
+  }
+
+  .step-optional {
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: var(--gris-3);
+  }
+
+  .step-subtitle {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.875rem;
+    color: var(--gris-2);
+    text-align: center;
+    margin: -0.25rem 0 0;
+  }
+
+  /* ========= Field group ========= */
+  .field-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+  }
+
+  .field-label {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--gris-2);
+  }
+
+  .text-input,
+  .select-input {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9375rem;
+    color: var(--gris-1);
+    border: 2px solid var(--borde);
+    border-radius: 10px;
+    padding: 0.65rem 0.875rem;
+    outline: none;
+    transition: border-color 0.2s;
+    background: #fff;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .text-input:focus,
+  .select-input:focus {
+    border-color: var(--verde);
+  }
+
+  .textarea-input {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9375rem;
+    color: var(--gris-1);
+    border: 2px solid var(--borde);
+    border-radius: 10px;
+    padding: 0.65rem 0.875rem;
+    outline: none;
+    transition: border-color 0.2s;
+    resize: vertical;
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 110px;
+  }
+
+  .textarea-input:focus {
+    border-color: var(--verde);
+  }
+
+  .char-counter {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.75rem;
+    color: var(--gris-3);
+    text-align: right;
+    margin: 0;
+  }
+
+  /* ========= Radio cards ========= */
+  .cards-radio {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .card-option {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    border: 2px solid var(--borde);
+    border-radius: 12px;
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+    user-select: none;
+  }
+
+  .card-option:hover {
+    border-color: var(--verde);
+    background: var(--verde-light);
+  }
+
+  .card-option.selected {
+    border-color: var(--verde);
+    background: var(--verde-light);
+  }
+
+  .card-icon {
+    font-size: 1.25rem;
+    flex-shrink: 0;
+  }
+
+  .card-label {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9375rem;
+    color: var(--gris-1);
+    font-weight: 500;
+  }
+
+  /* Cards grandes (paso 4) */
+  .cards-large {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .card-large {
+    flex: 1 1 140px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1.25rem 0.75rem;
+    text-align: center;
+    gap: 0.5rem;
+  }
+
+  .card-large .card-icon {
+    font-size: 1.75rem;
+  }
+
+  /* ========= Chips ========= */
+  .chips-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .chip {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--gris-2);
+    border: 2px solid var(--borde);
+    border-radius: 99px;
+    padding: 0.4rem 0.875rem;
+    background: #fff;
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s, color 0.15s;
+  }
+
+  .chip:hover {
+    border-color: var(--verde);
+    background: var(--verde-light);
+    color: var(--verde-dark);
+  }
+
+  .chip.selected {
+    border-color: var(--verde);
+    background: var(--verde-light);
+    color: var(--verde-dark);
+  }
+
+  /* ========= Buttons ========= */
+  .btn-primary {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #fff;
+    background: var(--verde);
+    border: none;
+    border-radius: 12px;
+    padding: 0.875rem 1.5rem;
+    width: 100%;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-top: 0.25rem;
+  }
+
+  .btn-primary:hover {
+    background: var(--verde-dark);
+  }
+
+  .btn-skip {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.8125rem;
+    color: var(--gris-3);
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    padding: 0.25rem;
+    transition: color 0.15s;
+  }
+
+  .btn-skip:hover {
+    color: var(--gris-2);
+  }
+
+  /* ========= Spinner ========= */
+  .spinner {
+    width: 36px;
+    height: 36px;
+    border: 3px solid var(--verde-light);
+    border-top-color: var(--verde);
+    border-radius: 50%;
+    animation: spin 0.75s linear infinite;
+    margin: 1rem auto 0;
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  /* ========= Responsive ========= */
+  @media (max-width: 560px) {
+    .wizard-card {
+      padding: 2rem 1.25rem;
+      border-radius: 16px;
+    }
+
+    .step-title {
+      font-size: 1.15rem;
+    }
+
+    .cards-large {
+      flex-direction: column;
+    }
+
+    .card-large {
+      flex-direction: row;
+      justify-content: flex-start;
+      text-align: left;
+    }
+  }
+</style>
+
+<script>
+  import { createClient } from '@supabase/supabase-js';
+
+  const supabase = createClient(
+    import.meta.env.PUBLIC_SUPABASE_URL,
+    import.meta.env.PUBLIC_SUPABASE_KEY,
+  );
+
+  // ===================== ESTADO =====================
+  const TOTAL_STEPS = 8;
+  let currentStep = 1;
+  const answers: Record<string, unknown> = {};
+
+  // ===================== HELPERS =====================
+  function showStep(n: number): void {
+    const current = document.querySelector('.step.active');
+    if (current) {
+      current.classList.remove('active');
+    }
+
+    const next = document.getElementById(`step-${n}`);
+    if (next) {
+      // pequeño delay para que el fadeIn se note
+      requestAnimationFrame(() => {
+        next.classList.add('active');
+      });
+    }
+
+    currentStep = n;
+    updateProgress();
+  }
+
+  function showDone(): void {
+    const current = document.querySelector('.step.active');
+    if (current) current.classList.remove('active');
+
+    const done = document.getElementById('step-done');
+    if (done) done.classList.add('active');
+
+    const bar = document.getElementById('progress-bar');
+    if (bar) bar.style.width = '100%';
+
+    const label = document.getElementById('progress-label');
+    if (label) label.textContent = 'Completado';
+  }
+
+  function updateProgress(): void {
+    const pct = (currentStep / TOTAL_STEPS) * 100;
+    const bar = document.getElementById('progress-bar');
+    if (bar) bar.style.width = `${pct}%`;
+
+    const label = document.getElementById('progress-label');
+    if (label) label.textContent = `Paso ${currentStep} de ${TOTAL_STEPS}`;
+  }
+
+  function nextStep(): void {
+    if (currentStep < TOTAL_STEPS) {
+      showStep(currentStep + 1);
+    }
+  }
+
+  function getNextParam(): string {
+    const params = new URLSearchParams(window.location.search);
+    return params.get('next') ?? '/';
+  }
+
+  // ===================== GUARDAR Y REDIRIGIR =====================
+  async function saveAndRedirect(): Promise<void> {
+    showDone();
+
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+
+      if (session?.user) {
+        await supabase.from('web_profiles').upsert(
+          {
+            auth_user_id: session.user.id,
+            email: session.user.email,
+            nombre: answers.nombre as string | undefined,
+            perfil_gestion: answers.perfil_gestion as string | undefined,
+            perfil_competidores: answers.perfil_competidores as string[] | undefined,
+            perfil_tipo_trabajo: answers.perfil_tipo_trabajo as string | undefined,
+            perfil_nivel_estudio: answers.perfil_nivel_estudio as string | undefined,
+            perfil_pais: answers.perfil_pais as string | undefined,
+            perfil_provincia: answers.perfil_provincia as string | undefined,
+            perfil_localidad: answers.perfil_localidad as string | undefined,
+            perfil_fecha_nac: answers.perfil_fecha_nac as string | undefined,
+            perfil_descripcion: answers.perfil_descripcion as string | undefined,
+            onboarding_completado: true,
+            updated_at: new Date().toISOString(),
+          },
+          { onConflict: 'auth_user_id' },
+        );
+      }
+    } catch (err) {
+      // Silencioso — si falla el guardado, igual redirigimos
+      console.error('Error al guardar perfil:', err);
+    }
+
+    setTimeout(() => {
+      window.location.href = getNextParam();
+    }, 1500);
+  }
+
+  // ===================== INIT: VERIFICAR SESIÓN =====================
+  async function init(): Promise<void> {
+    const { data: { session } } = await supabase.auth.getSession();
+
+    if (!session) {
+      // Sin sesión → redirect a /acceso/ con next=bienvenida+búsqueda actual
+      const nextUrl = encodeURIComponent('/bienvenida/' + window.location.search);
+      window.location.href = `/acceso/?next=${nextUrl}`;
+      return;
+    }
+
+    // Verificar si ya completó el onboarding
+    const { data: profile } = await supabase
+      .from('web_profiles')
+      .select('onboarding_completado')
+      .eq('auth_user_id', session.user.id)
+      .single();
+
+    if (profile?.onboarding_completado) {
+      window.location.href = getNextParam();
+      return;
+    }
+
+    // Todo OK — mostrar el wizard
+    showStep(1);
+  }
+
+  // ===================== PASO 1 — Nombre =====================
+  document.getElementById('btn-1-next')?.addEventListener('click', () => {
+    const val = (document.getElementById('input-nombre') as HTMLInputElement)?.value.trim();
+    if (val) answers.nombre = val;
+    nextStep();
+  });
+
+  document.getElementById('btn-1-skip')?.addEventListener('click', () => {
+    nextStep();
+  });
+
+  // ===================== PASO 2 — Gestión =====================
+  document.querySelectorAll<HTMLElement>('#cards-gestion .card-option').forEach((card) => {
+    card.addEventListener('click', () => {
+      document.querySelectorAll('#cards-gestion .card-option').forEach((c) =>
+        c.classList.remove('selected'),
+      );
+      card.classList.add('selected');
+    });
+  });
+
+  document.getElementById('btn-2-next')?.addEventListener('click', () => {
+    const selected = document.querySelector<HTMLElement>(
+      '#cards-gestion .card-option.selected',
+    );
+    if (selected?.dataset.value) answers.perfil_gestion = selected.dataset.value;
+    nextStep();
+  });
+
+  document.getElementById('btn-2-skip')?.addEventListener('click', () => {
+    nextStep();
+  });
+
+  // ===================== PASO 3 — Competidores =====================
+  document.querySelectorAll<HTMLButtonElement>('#chips-competidores .chip').forEach((chip) => {
+    chip.addEventListener('click', () => {
+      chip.classList.toggle('selected');
+    });
+  });
+
+  document.getElementById('btn-3-next')?.addEventListener('click', () => {
+    const selected = Array.from(
+      document.querySelectorAll<HTMLButtonElement>('#chips-competidores .chip.selected'),
+    ).map((c) => c.dataset.value ?? c.textContent?.trim() ?? '');
+
+    if (selected.length > 0) answers.perfil_competidores = selected;
+    nextStep();
+  });
+
+  document.getElementById('btn-3-skip')?.addEventListener('click', () => {
+    nextStep();
+  });
+
+  // ===================== PASO 4 — Tipo trabajo =====================
+  document.querySelectorAll<HTMLElement>('#cards-trabajo .card-option').forEach((card) => {
+    card.addEventListener('click', () => {
+      document.querySelectorAll('#cards-trabajo .card-option').forEach((c) =>
+        c.classList.remove('selected'),
+      );
+      card.classList.add('selected');
+    });
+  });
+
+  document.getElementById('btn-4-next')?.addEventListener('click', () => {
+    const selected = document.querySelector<HTMLElement>(
+      '#cards-trabajo .card-option.selected',
+    );
+    if (selected?.dataset.value) answers.perfil_tipo_trabajo = selected.dataset.value;
+    nextStep();
+  });
+
+  document.getElementById('btn-4-skip')?.addEventListener('click', () => {
+    nextStep();
+  });
+
+  // ===================== PASO 5 — Nivel estudio =====================
+  document.querySelectorAll<HTMLElement>('#cards-nivel .card-option').forEach((card) => {
+    card.addEventListener('click', () => {
+      document.querySelectorAll('#cards-nivel .card-option').forEach((c) =>
+        c.classList.remove('selected'),
+      );
+      card.classList.add('selected');
+    });
+  });
+
+  document.getElementById('btn-5-next')?.addEventListener('click', () => {
+    const selected = document.querySelector<HTMLElement>(
+      '#cards-nivel .card-option.selected',
+    );
+    if (selected?.dataset.value) answers.perfil_nivel_estudio = selected.dataset.value;
+    nextStep();
+  });
+
+  document.getElementById('btn-5-skip')?.addEventListener('click', () => {
+    nextStep();
+  });
+
+  // ===================== PASO 6 — Ubicación =====================
+  const selectPais = document.getElementById('select-pais') as HTMLSelectElement;
+  const provinciaGroup = document.getElementById('provincia-group');
+
+  selectPais?.addEventListener('change', () => {
+    if (provinciaGroup) {
+      provinciaGroup.style.display = selectPais.value === 'Argentina' ? 'block' : 'none';
+    }
+  });
+
+  document.getElementById('btn-6-next')?.addEventListener('click', () => {
+    const pais = (document.getElementById('select-pais') as HTMLSelectElement)?.value;
+    const provincia = (document.getElementById('select-provincia') as HTMLSelectElement)?.value;
+    const localidad = (document.getElementById('input-localidad') as HTMLInputElement)?.value.trim();
+
+    if (pais) answers.perfil_pais = pais;
+    if (pais === 'Argentina' && provincia) answers.perfil_provincia = provincia;
+    if (localidad) answers.perfil_localidad = localidad;
+
+    nextStep();
+  });
+
+  document.getElementById('btn-6-skip')?.addEventListener('click', () => {
+    nextStep();
+  });
+
+  // ===================== PASO 7 — Fecha nacimiento =====================
+  document.getElementById('btn-7-next')?.addEventListener('click', () => {
+    const val = (document.getElementById('input-fecha-nac') as HTMLInputElement)?.value;
+    if (val) answers.perfil_fecha_nac = val;
+    nextStep();
+  });
+
+  document.getElementById('btn-7-skip')?.addEventListener('click', () => {
+    nextStep();
+  });
+
+  // ===================== PASO 8 — Descripción =====================
+  const textarea = document.getElementById('input-descripcion') as HTMLTextAreaElement;
+  const charCount = document.getElementById('char-count');
+
+  textarea?.addEventListener('input', () => {
+    if (charCount) charCount.textContent = String(textarea.value.length);
+  });
+
+  document.getElementById('btn-8-finish')?.addEventListener('click', async () => {
+    const val = textarea?.value.trim();
+    if (val) answers.perfil_descripcion = val;
+    await saveAndRedirect();
+  });
+
+  document.getElementById('btn-8-skip')?.addEventListener('click', async () => {
+    await saveAndRedirect();
+  });
+
+  // ===================== ARRANCAR =====================
+  init();
+</script>

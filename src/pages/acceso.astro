@@ -258,10 +258,24 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     show(formState);
   }
 
-  supabase.auth.onAuthStateChange((_event, session) => {
+  supabase.auth.onAuthStateChange(async (_event, session) => {
     if (session) {
-      loggedMsg.textContent = `Autenticado como ${session.user.email}.`;
-      show(loggedState);
+      const email = session.user.email ?? '';
+      // upsert del perfil
+      await supabase.rpc('upsert_web_profile', { p_email: email });
+      // verificar si completó onboarding
+      const { data: profile } = await supabase
+        .from('web_profiles')
+        .select('onboarding_completado')
+        .eq('auth_user_id', session.user.id)
+        .maybeSingle();
+      const nextParam = new URLSearchParams(window.location.search).get('next') ?? '/blog/';
+      if (!profile?.onboarding_completado) {
+        const dest = `/bienvenida/?next=${encodeURIComponent(nextParam)}`;
+        window.location.href = dest;
+      } else {
+        window.location.href = nextParam;
+      }
     }
   });
 

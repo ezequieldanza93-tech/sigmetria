@@ -151,7 +151,20 @@ const blogGroups = [
 
     <a href="/nosotros/" class={`nav-link ${currentPath === '/nosotros/' ? 'active' : ''}`}>Nosotros</a>
 
-    <a href="/acceso/" class={`nav-link nav-link-acceso ${currentPath.startsWith('/acceso') ? 'active' : ''}`}>Accedé</a>
+    <span id="nav-auth-desktop">
+      <a href="/acceso/" class={`nav-link nav-link-acceso ${currentPath.startsWith('/acceso') ? 'active' : ''}`}>Accedé</a>
+    </span>
+    <span id="nav-user-desktop" style="display:none;position:relative" class="nav-user-wrap">
+      <button class="nav-user-btn" id="nav-user-btn" aria-expanded="false" aria-haspopup="true">
+        <span class="nav-user-avatar" id="nav-user-avatar">?</span>
+      </button>
+      <div class="nav-user-dropdown" id="nav-user-dropdown">
+        <span class="nav-user-email" id="nav-user-email-display"></span>
+        <div class="nav-submenu-divider"></div>
+        <a href="/acceso/" class="nav-dropdown-link">Mi cuenta</a>
+        <button class="nav-dropdown-link nav-signout-btn" id="nav-signout-btn-desktop" style="width:100%;text-align:left;background:none;border:none;cursor:pointer;color:var(--gris-2)">Cerrar sesión</button>
+      </div>
+    </span>
     <a href="https://sigmetria-hys.vercel.app/" target="_blank" rel="noopener" class="nav-cta">Probá gratis</a>
   </div>
 
@@ -216,7 +229,11 @@ const blogGroups = [
     </div>
   </div>
   <a href="/nosotros/" class="nav-mobile-link nav-mobile-root">Nosotros</a>
-  <a href="/acceso/" class="nav-mobile-link nav-mobile-root">Accedé</a>
+  <span id="nav-auth-mobile"><a href="/acceso/" class="nav-mobile-link nav-mobile-root">Accedé</a></span>
+  <span id="nav-user-mobile" style="display:none">
+    <a href="/acceso/" class="nav-mobile-link nav-mobile-root">Mi cuenta</a>
+    <button class="nav-mobile-link nav-mobile-root" id="nav-signout-btn-mobile" style="width:100%;text-align:left;background:none;border:none;cursor:pointer;color:var(--gris-2);font-family:inherit;font-size:.82rem;font-weight:600;letter-spacing:.6px;text-transform:uppercase;padding:12px 0;border-bottom:1px solid var(--borde)">Cerrar sesión</button>
+  </span>
   <a href="https://sigmetria-hys.vercel.app/" target="_blank" rel="noopener" class="btn-primary" style="margin-top:8px;">Probá gratis</a>
 </div>
 
@@ -529,6 +546,56 @@ nav.scrolled {
   .nav-right { display: none; }
   .nav-hamburger { display: flex; }
 }
+
+/* ---- USER AVATAR (autenticado) ---- */
+.nav-user-wrap { display: inline-flex; align-items: center; }
+.nav-user-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #2E7D33;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+  font-size: .75rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 8px;
+  transition: opacity .2s;
+}
+.nav-user-btn:hover { opacity: .85; }
+.nav-user-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 200px;
+  background: #fff;
+  border: 1px solid var(--borde);
+  border-radius: 8px;
+  padding: 8px 0;
+  box-shadow: 0 12px 40px rgba(0,0,0,.1);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-4px);
+  transition: opacity .18s ease, transform .18s ease;
+  z-index: 300;
+}
+.nav-user-dropdown.open {
+  opacity: 1;
+  pointer-events: all;
+  transform: translateY(0);
+}
+.nav-user-email {
+  display: block;
+  padding: 6px 16px 8px;
+  font-size: .7rem;
+  font-weight: 400;
+  color: var(--gris-3);
+  word-break: break-all;
+}
 </style>
 
 <script>
@@ -584,4 +651,69 @@ document.addEventListener('keydown', e => {
     toggle?.setAttribute('aria-expanded', 'false');
   }
 });
+
+// ── Auth state en nav ─────────────────────────────────────────────────────
+(async () => {
+  const { createClient } = await import('@supabase/supabase-js');
+  const sb = createClient(
+    import.meta.env.PUBLIC_SUPABASE_URL,
+    import.meta.env.PUBLIC_SUPABASE_KEY,
+  );
+
+  const authDesktop = document.getElementById('nav-auth-desktop');
+  const userDesktop = document.getElementById('nav-user-desktop');
+  const authMobile  = document.getElementById('nav-auth-mobile');
+  const userMobile  = document.getElementById('nav-user-mobile');
+  const avatar      = document.getElementById('nav-user-avatar');
+  const emailLabel  = document.getElementById('nav-user-email-display');
+  const dropdown    = document.getElementById('nav-user-dropdown');
+  const userBtn     = document.getElementById('nav-user-btn');
+
+  function setLoggedIn(email: string) {
+    if (authDesktop) authDesktop.style.display = 'none';
+    if (userDesktop) userDesktop.style.display = 'inline-flex';
+    if (authMobile)  authMobile.style.display  = 'none';
+    if (userMobile)  userMobile.style.display  = 'block';
+    if (avatar)      avatar.textContent = email.charAt(0).toUpperCase();
+    if (emailLabel)  emailLabel.textContent = email;
+  }
+
+  function setLoggedOut() {
+    if (authDesktop) authDesktop.style.display = 'inline';
+    if (userDesktop) userDesktop.style.display = 'none';
+    if (authMobile)  authMobile.style.display  = 'block';
+    if (userMobile)  userMobile.style.display  = 'none';
+  }
+
+  const { data: { session } } = await sb.auth.getSession();
+  if (session?.user?.email) {
+    setLoggedIn(session.user.email);
+  }
+
+  sb.auth.onAuthStateChange((_event, session) => {
+    if (session?.user?.email) setLoggedIn(session.user.email);
+    else setLoggedOut();
+  });
+
+  // Toggle dropdown
+  userBtn?.addEventListener('click', () => {
+    const isOpen = dropdown?.classList.toggle('open');
+    userBtn.setAttribute('aria-expanded', String(isOpen));
+  });
+  document.addEventListener('click', (e) => {
+    if (!userBtn?.contains(e.target as Node)) {
+      dropdown?.classList.remove('open');
+      userBtn?.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  // Sign out buttons
+  async function signOut() {
+    await sb.auth.signOut();
+    localStorage.removeItem('sigm_email');
+    window.location.href = '/';
+  }
+  document.getElementById('nav-signout-btn-desktop')?.addEventListener('click', signOut);
+  document.getElementById('nav-signout-btn-mobile')?.addEventListener('click', signOut);
+})();
 </script>
