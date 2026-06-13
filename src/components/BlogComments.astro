@@ -296,7 +296,8 @@ const { postSlug } = Astro.props;
 
   const supabase = createClient(
     import.meta.env.PUBLIC_SUPABASE_URL,
-    import.meta.env.PUBLIC_SUPABASE_KEY
+    import.meta.env.PUBLIC_SUPABASE_KEY,
+    { auth: { flowType: 'implicit' } }
   );
 
   const section = document.querySelector<HTMLElement>('.comments-section')!;

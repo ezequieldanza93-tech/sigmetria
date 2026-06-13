@@ -216,7 +216,7 @@ const {
   const supabase = createClient(
     import.meta.env.PUBLIC_SUPABASE_URL,
     import.meta.env.PUBLIC_SUPABASE_KEY,
-    { auth: { detectSessionInUrl: true, persistSession: true } }
+    { auth: { flowType: 'implicit', detectSessionInUrl: true, persistSession: true } }
   );
 
   document.querySelectorAll<HTMLElement>('.lm-wrap').forEach(wrap => {

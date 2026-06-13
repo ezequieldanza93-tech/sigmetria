@@ -505,6 +505,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   const supabase = createClient(
     import.meta.env.PUBLIC_SUPABASE_URL,
     import.meta.env.PUBLIC_SUPABASE_KEY,
+    { auth: { flowType: 'implicit' } }
   );
 
   const TOTAL_SECTIONS = 4;

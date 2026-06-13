@@ -333,7 +333,8 @@ import Icon from '../components/Icon.astro';
 
   const supabase = createClient(
     import.meta.env.PUBLIC_SUPABASE_URL,
-    import.meta.env.PUBLIC_SUPABASE_KEY
+    import.meta.env.PUBLIC_SUPABASE_KEY,
+    { auth: { flowType: 'implicit' } }
   );
 
   // ── Captura de contexto desde URL ──────────────────────────
