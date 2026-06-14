@@ -4,95 +4,100 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 <BaseLayout
   title="Accedé a tu cuenta — SIGMETRÍA HyS"
-  description="Ingresá con email y contraseña. Si es tu primera vez, accedé con link de email."
+  description="Ingresá con tu email. Si tenés cuenta te pedimos tu contraseña; si es tu primera vez te mandamos un link."
   canonical="https://sigmetriahys.com/acceso/"
 >
   <section class="acceso-wrap">
     <div class="acceso-card">
 
-      <!-- Estado: login email + password (PRINCIPAL) -->
-      <div id="ac-login-state">
+      <!-- Paso 1: email (estado inicial) -->
+      <div id="ac-email-step">
         <div class="ac-icon" aria-hidden="true">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2E7D33" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-          </svg>
-        </div>
-        <h1 class="ac-title">Accedé a tu cuenta</h1>
-        <p class="ac-sub">Ingresá con tu email y contraseña.</p>
-
-        <form id="ac-login-form" novalidate>
-          <div class="ac-field">
-            <label for="ac-email">Email</label>
-            <input id="ac-email" type="email" name="email" required autocomplete="email" placeholder="tu@email.com" />
-          </div>
-          <div class="ac-field">
-            <label for="ac-password">Contraseña</label>
-            <input id="ac-password" type="password" name="password" required autocomplete="current-password" placeholder="Tu contraseña" />
-          </div>
-          <p class="ac-error" id="ac-login-error" role="alert" style="display:none"></p>
-          <button type="submit" class="ac-btn" id="ac-login-btn">Iniciar sesión</button>
-        </form>
-
-        <p class="ac-hint">
-          ¿Primera vez o no recordás tu contraseña?
-          <button class="ac-link-btn" id="ac-to-magic-btn">Accedé con link al email</button>
-        </p>
-      </div>
-
-      <!-- Estado: magic link (primera vez / recuperar acceso) -->
-      <div id="ac-magic-state" style="display:none">
-        <div class="ac-icon" aria-hidden="true">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2E7D33" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2E7D33" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
             <polyline points="22,6 12,13 2,6"/>
           </svg>
         </div>
-        <h2 class="ac-title">Accedé con link al email</h2>
-        <p class="ac-sub">Si es tu primera vez o no recordás tu contraseña, te mandamos un link instantáneo. Sin contraseña.</p>
+        <h1 class="ac-title">Ingresá a Sigmetría</h1>
+        <p class="ac-sub">Escribí tu email y te decimos el siguiente paso.</p>
 
-        <form id="ac-magic-form" novalidate>
+        <form id="ac-email-form" novalidate>
           <div class="ac-field">
-            <label for="ac-magic-email">Email</label>
-            <input id="ac-magic-email" type="email" name="email" required autocomplete="email" placeholder="tu@email.com" />
+            <label for="ac-email-input">Email</label>
+            <input id="ac-email-input" type="email" name="email" required autocomplete="email" placeholder="tu@email.com" />
           </div>
-          <p class="ac-error" id="ac-magic-error" role="alert" style="display:none"></p>
-          <button type="submit" class="ac-btn" id="ac-magic-btn">Enviar link de acceso</button>
+          <p class="ac-error" id="ac-email-error" role="alert" style="display:none"></p>
+          <button type="submit" class="ac-btn">Continuar →</button>
+        </form>
+      </div>
+
+      <!-- Paso 2A: contraseña (cuenta existente) -->
+      <div id="ac-password-step" style="display:none">
+        <div class="ac-icon" aria-hidden="true">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2E7D33" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+          </svg>
+        </div>
+        <h2 class="ac-title">¡Hola de nuevo!</h2>
+        <div class="ac-email-chip">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6"/>
+          </svg>
+          <span id="ac-email-display"></span>
+          <button class="ac-chip-close" id="ac-change-email-btn" type="button" title="Cambiar email" aria-label="Cambiar email">✕</button>
+        </div>
+
+        <form id="ac-password-form" novalidate>
+          <div class="ac-field">
+            <label for="ac-password-input">Contraseña</label>
+            <input id="ac-password-input" type="password" name="password" required autocomplete="current-password" placeholder="Tu contraseña" />
+          </div>
+          <p class="ac-error" id="ac-password-error" role="alert" style="display:none"></p>
+          <button type="submit" class="ac-btn">Iniciar sesión</button>
         </form>
 
         <p class="ac-hint">
-          ¿Ya tenés contraseña?
-          <button class="ac-link-btn" id="ac-to-login-btn">Iniciá sesión</button>
+          <button class="ac-link-btn" id="ac-forgot-btn" type="button">¿Olvidaste tu contraseña?</button>
+          Te mandamos un link.
         </p>
       </div>
 
-      <!-- Estado: loading -->
-      <div id="ac-loading-state" style="display:none">
+      <!-- Loading -->
+      <div id="ac-loading-step" style="display:none">
         <div class="ac-spinner-wrap">
           <span class="ac-spinner" aria-hidden="true"></span>
           <p>Un momento…</p>
         </div>
       </div>
 
-      <!-- Estado: link enviado -->
-      <div id="ac-success-state" style="display:none">
-        <div class="ac-success-icon" aria-hidden="true">✅</div>
-        <h2 class="ac-title">¡Listo! Revisá tu casilla</h2>
+      <!-- Magic link enviado (cuenta nueva + recuperar contraseña) -->
+      <div id="ac-magic-sent-step" style="display:none">
+        <div class="ac-success-icon" aria-hidden="true">📬</div>
+        <h2 class="ac-title">Revisá tu casilla</h2>
         <p class="ac-sub">
-          Te enviamos un link de acceso a <strong id="ac-email-confirm"></strong>.
-          Hacé clic en el link del email para ingresar.
+          Te enviamos un link a <strong id="ac-sent-email"></strong>.
+          Hacé clic en él para acceder.
         </p>
-        <p class="ac-hint">No lo encontrás? Revisá en spam o <button class="ac-link-btn" id="ac-retry-btn">volvé a intentarlo</button>.</p>
+        <p class="ac-hint">
+          ¿No lo encontrás? Revisá spam o
+          <button class="ac-link-btn" id="ac-resend-btn" type="button">reenvialo</button>.
+        </p>
+        <p class="ac-hint" style="margin-top:6px">
+          <button class="ac-link-btn" id="ac-back-email-btn" type="button">Cambiar email</button>
+        </p>
       </div>
 
-      <!-- Estado: ya logueado -->
-      <div id="ac-logged-state" style="display:none">
+      <!-- Ya logueado -->
+      <div id="ac-logged-step" style="display:none">
         <div class="ac-success-icon" aria-hidden="true">👋</div>
         <h2 class="ac-title">Ya estás adentro</h2>
         <p class="ac-sub" id="ac-logged-msg">Estás autenticado.</p>
-        <a href="/blog/" class="ac-btn ac-btn-outline">Ir al blog</a>
+        <a href="/blog/" class="ac-btn ac-btn-link">Ir al blog →</a>
         <p class="ac-hint">
-          ¿No sos vos? <button class="ac-link-btn" id="ac-signout-btn">Cerrar sesión</button>
+          ¿No sos vos?
+          <button class="ac-link-btn" id="ac-signout-btn" type="button">Cerrar sesión</button>
         </p>
       </div>
 
@@ -143,6 +148,38 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   line-height: 1.6;
   margin-bottom: 24px;
 }
+.ac-email-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: #E8F5E9;
+  border: 1px solid #C8E6C9;
+  border-radius: 24px;
+  padding: 7px 14px;
+  margin-bottom: 22px;
+  max-width: 100%;
+  color: var(--gris-2, #555);
+}
+.ac-email-chip span {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--gris-1, #1A1A1A);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 220px;
+}
+.ac-chip-close {
+  background: none;
+  border: none;
+  color: var(--gris-3, #9CA3AF);
+  cursor: pointer;
+  font-size: 13px;
+  padding: 0;
+  line-height: 1;
+  flex-shrink: 0;
+}
+.ac-chip-close:hover { color: var(--gris-1, #1A1A1A); }
 .ac-field {
   display: flex;
   flex-direction: column;
@@ -198,12 +235,25 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 }
 .ac-btn:hover { background: #1B5E20; }
 .ac-btn:focus-visible { outline: 2px solid #2E7D33; outline-offset: 3px; }
-.ac-btn-outline {
+.ac-btn-link {
+  display: block;
+  width: 100%;
+  padding: 13px 20px;
   background: transparent;
   color: #2E7D33;
   border: 2px solid #2E7D33;
+  border-radius: 10px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: .85rem;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background .2s;
+  text-decoration: none;
+  text-align: center;
 }
-.ac-btn-outline:hover { background: #E8F5E9; }
+.ac-btn-link:hover { background: #E8F5E9; }
 .ac-hint {
   font-size: 12px;
   font-weight: 300;
@@ -211,7 +261,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   margin-top: 16px;
   line-height: 1.6;
 }
-.ac-hint a, .ac-link-btn {
+.ac-link-btn {
   color: #2E7D33;
   font-weight: 500;
   background: none;
@@ -219,6 +269,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   cursor: pointer;
   font-size: inherit;
   padding: 0;
+  font-family: inherit;
   text-decoration: underline;
 }
 .ac-link-btn:hover { color: #1B5E20; }
@@ -242,7 +293,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   animation: spin .7s linear infinite;
 }
 @keyframes spin { to { transform: rotate(360deg); } }
-.ac-success-icon { font-size: 2.5rem; margin-bottom: 12px; }
+.ac-success-icon { font-size: 2.5rem; margin-bottom: 12px; display: block; }
 
 @media (max-width: 480px) {
   .acceso-card { padding: 32px 20px; }
@@ -259,18 +310,17 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   );
 
   const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  let currentEmail = '';
 
-  const loginState   = document.getElementById('ac-login-state')!;
-  const magicState   = document.getElementById('ac-magic-state')!;
-  const loadingState = document.getElementById('ac-loading-state')!;
-  const successState = document.getElementById('ac-success-state')!;
-  const loggedState  = document.getElementById('ac-logged-state')!;
-  const loggedMsg    = document.getElementById('ac-logged-msg')!;
-  const emailConfirm = document.getElementById('ac-email-confirm')!;
+  const emailStep    = document.getElementById('ac-email-step')!;
+  const passwordStep = document.getElementById('ac-password-step')!;
+  const loadingStep  = document.getElementById('ac-loading-step')!;
+  const magicSentStep = document.getElementById('ac-magic-sent-step')!;
+  const loggedStep   = document.getElementById('ac-logged-step')!;
 
-  const ALL_STATES = [loginState, magicState, loadingState, successState, loggedState];
+  const ALL_STEPS = [emailStep, passwordStep, loadingStep, magicSentStep, loggedStep];
   function show(el: HTMLElement) {
-    ALL_STATES.forEach(s => s.style.display = 'none');
+    ALL_STEPS.forEach(s => { s.style.display = 'none'; });
     el.style.display = 'block';
   }
 
@@ -280,6 +330,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   async function handleSession(session: any) {
     const email = session.user.email ?? '';
+    localStorage.setItem('sigm_email', email);
     await supabase.rpc('upsert_web_profile', { p_email: email });
     const { data: profile } = await supabase
       .from('web_profiles')
@@ -292,120 +343,153 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       : next;
   }
 
-  // INITIAL_SESSION: si ya estaba logueado → "Ya estás adentro"
-  // SIGNED_IN: retorno del magic link o login exitoso → redirigir
-  const saved = localStorage.getItem('sigm_email');
-  if (saved) {
-    const emailEl = document.getElementById('ac-email') as HTMLInputElement;
-    const magicEl = document.getElementById('ac-magic-email') as HTMLInputElement;
-    if (emailEl) emailEl.value = saved;
-    if (magicEl) magicEl.value = saved;
+  async function sendMagicLink(email: string): Promise<string | null> {
+    const next = getNextParam();
+    const redirectTo = `${window.location.origin}/acceso/?next=${encodeURIComponent(next)}`;
+    const { error } = await supabase.auth.signInWithOtp({ email, options: { emailRedirectTo: redirectTo } });
+    if (!error) return null;
+    const isRateLimit = error.status === 429 || error.message?.toLowerCase().includes('rate');
+    return isRateLimit
+      ? 'Límite de envíos alcanzado. Esperá unos minutos y volvé a intentarlo.'
+      : `Error al enviar: ${error.message}`;
   }
 
+  // Pre-fill email from localStorage
+  const saved = localStorage.getItem('sigm_email');
+  if (saved) {
+    const emailInput = document.getElementById('ac-email-input') as HTMLInputElement;
+    if (emailInput) emailInput.value = saved;
+  }
+
+  // onAuthStateChange
   supabase.auth.onAuthStateChange(async (event, session) => {
     if (event === 'INITIAL_SESSION') {
       if (session) {
+        const loggedMsg = document.getElementById('ac-logged-msg')!;
         loggedMsg.textContent = `Autenticado como ${session.user.email}.`;
-        show(loggedState);
+        show(loggedStep);
       }
-      // sin sesión: el login form ya está visible (por defecto)
+      // sin sesión → email-step ya visible por defecto
     } else if (event === 'SIGNED_IN' && session) {
       await handleSession(session);
     }
   });
 
-  // ── Login con email + contraseña ─────────────────────────────────────────
-  const loginForm  = document.getElementById('ac-login-form') as HTMLFormElement;
-  const loginError = document.getElementById('ac-login-error')!;
+  // ── Paso 1: email → Continuar ────────────────────────────────────────────────
+  const emailForm  = document.getElementById('ac-email-form') as HTMLFormElement;
+  const emailError = document.getElementById('ac-email-error')!;
+  const emailDisplay = document.getElementById('ac-email-display')!;
+  const sentEmail    = document.getElementById('ac-sent-email')!;
 
-  loginForm?.addEventListener('submit', async (e) => {
+  emailForm?.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const email    = (document.getElementById('ac-email') as HTMLInputElement).value.trim();
-    const password = (document.getElementById('ac-password') as HTMLInputElement).value;
-
-    if (!EMAIL_RE.test(email) || !password) {
-      loginError.textContent = 'Completá email y contraseña.';
-      loginError.style.display = 'block';
-      return;
-    }
-
-    loginError.style.display = 'none';
-    show(loadingState);
-
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
-
-    if (error) {
-      show(loginState);
-      const isCredentials = error.message?.toLowerCase().includes('invalid') || error.status === 400;
-      loginError.textContent = isCredentials
-        ? 'Email o contraseña incorrectos. Si es tu primera vez, accedé con link al email.'
-        : `Error: ${error.message}`;
-      loginError.style.display = 'block';
-      return;
-    }
-
-    localStorage.setItem('sigm_email', email);
-    // onAuthStateChange SIGNED_IN se dispara y redirige
-  });
-
-  // ── Magic link (primera vez / recuperar acceso) ──────────────────────────
-  const magicForm  = document.getElementById('ac-magic-form') as HTMLFormElement;
-  const magicError = document.getElementById('ac-magic-error')!;
-
-  magicForm?.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const email = (document.getElementById('ac-magic-email') as HTMLInputElement).value.trim();
+    const emailInput = document.getElementById('ac-email-input') as HTMLInputElement;
+    const email = emailInput.value.trim();
 
     if (!EMAIL_RE.test(email)) {
-      magicError.textContent = 'Ingresá un email válido.';
-      magicError.style.display = 'block';
+      emailError.textContent = 'Ingresá un email válido.';
+      emailError.style.display = 'block';
       return;
     }
 
-    magicError.style.display = 'none';
-    show(loadingState);
+    emailError.style.display = 'none';
+    currentEmail = email;
+    show(loadingStep);
 
-    const next = getNextParam();
-    const redirectTo = `${window.location.origin}/acceso/?next=${encodeURIComponent(next)}`;
-    const { error } = await supabase.auth.signInWithOtp({ email, options: { emailRedirectTo: redirectTo } });
+    const { data: exists, error: checkError } = await supabase.rpc('check_email_registered', { p_email: email });
+
+    if (checkError) {
+      show(emailStep);
+      emailError.textContent = `No se pudo verificar el email. Intentá de nuevo.`;
+      emailError.style.display = 'block';
+      return;
+    }
+
+    if (exists) {
+      // Cuenta existente → mostrar password step
+      emailDisplay.textContent = email;
+      show(passwordStep);
+      (document.getElementById('ac-password-input') as HTMLInputElement)?.focus();
+    } else {
+      // Sin cuenta → crear + enviar magic link
+      const errMsg = await sendMagicLink(email);
+      if (errMsg) {
+        show(emailStep);
+        emailError.textContent = errMsg;
+        emailError.style.display = 'block';
+        return;
+      }
+      localStorage.setItem('sigm_email', email);
+      sentEmail.textContent = email;
+      show(magicSentStep);
+    }
+  });
+
+  // ── Paso 2A: password → Iniciar sesión ───────────────────────────────────────
+  const passwordForm  = document.getElementById('ac-password-form') as HTMLFormElement;
+  const passwordError = document.getElementById('ac-password-error')!;
+
+  passwordForm?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const pwInput = document.getElementById('ac-password-input') as HTMLInputElement;
+    const password = pwInput.value;
+
+    if (!password) {
+      passwordError.textContent = 'Ingresá tu contraseña.';
+      passwordError.style.display = 'block';
+      return;
+    }
+
+    passwordError.style.display = 'none';
+    show(loadingStep);
+
+    const { error } = await supabase.auth.signInWithPassword({ email: currentEmail, password });
 
     if (error) {
-      show(magicState);
-      const isRateLimit = error.status === 429 || error.message?.toLowerCase().includes('rate');
-      magicError.textContent = isRateLimit
-        ? 'Límite de envíos alcanzado. Esperá unos minutos y volvé a intentarlo.'
-        : `Error: ${error.message}`;
-      magicError.style.display = 'block';
+      show(passwordStep);
+      passwordError.textContent = 'Contraseña incorrecta.';
+      passwordError.style.display = 'block';
       return;
     }
-
-    localStorage.setItem('sigm_email', email);
-    emailConfirm.textContent = email;
-    show(successState);
+    // SIGNED_IN dispara y redirige vía handleSession
   });
 
-  // ── Toggles entre estados ────────────────────────────────────────────────
-  document.getElementById('ac-to-magic-btn')?.addEventListener('click', () => {
-    loginError.style.display = 'none';
-    const email = (document.getElementById('ac-email') as HTMLInputElement)?.value;
-    const magicEl = document.getElementById('ac-magic-email') as HTMLInputElement;
-    if (email && magicEl) magicEl.value = email;
-    show(magicState);
+  // ── Olvidé mi contraseña ─────────────────────────────────────────────────────
+  document.getElementById('ac-forgot-btn')?.addEventListener('click', async () => {
+    show(loadingStep);
+    const errMsg = await sendMagicLink(currentEmail);
+    if (errMsg) {
+      show(passwordStep);
+      passwordError.textContent = errMsg;
+      passwordError.style.display = 'block';
+      return;
+    }
+    sentEmail.textContent = currentEmail;
+    show(magicSentStep);
   });
 
-  document.getElementById('ac-to-login-btn')?.addEventListener('click', () => {
-    magicError.style.display = 'none';
-    const email = (document.getElementById('ac-magic-email') as HTMLInputElement)?.value;
-    const loginEl = document.getElementById('ac-email') as HTMLInputElement;
-    if (email && loginEl) loginEl.value = email;
-    show(loginState);
+  // ── Cambiar email (desde password step) ─────────────────────────────────────
+  document.getElementById('ac-change-email-btn')?.addEventListener('click', () => {
+    show(emailStep);
   });
 
-  document.getElementById('ac-retry-btn')?.addEventListener('click', () => show(magicState));
+  // ── Reenviar desde magic-sent-step ───────────────────────────────────────────
+  document.getElementById('ac-resend-btn')?.addEventListener('click', async () => {
+    show(loadingStep);
+    await sendMagicLink(currentEmail); // silencioso si falla (ya está en el estado correcto)
+    sentEmail.textContent = currentEmail;
+    show(magicSentStep);
+  });
 
+  // ── Cambiar email desde magic-sent-step ─────────────────────────────────────
+  document.getElementById('ac-back-email-btn')?.addEventListener('click', () => {
+    show(emailStep);
+  });
+
+  // ── Cerrar sesión ────────────────────────────────────────────────────────────
   document.getElementById('ac-signout-btn')?.addEventListener('click', async () => {
     await supabase.auth.signOut();
     localStorage.removeItem('sigm_email');
-    show(loginState);
+    show(emailStep);
   });
 </script>
