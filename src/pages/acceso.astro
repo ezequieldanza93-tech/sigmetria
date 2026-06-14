@@ -396,11 +396,22 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     currentEmail = email;
     show(loadingStep);
 
-    const { data: exists, error: checkError } = await supabase.rpc('check_email_registered', { p_email: email });
+    // Timeout de 8s: si supabase-js reintenta con backoff no quedamos colgados
+    let exists: boolean | null = null;
+    let checkFailed = false;
+    try {
+      const rpcPromise = supabase.rpc('check_email_registered', { p_email: email });
+      const timeoutPromise = new Promise<never>((_, rej) => setTimeout(() => rej(new Error('timeout')), 8000));
+      const { data, error: checkError } = await Promise.race([rpcPromise, timeoutPromise]) as any;
+      if (checkError) throw checkError;
+      exists = data as boolean;
+    } catch (_) {
+      checkFailed = true;
+    }
 
-    if (checkError) {
+    if (checkFailed) {
       show(emailStep);
-      emailError.textContent = `No se pudo verificar el email. Intentá de nuevo.`;
+      emailError.textContent = 'No se pudo conectar con el servidor. Intentá de nuevo.';
       emailError.style.display = 'block';
       return;
     }
