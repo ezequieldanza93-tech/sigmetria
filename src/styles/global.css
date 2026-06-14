@@ -607,6 +607,7 @@ h3      { font-family: 'Montserrat', sans-serif; font-weight: 700; }
   letter-spacing: 0;
 }
 .blog-card-title a { color: var(--gris-1); text-decoration: none; transition: color .2s; }
+.blog-card-title a::after { content: ''; position: absolute; inset: 0; z-index: 0; }
 .blog-card-title a:hover { color: var(--verde); }
 .blog-card-resumen { font-size: 13px; font-weight: 300; color: var(--gris-2); line-height: 1.7; flex: 1; }
 .blog-card-footer {
@@ -618,7 +619,7 @@ h3      { font-family: 'Montserrat', sans-serif; font-weight: 700; }
   border-top: 1px solid var(--borde);
   padding-top: 12px;
 }
-.blog-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+.blog-tags { display: flex; gap: 6px; flex-wrap: wrap; position: relative; z-index: 1; }
 .blog-tag {
   font-family: 'Montserrat', sans-serif;
   font-size: .48rem;
@@ -632,6 +633,8 @@ h3      { font-family: 'Montserrat', sans-serif; font-weight: 700; }
   text-transform: uppercase;
 }
 .blog-read-more {
+  position: relative;
+  z-index: 1;
   font-family: 'Montserrat', sans-serif;
   font-size: .58rem;
   font-weight: 700;

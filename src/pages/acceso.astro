@@ -330,8 +330,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   async function handleSession(session: any) {
     const email = session.user.email ?? '';
+    const nombre = session.user.user_metadata?.full_name
+      ?? session.user.user_metadata?.name
+      ?? null;
     localStorage.setItem('sigm_email', email);
-    await supabase.rpc('upsert_web_profile', { p_email: email });
+    await supabase.rpc('upsert_web_profile', { p_email: email, p_nombre: nombre });
     const { data: profile } = await supabase
       .from('web_profiles')
       .select('onboarding_completado')
@@ -365,9 +368,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   supabase.auth.onAuthStateChange(async (event, session) => {
     if (event === 'INITIAL_SESSION') {
       if (session) {
-        const loggedMsg = document.getElementById('ac-logged-msg')!;
-        loggedMsg.textContent = `Autenticado como ${session.user.email}.`;
-        show(loggedStep);
+        // Si venimos de un redirect OAuth (token en el hash) → procesar como login nuevo
+        if (window.location.hash.includes('access_token')) {
+          await handleSession(session);
+        } else {
+          const loggedMsg = document.getElementById('ac-logged-msg')!;
+          loggedMsg.textContent = `Autenticado como ${session.user.email}.`;
+          show(loggedStep);
+        }
       }
       // sin sesión → email-step ya visible por defecto
     } else if (event === 'SIGNED_IN' && session) {
