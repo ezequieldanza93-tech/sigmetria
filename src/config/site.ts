@@ -19,3 +19,17 @@ export const CONSULTORA_ID: string | null = null;
 
 /** Versión del texto de política de privacidad aceptado (log de consentimientos). */
 export const PRIVACY_VERSION = 'pp-2026-06';
+
+/**
+ * Canales de contacto y redes — fuente única de verdad.
+ * WhatsApp e Instagram ya están activos. LinkedIn y YouTube valen '#' porque
+ * todavía no existen esos perfiles: en el menú "Canales" aparecen GRISES y no
+ * clickeables (badge "pronto"). Cuando crees el perfil, pegá la URL real acá y
+ * el ítem se activa solo en todos lados (nav desktop + mobile) — sin tocar nada más.
+ */
+export const CANALES = {
+  whatsapp:  'https://wa.me/5491123496789',
+  instagram: 'https://www.instagram.com/sigmetria',
+  linkedin:  '#', // TODO: pegar la URL real de LinkedIn
+  youtube:   '#', // TODO: pegar la URL real de YouTube
+} as const;

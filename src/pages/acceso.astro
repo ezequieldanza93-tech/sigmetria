@@ -52,7 +52,23 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <form id="ac-password-form" novalidate>
           <div class="ac-field">
             <label for="ac-password-input">Contraseña</label>
-            <input id="ac-password-input" type="password" name="password" required autocomplete="current-password" placeholder="Tu contraseña" />
+            <div class="ac-input-wrap">
+              <input id="ac-password-input" type="password" name="password" required autocomplete="current-password" placeholder="Tu contraseña" />
+              <button type="button" class="ac-pw-toggle" id="ac-pw-toggle" aria-label="Mostrar contraseña" aria-pressed="false">
+                <!-- Ojo abierto: visible cuando la contraseña está oculta (click → mostrar) -->
+                <svg id="ac-eye-open" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/>
+                  <circle cx="12" cy="12" r="3"/>
+                </svg>
+                <!-- Ojo tachado: visible cuando la contraseña está revelada (click → ocultar) -->
+                <svg id="ac-eye-off" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:none">
+                  <path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"/>
+                  <path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"/>
+                  <path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"/>
+                  <line x1="2" x2="22" y1="2" y2="22"/>
+                </svg>
+              </button>
+            </div>
           </div>
           <p class="ac-error" id="ac-password-error" role="alert" style="display:none"></p>
           <button type="submit" class="ac-btn">Iniciar sesión</button>
@@ -209,6 +225,26 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 }
 .ac-field input:focus { border-color: #2E7D33; }
 .ac-field input:focus-visible { outline: 2px solid #2E7D33; outline-offset: 2px; }
+.ac-input-wrap { position: relative; }
+.ac-input-wrap input { padding-right: 44px; }
+.ac-pw-toggle {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  padding: 6px;
+  border-radius: 6px;
+  cursor: pointer;
+  color: var(--gris-3, #9CA3AF);
+  transition: color .2s;
+}
+.ac-pw-toggle:hover { color: var(--gris-1, #1A1A1A); }
+.ac-pw-toggle:focus-visible { outline: 2px solid #2E7D33; outline-offset: 1px; }
 .ac-error {
   font-size: 12px;
   color: var(--rojo, #D32F2F);
@@ -473,6 +509,26 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     // SIGNED_IN dispara y redirige vía handleSession
   });
 
+  // ── Mostrar / ocultar contraseña ─────────────────────────────────────────────
+  const pwToggleBtn = document.getElementById('ac-pw-toggle');
+  const pwField     = document.getElementById('ac-password-input') as HTMLInputElement;
+  const eyeOpen     = document.getElementById('ac-eye-open')!;
+  const eyeOff      = document.getElementById('ac-eye-off')!;
+
+  function setPwVisible(visible: boolean) {
+    if (!pwToggleBtn || !pwField) return;
+    pwField.type = visible ? 'text' : 'password';
+    pwToggleBtn.setAttribute('aria-pressed', String(visible));
+    pwToggleBtn.setAttribute('aria-label', visible ? 'Ocultar contraseña' : 'Mostrar contraseña');
+    eyeOpen.style.display = visible ? 'none' : 'block';
+    eyeOff.style.display  = visible ? 'block' : 'none';
+  }
+
+  pwToggleBtn?.addEventListener('click', () => {
+    setPwVisible(pwField.type === 'password');
+    pwField.focus();
+  });
+
   // ── Olvidé mi contraseña ─────────────────────────────────────────────────────
   document.getElementById('ac-forgot-btn')?.addEventListener('click', async () => {
     show(loadingStep);
@@ -489,6 +545,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   // ── Cambiar email (desde password step) ─────────────────────────────────────
   document.getElementById('ac-change-email-btn')?.addEventListener('click', () => {
+    setPwVisible(false);
     show(emailStep);
   });
 

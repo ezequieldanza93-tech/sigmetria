@@ -1,0 +1,180 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { RECURSOS, type RecursoTipo } from '../data/recursos';
+
+// Ícono por tipo de recurso (estilo line / stroke, coherente con el resto del sitio)
+const ICONOS: Record<RecursoTipo, string> = {
+  'E-book':    'M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2zM22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z',
+  'Plantilla': 'M3 3h7v7H3zM14 3h7v7h-7zM14 14h7v7h-7zM3 14h7v7H3z',
+  'Checklist': 'm3 17 2 2 4-4M3 7l2 2 4-4M13 6h8M13 12h8M13 18h8',
+  'Guía':      'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM14 2v6h6M16 13H8M16 17H8M10 9H8',
+  'Reporte':   'M3 3v18h18M18 17V9M13 17V5M8 17v-3',
+};
+
+const total = RECURSOS.length;
+---
+
+<BaseLayout
+  title="Recursos gratis de Higiene y Seguridad — SIGMETRÍA HyS"
+  description="Plantillas, checklists, guías y e-books gratis para ordenar tu gestión de Higiene y Seguridad: IPER, recorridas, ISO 45001, mediciones SRT, capacitaciones y más."
+  canonical="https://sigmetriahys.com/recursos/"
+>
+  <section class="rec-hero">
+    <span class="rec-eyebrow">Recursos · {total} descargables gratis</span>
+    <h1 class="rec-title">Recursos de Higiene y Seguridad</h1>
+    <p class="rec-sub">
+      Plantillas, checklists, guías y e-books para ordenar tu gestión de HyS.
+      Son todos gratis: algunos los descargás al instante con tu cuenta y otros te los
+      mandamos por email. Hacé clic en el que necesites.
+    </p>
+  </section>
+
+  <section class="rec-grid-wrap">
+    <div class="rec-grid">
+      {RECURSOS.map(r => (
+        <a href={r.articulo} class="rec-card">
+          <div class="rec-card-top">
+            <span class="rec-card-icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d={ICONOS[r.tipo]} />
+              </svg>
+            </span>
+            <span class="rec-card-badge">{r.tipo}</span>
+          </div>
+          <h2 class="rec-card-title">{r.titulo}</h2>
+          <p class="rec-card-desc">{r.descripcion}</p>
+          <span class="rec-card-link">
+            {r.entrega === 'descarga' ? 'Descargar' : 'Solicitar gratis'} →
+          </span>
+        </a>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+.rec-hero {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 130px 24px 32px;
+  text-align: center;
+}
+.rec-eyebrow {
+  display: inline-block;
+  font-family: 'Montserrat', sans-serif;
+  font-size: .62rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--verde, #2E7D33);
+  background: var(--verde-light, #E8F5E9);
+  border-radius: 20px;
+  padding: 6px 14px;
+  margin-bottom: 18px;
+}
+.rec-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 800;
+  color: var(--gris-1, #1A1A1A);
+  line-height: 1.15;
+  margin-bottom: 14px;
+}
+.rec-sub {
+  font-size: 1rem;
+  font-weight: 300;
+  color: var(--gris-2, #555);
+  line-height: 1.7;
+}
+
+.rec-grid-wrap {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 16px 24px 96px;
+}
+.rec-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 22px;
+}
+
+.rec-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--blanco, #fff);
+  border: 1px solid var(--borde, #E5E7EB);
+  border-radius: 14px;
+  padding: 26px 24px;
+  text-decoration: none;
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+.rec-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 36px rgba(0,0,0,.09);
+  border-color: var(--verde-borde, #C8E6C9);
+}
+.rec-card:focus-visible {
+  outline: 2px solid var(--verde, #2E7D33);
+  outline-offset: 3px;
+}
+
+.rec-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+.rec-card-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--verde-light, #E8F5E9);
+  color: var(--verde, #2E7D33);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.rec-card-badge {
+  font-family: 'Montserrat', sans-serif;
+  font-size: .56rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--verde-dark, #1B5E20);
+  background: var(--verde-light, #E8F5E9);
+  border: 1px solid var(--verde-borde, #C8E6C9);
+  border-radius: 20px;
+  padding: 5px 12px;
+}
+.rec-card-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--gris-1, #1A1A1A);
+  line-height: 1.35;
+  margin-bottom: 10px;
+}
+.rec-card-desc {
+  font-size: .9rem;
+  font-weight: 300;
+  color: var(--gris-2, #555);
+  line-height: 1.6;
+  margin-bottom: 20px;
+  flex-grow: 1;
+}
+.rec-card-link {
+  font-family: 'Montserrat', sans-serif;
+  font-size: .78rem;
+  font-weight: 700;
+  letter-spacing: .4px;
+  color: var(--verde, #2E7D33);
+  transition: gap .2s;
+}
+.rec-card:hover .rec-card-link { color: var(--verde-dark, #1B5E20); }
+
+@media (max-width: 480px) {
+  .rec-hero { padding-top: 110px; }
+  .rec-grid { grid-template-columns: 1fr; }
+}
+</style>
