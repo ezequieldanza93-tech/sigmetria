@@ -2,96 +2,128 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const planes = [
-  { slug: 'trial',                    nombre: 'Trial',                    short: 'Trial'   },
-  { slug: 'profesional-independiente', nombre: 'Profesional\nIndependiente', short: 'Prof. Ind.' },
-  { slug: 'consultora-chica',          nombre: 'Consultora\nChica',          short: 'C. Chica' },
-  { slug: 'consultora-grande',         nombre: 'Consultora\nGrande',         short: 'C. Grande' },
-  { slug: 'empresa',                   nombre: 'Empresa',                  short: 'Empresa' },
+  { slug: 'trial',                nombre: 'Trial',                short: 'Trial' },
+  { slug: 'profesional-inicial',  nombre: 'Profesional\nInicial',  short: 'Prof. Inicial' },
+  { slug: 'profesional-avanzado', nombre: 'Profesional\nAvanzado', short: 'Prof. Avanzado' },
+  { slug: 'consultora-chica',     nombre: 'Consultora\nChica',     short: 'C. Chica' },
+  { slug: 'consultora-media',     nombre: 'Consultora\nMedia',     short: 'C. Media' },
+  { slug: 'consultora-grande',    nombre: 'Consultora\nGrande',    short: 'C. Grande' },
+  { slug: 'empresa',              nombre: 'Empresa',              short: 'Empresa' },
 ];
 
 type Cell = string | boolean;
 
 interface FeatureRow {
   label: string;
-  values: [Cell, Cell, Cell, Cell, Cell]; // [trial, pi, cc, cg, empresa]
+  values: Cell[]; // [trial, inicial, avanzado, chica, media, grande, empresa]
 }
 interface FeatureGroup {
   group: string;
   rows: FeatureRow[];
 }
 
-const features: FeatureGroup[] = [
-  {
-    group: 'Precio',
-    rows: [
-      { label: 'Precio mensual (neto + IVA 21%)',    values: ['Gratis',    '$24.000',   '$69.000',  '$114.000', 'A consultar'] },
-      { label: 'Precio anual mensualizado (−20%)',   values: ['—',         '$19.200',   '$55.200',  '$91.200',  'A consultar'] },
-      { label: 'Período de prueba gratuita',          values: ['1 mes',    '1 mes',     '1 mes',    '1 mes',   '1 mes'] },
-    ],
-  },
-  {
-    group: 'Límites',
-    rows: [
-      { label: 'Empresas cliente',      values: ['2',    '20',        '30',        '45',         'Ilimitadas'] },
-      { label: 'Establecimientos',      values: ['5',    '40',        '80',        'Ilimitados', 'Ilimitados'] },
-      { label: 'Gestiones registradas', values: ['200',  'Ilimitadas','Ilimitadas','Ilimitadas', 'Ilimitadas'] },
-      { label: 'Colaboradores en equipo', values: [false, false,      'Hasta 3',  'Hasta 5',    'Ilimitados'] },
-    ],
-  },
-  {
-    group: 'Módulos de la plataforma',
-    rows: [
-      { label: 'Gestión documental y vencimientos',      values: [true,  true,  true,  true,  true] },
-      { label: 'Seguimiento de desvíos con trazabilidad',values: [true,  true,  true,  true,  true] },
-      { label: 'Capacitaciones digitales con evidencias',values: [true,  true,  true,  true,  true] },
-      { label: 'Matriz de riesgos dinámica',             values: [true,  true,  true,  true,  true] },
-      { label: 'App de campo para operarios',            values: [false, true,  true,  true,  true] },
-      { label: 'KPIs y reportes ejecutivos',             values: [true,  true,  true,  true,  true] },
-      { label: 'Exportación de datos (PDF / Excel)',     values: [false, true,  true,  true,  true] },
-    ],
-  },
-  {
-    group: 'Equipo y colaboración',
-    rows: [
-      { label: 'Múltiples usuarios / colaboradores',     values: [false, false, true,  true,  true] },
-      { label: 'Roles y permisos diferenciados',         values: [false, false, true,  true,  true] },
-      { label: 'Add-on seat extra',  values: [false, false, '$23.000/seat', '$22.800/seat', 'A consultar'] },
-    ],
-  },
-  {
-    group: 'Soporte y onboarding',
-    rows: [
-      { label: 'Soporte por WhatsApp',              values: [true,  true,  true,  true,  true] },
-      { label: 'Documentación y autoservicio',      values: [true,  true,  true,  true,  true] },
-      { label: 'Onboarding guiado (videollamada)',  values: [false, false, true,  true,  true] },
-      { label: 'Onboarding personalizado in situ',  values: [false, false, false, false, true] },
-      { label: 'SLA de soporte prioritario',        values: [false, false, false, false, true] },
-      { label: 'Capacitación del equipo incluida',  values: [false, false, false, false, true] },
-    ],
-  },
-];
+// Programa Fundadores
+const FOUNDER_DISCOUNT = 20;  // % de descuento de por vida
+const FOUNDER_CUPOS = 5;      // cupos por plan
 
-const precios = [
-  { mensual: null,    anual_mes: null,   porUsuario: null,  colab: null, gratis: true,  empresa: false },
-  { mensual: 24000,   anual_mes: 19200,  porUsuario: 24000, colab: 1,    gratis: false, empresa: false },
-  { mensual: 69000,   anual_mes: 55200,  porUsuario: 23000, colab: 3,    gratis: false, empresa: false },
-  { mensual: 114000,  anual_mes: 91200,  porUsuario: 22800, colab: 5,    gratis: false, empresa: false },
-  { mensual: null,    anual_mes: null,   porUsuario: null,  colab: null, gratis: false, empresa: true  },
-];
+interface Plan {
+  mensual: number | null;
+  anual_mes: number | null;
+  porUsuario: number | null;
+  colab: number | null;
+  empresas: number | null;          // null = ilimitadas
+  establecimientos: number | null;  // null = ilimitados
+  gratis: boolean;
+  empresa: boolean;
+  founders: number | null;          // cupos Fundador disponibles (null = no aplica)
+}
 
-const destacado = [false, false, true, false, false];
-
-const ctas = [
-  { label: 'Empezar gratis',  href: 'https://sigmetria-hys.vercel.app/', ext: true  },
-  { label: 'Elegir plan',     href: 'https://sigmetria-hys.vercel.app/', ext: true  },
-  { label: 'Elegir plan',     href: 'https://sigmetria-hys.vercel.app/', ext: true  },
-  { label: 'Elegir plan',     href: 'https://sigmetria-hys.vercel.app/', ext: true  },
-  { label: 'Contactar',       href: '/contacto/?s=s4&funnel=plan-empresa', ext: false },
+const precios: Plan[] = [
+  { mensual: null,   anual_mes: null,   porUsuario: null,  colab: null, empresas: 2,    establecimientos: 5,    gratis: true,  empresa: false, founders: null },
+  { mensual: 24000,  anual_mes: 19200,  porUsuario: 24000, colab: 1,    empresas: 20,   establecimientos: 40,   gratis: false, empresa: false, founders: FOUNDER_CUPOS },
+  { mensual: 33600,  anual_mes: 26880,  porUsuario: 33600, colab: 1,    empresas: 40,   establecimientos: 80,   gratis: false, empresa: false, founders: FOUNDER_CUPOS },
+  { mensual: 138000, anual_mes: 110400, porUsuario: 23000, colab: 6,    empresas: 30,   establecimientos: 80,   gratis: false, empresa: false, founders: FOUNDER_CUPOS },
+  { mensual: 228000, anual_mes: 182400, porUsuario: 22800, colab: 10,   empresas: 45,   establecimientos: null, gratis: false, empresa: false, founders: FOUNDER_CUPOS },
+  { mensual: 430000, anual_mes: 344000, porUsuario: 21500, colab: 20,   empresas: 90,   establecimientos: null, gratis: false, empresa: false, founders: FOUNDER_CUPOS },
+  { mensual: null,   anual_mes: null,   porUsuario: null,  colab: null, empresas: null, establecimientos: null, gratis: false, empresa: true,  founders: null },
 ];
 
 function fmt(n: number) {
   return n.toLocaleString('es-AR');
 }
+function perEmpresa(p: Plan): string {
+  if (!p.mensual || !p.empresas) return '—';
+  return '$' + fmt(Math.round(p.mensual / p.empresas));
+}
+function perEstablec(p: Plan): string {
+  if (!p.mensual || !p.establecimientos) return '—';
+  return '$' + fmt(Math.round(p.mensual / p.establecimientos));
+}
+
+const features: FeatureGroup[] = [
+  {
+    group: 'Precio',
+    rows: [
+      { label: 'Precio mensual (neto + IVA 21%)',  values: ['Gratis', '$24.000', '$33.600', '$138.000', '$228.000', '$430.000', 'A consultar'] },
+      { label: 'Precio anual mensualizado (−20%)', values: ['—',      '$19.200', '$26.880', '$110.400', '$182.400', '$344.000', 'A consultar'] },
+      { label: 'Precio por empresa / mes',          values: precios.map(perEmpresa) },
+      { label: 'Precio por establecimiento / mes',  values: precios.map(perEstablec) },
+      { label: 'Período de prueba gratuita',        values: ['1 mes', '1 mes', '1 mes', '1 mes', '1 mes', '1 mes', '1 mes'] },
+    ],
+  },
+  {
+    group: 'Límites',
+    rows: [
+      { label: 'Empresas cliente',        values: ['2',   '20',         '40',         '30',         '45',         '90',         'Ilimitadas'] },
+      { label: 'Establecimientos',        values: ['5',   '40',         '80',         '80',         'Ilimitados', 'Ilimitados', 'Ilimitados'] },
+      { label: 'Gestiones registradas',   values: ['200', 'Ilimitadas', 'Ilimitadas', 'Ilimitadas', 'Ilimitadas', 'Ilimitadas', 'Ilimitadas'] },
+      { label: 'Colaboradores en equipo', values: [false, false,        false,        'Hasta 6',    'Hasta 10',   'Hasta 20',   'Ilimitados'] },
+    ],
+  },
+  {
+    group: 'Módulos de la plataforma',
+    rows: [
+      { label: 'Gestión documental y vencimientos',       values: [true,  true,  true,  true,  true,  true,  true] },
+      { label: 'Seguimiento de desvíos con trazabilidad', values: [true,  true,  true,  true,  true,  true,  true] },
+      { label: 'Capacitaciones digitales con evidencias', values: [true,  true,  true,  true,  true,  true,  true] },
+      { label: 'Matriz de riesgos dinámica',              values: [true,  true,  true,  true,  true,  true,  true] },
+      { label: 'App de campo para operarios',             values: [false, true,  true,  true,  true,  true,  true] },
+      { label: 'KPIs y reportes ejecutivos',              values: [true,  true,  true,  true,  true,  true,  true] },
+      { label: 'Exportación de datos (PDF / Excel)',      values: [false, true,  true,  true,  true,  true,  true] },
+    ],
+  },
+  {
+    group: 'Equipo y colaboración',
+    rows: [
+      { label: 'Múltiples usuarios / colaboradores', values: [false, false, false, true, true, true, true] },
+      { label: 'Roles y permisos diferenciados',     values: [false, false, false, true, true, true, true] },
+      { label: 'Add-on seat extra',                  values: [false, false, false, '$23.000/seat', '$22.800/seat', '$21.500/seat', 'A consultar'] },
+    ],
+  },
+  {
+    group: 'Soporte y onboarding',
+    rows: [
+      { label: 'Soporte por WhatsApp',             values: [true,  true,  true,  true,  true,  true,  true] },
+      { label: 'Documentación y autoservicio',     values: [true,  true,  true,  true,  true,  true,  true] },
+      { label: 'Onboarding guiado (videollamada)', values: [false, false, false, true,  true,  true,  true] },
+      { label: 'Onboarding personalizado in situ', values: [false, false, false, false, false, false, true] },
+      { label: 'SLA de soporte prioritario',       values: [false, false, false, false, false, false, true] },
+      { label: 'Capacitación del equipo incluida', values: [false, false, false, false, false, false, true] },
+    ],
+  },
+];
+
+const destacado = [false, false, false, true, false, false, false];
+
+const ctas = [
+  { label: 'Empezar gratis', href: 'https://sigmetria-hys.vercel.app/', ext: true  },
+  { label: 'Elegir plan',    href: 'https://sigmetria-hys.vercel.app/', ext: true  },
+  { label: 'Elegir plan',    href: 'https://sigmetria-hys.vercel.app/', ext: true  },
+  { label: 'Elegir plan',    href: 'https://sigmetria-hys.vercel.app/', ext: true  },
+  { label: 'Elegir plan',    href: 'https://sigmetria-hys.vercel.app/', ext: true  },
+  { label: 'Elegir plan',    href: 'https://sigmetria-hys.vercel.app/', ext: true  },
+  { label: 'Contactar',      href: '/contacto/?s=s4&funnel=plan-empresa', ext: false },
+];
 ---
 
 <BaseLayout
@@ -161,6 +193,9 @@ function fmt(n: number) {
                       </>
                     )}
                   </div>
+                  {precios[i].founders && (
+                    <span class="founder-cupos">🔥 {precios[i].founders} de {FOUNDER_CUPOS} cupos Fundador</span>
+                  )}
                   <a
                     href={ctas[i].href}
                     class={`th-cta ${destacado[i] ? 'th-cta-primary' : 'th-cta-outline'}`}
@@ -176,7 +211,7 @@ function fmt(n: number) {
             {features.map(group => (
               <>
                 <tr class="group-header">
-                  <td colspan={6}>{group.group}</td>
+                  <td colspan={8}>{group.group}</td>
                 </tr>
                 {group.rows.map(row => (
                   <tr class="feature-row">
@@ -217,9 +252,52 @@ function fmt(n: number) {
       <div class="addon-note">
         <span class="addon-icon">➕</span>
         <p>
-          ¿Necesitás más colaboradores? Podés agregar <strong>seats adicionales</strong> en los planes Consultora Chica ($23.000 neto/seat/mes), Grande ($22.800 neto/seat/mes) y Empresa.
+          ¿Necesitás más colaboradores? Podés agregar <strong>seats adicionales</strong> en los planes Consultora Chica ($23.000 neto/seat/mes), Media ($22.800 neto/seat/mes), Grande ($21.500 neto/seat/mes) y Empresa.
         </p>
       </div>
+
+      <!-- Programa Fundadores -->
+      <section class="fundadores">
+        <div class="fundadores-head">
+          <span class="fundadores-kicker">🔥 Programa Fundadores</span>
+          <h2>SÉ DE LOS <em>PRIMEROS</em></h2>
+          <p>Los <strong>primeros {FOUNDER_CUPOS}</strong> que contratan cada plan entran como <strong>Fundadores</strong>. Cupos limitados — cuando se agotan, no vuelven.</p>
+        </div>
+
+        <div class="fundadores-beneficios">
+          <div class="fb-card">
+            <span class="fb-icon">🔒</span>
+            <h3>−{FOUNDER_DISCOUNT}% de por vida</h3>
+            <p>El precio Fundador no te sube nunca, aunque actualicemos la lista. Para siempre, mientras tu suscripción siga activa.</p>
+          </div>
+          <div class="fb-card">
+            <span class="fb-icon">🎁</span>
+            <h3>Meses gratis por reseña</h3>
+            <ul class="fb-bonus">
+              <li><strong>Reseña en video</strong> → 2 meses gratis</li>
+              <li><strong>Nota en un medio / blog</strong> → 1 mes gratis</li>
+              <li><strong>Reseña corta (Google / texto)</strong> → 15 días gratis</li>
+            </ul>
+          </div>
+          <div class="fb-card">
+            <span class="fb-icon">⏳</span>
+            <h3>Cupos limitados</h3>
+            <p>Solo {FOUNDER_CUPOS} lugares por plan. Mirá cuántos quedan:</p>
+            <ul class="fb-cupos">
+              {planes.map((plan, i) => (
+                precios[i].founders ? (
+                  <li>
+                    <span class="cupo-plan">{plan.nombre.replace('\n', ' ')}</span>
+                    <span class="cupo-num">{precios[i].founders}/{FOUNDER_CUPOS}</span>
+                  </li>
+                ) : null
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <p class="fundadores-fine">El descuento Fundador se aplica sobre el precio de lista del plan y se mantiene mientras la suscripción siga activa. Los meses de bonus por reseña se acreditan al verificar la publicación y son acumulables.</p>
+      </section>
 
       <!-- FAQ -->
       <div class="faq-section">
@@ -248,6 +326,10 @@ function fmt(n: number) {
           <div class="faq-item">
             <h3>¿Mis datos son propios?</h3>
             <p>Completamente. Podés exportar todo en cualquier momento. No retenemos datos si cancelás.</p>
+          </div>
+          <div class="faq-item">
+            <h3>¿Cómo funciona el Programa Fundadores?</h3>
+            <p>Los primeros {FOUNDER_CUPOS} que contratan cada plan entran como Fundadores: −{FOUNDER_DISCOUNT}% de por vida sobre el precio de lista. Además sumás meses gratis si nos dejás una reseña (video: 2 meses, nota: 1 mes, reseña corta: 15 días).</p>
           </div>
         </div>
       </div>
@@ -309,12 +391,12 @@ function fmt(n: number) {
 .compare-table {
   width: 100%; border-collapse: collapse;
   table-layout: fixed;
-  min-width: 760px;
+  min-width: 1080px;
 }
 
 /* Columnas */
-.col-feature { width: 30%; }
-.col-plan { width: 14%; }
+.col-feature { width: 19%; }
+.col-plan { width: 11.5%; }
 
 /* Header */
 .compare-table thead tr {
@@ -422,6 +504,62 @@ function fmt(n: number) {
 }
 .addon-icon { font-size: 1.2rem; flex-shrink: 0; }
 .addon-note p { margin: 0; font-size: 13px; color: var(--gris-2); line-height: 1.5; }
+
+/* Cupos Fundador en el header de cada plan */
+.founder-cupos {
+  display: block;
+  background: #FFF4E5; color: #B45309;
+  font-family: 'Montserrat', sans-serif; font-size: .55rem; font-weight: 700;
+  letter-spacing: .2px; line-height: 1.2;
+  padding: 4px 6px; border-radius: 6px;
+  margin: 0 auto 8px; width: fit-content; max-width: 100%;
+  border: 1px solid #FCD9A8;
+}
+
+/* Programa Fundadores */
+.fundadores {
+  background: linear-gradient(135deg, #FFFBF5 0%, #FFF4E5 100%);
+  border: 1px solid #FCD9A8; border-radius: 14px;
+  padding: 36px 28px; margin-bottom: 48px;
+}
+.fundadores-head { text-align: center; max-width: 620px; margin: 0 auto 28px; }
+.fundadores-kicker {
+  display: inline-block; background: #B45309; color: #fff;
+  font-family: 'Montserrat', sans-serif; font-size: .6rem; font-weight: 700;
+  letter-spacing: .6px; text-transform: uppercase;
+  padding: 4px 12px; border-radius: 12px; margin-bottom: 12px;
+}
+.fundadores-head h2 {
+  font-family: 'Montserrat', sans-serif; font-size: clamp(22px, 3vw, 30px); font-weight: 800;
+  color: var(--gris-1); margin: 0 0 10px; letter-spacing: .5px;
+}
+.fundadores-head h2 em { color: #B45309; font-style: normal; }
+.fundadores-head p { font-size: 14px; font-weight: 300; color: var(--gris-2); line-height: 1.6; margin: 0; }
+
+.fundadores-beneficios { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.fb-card {
+  background: #fff; border: 1px solid #FCD9A8; border-radius: 10px; padding: 20px;
+}
+.fb-icon { font-size: 1.4rem; display: block; margin-bottom: 8px; }
+.fb-card h3 {
+  font-family: 'Montserrat', sans-serif; font-size: .9rem; font-weight: 700;
+  color: var(--gris-1); margin: 0 0 8px;
+}
+.fb-card p { font-size: 13px; font-weight: 300; color: var(--gris-2); line-height: 1.55; margin: 0; }
+.fb-bonus { list-style: none; padding: 0; margin: 0; }
+.fb-bonus li { font-size: 13px; color: var(--gris-2); padding: 4px 0; border-bottom: 1px dashed #FCD9A8; }
+.fb-bonus li:last-child { border-bottom: none; }
+.fb-cupos { list-style: none; padding: 0; margin: 10px 0 0; }
+.fb-cupos li {
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 12.5px; padding: 5px 0; border-bottom: 1px dashed #FCD9A8;
+}
+.fb-cupos li:last-child { border-bottom: none; }
+.cupo-plan { color: var(--gris-2); }
+.cupo-num { font-family: 'Montserrat', sans-serif; font-weight: 700; color: #B45309; }
+.fundadores-fine { font-size: 11px; color: var(--gris-3); line-height: 1.5; text-align: center; margin: 24px auto 0; max-width: 680px; }
+
+@media (max-width: 760px) { .fundadores-beneficios { grid-template-columns: 1fr; } }
 
 /* FAQ */
 .faq-section { margin-bottom: 48px; }
