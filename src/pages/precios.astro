@@ -42,9 +42,9 @@ const precios: Plan[] = [
   { mensual: null,   anual_mes: null,   porUsuario: null,  colab: null, empresas: 2,    establecimientos: 5,    gratis: true,  empresa: false, founders: null },
   { mensual: 24000,  anual_mes: 19200,  porUsuario: 24000, colab: 1,    empresas: 10,   establecimientos: 40,   gratis: false, empresa: false, founders: FOUNDER_CUPOS },
   { mensual: 33600,  anual_mes: 26880,  porUsuario: 33600, colab: 1,    empresas: 20,   establecimientos: 80,   gratis: false, empresa: false, founders: FOUNDER_CUPOS },
-  { mensual: 138000, anual_mes: 110400, porUsuario: 23000, colab: 6,    empresas: 90,   establecimientos: 365,  gratis: false, empresa: false, founders: FOUNDER_CUPOS },
-  { mensual: 228000, anual_mes: 182400, porUsuario: 22800, colab: 10,   empresas: 168,  establecimientos: 670,  gratis: false, empresa: false, founders: FOUNDER_CUPOS },
-  { mensual: 430000, anual_mes: 344000, porUsuario: 21500, colab: 20,   empresas: 350,  establecimientos: 1405, gratis: false, empresa: false, founders: FOUNDER_CUPOS },
+  { mensual: 115000, anual_mes: 92000,  porUsuario: 23000, colab: 5,    empresas: 30,   establecimientos: 60,   gratis: false, empresa: false, founders: FOUNDER_CUPOS },
+  { mensual: 228000, anual_mes: 182400, porUsuario: 22800, colab: 10,   empresas: 60,   establecimientos: 120,  gratis: false, empresa: false, founders: FOUNDER_CUPOS },
+  { mensual: 430000, anual_mes: 344000, porUsuario: 21500, colab: 20,   empresas: 120,  establecimientos: 240,  gratis: false, empresa: false, founders: FOUNDER_CUPOS },
   { mensual: null,   anual_mes: null,   porUsuario: null,  colab: null, empresas: null, establecimientos: null, gratis: false, empresa: true,  founders: null },
 ];
 
@@ -64,8 +64,8 @@ const features: FeatureGroup[] = [
   {
     group: 'Precio',
     rows: [
-      { label: 'Precio mensual (neto + IVA 21%)',  values: ['Gratis', '$24.000', '$33.600', '$138.000', '$228.000', '$430.000', 'A consultar'] },
-      { label: 'Precio anual mensualizado (−20%)', values: ['—',      '$19.200', '$26.880', '$110.400', '$182.400', '$344.000', 'A consultar'] },
+      { label: 'Precio mensual (neto + IVA 21%)',  values: ['Gratis', '$24.000', '$33.600', '$115.000', '$228.000', '$430.000', 'A consultar'] },
+      { label: 'Precio anual mensualizado (−20%)', values: ['—',      '$19.200', '$26.880', '$92.000',  '$182.400', '$344.000', 'A consultar'] },
       { label: 'Precio por empresa / mes',          values: precios.map(perEmpresa) },
       { label: 'Precio por establecimiento / mes',  values: precios.map(perEstablec) },
       { label: 'Período de prueba gratuita',        values: ['1 mes', '1 mes', '1 mes', '1 mes', '1 mes', '1 mes', '1 mes'] },
@@ -74,10 +74,10 @@ const features: FeatureGroup[] = [
   {
     group: 'Límites',
     rows: [
-      { label: 'Empresas cliente',        values: ['2',   '10',         '20',         '90',         '168',        '350',        'Ilimitadas'] },
-      { label: 'Establecimientos',        values: ['5',   '40',         '80',         '365',        '670',        '1.405',      'Ilimitados'] },
+      { label: 'Empresas cliente',        values: ['2',   '10',         '20',         '30',         '60',         '120',        'Ilimitadas'] },
+      { label: 'Establecimientos',        values: ['5',   '40',         '80',         '60',         '120',        '240',        'Ilimitados'] },
       { label: 'Gestiones registradas',   values: ['200', 'Ilimitadas', 'Ilimitadas', 'Ilimitadas', 'Ilimitadas', 'Ilimitadas', 'Ilimitadas'] },
-      { label: 'Colaboradores en equipo', values: [false, false,        false,        'Hasta 6',    'Hasta 10',   'Hasta 20',   'Ilimitados'] },
+      { label: 'Colaboradores en equipo', values: [false, false,        false,        'Hasta 5',    'Hasta 10',   'Hasta 20',   'Ilimitados'] },
     ],
   },
   {
