@@ -24,7 +24,7 @@ interface FeatureGroup {
 
 // Programa Fundadores
 const FOUNDER_DISCOUNT = 20;  // % de descuento de por vida
-const FOUNDER_CUPOS = 5;      // cupos por plan
+const FOUNDER_CUPOS = 8;      // cupos totales por plan (los `founders` de cada plan = los que QUEDAN)
 
 interface Plan {
   mensual: number | null;
@@ -40,11 +40,11 @@ interface Plan {
 
 const precios: Plan[] = [
   { mensual: null,   anual_mes: null,   porUsuario: null,  colab: null, empresas: 2,    establecimientos: 5,    gratis: true,  empresa: false, founders: null },
-  { mensual: 24000,  anual_mes: 19200,  porUsuario: 24000, colab: 1,    empresas: 10,   establecimientos: 40,   gratis: false, empresa: false, founders: FOUNDER_CUPOS },
-  { mensual: 33600,  anual_mes: 26880,  porUsuario: 33600, colab: 1,    empresas: 20,   establecimientos: 80,   gratis: false, empresa: false, founders: FOUNDER_CUPOS },
-  { mensual: 115000, anual_mes: 92000,  porUsuario: 23000, colab: 5,    empresas: 30,   establecimientos: 60,   gratis: false, empresa: false, founders: FOUNDER_CUPOS },
-  { mensual: 228000, anual_mes: 182400, porUsuario: 22800, colab: 10,   empresas: 60,   establecimientos: 120,  gratis: false, empresa: false, founders: FOUNDER_CUPOS },
-  { mensual: 430000, anual_mes: 344000, porUsuario: 21500, colab: 20,   empresas: 120,  establecimientos: 240,  gratis: false, empresa: false, founders: FOUNDER_CUPOS },
+  { mensual: 24000,  anual_mes: 19200,  porUsuario: 24000, colab: 1,    empresas: 10,   establecimientos: 40,   gratis: false, empresa: false, founders: 5 },
+  { mensual: 33600,  anual_mes: 26880,  porUsuario: 33600, colab: 1,    empresas: 20,   establecimientos: 80,   gratis: false, empresa: false, founders: 6 },
+  { mensual: 115000, anual_mes: 92000,  porUsuario: 23000, colab: 5,    empresas: 30,   establecimientos: 60,   gratis: false, empresa: false, founders: 4 },
+  { mensual: 228000, anual_mes: 182400, porUsuario: 22800, colab: 10,   empresas: 60,   establecimientos: 120,  gratis: false, empresa: false, founders: 5 },
+  { mensual: 430000, anual_mes: 344000, porUsuario: 21500, colab: 20,   empresas: 120,  establecimientos: 240,  gratis: false, empresa: false, founders: 6 },
   { mensual: null,   anual_mes: null,   porUsuario: null,  colab: null, empresas: null, establecimientos: null, gratis: false, empresa: true,  founders: null },
 ];
 
@@ -194,7 +194,7 @@ const ctas = [
                     )}
                   </div>
                   {precios[i].founders && (
-                    <span class="founder-cupos">🔥 {precios[i].founders} de {FOUNDER_CUPOS} cupos Fundador</span>
+                    <span class="founder-cupos">🔥 Quedan {precios[i].founders} de {FOUNDER_CUPOS} cupos Fundador</span>
                   )}
                   <a
                     href={ctas[i].href}
@@ -294,6 +294,10 @@ const ctas = [
               ))}
             </ul>
           </div>
+        </div>
+
+        <div class="fundadores-cta">
+          <a href="/fundadores/" class="fundadores-btn">Conocé el Programa Fundadores →</a>
         </div>
 
         <p class="fundadores-fine">El descuento Fundador se aplica sobre el precio de lista del plan y se mantiene mientras la suscripción siga activa. Los meses de bonus por reseña se acreditan al verificar la publicación y son acumulables.</p>
@@ -557,7 +561,15 @@ const ctas = [
 .fb-cupos li:last-child { border-bottom: none; }
 .cupo-plan { color: var(--gris-2); }
 .cupo-num { font-family: 'Montserrat', sans-serif; font-weight: 700; color: #B45309; }
-.fundadores-fine { font-size: 11px; color: var(--gris-3); line-height: 1.5; text-align: center; margin: 24px auto 0; max-width: 680px; }
+.fundadores-cta { text-align: center; margin-top: 24px; }
+.fundadores-btn {
+  display: inline-block; background: #B45309; color: #fff;
+  font-family: 'Montserrat', sans-serif; font-size: .72rem; font-weight: 700;
+  letter-spacing: .4px; text-transform: uppercase; text-decoration: none;
+  padding: 11px 22px; border-radius: 8px; transition: background .18s;
+}
+.fundadores-btn:hover { background: #92400E; }
+.fundadores-fine { font-size: 11px; color: var(--gris-3); line-height: 1.5; text-align: center; margin: 16px auto 0; max-width: 680px; }
 
 @media (max-width: 760px) { .fundadores-beneficios { grid-template-columns: 1fr; } }
 

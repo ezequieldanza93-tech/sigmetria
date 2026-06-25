@@ -1,0 +1,280 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const FOUNDER_TOTAL = 8;       // cupos totales por plan
+const FOUNDER_DISCOUNT = 20;   // % de por vida
+
+// Cupos restantes por plan (debe coincidir con precios.astro)
+const planes = [
+  { nombre: 'Profesional Inicial',  precio: '$24.000',  left: 5 },
+  { nombre: 'Profesional Avanzado', precio: '$33.600',  left: 6 },
+  { nombre: 'Consultora Chica',     precio: '$115.000', left: 4, destacado: true },
+  { nombre: 'Consultora Media',     precio: '$228.000', left: 5 },
+  { nombre: 'Consultora Grande',    precio: '$430.000', left: 6 },
+];
+
+const APP_URL = 'https://sigmetria-hys.vercel.app/';
+---
+
+<BaseLayout
+  title="Programa Fundadores — Sé de los primeros | SIGMETRÍA HyS"
+  description="Los primeros 8 que contratan cada plan de SIGMETRÍA HyS entran como Fundadores: −20% de por vida + meses gratis por reseña. Cupos limitados."
+>
+
+  <section class="f-hero">
+    <div class="f-hero-inner">
+      <nav aria-label="Breadcrumb" class="breadcrumb">
+        <a href="/">Inicio</a><span>/</span>
+        <a href="/precios/">Precios</a><span>/</span>
+        <span>Fundadores</span>
+      </nav>
+      <span class="f-kicker">🔥 Programa Fundadores</span>
+      <h1>SÉ DE LOS<br><em>PRIMEROS</em></h1>
+      <p class="f-sub">
+        Solo los <strong>primeros {FOUNDER_TOTAL}</strong> que contratan cada plan entran como
+        <strong>Fundadores</strong>. Precio congelado con descuento, para siempre, y meses
+        gratis por cada reseña. Cuando se agotan los cupos, no vuelven.
+      </p>
+      <div class="f-hero-cta">
+        <a href={APP_URL} target="_blank" rel="noopener" class="f-btn-primary">Quiero ser Fundador</a>
+        <a href="/precios/" class="f-btn-outline">Ver los planes</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="f-section">
+    <div class="f-inner">
+
+      <!-- Beneficios -->
+      <div class="f-beneficios">
+        <div class="f-card">
+          <span class="f-icon">🔒</span>
+          <h3>−{FOUNDER_DISCOUNT}% de por vida</h3>
+          <p>El precio Fundador no te sube nunca, aunque actualicemos la lista. Se mantiene mientras tu suscripción siga activa.</p>
+        </div>
+        <div class="f-card">
+          <span class="f-icon">🎁</span>
+          <h3>Meses gratis por reseña</h3>
+          <ul class="f-bonus">
+            <li><strong>Reseña en video</strong> <span>2 meses</span></li>
+            <li><strong>Nota en un medio / blog</strong> <span>1 mes</span></li>
+            <li><strong>Reseña corta (Google / texto)</strong> <span>15 días</span></li>
+          </ul>
+          <p class="f-card-fine">Acumulables. Se acreditan al verificar la publicación.</p>
+        </div>
+        <div class="f-card">
+          <span class="f-icon">⏳</span>
+          <h3>Cupos limitados</h3>
+          <p>Solo {FOUNDER_TOTAL} lugares por plan. Una vez ocupados, el plan vuelve a su precio de lista para todos los que entren después.</p>
+        </div>
+      </div>
+
+      <!-- Cupos disponibles -->
+      <h2 class="f-h2">Cupos disponibles ahora</h2>
+      <p class="f-h2-sub">Se asignan por orden de contratación. Estos son los que quedan en cada plan:</p>
+      <div class="f-cupos-grid">
+        {planes.map(plan => {
+          const tomados = FOUNDER_TOTAL - plan.left;
+          const pct = Math.round((tomados / FOUNDER_TOTAL) * 100);
+          return (
+            <div class={`f-cupo-card ${plan.destacado ? 'f-cupo-destacado' : ''}`}>
+              {plan.destacado && <span class="f-cupo-badge">Más elegido</span>}
+              <span class="f-cupo-plan">{plan.nombre}</span>
+              <span class="f-cupo-precio">{plan.precio}<small>/mes</small></span>
+              <div class="f-cupo-bar"><div class="f-cupo-fill" style={`width:${pct}%`}></div></div>
+              <span class="f-cupo-num">Quedan <strong>{plan.left}</strong> de {FOUNDER_TOTAL}</span>
+            </div>
+          );
+        })}
+      </div>
+
+      <!-- Cómo entrar -->
+      <h2 class="f-h2">Cómo entrar al programa</h2>
+      <div class="f-pasos">
+        <div class="f-paso">
+          <span class="f-paso-num">1</span>
+          <p>Elegí el plan que te sirve y contratá mientras queden cupos Fundador en ese plan.</p>
+        </div>
+        <div class="f-paso">
+          <span class="f-paso-num">2</span>
+          <p>Tu precio queda con <strong>−{FOUNDER_DISCOUNT}% de por vida</strong>, automáticamente, desde el primer pago.</p>
+        </div>
+        <div class="f-paso">
+          <span class="f-paso-num">3</span>
+          <p>Si querés, dejanos una reseña y sumá <strong>meses gratis</strong> según el formato.</p>
+        </div>
+      </div>
+
+      <!-- FAQ -->
+      <h2 class="f-h2">Preguntas frecuentes</h2>
+      <div class="f-faq">
+        <div class="f-faq-item">
+          <h3>¿El descuento es para siempre?</h3>
+          <p>Sí. Mientras mantengas la suscripción activa, conservás el precio Fundador con −{FOUNDER_DISCOUNT}%, aunque suba el precio de lista.</p>
+        </div>
+        <div class="f-faq-item">
+          <h3>¿Los cupos son reales?</h3>
+          <p>Sí. Son {FOUNDER_TOTAL} por plan y se asignan por orden de contratación. Cuando se ocupan, ese plan deja de ofrecer el beneficio Fundador.</p>
+        </div>
+        <div class="f-faq-item">
+          <h3>¿Cómo sumo meses gratis?</h3>
+          <p>Dejándonos una reseña: video (2 meses), nota en un medio o blog (1 mes) o reseña corta en Google/texto (15 días). Son acumulables.</p>
+        </div>
+        <div class="f-faq-item">
+          <h3>¿Y si después cambio de plan?</h3>
+          <p>El beneficio Fundador acompaña tu cuenta. Si hacés upgrade, mantenés el descuento sobre el nuevo plan según disponibilidad de cupos.</p>
+        </div>
+      </div>
+
+      <!-- CTA final -->
+      <div class="f-cta-banner">
+        <h2>NO TE QUEDES <em>AFUERA</em></h2>
+        <p>Los cupos Fundador no se reponen. Entrá hoy y congelá tu precio.</p>
+        <div class="f-cta-actions">
+          <a href={APP_URL} target="_blank" rel="noopener" class="f-btn-primary">Quiero ser Fundador</a>
+          <a href="/contacto/?s=s4&funnel=fundadores" class="f-btn-outline-dark">Hablar con un asesor</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+/* Paleta Fundadores (ámbar) sobre la base verde de la marca */
+.f-hero {
+  padding: 116px 24px 48px;
+  background: linear-gradient(135deg, #FFFBF5 0%, #FFF4E5 100%);
+  border-bottom: 1px solid #FCD9A8;
+}
+.f-hero-inner { max-width: 760px; margin: 0 auto; text-align: center; }
+.breadcrumb {
+  font-size: 12px; color: var(--gris-3); margin-bottom: 18px;
+  display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;
+}
+.breadcrumb a { color: var(--gris-2); text-decoration: none; }
+.breadcrumb a:hover { color: #B45309; }
+.breadcrumb span { color: var(--gris-3); }
+
+.f-kicker {
+  display: inline-block; background: #B45309; color: #fff;
+  font-family: 'Montserrat', sans-serif; font-size: .62rem; font-weight: 700;
+  letter-spacing: .6px; text-transform: uppercase;
+  padding: 5px 14px; border-radius: 12px; margin-bottom: 16px;
+}
+.f-hero h1 {
+  font-family: 'Montserrat', sans-serif; font-size: clamp(32px, 5vw, 54px);
+  font-weight: 800; color: var(--gris-1); line-height: 1.05; margin: 0 0 16px;
+}
+.f-hero h1 em { color: #B45309; font-style: normal; }
+.f-sub { font-size: 16px; font-weight: 300; color: var(--gris-2); line-height: 1.7; max-width: 620px; margin: 0 auto 28px; }
+
+.f-hero-cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.f-btn-primary {
+  display: inline-block; background: #B45309; color: #fff;
+  font-family: 'Montserrat', sans-serif; font-size: .74rem; font-weight: 700;
+  letter-spacing: .5px; text-transform: uppercase; text-decoration: none;
+  padding: 13px 28px; border-radius: 8px; transition: background .18s;
+}
+.f-btn-primary:hover { background: #92400E; }
+.f-btn-outline {
+  display: inline-block; background: #fff; color: #B45309; border: 1.5px solid #FCD9A8;
+  font-family: 'Montserrat', sans-serif; font-size: .74rem; font-weight: 700;
+  letter-spacing: .5px; text-transform: uppercase; text-decoration: none;
+  padding: 13px 28px; border-radius: 8px; transition: all .18s;
+}
+.f-btn-outline:hover { border-color: #B45309; background: #FFF4E5; }
+
+.f-section { padding: 48px 24px 64px; }
+.f-inner { max-width: 980px; margin: 0 auto; }
+
+/* Beneficios */
+.f-beneficios { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-bottom: 56px; }
+.f-card {
+  background: #fff; border: 1px solid #FCD9A8; border-radius: 12px; padding: 24px;
+}
+.f-icon { font-size: 1.6rem; display: block; margin-bottom: 10px; }
+.f-card h3 { font-family: 'Montserrat', sans-serif; font-size: 1rem; font-weight: 700; color: var(--gris-1); margin: 0 0 10px; }
+.f-card p { font-size: 13.5px; font-weight: 300; color: var(--gris-2); line-height: 1.6; margin: 0; }
+.f-card-fine { font-size: 11.5px !important; color: var(--gris-3) !important; margin-top: 10px !important; }
+.f-bonus { list-style: none; padding: 0; margin: 0; }
+.f-bonus li {
+  display: flex; justify-content: space-between; align-items: center; gap: 8px;
+  font-size: 13.5px; color: var(--gris-2); padding: 7px 0; border-bottom: 1px dashed #FCD9A8;
+}
+.f-bonus li:last-child { border-bottom: none; }
+.f-bonus li span { font-family: 'Montserrat', sans-serif; font-weight: 700; color: #B45309; white-space: nowrap; }
+
+/* Títulos de sección */
+.f-h2 {
+  font-family: 'Montserrat', sans-serif; font-size: 1.3rem; font-weight: 800;
+  color: var(--gris-1); text-align: center; margin: 0 0 6px; letter-spacing: .3px;
+}
+.f-h2-sub { font-size: 14px; font-weight: 300; color: var(--gris-2); text-align: center; margin: 0 0 24px; }
+
+/* Cupos */
+.f-cupos-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-bottom: 56px; }
+.f-cupo-card {
+  position: relative; background: #fff; border: 1px solid var(--borde); border-radius: 10px;
+  padding: 18px 14px; text-align: center; display: flex; flex-direction: column; gap: 8px;
+}
+.f-cupo-destacado { border-color: #FCD9A8; background: #FFFBF5; }
+.f-cupo-badge {
+  position: absolute; top: -9px; left: 50%; transform: translateX(-50%);
+  background: var(--verde); color: #fff; font-family: 'Montserrat', sans-serif;
+  font-size: .5rem; font-weight: 700; letter-spacing: .4px; text-transform: uppercase;
+  padding: 3px 9px; border-radius: 10px; white-space: nowrap;
+}
+.f-cupo-plan { font-family: 'Montserrat', sans-serif; font-size: .72rem; font-weight: 700; color: var(--gris-1); line-height: 1.3; min-height: 2.4em; display: flex; align-items: center; justify-content: center; }
+.f-cupo-precio { font-family: 'Montserrat', sans-serif; font-size: 1rem; font-weight: 800; color: var(--gris-1); }
+.f-cupo-precio small { font-size: .6rem; font-weight: 400; color: var(--gris-2); }
+.f-cupo-bar { height: 6px; background: #F0E6D6; border-radius: 4px; overflow: hidden; }
+.f-cupo-fill { height: 100%; background: #B45309; border-radius: 4px; }
+.f-cupo-num { font-size: 12px; color: var(--gris-2); }
+.f-cupo-num strong { color: #B45309; font-family: 'Montserrat', sans-serif; }
+
+/* Pasos */
+.f-pasos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-bottom: 56px; }
+.f-paso { background: #fff; border: 1px solid var(--borde); border-radius: 10px; padding: 22px; text-align: center; }
+.f-paso-num {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 36px; height: 36px; border-radius: 50%; background: #B45309; color: #fff;
+  font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1rem; margin-bottom: 12px;
+}
+.f-paso p { font-size: 13.5px; font-weight: 300; color: var(--gris-2); line-height: 1.6; margin: 0; }
+
+/* FAQ */
+.f-faq { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 56px; }
+.f-faq-item { background: #fff; border: 1px solid var(--borde); border-radius: 10px; padding: 20px; }
+.f-faq-item h3 { font-family: 'Montserrat', sans-serif; font-size: .85rem; font-weight: 700; color: var(--gris-1); margin: 0 0 8px; }
+.f-faq-item p { font-size: 13px; font-weight: 300; color: var(--gris-2); line-height: 1.6; margin: 0; }
+
+/* CTA banner */
+.f-cta-banner {
+  background: linear-gradient(135deg, #B45309 0%, #92400E 100%);
+  border-radius: 14px; padding: 40px 28px; text-align: center;
+}
+.f-cta-banner h2 { font-family: 'Montserrat', sans-serif; font-size: clamp(22px, 3vw, 30px); font-weight: 800; color: #fff; margin: 0 0 8px; }
+.f-cta-banner h2 em { color: #FCD9A8; font-style: normal; }
+.f-cta-banner p { font-size: 14px; font-weight: 300; color: #FFF4E5; margin: 0 0 22px; }
+.f-cta-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.f-cta-banner .f-btn-primary { background: #fff; color: #B45309; }
+.f-cta-banner .f-btn-primary:hover { background: #FFF4E5; }
+.f-btn-outline-dark {
+  display: inline-block; background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,.5);
+  font-family: 'Montserrat', sans-serif; font-size: .74rem; font-weight: 700;
+  letter-spacing: .5px; text-transform: uppercase; text-decoration: none;
+  padding: 13px 28px; border-radius: 8px; transition: all .18s;
+}
+.f-btn-outline-dark:hover { border-color: #fff; background: rgba(255,255,255,.12); }
+
+@media (max-width: 860px) {
+  .f-beneficios, .f-pasos { grid-template-columns: 1fr; }
+  .f-cupos-grid { grid-template-columns: repeat(2, 1fr); }
+  .f-faq { grid-template-columns: 1fr; }
+}
+@media (max-width: 460px) {
+  .f-cupos-grid { grid-template-columns: 1fr; }
+}
+</style>
