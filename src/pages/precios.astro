@@ -42,9 +42,9 @@ const precios: Plan[] = [
   { mensual: null,   anual_mes: null,   porUsuario: null,  colab: null, empresas: 2,    establecimientos: 5,    gratis: true,  empresa: false, founders: null },
   { mensual: 24000,  anual_mes: 19200,  porUsuario: 24000, colab: 1,    empresas: 20,   establecimientos: 40,   gratis: false, empresa: false, founders: FOUNDER_CUPOS },
   { mensual: 33600,  anual_mes: 26880,  porUsuario: 33600, colab: 1,    empresas: 40,   establecimientos: 80,   gratis: false, empresa: false, founders: FOUNDER_CUPOS },
-  { mensual: 138000, anual_mes: 110400, porUsuario: 23000, colab: 6,    empresas: 30,   establecimientos: 80,   gratis: false, empresa: false, founders: FOUNDER_CUPOS },
-  { mensual: 228000, anual_mes: 182400, porUsuario: 22800, colab: 10,   empresas: 45,   establecimientos: null, gratis: false, empresa: false, founders: FOUNDER_CUPOS },
-  { mensual: 430000, anual_mes: 344000, porUsuario: 21500, colab: 20,   empresas: 90,   establecimientos: null, gratis: false, empresa: false, founders: FOUNDER_CUPOS },
+  { mensual: 138000, anual_mes: 110400, porUsuario: 23000, colab: 6,    empresas: 180,  establecimientos: 365,  gratis: false, empresa: false, founders: FOUNDER_CUPOS },
+  { mensual: 228000, anual_mes: 182400, porUsuario: 22800, colab: 10,   empresas: 335,  establecimientos: 670,  gratis: false, empresa: false, founders: FOUNDER_CUPOS },
+  { mensual: 430000, anual_mes: 344000, porUsuario: 21500, colab: 20,   empresas: 700,  establecimientos: 1405, gratis: false, empresa: false, founders: FOUNDER_CUPOS },
   { mensual: null,   anual_mes: null,   porUsuario: null,  colab: null, empresas: null, establecimientos: null, gratis: false, empresa: true,  founders: null },
 ];
 
@@ -74,8 +74,8 @@ const features: FeatureGroup[] = [
   {
     group: 'Límites',
     rows: [
-      { label: 'Empresas cliente',        values: ['2',   '20',         '40',         '30',         '45',         '90',         'Ilimitadas'] },
-      { label: 'Establecimientos',        values: ['5',   '40',         '80',         '80',         'Ilimitados', 'Ilimitados', 'Ilimitados'] },
+      { label: 'Empresas cliente',        values: ['2',   '20',         '40',         '180',        '335',        '700',        'Ilimitadas'] },
+      { label: 'Establecimientos',        values: ['5',   '40',         '80',         '365',        '670',        '1.405',      'Ilimitados'] },
       { label: 'Gestiones registradas',   values: ['200', 'Ilimitadas', 'Ilimitadas', 'Ilimitadas', 'Ilimitadas', 'Ilimitadas', 'Ilimitadas'] },
       { label: 'Colaboradores en equipo', values: [false, false,        false,        'Hasta 6',    'Hasta 10',   'Hasta 20',   'Ilimitados'] },
     ],
