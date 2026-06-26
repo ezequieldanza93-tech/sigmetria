@@ -6,12 +6,15 @@ const FOUNDER_DISCOUNT = 20;   // % de por vida
 
 // Cupos restantes por plan (debe coincidir con precios.astro)
 const planes = [
-  { nombre: 'Profesional Inicial',  precio: '$24.000',  left: 5 },
-  { nombre: 'Profesional Avanzado', precio: '$33.600',  left: 6 },
-  { nombre: 'Consultora Chica',     precio: '$115.000', left: 4, destacado: true },
-  { nombre: 'Consultora Media',     precio: '$228.000', left: 5 },
-  { nombre: 'Consultora Grande',    precio: '$430.000', left: 6 },
+  { nombre: 'Profesional Inicial',  precioNum: 24000,  left: 5 },
+  { nombre: 'Profesional Avanzado', precioNum: 33600,  left: 6 },
+  { nombre: 'Consultora Chica',     precioNum: 115000, left: 4, destacado: true },
+  { nombre: 'Consultora Media',     precioNum: 228000, left: 5 },
+  { nombre: 'Consultora Grande',    precioNum: 430000, left: 6 },
 ];
+
+function fmt(n: number) { return '$' + n.toLocaleString('es-AR'); }
+function precioFundador(n: number) { return Math.round(n * (1 - FOUNDER_DISCOUNT / 100)); }
 
 const APP_URL = 'https://sigmetria-hys.vercel.app/';
 ---
@@ -63,6 +66,11 @@ const APP_URL = 'https://sigmetria-hys.vercel.app/';
           <p class="f-card-fine">Acumulables. Se acreditan al verificar la publicación.</p>
         </div>
         <div class="f-card">
+          <span class="f-icon">🚀</span>
+          <h3>Siempre primero</h3>
+          <p>Los Fundadores reciben <strong>antes que nadie</strong> cada actualización, función nueva y mejora del sistema. Y tu voz pesa en lo que construimos.</p>
+        </div>
+        <div class="f-card">
           <span class="f-icon">⏳</span>
           <h3>Cupos limitados</h3>
           <p>Solo {FOUNDER_TOTAL} lugares por plan. Una vez ocupados, el plan vuelve a su precio de lista para todos los que entren después.</p>
@@ -80,7 +88,11 @@ const APP_URL = 'https://sigmetria-hys.vercel.app/';
             <div class={`f-cupo-card ${plan.destacado ? 'f-cupo-destacado' : ''}`}>
               {plan.destacado && <span class="f-cupo-badge">Más elegido</span>}
               <span class="f-cupo-plan">{plan.nombre}</span>
-              <span class="f-cupo-precio">{plan.precio}<small>/mes</small></span>
+              <span class="f-cupo-precio">
+                <s class="f-cupo-lista">{fmt(plan.precioNum)}</s>
+                {fmt(precioFundador(plan.precioNum))}<small>/mes</small>
+              </span>
+              <span class="f-cupo-founder-lbl">precio Fundador (−{FOUNDER_DISCOUNT}%)</span>
               <div class="f-cupo-bar"><div class="f-cupo-fill" style={`width:${pct}%`}></div></div>
               <span class="f-cupo-num">Quedan <strong>{plan.left}</strong> de {FOUNDER_TOTAL}</span>
             </div>
@@ -190,7 +202,7 @@ const APP_URL = 'https://sigmetria-hys.vercel.app/';
 .f-inner { max-width: 980px; margin: 0 auto; }
 
 /* Beneficios */
-.f-beneficios { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-bottom: 56px; }
+.f-beneficios { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; margin-bottom: 56px; }
 .f-card {
   background: #fff; border: 1px solid #FCD9A8; border-radius: 12px; padding: 24px;
 }
@@ -227,8 +239,10 @@ const APP_URL = 'https://sigmetria-hys.vercel.app/';
   padding: 3px 9px; border-radius: 10px; white-space: nowrap;
 }
 .f-cupo-plan { font-family: 'Montserrat', sans-serif; font-size: .72rem; font-weight: 700; color: var(--gris-1); line-height: 1.3; min-height: 2.4em; display: flex; align-items: center; justify-content: center; }
-.f-cupo-precio { font-family: 'Montserrat', sans-serif; font-size: 1rem; font-weight: 800; color: var(--gris-1); }
+.f-cupo-precio { font-family: 'Montserrat', sans-serif; font-size: 1rem; font-weight: 800; color: #B45309; }
 .f-cupo-precio small { font-size: .6rem; font-weight: 400; color: var(--gris-2); }
+.f-cupo-lista { display: block; font-size: .7rem; font-weight: 400; color: var(--gris-3); text-decoration: line-through; }
+.f-cupo-founder-lbl { font-size: .58rem; font-weight: 700; color: #B45309; text-transform: uppercase; letter-spacing: .3px; }
 .f-cupo-bar { height: 6px; background: #F0E6D6; border-radius: 4px; overflow: hidden; }
 .f-cupo-fill { height: 100%; background: #B45309; border-radius: 4px; }
 .f-cupo-num { font-size: 12px; color: var(--gris-2); }

@@ -128,7 +128,7 @@ const ctas = [
 
 <BaseLayout
   title="Planes y Precios — Gestión HyS SaaS | SIGMETRÍA"
-  description="Conocé los planes de SIGMETRÍA HyS: Trial gratis, Profesional Independiente, Consultora Chica, Consultora Grande y Empresa. Tabla comparativa completa. Precios en ARS + IVA."
+  description="Conocé los planes de SIGMETRÍA HyS: Trial gratis, Profesional (Inicial y Avanzado), Consultora (Chica, Media y Grande) y Empresa. Programa Fundadores con −20% de por vida. Tabla comparativa completa. Precios en ARS + IVA."
 >
 
   <section class="page-hero">
@@ -142,12 +142,19 @@ const ctas = [
       <h1>PLANES Y<br><em>PRECIOS</em></h1>
       <p class="hero-sub">Elegí el plan que se adapta a tu consultora. Todos incluyen 1 mes de prueba gratuita y acceso completo a la plataforma.</p>
 
-      <div class="billing-toggle" id="billing-toggle">
-        <button class="toggle-btn active" id="btn-mensual">Mensual</button>
-        <button class="toggle-btn" id="btn-anual">
-          Anual
-          <span class="toggle-badge">−20%</span>
-        </button>
+      <div class="toggles">
+        <div class="billing-toggle" id="billing-toggle">
+          <button class="toggle-btn active" id="btn-mensual">Mensual</button>
+          <button class="toggle-btn" id="btn-anual">
+            Anual
+            <span class="toggle-badge">−20%</span>
+          </button>
+        </div>
+        <label class="founder-switch">
+          <input type="checkbox" id="chk-fundador" />
+          <span class="founder-switch-track"><span class="founder-switch-thumb"></span></span>
+          <span class="founder-switch-text">🔥 Precio Fundador <strong>−20% extra</strong></span>
+        </label>
       </div>
     </div>
   </section>
@@ -155,7 +162,104 @@ const ctas = [
   <section class="content-section">
     <div class="content-inner">
 
+      <!-- Tarjetas de planes -->
+      <div class="plan-cards">
+        {planes.map((plan, i) => (
+          <div class={`plan-card ${destacado[i] ? 'plan-card-destacado' : ''}`}>
+            {destacado[i] && <span class="plan-card-badge">Más elegido</span>}
+            <span class="plan-card-nombre">{plan.nombre.replace('\n', ' ')}</span>
+            <div class="plan-card-precio">
+              {precios[i].gratis ? (
+                <span class="pc-val">Gratis</span>
+              ) : precios[i].empresa ? (
+                <span class="pc-val pc-consultar">A consultar</span>
+              ) : (
+                <>
+                  <span
+                    class="pc-val js-precio"
+                    data-mensual={precios[i].mensual}
+                    data-anual={precios[i].anual_mes}
+                  >${fmt(precios[i].mensual!)}</span>
+                  <span class="pc-periodo">/mes + IVA</span>
+                  {precios[i].porUsuario && (
+                    <span
+                      class="pc-usuario js-peruser"
+                      data-mensual={precios[i].porUsuario}
+                      data-anual={Math.round(precios[i].anual_mes! / precios[i].colab!)}
+                      data-colab={precios[i].colab}
+                    >${fmt(precios[i].porUsuario!)} /usuario{precios[i].colab! > 1 ? ` · ${precios[i].colab} colab.` : ''}</span>
+                  )}
+                  <span class="pc-fundador-tag hidden">🔥 Precio Fundador</span>
+                </>
+              )}
+            </div>
+            {precios[i].founders && (
+              <span class="founder-cupos">🔥 Quedan {precios[i].founders} de {FOUNDER_CUPOS} cupos Fundador</span>
+            )}
+            <a
+              href={ctas[i].href}
+              class={`pc-cta ${destacado[i] ? 'pc-cta-primary' : 'pc-cta-outline'}`}
+              {...(ctas[i].ext ? { target: '_blank', rel: 'noopener' } : {})}
+            >{ctas[i].label}</a>
+          </div>
+        ))}
+      </div>
+
+      <!-- Programa Fundadores -->
+      <section class="fundadores">
+        <div class="fundadores-head">
+          <span class="fundadores-kicker">🔥 Programa Fundadores</span>
+          <h2>SÉ DE LOS <em>PRIMEROS</em></h2>
+          <p>Los <strong>primeros {FOUNDER_CUPOS}</strong> que contratan cada plan entran como <strong>Fundadores</strong>: precio congelado con descuento de por vida, meses gratis por reseña y acceso anticipado a cada mejora del sistema. Cupos limitados — cuando se agotan, no vuelven.</p>
+          <p class="fundadores-tip">💡 Activá <strong>"Precio Fundador"</strong> arriba para ver cuánto pagarías como Fundador en cada plan.</p>
+        </div>
+
+        <div class="fundadores-beneficios">
+          <div class="fb-card">
+            <span class="fb-icon">🔒</span>
+            <h3>−{FOUNDER_DISCOUNT}% de por vida</h3>
+            <p>El precio Fundador no te sube nunca, aunque actualicemos la lista. Para siempre, mientras tu suscripción siga activa.</p>
+          </div>
+          <div class="fb-card">
+            <span class="fb-icon">🎁</span>
+            <h3>Meses gratis por reseña</h3>
+            <ul class="fb-bonus">
+              <li><strong>Reseña en video</strong> → 2 meses gratis</li>
+              <li><strong>Nota en un medio / blog</strong> → 1 mes gratis</li>
+              <li><strong>Reseña corta (Google / texto)</strong> → 15 días gratis</li>
+            </ul>
+          </div>
+          <div class="fb-card">
+            <span class="fb-icon">🚀</span>
+            <h3>Siempre primero</h3>
+            <p>Los Fundadores reciben <strong>antes que nadie</strong> cada actualización, función nueva y mejora del sistema. Y tu voz pesa en lo que construimos.</p>
+          </div>
+          <div class="fb-card">
+            <span class="fb-icon">⏳</span>
+            <h3>Cupos limitados</h3>
+            <p>Solo {FOUNDER_CUPOS} lugares por plan. Mirá cuántos quedan:</p>
+            <ul class="fb-cupos">
+              {planes.map((plan, i) => (
+                precios[i].founders ? (
+                  <li>
+                    <span class="cupo-plan">{plan.nombre.replace('\n', ' ')}</span>
+                    <span class="cupo-num">{precios[i].founders}/{FOUNDER_CUPOS}</span>
+                  </li>
+                ) : null
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <div class="fundadores-cta">
+          <a href="/fundadores/" class="fundadores-btn">Conocé el Programa Fundadores →</a>
+        </div>
+
+        <p class="fundadores-fine">El descuento Fundador se aplica sobre el precio de lista del plan y se mantiene mientras la suscripción siga activa. Los meses de bonus por reseña se acreditan al verificar la publicación y son acumulables.</p>
+      </section>
+
       <!-- Tabla comparativa completa -->
+      <h2 class="compare-title">Comparativa completa</h2>
       <div class="compare-wrap">
         <table class="compare-table">
           <thead>
@@ -165,44 +269,6 @@ const ctas = [
                 <th class={`col-plan ${destacado[i] ? 'col-destacado' : ''}`}>
                   {destacado[i] && <span class="plan-badge">Más elegido</span>}
                   <span class="th-nombre">{plan.nombre.replace('\n', ' ')}</span>
-                  <div class="th-precio">
-                    {precios[i].gratis ? (
-                      <span class="precio-val">Gratis</span>
-                    ) : precios[i].empresa ? (
-                      <span class="precio-val precio-consultar">A consultar</span>
-                    ) : (
-                      <>
-                        <span class="precio-val precio-mensual-val" data-show="mensual">
-                          ${fmt(precios[i].mensual!)}
-                        </span>
-                        <span class="precio-val precio-anual-val hidden" data-show="anual">
-                          ${fmt(precios[i].anual_mes!)}
-                        </span>
-                        <span class="precio-periodo precio-mensual-val" data-show="mensual">/mes + IVA</span>
-                        <span class="precio-periodo precio-anual-val hidden" data-show="anual">/mes + IVA</span>
-                        {precios[i].porUsuario && (
-                          <>
-                            <span class="precio-usuario precio-mensual-val" data-show="mensual">
-                              ${fmt(precios[i].porUsuario!)} /usuario{precios[i].colab! > 1 ? ` · ${precios[i].colab} colab.` : ''}
-                            </span>
-                            <span class="precio-usuario precio-anual-val hidden" data-show="anual">
-                              ${fmt(Math.round(precios[i].anual_mes! / precios[i].colab!))} /usuario{precios[i].colab! > 1 ? ` · ${precios[i].colab} colab.` : ''}
-                            </span>
-                          </>
-                        )}
-                      </>
-                    )}
-                  </div>
-                  {precios[i].founders && (
-                    <span class="founder-cupos">🔥 Quedan {precios[i].founders} de {FOUNDER_CUPOS} cupos Fundador</span>
-                  )}
-                  <a
-                    href={ctas[i].href}
-                    class={`th-cta ${destacado[i] ? 'th-cta-primary' : 'th-cta-outline'}`}
-                    {...(ctas[i].ext ? { target: '_blank', rel: 'noopener' } : {})}
-                  >
-                    {ctas[i].label}
-                  </a>
                 </th>
               ))}
             </tr>
@@ -255,53 +321,6 @@ const ctas = [
           ¿Necesitás más colaboradores? Podés agregar <strong>seats adicionales</strong> en los planes Consultora Chica ($23.000 neto/seat/mes), Media ($22.800 neto/seat/mes), Grande ($21.500 neto/seat/mes) y Empresa.
         </p>
       </div>
-
-      <!-- Programa Fundadores -->
-      <section class="fundadores">
-        <div class="fundadores-head">
-          <span class="fundadores-kicker">🔥 Programa Fundadores</span>
-          <h2>SÉ DE LOS <em>PRIMEROS</em></h2>
-          <p>Los <strong>primeros {FOUNDER_CUPOS}</strong> que contratan cada plan entran como <strong>Fundadores</strong>. Cupos limitados — cuando se agotan, no vuelven.</p>
-        </div>
-
-        <div class="fundadores-beneficios">
-          <div class="fb-card">
-            <span class="fb-icon">🔒</span>
-            <h3>−{FOUNDER_DISCOUNT}% de por vida</h3>
-            <p>El precio Fundador no te sube nunca, aunque actualicemos la lista. Para siempre, mientras tu suscripción siga activa.</p>
-          </div>
-          <div class="fb-card">
-            <span class="fb-icon">🎁</span>
-            <h3>Meses gratis por reseña</h3>
-            <ul class="fb-bonus">
-              <li><strong>Reseña en video</strong> → 2 meses gratis</li>
-              <li><strong>Nota en un medio / blog</strong> → 1 mes gratis</li>
-              <li><strong>Reseña corta (Google / texto)</strong> → 15 días gratis</li>
-            </ul>
-          </div>
-          <div class="fb-card">
-            <span class="fb-icon">⏳</span>
-            <h3>Cupos limitados</h3>
-            <p>Solo {FOUNDER_CUPOS} lugares por plan. Mirá cuántos quedan:</p>
-            <ul class="fb-cupos">
-              {planes.map((plan, i) => (
-                precios[i].founders ? (
-                  <li>
-                    <span class="cupo-plan">{plan.nombre.replace('\n', ' ')}</span>
-                    <span class="cupo-num">{precios[i].founders}/{FOUNDER_CUPOS}</span>
-                  </li>
-                ) : null
-              ))}
-            </ul>
-          </div>
-        </div>
-
-        <div class="fundadores-cta">
-          <a href="/fundadores/" class="fundadores-btn">Conocé el Programa Fundadores →</a>
-        </div>
-
-        <p class="fundadores-fine">El descuento Fundador se aplica sobre el precio de lista del plan y se mantiene mientras la suscripción siga activa. Los meses de bonus por reseña se acreditan al verificar la publicación y son acumulables.</p>
-      </section>
 
       <!-- FAQ -->
       <div class="faq-section">
@@ -382,6 +401,74 @@ const ctas = [
 .toggle-badge {
   background: var(--verde); color: #fff; font-size: .6rem; font-weight: 700;
   padding: 2px 6px; border-radius: 10px; letter-spacing: .3px;
+}
+
+/* Toggles (periodo + fundador) */
+.toggles { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.founder-switch { display: inline-flex; align-items: center; gap: 9px; cursor: pointer; user-select: none; }
+.founder-switch input { position: absolute; opacity: 0; width: 0; height: 0; }
+.founder-switch-track {
+  width: 38px; height: 22px; border-radius: 22px; background: var(--borde);
+  position: relative; transition: background .18s; flex-shrink: 0;
+}
+.founder-switch-thumb {
+  position: absolute; top: 3px; left: 3px; width: 16px; height: 16px; border-radius: 50%;
+  background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.2); transition: transform .18s;
+}
+.founder-switch input:checked + .founder-switch-track { background: #B45309; }
+.founder-switch input:checked + .founder-switch-track .founder-switch-thumb { transform: translateX(16px); }
+.founder-switch input:focus-visible + .founder-switch-track { outline: 2px solid #B45309; outline-offset: 2px; }
+.founder-switch-text { font-family: 'Montserrat', sans-serif; font-size: .74rem; font-weight: 600; color: var(--gris-2); }
+.founder-switch-text strong { color: #B45309; }
+
+/* Tarjetas de planes */
+.plan-cards {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(158px, 1fr));
+  gap: 12px; margin-bottom: 44px;
+}
+.plan-card {
+  position: relative; background: #fff; border: 1px solid var(--borde); border-radius: 12px;
+  padding: 22px 16px 18px; text-align: center; display: flex; flex-direction: column; gap: 10px;
+}
+.plan-card-destacado { border-color: var(--verde-borde); background: #F9FCF9; box-shadow: 0 4px 16px rgba(76,175,80,.12); }
+.plan-card-badge {
+  position: absolute; top: -10px; left: 50%; transform: translateX(-50%);
+  background: var(--verde); color: #fff; font-family: 'Montserrat', sans-serif;
+  font-size: .52rem; font-weight: 700; letter-spacing: .5px; text-transform: uppercase;
+  padding: 3px 10px; border-radius: 10px; white-space: nowrap;
+}
+.plan-card-nombre {
+  font-family: 'Montserrat', sans-serif; font-size: .74rem; font-weight: 700;
+  color: var(--gris-1); text-transform: uppercase; letter-spacing: .4px; line-height: 1.3;
+  min-height: 2.4em; display: flex; align-items: center; justify-content: center;
+}
+.plan-card-precio { display: flex; flex-direction: column; gap: 2px; min-height: 62px; justify-content: center; }
+.pc-val { font-family: 'Montserrat', sans-serif; font-size: 1.3rem; font-weight: 800; color: var(--gris-1); line-height: 1; }
+.pc-consultar { font-size: .95rem; font-weight: 700; color: var(--gris-2); }
+.pc-periodo { font-size: .64rem; color: var(--gris-2); }
+.pc-usuario { font-size: .62rem; color: var(--gris-3); font-weight: 600; margin-top: 3px; }
+.pc-fundador-tag {
+  display: inline-block; margin: 2px auto 0; background: #FFF4E5; color: #B45309;
+  font-family: 'Montserrat', sans-serif; font-size: .55rem; font-weight: 700;
+  letter-spacing: .3px; padding: 2px 8px; border-radius: 8px; border: 1px solid #FCD9A8; width: fit-content;
+}
+.pc-cta {
+  display: block; margin-top: auto; padding: 9px 8px; border-radius: 6px;
+  font-family: 'Montserrat', sans-serif; font-size: .65rem; font-weight: 700;
+  letter-spacing: .4px; text-transform: uppercase; text-decoration: none; transition: all .18s;
+}
+.pc-cta-primary { background: var(--verde); color: #fff; }
+.pc-cta-primary:hover { background: var(--verde-dark); }
+.pc-cta-outline { border: 1.5px solid var(--borde); color: var(--gris-2); }
+.pc-cta-outline:hover { border-color: var(--verde-borde); color: var(--verde); background: var(--verde-light); }
+
+.compare-title {
+  font-family: 'Montserrat', sans-serif; font-size: 1rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .5px; color: var(--gris-1); margin: 0 0 16px;
+}
+.fundadores-tip {
+  margin-top: 12px !important; font-size: 13px !important; color: #92400E !important;
+  background: #FFF4E5; border: 1px dashed #FCD9A8; border-radius: 8px; padding: 8px 14px; display: inline-block;
 }
 
 /* Tabla */
@@ -540,7 +627,7 @@ const ctas = [
 .fundadores-head h2 em { color: #B45309; font-style: normal; }
 .fundadores-head p { font-size: 14px; font-weight: 300; color: var(--gris-2); line-height: 1.6; margin: 0; }
 
-.fundadores-beneficios { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.fundadores-beneficios { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 16px; }
 .fb-card {
   background: #fff; border: 1px solid #FCD9A8; border-radius: 10px; padding: 20px;
 }
@@ -597,17 +684,41 @@ const ctas = [
 </style>
 
 <script>
-const btnMensual = document.getElementById('btn-mensual');
-const btnAnual   = document.getElementById('btn-anual');
+const btnMensual  = document.getElementById('btn-mensual');
+const btnAnual    = document.getElementById('btn-anual');
+const chkFundador = document.getElementById('chk-fundador') as HTMLInputElement | null;
 
-function setPeriod(period: string) {
-  const isMensual = period === 'mensual';
-  btnMensual?.classList.toggle('active', isMensual);
-  btnAnual?.classList.toggle('active', !isMensual);
-  document.querySelectorAll<HTMLElement>('[data-show="mensual"]').forEach(el => el.classList.toggle('hidden', !isMensual));
-  document.querySelectorAll<HTMLElement>('[data-show="anual"]').forEach(el => el.classList.toggle('hidden', isMensual));
+let period: 'mensual' | 'anual' = 'mensual';
+
+function fmtAR(n: number) { return n.toLocaleString('es-AR'); }
+
+function render() {
+  const founder = !!chkFundador?.checked;
+  const factor = founder ? 0.8 : 1;
+
+  document.querySelectorAll<HTMLElement>('.js-precio').forEach(el => {
+    const base = Number(el.dataset[period]);
+    el.textContent = '$' + fmtAR(Math.round(base * factor));
+  });
+
+  document.querySelectorAll<HTMLElement>('.js-peruser').forEach(el => {
+    const base  = Number(el.dataset[period]);
+    const colab = Number(el.dataset.colab);
+    el.textContent = '$' + fmtAR(Math.round(base * factor)) + ' /usuario' + (colab > 1 ? ` · ${colab} colab.` : '');
+  });
+
+  document.querySelectorAll<HTMLElement>('.pc-fundador-tag').forEach(el => el.classList.toggle('hidden', !founder));
+}
+
+function setPeriod(p: 'mensual' | 'anual') {
+  period = p;
+  btnMensual?.classList.toggle('active', p === 'mensual');
+  btnAnual?.classList.toggle('active', p === 'anual');
+  render();
 }
 
 btnMensual?.addEventListener('click', () => setPeriod('mensual'));
 btnAnual?.addEventListener('click', () => setPeriod('anual'));
+chkFundador?.addEventListener('change', render);
+render();
 </script>
