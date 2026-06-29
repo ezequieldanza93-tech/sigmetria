@@ -1,6 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 
+const APP_URL = 'https://app.sigmetria.com.ar';
+
 const planes = [
   { slug: 'trial',                nombre: 'Trial',                short: 'Trial' },
   { slug: 'profesional-inicial',  nombre: 'Profesional\nInicial',  short: 'Prof. Inicial' },
@@ -24,7 +26,7 @@ interface FeatureGroup {
 
 // Programa Fundadores
 const FOUNDER_DISCOUNT = 20;  // % de descuento de por vida
-const FOUNDER_CUPOS = 8;      // cupos totales por plan (los `founders` de cada plan = los que QUEDAN)
+const FOUNDER_CUPOS = 8;      // cupos totales por plan
 
 interface Plan {
   mensual: number | null;
@@ -35,7 +37,7 @@ interface Plan {
   establecimientos: number | null;  // null = ilimitados
   gratis: boolean;
   empresa: boolean;
-  founders: number | null;          // cupos Fundador disponibles (null = no aplica)
+  founders: number | null;          // cupos Fundador disponibles — fallback estático
 }
 
 const precios: Plan[] = [
@@ -47,6 +49,31 @@ const precios: Plan[] = [
   { mensual: 430000, anual_mes: 344000, porUsuario: 21500, colab: 20,   empresas: 120,  establecimientos: 240,  gratis: false, empresa: false, founders: 6 },
   { mensual: null,   anual_mes: null,   porUsuario: null,  colab: null, empresas: null, establecimientos: null, gratis: false, empresa: true,  founders: null },
 ];
+
+// Cupos en vivo desde el endpoint de la app (con fallback a datos estáticos)
+interface CuposPlan {
+  slug: string;
+  cupos_disponibles: number;
+}
+let cuposVivo: CuposPlan[] = [];
+try {
+  const res = await fetch(`${APP_URL}/api/fundadores/cupos`, {
+    headers: { 'Accept': 'application/json' },
+  });
+  if (res.ok) {
+    const data = await res.json() as { planes: CuposPlan[] };
+    cuposVivo = data.planes ?? [];
+  }
+} catch {
+  // Fallback silencioso: se usan los datos estáticos de `precios`
+}
+
+// Helper para obtener cupos de un plan (prioriza datos vivos, cae en estático)
+function getCupos(slug: string, staticFounders: number | null): number | null {
+  const vivo = cuposVivo.find(p => p.slug === slug);
+  if (vivo !== undefined) return vivo.cupos_disponibles;
+  return staticFounders;
+}
 
 function fmt(n: number) {
   return n.toLocaleString('es-AR');
@@ -116,13 +143,13 @@ const features: FeatureGroup[] = [
 const destacado = [false, false, false, true, false, false, false];
 
 const ctas = [
-  { label: 'Empezar gratis', href: 'https://sigmetria-hys.vercel.app/', ext: true  },
-  { label: 'Elegir plan',    href: 'https://sigmetria-hys.vercel.app/', ext: true  },
-  { label: 'Elegir plan',    href: 'https://sigmetria-hys.vercel.app/', ext: true  },
-  { label: 'Elegir plan',    href: 'https://sigmetria-hys.vercel.app/', ext: true  },
-  { label: 'Elegir plan',    href: 'https://sigmetria-hys.vercel.app/', ext: true  },
-  { label: 'Elegir plan',    href: 'https://sigmetria-hys.vercel.app/', ext: true  },
-  { label: 'Contactar',      href: '/contacto/?s=s4&funnel=plan-empresa', ext: false },
+  { label: 'Empezar gratis', href: `${APP_URL}/onboarding?plan=trial`,                                         ext: true  },
+  { label: 'Elegir plan',    href: `${APP_URL}/onboarding?plan=profesional-inicial&ciclo=annual&fundador=1`,   ext: true  },
+  { label: 'Elegir plan',    href: `${APP_URL}/onboarding?plan=profesional-avanzado&ciclo=annual&fundador=1`,  ext: true  },
+  { label: 'Elegir plan',    href: `${APP_URL}/onboarding?plan=consultora-chica&ciclo=annual&fundador=1`,      ext: true  },
+  { label: 'Elegir plan',    href: `${APP_URL}/onboarding?plan=consultora-media&ciclo=annual&fundador=1`,      ext: true  },
+  { label: 'Elegir plan',    href: `${APP_URL}/onboarding?plan=consultora-grande&ciclo=annual&fundador=1`,     ext: true  },
+  { label: 'Contactar',      href: '/contacto/?s=s4&funnel=plan-empresa',                                      ext: false },
 ];
 ---
 
@@ -193,9 +220,14 @@ const ctas = [
                 </>
               )}
             </div>
-            {precios[i].founders && (
-              <span class="founder-cupos">🔥 Quedan {precios[i].founders} de {FOUNDER_CUPOS} cupos Fundador</span>
-            )}
+            {(() => {
+              const cupos = getCupos(plan.slug, precios[i].founders);
+              return cupos !== null && cupos > 0 ? (
+                <span class="founder-cupos">🔥 Quedan {cupos} de {FOUNDER_CUPOS} cupos Fundador</span>
+              ) : cupos === 0 ? (
+                <span class="founder-cupos founder-cupos-agotado">⚫ Cupos Fundador agotados</span>
+              ) : null;
+            })()}
             <a
               href={ctas[i].href}
               class={`pc-cta ${destacado[i] ? 'pc-cta-primary' : 'pc-cta-outline'}`}
@@ -224,7 +256,7 @@ const ctas = [
             <span class="fb-icon">🎁</span>
             <h3>Meses gratis por reseña</h3>
             <ul class="fb-bonus">
-              <li><strong>Reseña en video</strong> → 2 meses gratis</li>
+              <li><strong>Reseña en video</strong> → 3 meses gratis</li>
               <li><strong>Nota en un medio / blog</strong> → 1 mes gratis</li>
               <li><strong>Reseña corta (Google / texto)</strong> → 15 días gratis</li>
             </ul>
@@ -239,14 +271,17 @@ const ctas = [
             <h3>Cupos limitados</h3>
             <p>Solo {FOUNDER_CUPOS} lugares por plan. Mirá cuántos quedan:</p>
             <ul class="fb-cupos">
-              {planes.map((plan, i) => (
-                precios[i].founders ? (
+              {planes.map((plan, i) => {
+                const cupos = getCupos(plan.slug, precios[i].founders);
+                return cupos !== null ? (
                   <li>
                     <span class="cupo-plan">{plan.nombre.replace('\n', ' ')}</span>
-                    <span class="cupo-num">{precios[i].founders}/{FOUNDER_CUPOS}</span>
+                    <span class={`cupo-num ${cupos === 0 ? 'cupo-num-agotado' : ''}`}>
+                      {cupos === 0 ? 'Agotado' : `${cupos}/${FOUNDER_CUPOS}`}
+                    </span>
                   </li>
-                ) : null
-              ))}
+                ) : null;
+              })}
             </ul>
           </div>
         </div>
@@ -352,7 +387,7 @@ const ctas = [
           </div>
           <div class="faq-item">
             <h3>¿Cómo funciona el Programa Fundadores?</h3>
-            <p>Los primeros {FOUNDER_CUPOS} que contratan cada plan entran como Fundadores: −{FOUNDER_DISCOUNT}% de por vida sobre el precio de lista. Además sumás meses gratis si nos dejás una reseña (video: 2 meses, nota: 1 mes, reseña corta: 15 días).</p>
+            <p>Los primeros {FOUNDER_CUPOS} que contratan cada plan entran como Fundadores: −{FOUNDER_DISCOUNT}% de por vida sobre el precio de lista. Además sumás meses gratis si nos dejás una reseña (video: 3 meses, nota: 1 mes, reseña corta: 15 días).</p>
           </div>
         </div>
       </div>
@@ -648,6 +683,8 @@ const ctas = [
 .fb-cupos li:last-child { border-bottom: none; }
 .cupo-plan { color: var(--gris-2); }
 .cupo-num { font-family: 'Montserrat', sans-serif; font-weight: 700; color: #B45309; }
+.cupo-num-agotado { color: var(--gris-3); }
+.founder-cupos-agotado { background: #F5F5F5; color: var(--gris-3); border-color: var(--borde); }
 .fundadores-cta { text-align: center; margin-top: 24px; }
 .fundadores-btn {
   display: inline-block; background: #B45309; color: #fff;

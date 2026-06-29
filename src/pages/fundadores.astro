@@ -4,19 +4,55 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 const FOUNDER_TOTAL = 8;       // cupos totales por plan
 const FOUNDER_DISCOUNT = 20;   // % de por vida
 
-// Cupos restantes por plan (debe coincidir con precios.astro)
-const planes = [
-  { nombre: 'Profesional Inicial',  precioNum: 24000,  left: 5 },
-  { nombre: 'Profesional Avanzado', precioNum: 33600,  left: 6 },
-  { nombre: 'Consultora Chica',     precioNum: 115000, left: 4, destacado: true },
-  { nombre: 'Consultora Media',     precioNum: 228000, left: 5 },
-  { nombre: 'Consultora Grande',    precioNum: 430000, left: 6 },
+const APP_URL = 'https://app.sigmetria.com.ar';
+
+// Datos estáticos de fallback (se usan si el endpoint no responde)
+const planesFallback = [
+  { slug: 'profesional-inicial',  nombre: 'Profesional Inicial',  precioNum: 24000,  left: 5 },
+  { slug: 'profesional-avanzado', nombre: 'Profesional Avanzado', precioNum: 33600,  left: 6 },
+  { slug: 'consultora-chica',     nombre: 'Consultora Chica',     precioNum: 115000, left: 4, destacado: true },
+  { slug: 'consultora-media',     nombre: 'Consultora Media',     precioNum: 228000, left: 5 },
+  { slug: 'consultora-grande',    nombre: 'Consultora Grande',    precioNum: 430000, left: 6 },
 ];
 
-function fmt(n: number) { return '$' + n.toLocaleString('es-AR'); }
-function precioFundador(n: number) { return Math.round(n * (1 - FOUNDER_DISCOUNT / 100)); }
+// Fetch en vivo desde el endpoint público de la app
+interface CuposPlanAPI {
+  slug: string;
+  nombre: string;
+  cupos_disponibles: number;
+  precio_mensual: number | null;
+  precio_anual: number | null;
+  precio_fundador_anual: number | null;
+}
 
-const APP_URL = 'https://sigmetria-hys.vercel.app/';
+let planesVivo: CuposPlanAPI[] = [];
+try {
+  const res = await fetch(`${APP_URL}/api/fundadores/cupos`, {
+    headers: { 'Accept': 'application/json' },
+  });
+  if (res.ok) {
+    const data = await res.json() as { planes: CuposPlanAPI[] };
+    planesVivo = data.planes ?? [];
+  }
+} catch {
+  // Silencioso — usamos fallback estático
+}
+
+// Construir lista final: datos vivos si están, fallback si no
+const planes = planesFallback.map(fb => {
+  const vivo = planesVivo.find(p => p.slug === fb.slug);
+  return {
+    slug: fb.slug,
+    nombre: vivo?.nombre ?? fb.nombre,
+    precioNum: vivo?.precio_mensual ?? fb.precioNum,
+    precioFundadorAnual: vivo?.precio_fundador_anual ?? null,
+    left: vivo?.cupos_disponibles ?? fb.left,
+    destacado: fb.destacado ?? false,
+  };
+});
+
+function fmt(n: number) { return '$' + n.toLocaleString('es-AR'); }
+function precioFundadorMensual(n: number) { return Math.round(n * (1 - FOUNDER_DISCOUNT / 100)); }
 ---
 
 <BaseLayout
@@ -39,7 +75,7 @@ const APP_URL = 'https://sigmetria-hys.vercel.app/';
         gratis por cada reseña. Cuando se agotan los cupos, no vuelven.
       </p>
       <div class="f-hero-cta">
-        <a href={APP_URL} target="_blank" rel="noopener" class="f-btn-primary">Quiero ser Fundador</a>
+        <a href={`${APP_URL}/onboarding?ciclo=annual&fundador=1`} target="_blank" rel="noopener" class="f-btn-primary">Quiero ser Fundador</a>
         <a href="/precios/" class="f-btn-outline">Ver los planes</a>
       </div>
     </div>
@@ -59,7 +95,7 @@ const APP_URL = 'https://sigmetria-hys.vercel.app/';
           <span class="f-icon">🎁</span>
           <h3>Meses gratis por reseña</h3>
           <ul class="f-bonus">
-            <li><strong>Reseña en video</strong> <span>2 meses</span></li>
+            <li><strong>Reseña en video</strong> <span>3 meses</span></li>
             <li><strong>Nota en un medio / blog</strong> <span>1 mes</span></li>
             <li><strong>Reseña corta (Google / texto)</strong> <span>15 días</span></li>
           </ul>
@@ -84,17 +120,48 @@ const APP_URL = 'https://sigmetria-hys.vercel.app/';
         {planes.map(plan => {
           const tomados = FOUNDER_TOTAL - plan.left;
           const pct = Math.round((tomados / FOUNDER_TOTAL) * 100);
+          // Precio Fundador anual mensualizado (del endpoint) o calculado desde precio mensual
+          const precioFundadorAnualMes = plan.precioFundadorAnual != null
+            ? Math.round(plan.precioFundadorAnual / 12)
+            : (plan.precioNum != null ? precioFundadorMensual(plan.precioNum) : null);
+          const agotado = plan.left <= 0;
           return (
-            <div class={`f-cupo-card ${plan.destacado ? 'f-cupo-destacado' : ''}`}>
-              {plan.destacado && <span class="f-cupo-badge">Más elegido</span>}
+            <div class={`f-cupo-card ${plan.destacado ? 'f-cupo-destacado' : ''} ${agotado ? 'f-cupo-agotado' : ''}`}>
+              {plan.destacado && !agotado && <span class="f-cupo-badge">Más elegido</span>}
+              {agotado && <span class="f-cupo-badge f-cupo-badge-agotado">Agotado</span>}
               <span class="f-cupo-plan">{plan.nombre}</span>
-              <span class="f-cupo-precio">
-                <s class="f-cupo-lista">{fmt(plan.precioNum)}</s>
-                {fmt(precioFundador(plan.precioNum))}<small>/mes</small>
-              </span>
-              <span class="f-cupo-founder-lbl">precio Fundador (−{FOUNDER_DISCOUNT}%)</span>
-              <div class="f-cupo-bar"><div class="f-cupo-fill" style={`width:${pct}%`}></div></div>
-              <span class="f-cupo-num">Quedan <strong>{plan.left}</strong> de {FOUNDER_TOTAL}</span>
+              {!agotado && plan.precioNum != null && precioFundadorAnualMes != null ? (
+                <>
+                  <span class="f-cupo-precio">
+                    <s class="f-cupo-lista">{fmt(plan.precioNum)}</s>
+                    {fmt(precioFundadorAnualMes)}<small>/mes</small>
+                  </span>
+                  <span class="f-cupo-founder-lbl">precio Fundador anual (−{FOUNDER_DISCOUNT}%)</span>
+                </>
+              ) : agotado && plan.precioNum != null ? (
+                <>
+                  <span class="f-cupo-precio-lista">{fmt(plan.precioNum)}</span>
+                  <span class="f-cupo-founder-lbl f-cupo-founder-lbl-agotado">precio de lista /mes</span>
+                </>
+              ) : null}
+              <div class="f-cupo-bar">
+                <div class="f-cupo-fill" style={`width:${Math.min(pct, 100)}%`}></div>
+              </div>
+              {agotado ? (
+                <span class="f-cupo-num f-cupo-num-agotado">Cupos agotados</span>
+              ) : (
+                <span class="f-cupo-num">Quedan <strong>{plan.left}</strong> de {FOUNDER_TOTAL}</span>
+              )}
+              {!agotado && (
+                <a
+                  href={`${APP_URL}/onboarding?plan=${plan.slug}&ciclo=annual&fundador=1`}
+                  target="_blank"
+                  rel="noopener"
+                  class="f-cupo-cta"
+                >
+                  Entrar →
+                </a>
+              )}
             </div>
           );
         })}
@@ -130,7 +197,7 @@ const APP_URL = 'https://sigmetria-hys.vercel.app/';
         </div>
         <div class="f-faq-item">
           <h3>¿Cómo sumo meses gratis?</h3>
-          <p>Dejándonos una reseña: video (2 meses), nota en un medio o blog (1 mes) o reseña corta en Google/texto (15 días). Son acumulables.</p>
+          <p>Dejándonos una reseña: video (3 meses), nota en un medio o blog (1 mes) o reseña corta en Google/texto (15 días). Son acumulables.</p>
         </div>
         <div class="f-faq-item">
           <h3>¿Y si después cambio de plan?</h3>
@@ -143,7 +210,7 @@ const APP_URL = 'https://sigmetria-hys.vercel.app/';
         <h2>NO TE QUEDES <em>AFUERA</em></h2>
         <p>Los cupos Fundador no se reponen. Entrá hoy y congelá tu precio.</p>
         <div class="f-cta-actions">
-          <a href={APP_URL} target="_blank" rel="noopener" class="f-btn-primary">Quiero ser Fundador</a>
+          <a href={`${APP_URL}/onboarding?ciclo=annual&fundador=1`} target="_blank" rel="noopener" class="f-btn-primary">Quiero ser Fundador</a>
           <a href="/contacto/?s=s4&funnel=fundadores" class="f-btn-outline-dark">Hablar con un asesor</a>
         </div>
       </div>
@@ -247,6 +314,18 @@ const APP_URL = 'https://sigmetria-hys.vercel.app/';
 .f-cupo-fill { height: 100%; background: #B45309; border-radius: 4px; }
 .f-cupo-num { font-size: 12px; color: var(--gris-2); }
 .f-cupo-num strong { color: #B45309; font-family: 'Montserrat', sans-serif; }
+.f-cupo-num-agotado { color: var(--gris-3); font-style: italic; }
+.f-cupo-agotado { opacity: .7; }
+.f-cupo-badge-agotado { background: var(--gris-3) !important; }
+.f-cupo-precio-lista { font-family: 'Montserrat', sans-serif; font-size: 1rem; font-weight: 700; color: var(--gris-2); }
+.f-cupo-founder-lbl-agotado { color: var(--gris-3) !important; }
+.f-cupo-cta {
+  display: block; text-align: center; background: #B45309; color: #fff;
+  font-family: 'Montserrat', sans-serif; font-size: .62rem; font-weight: 700;
+  letter-spacing: .4px; text-transform: uppercase; text-decoration: none;
+  padding: 7px 10px; border-radius: 6px; margin-top: 2px; transition: background .18s;
+}
+.f-cupo-cta:hover { background: #92400E; }
 
 /* Pasos */
 .f-pasos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-bottom: 56px; }
