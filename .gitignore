@@ -9,3 +9,4 @@ node_modules/
 docs/
 sigmetría_app_mkt/
 supabase/.temp/
+.vercel
