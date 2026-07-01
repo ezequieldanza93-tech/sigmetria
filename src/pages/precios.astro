@@ -201,7 +201,7 @@ const ctas = [
               ) : precios[i].empresa ? (
                 <span class="pc-val pc-consultar">A consultar</span>
               ) : (
-                <>
+                <Fragment>
                   <span
                     class="pc-val js-precio"
                     data-mensual={precios[i].mensual}
@@ -217,7 +217,7 @@ const ctas = [
                     >${fmt(precios[i].porUsuario!)} /usuario{precios[i].colab! > 1 ? ` · ${precios[i].colab} colab.` : ''}</span>
                   )}
                   <span class="pc-fundador-tag hidden">🔥 Precio Fundador</span>
-                </>
+                </Fragment>
               )}
             </div>
             {(() => {
@@ -310,7 +310,7 @@ const ctas = [
           </thead>
           <tbody>
             {features.map(group => (
-              <>
+              <Fragment>
                 <tr class="group-header">
                   <td colspan={8}>{group.group}</td>
                 </tr>
@@ -327,7 +327,7 @@ const ctas = [
                     ))}
                   </tr>
                 ))}
-              </>
+              </Fragment>
             ))}
           </tbody>
           <tfoot>
