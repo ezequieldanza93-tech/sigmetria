@@ -131,18 +131,18 @@ function precioFundadorMensual(n: number) { return Math.round(n * (1 - FOUNDER_D
               {agotado && <span class="f-cupo-badge f-cupo-badge-agotado">Agotado</span>}
               <span class="f-cupo-plan">{plan.nombre}</span>
               {!agotado && plan.precioNum != null && precioFundadorAnualMes != null ? (
-                <>
+                <Fragment>
                   <span class="f-cupo-precio">
                     <s class="f-cupo-lista">{fmt(plan.precioNum)}</s>
                     {fmt(precioFundadorAnualMes)}<small>/mes</small>
                   </span>
                   <span class="f-cupo-founder-lbl">precio Fundador anual (−{FOUNDER_DISCOUNT}%)</span>
-                </>
+                </Fragment>
               ) : agotado && plan.precioNum != null ? (
-                <>
+                <Fragment>
                   <span class="f-cupo-precio-lista">{fmt(plan.precioNum)}</span>
                   <span class="f-cupo-founder-lbl f-cupo-founder-lbl-agotado">precio de lista /mes</span>
-                </>
+                </Fragment>
               ) : null}
               <div class="f-cupo-bar">
                 <div class="f-cupo-fill" style={`width:${Math.min(pct, 100)}%`}></div>
