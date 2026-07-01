@@ -86,12 +86,20 @@ function perEstablec(p: Plan): string {
   if (!p.mensual || !p.establecimientos) return '—';
   return '$' + fmt(Math.round(p.mensual / p.establecimientos));
 }
+// Estimado de precio de lista al segundo año (+30% por nuevas funcionalidades, luego ajusta por IPC)
+const AJUSTE_ANIO_2 = 0.30;
+function perAnio2(p: Plan): string {
+  if (p.empresa) return 'A consultar';
+  if (p.gratis || !p.mensual) return '—';
+  return '$' + fmt(Math.round(p.mensual * (1 + AJUSTE_ANIO_2)));
+}
 
 const features: FeatureGroup[] = [
   {
     group: 'Precio',
     rows: [
-      { label: 'Precio mensual (neto + IVA 21%)',  values: ['Gratis', '$24.000', '$33.600', '$115.000', '$228.000', '$430.000', 'A consultar'] },
+      { label: 'Precio mensual (neto + IVA 21%) — año 1', values: ['Gratis', '$24.000', '$33.600', '$115.000', '$228.000', '$430.000', 'A consultar'] },
+      { label: 'Precio de lista año 2 (estimado, +30%)',  values: precios.map(perAnio2) },
       { label: 'Precio anual mensualizado (−20%)', values: ['—',      '$19.200', '$26.880', '$92.000',  '$182.400', '$344.000', 'A consultar'] },
       { label: 'Precio por empresa / mes',          values: precios.map(perEmpresa) },
       { label: 'Precio por establecimiento / mes',  values: precios.map(perEstablec) },
@@ -368,6 +376,14 @@ const ctas = [
           <div class="faq-item">
             <h3>¿El IVA está incluido?</h3>
             <p>No. Los precios son <strong>netos</strong>. Se suma IVA 21% en la factura, siempre discriminado: neto, IVA y total por separado.</p>
+          </div>
+          <div class="faq-item">
+            <h3>¿Los precios pueden subir de golpe, sin aviso?</h3>
+            <p>No. Durante tu primer año como cliente, el precio de lista se actualiza mes a mes únicamente según la variación del IPC (INDEC). No lo subimos por decisión propia ni de forma arbitraria: el ajuste queda atado al índice oficial de inflación, así sabés de antemano qué esperar.</p>
+          </div>
+          <div class="faq-item">
+            <h3>¿Qué pasa con el precio después del primer año?</h3>
+            <p>Al cumplir 12 meses, el precio de lista se actualiza una vez para reflejar las nuevas funcionalidades que sumamos a la plataforma durante ese año (estimado +30% — el detalle por plan está en la fila "Precio de lista año 2" de la comparativa). A partir de ese ajuste, el precio vuelve a actualizarse mes a mes por IPC, igual que en el año 1.</p>
           </div>
           <div class="faq-item">
             <h3>¿Qué pasa cuando vence el trial?</h3>
