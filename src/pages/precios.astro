@@ -1,7 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-
-const APP_URL = 'https://app.sigmetria.com.ar';
+import { APP_URL, onboardingUrl } from '../config/site';
 
 const planes = [
   { slug: 'trial',                nombre: 'Trial',                short: 'Trial' },
@@ -99,7 +98,6 @@ const features: FeatureGroup[] = [
     group: 'Precio',
     rows: [
       { label: 'Precio mensual (neto + IVA 21%) — año 1', values: ['Gratis', '$24.000', '$33.600', '$115.000', '$228.000', '$430.000', 'A consultar'] },
-      { label: 'Precio de lista año 2 (estimado, +30%)',  values: precios.map(perAnio2) },
       { label: 'Precio anual mensualizado (−20%)', values: ['—',      '$19.200', '$26.880', '$92.000',  '$182.400', '$344.000', 'A consultar'] },
       { label: 'Precio por empresa / mes',          values: precios.map(perEmpresa) },
       { label: 'Precio por establecimiento / mes',  values: precios.map(perEstablec) },
@@ -150,14 +148,21 @@ const features: FeatureGroup[] = [
 
 const destacado = [false, false, false, true, false, false, false];
 
+// Índices de planes: [trial, prof. inicial, prof. avanzado, consultora chica, consultora media, consultora grande, empresa]
+const coreIndices = [0, 1, 3, 4]; // trial + profesional inicial + consultora chica (destacado) + consultora media
+const restIndices = [2, 5, 6];    // profesional avanzado + consultora grande + empresa — detrás de "Ver todos los planes"
+
+// CTA por plan. `dynamic: true` = el href se recalcula en el cliente en sincro con los
+// toggles Mensual/Anual y Precio Fundador (ver <script> al final). El href de acá abajo
+// es el estado inicial: Mensual, sin Fundador (coincide con el precio que se ve al cargar).
 const ctas = [
-  { label: 'Empezar gratis', href: `${APP_URL}/onboarding?plan=trial`,                                         ext: true  },
-  { label: 'Elegir plan',    href: `${APP_URL}/onboarding?plan=profesional-inicial&ciclo=annual&fundador=1`,   ext: true  },
-  { label: 'Elegir plan',    href: `${APP_URL}/onboarding?plan=profesional-avanzado&ciclo=annual&fundador=1`,  ext: true  },
-  { label: 'Elegir plan',    href: `${APP_URL}/onboarding?plan=consultora-chica&ciclo=annual&fundador=1`,      ext: true  },
-  { label: 'Elegir plan',    href: `${APP_URL}/onboarding?plan=consultora-media&ciclo=annual&fundador=1`,      ext: true  },
-  { label: 'Elegir plan',    href: `${APP_URL}/onboarding?plan=consultora-grande&ciclo=annual&fundador=1`,     ext: true  },
-  { label: 'Contactar',      href: '/contacto/?s=s4&funnel=plan-empresa',                                      ext: false },
+  { label: 'Empezar gratis', href: onboardingUrl({ plan: 'trial' }),                             ext: true,  dynamic: false },
+  { label: 'Elegir plan',    href: onboardingUrl({ plan: 'profesional-inicial',  ciclo: 'monthly' }), ext: true,  dynamic: true },
+  { label: 'Elegir plan',    href: onboardingUrl({ plan: 'profesional-avanzado', ciclo: 'monthly' }), ext: true,  dynamic: true },
+  { label: 'Elegir plan',    href: onboardingUrl({ plan: 'consultora-chica',     ciclo: 'monthly' }), ext: true,  dynamic: true },
+  { label: 'Elegir plan',    href: onboardingUrl({ plan: 'consultora-media',     ciclo: 'monthly' }), ext: true,  dynamic: true },
+  { label: 'Elegir plan',    href: onboardingUrl({ plan: 'consultora-grande',    ciclo: 'monthly' }), ext: true,  dynamic: true },
+  { label: 'Contactar',      href: '/contacto/?s=s4&funnel=plan-empresa',                             ext: false, dynamic: false },
 ];
 ---
 
@@ -197,53 +202,128 @@ const ctas = [
   <section class="content-section">
     <div class="content-inner">
 
-      <!-- Tarjetas de planes -->
+      <!-- Tarjetas de planes: los 4 planes core, siempre visibles (Hick's Law: pocas opciones al decidir) -->
       <div class="plan-cards">
-        {planes.map((plan, i) => (
-          <div class={`plan-card ${destacado[i] ? 'plan-card-destacado' : ''}`}>
-            {destacado[i] && <span class="plan-card-badge">Más elegido</span>}
-            <span class="plan-card-nombre">{plan.nombre.replace('\n', ' ')}</span>
-            <div class="plan-card-precio">
-              {precios[i].gratis ? (
-                <span class="pc-val">Gratis</span>
-              ) : precios[i].empresa ? (
-                <span class="pc-val pc-consultar">A consultar</span>
-              ) : (
-                <>
-                  <span
-                    class="pc-val js-precio"
-                    data-mensual={precios[i].mensual}
-                    data-anual={precios[i].anual_mes}
-                  >${fmt(precios[i].mensual!)}</span>
-                  <span class="pc-periodo">/mes + IVA</span>
-                  {precios[i].porUsuario && (
+        {coreIndices.map(i => {
+          const plan = planes[i];
+          return (
+            <div class={`plan-card ${destacado[i] ? 'plan-card-destacado' : ''}`}>
+              {destacado[i] && <span class="plan-card-badge">Más elegido</span>}
+              <span class="plan-card-nombre">{plan.nombre.replace('\n', ' ')}</span>
+              <div class="plan-card-precio">
+                {precios[i].gratis ? (
+                  <span class="pc-val">Gratis</span>
+                ) : precios[i].empresa ? (
+                  <span class="pc-val pc-consultar">A consultar</span>
+                ) : (
+                  <>
                     <span
-                      class="pc-usuario js-peruser"
-                      data-mensual={precios[i].porUsuario}
-                      data-anual={Math.round(precios[i].anual_mes! / precios[i].colab!)}
-                      data-colab={precios[i].colab}
-                    >${fmt(precios[i].porUsuario!)} /usuario{precios[i].colab! > 1 ? ` · ${precios[i].colab} colab.` : ''}</span>
-                  )}
-                  <span class="pc-fundador-tag hidden">🔥 Precio Fundador</span>
-                </>
-              )}
+                      class="pc-val js-precio"
+                      data-mensual={precios[i].mensual}
+                      data-anual={precios[i].anual_mes}
+                    >${fmt(precios[i].mensual!)}</span>
+                    <span class="pc-periodo">/mes + IVA</span>
+                    {precios[i].porUsuario && (
+                      <span
+                        class="pc-usuario js-peruser"
+                        data-mensual={precios[i].porUsuario}
+                        data-anual={Math.round(precios[i].anual_mes! / precios[i].colab!)}
+                        data-colab={precios[i].colab}
+                      >${fmt(precios[i].porUsuario!)} /usuario{precios[i].colab! > 1 ? ` · ${precios[i].colab} colab.` : ''}</span>
+                    )}
+                    <span class="pc-fundador-tag hidden">🔥 Precio Fundador</span>
+                  </>
+                )}
+              </div>
+              {(() => {
+                const cupos = getCupos(plan.slug, precios[i].founders);
+                return cupos !== null && cupos > 0 ? (
+                  <span class="founder-cupos">🔥 Quedan {cupos} de {FOUNDER_CUPOS} cupos Fundador</span>
+                ) : cupos === 0 ? (
+                  <span class="founder-cupos founder-cupos-agotado">⚫ Cupos Fundador agotados</span>
+                ) : null;
+              })()}
+              <a
+                href={ctas[i].href}
+                class={`pc-cta ${destacado[i] ? 'pc-cta-primary' : 'pc-cta-outline'}`}
+                data-plan-slug={ctas[i].dynamic ? plan.slug : undefined}
+                {...(ctas[i].ext ? { target: '_blank', rel: 'noopener' } : {})}
+              >{ctas[i].label}</a>
             </div>
-            {(() => {
-              const cupos = getCupos(plan.slug, precios[i].founders);
-              return cupos !== null && cupos > 0 ? (
-                <span class="founder-cupos">🔥 Quedan {cupos} de {FOUNDER_CUPOS} cupos Fundador</span>
-              ) : cupos === 0 ? (
-                <span class="founder-cupos founder-cupos-agotado">⚫ Cupos Fundador agotados</span>
-              ) : null;
-            })()}
-            <a
-              href={ctas[i].href}
-              class={`pc-cta ${destacado[i] ? 'pc-cta-primary' : 'pc-cta-outline'}`}
-              {...(ctas[i].ext ? { target: '_blank', rel: 'noopener' } : {})}
-            >{ctas[i].label}</a>
-          </div>
-        ))}
+          );
+        })}
       </div>
+
+      <!-- Micro-reaseguro cerca del punto de decisión (reduce ansiedad de precio) -->
+      <p class="pc-reassurance">1 mes gratis · sin tarjeta · sin permanencia</p>
+
+      <!-- Resto de los planes: colapsados por defecto (menos decisiones a la vista) -->
+      <details class="plan-cards-more">
+        <summary>Ver todos los planes <span class="chev">▾</span></summary>
+        <div class="plan-cards plan-cards-rest">
+          {restIndices.map(i => {
+            const plan = planes[i];
+            return (
+              <div class={`plan-card ${destacado[i] ? 'plan-card-destacado' : ''}`}>
+                {destacado[i] && <span class="plan-card-badge">Más elegido</span>}
+                <span class="plan-card-nombre">{plan.nombre.replace('\n', ' ')}</span>
+                <div class="plan-card-precio">
+                  {precios[i].gratis ? (
+                    <span class="pc-val">Gratis</span>
+                  ) : precios[i].empresa ? (
+                    <span class="pc-val pc-consultar">A consultar</span>
+                  ) : (
+                    <>
+                      <span
+                        class="pc-val js-precio"
+                        data-mensual={precios[i].mensual}
+                        data-anual={precios[i].anual_mes}
+                      >${fmt(precios[i].mensual!)}</span>
+                      <span class="pc-periodo">/mes + IVA</span>
+                      {precios[i].porUsuario && (
+                        <span
+                          class="pc-usuario js-peruser"
+                          data-mensual={precios[i].porUsuario}
+                          data-anual={Math.round(precios[i].anual_mes! / precios[i].colab!)}
+                          data-colab={precios[i].colab}
+                        >${fmt(precios[i].porUsuario!)} /usuario{precios[i].colab! > 1 ? ` · ${precios[i].colab} colab.` : ''}</span>
+                      )}
+                      <span class="pc-fundador-tag hidden">🔥 Precio Fundador</span>
+                    </>
+                  )}
+                </div>
+                {(() => {
+                  const cupos = getCupos(plan.slug, precios[i].founders);
+                  return cupos !== null && cupos > 0 ? (
+                    <span class="founder-cupos">🔥 Quedan {cupos} de {FOUNDER_CUPOS} cupos Fundador</span>
+                  ) : cupos === 0 ? (
+                    <span class="founder-cupos founder-cupos-agotado">⚫ Cupos Fundador agotados</span>
+                  ) : null;
+                })()}
+                <a
+                  href={ctas[i].href}
+                  class={`pc-cta ${destacado[i] ? 'pc-cta-primary' : 'pc-cta-outline'}`}
+                  data-plan-slug={ctas[i].dynamic ? plan.slug : undefined}
+                  {...(ctas[i].ext ? { target: '_blank', rel: 'noopener' } : {})}
+                >{ctas[i].label}</a>
+              </div>
+            );
+          })}
+        </div>
+      </details>
+
+      <!-- Cómo evoluciona el precio en el año 2 — info honesta, pero sin gritar en el punto de decisión -->
+      <details class="anio2-details">
+        <summary>¿Cómo evoluciona el precio en el año 2? <span class="chev">▾</span></summary>
+        <div class="anio2-body">
+          <p>Al cumplir 12 meses, el precio de lista se actualiza una vez para reflejar las nuevas funcionalidades sumadas durante ese año (estimado <strong>+{Math.round(AJUSTE_ANIO_2 * 100)}%</strong>). A partir de ahí, vuelve a ajustarse mes a mes por IPC, igual que en el año 1. El precio <strong>Fundador queda congelado</strong> y no sufre este ajuste.</p>
+          <ul class="anio2-list">
+            {planes.map((plan, i) => (
+              <li><span class="anio2-plan">{plan.nombre.replace('\n', ' ')}</span><span class="anio2-val">{perAnio2(precios[i])}</span></li>
+            ))}
+          </ul>
+        </div>
+      </details>
 
       <!-- Programa Fundadores -->
       <section class="fundadores">
@@ -301,9 +381,11 @@ const ctas = [
         <p class="fundadores-fine">El descuento Fundador se aplica sobre el precio de lista del plan y se mantiene mientras la suscripción siga activa. Los meses de bonus por reseña se acreditan al verificar la publicación y son acumulables.</p>
       </section>
 
-      <!-- Tabla comparativa completa -->
-      <h2 class="compare-title">Comparativa completa</h2>
-      <div class="compare-wrap">
+      <!-- Tabla comparativa completa: en mobile queda colapsada (menos sobrecarga); en desktop se ve entera -->
+      <details class="compare-details">
+        <summary class="compare-summary">Ver comparativa completa <span class="chev">▾</span></summary>
+        <h2 class="compare-title">Comparativa completa</h2>
+        <div class="compare-wrap">
         <table class="compare-table">
           <thead>
             <tr>
@@ -346,6 +428,7 @@ const ctas = [
                   <a
                     href={cta.href}
                     class={`th-cta ${destacado[i] ? 'th-cta-primary' : 'th-cta-outline'}`}
+                    data-plan-slug={cta.dynamic ? planes[i].slug : undefined}
                     {...(cta.ext ? { target: '_blank', rel: 'noopener' } : {})}
                   >
                     {cta.label}
@@ -355,7 +438,8 @@ const ctas = [
             </tr>
           </tfoot>
         </table>
-      </div>
+        </div>
+      </details>
 
       <!-- Add-on note -->
       <div class="addon-note">
@@ -383,7 +467,7 @@ const ctas = [
           </div>
           <div class="faq-item">
             <h3>¿Qué pasa con el precio después del primer año?</h3>
-            <p>Al cumplir 12 meses, el precio de lista se actualiza una vez para reflejar las nuevas funcionalidades que sumamos a la plataforma durante ese año (estimado +30% — el detalle por plan está en la fila "Precio de lista año 2" de la comparativa). A partir de ese ajuste, el precio vuelve a actualizarse mes a mes por IPC, igual que en el año 1.</p>
+            <p>Al cumplir 12 meses, el precio de lista se actualiza una vez para reflejar las nuevas funcionalidades que sumamos a la plataforma durante ese año (estimado +30% — el detalle por plan está en "¿Cómo evoluciona el precio en el año 2?", debajo de las tarjetas de planes). A partir de ese ajuste, el precio vuelve a actualizarse mes a mes por IPC, igual que en el año 1.</p>
           </div>
           <div class="faq-item">
             <h3>¿Qué pasa cuando vence el trial?</h3>
@@ -734,9 +818,52 @@ const ctas = [
 
 @media (max-width: 900px) { .faq-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 600px) { .faq-grid { grid-template-columns: 1fr; } }
+
+/* Micro-reaseguro debajo de las tarjetas core (reduce ansiedad cerca del punto de decisión) */
+.pc-reassurance {
+  text-align: center; font-size: 12.5px; font-weight: 600; color: var(--verde-dark);
+  margin: -28px 0 28px;
+}
+
+/* "Ver todos los planes" / "¿Cómo evoluciona el precio...?" — acordeones nativos <details> */
+.plan-cards-more, .anio2-details { margin-bottom: 28px; }
+.plan-cards-more summary, .anio2-details summary, .compare-summary {
+  cursor: pointer; list-style: none;
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: 'Montserrat', sans-serif; font-size: .78rem; font-weight: 700;
+  color: var(--verde-dark); letter-spacing: .3px;
+  padding: 4px 0; user-select: none;
+}
+.plan-cards-more summary::-webkit-details-marker,
+.anio2-details summary::-webkit-details-marker,
+.compare-details summary::-webkit-details-marker { display: none; }
+.chev { font-size: .7rem; transition: transform .18s; }
+details[open] > summary .chev { transform: rotate(180deg); }
+.plan-cards-more summary:hover, .anio2-details summary:hover, .compare-summary:hover { color: var(--verde); }
+.plan-cards-rest { margin-top: 16px; }
+
+.anio2-body { margin-top: 12px; }
+.anio2-body > p { font-size: 13px; font-weight: 300; color: var(--gris-2); line-height: 1.6; max-width: 680px; margin-bottom: 14px; }
+.anio2-list { list-style: none; padding: 0; margin: 0; max-width: 420px; }
+.anio2-list li {
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 13px; padding: 6px 0; border-bottom: 1px dashed var(--borde); color: var(--gris-2);
+}
+.anio2-list li:last-child { border-bottom: none; }
+.anio2-val { font-weight: 700; color: var(--gris-1); }
+
+/* Tabla comparativa: colapsada por defecto en mobile; en desktop siempre visible */
+.compare-details { margin-bottom: 0; }
+@media (min-width: 901px) {
+  .compare-summary { display: none; }
+  .compare-details .compare-title,
+  .compare-details .compare-wrap { display: block !important; }
+}
 </style>
 
 <script>
+import { onboardingUrl } from '../config/site';
+
 const btnMensual  = document.getElementById('btn-mensual');
 const btnAnual    = document.getElementById('btn-anual');
 const chkFundador = document.getElementById('chk-fundador') as HTMLInputElement | null;
@@ -761,6 +888,17 @@ function render() {
   });
 
   document.querySelectorAll<HTMLElement>('.pc-fundador-tag').forEach(el => el.classList.toggle('hidden', !founder));
+
+  // CRÍTICO (coherencia precio↔CTA): el link "Elegir plan" tiene que llevar EXACTAMENTE
+  // el ciclo y el estado Fundador que se está mostrando en pantalla — nunca un valor fijo.
+  document.querySelectorAll<HTMLAnchorElement>('[data-plan-slug]').forEach(el => {
+    const plan = el.dataset.planSlug!;
+    el.href = onboardingUrl({
+      plan,
+      ciclo: period === 'anual' ? 'annual' : 'monthly',
+      fundador: founder,
+    });
+  });
 }
 
 function setPeriod(p: 'mensual' | 'anual') {

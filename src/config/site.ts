@@ -33,3 +33,37 @@ export const CANALES = {
   linkedin:  '#', // TODO: pegar la URL real de LinkedIn
   youtube:   '#', // TODO: pegar la URL real de YouTube
 } as const;
+
+/**
+ * Destino del app (el funnel de conversión) — fuente ÚNICA de verdad.
+ *
+ * Antes la URL del app estaba hardcodeada y dispersa en 6+ archivos apuntando a
+ * `https://app.sigmetria.com.ar`, un dominio que HOY no resuelve en DNS (NXDOMAIN):
+ * todos los CTA de "Probá gratis / Elegir plan" caían en el vacío y el fetch de
+ * cupos Fundador (build-time) fallaba en silencio y caía a defaults.
+ *
+ * 🔧 Cuando el DNS de app.sigmetria.com.ar esté cableado en NIC.ar, cambiá SOLO
+ *    la constante APP_URL de abajo. Nada más. NO hardcodees la URL en otro lado.
+ */
+export const APP_URL = 'https://hys-app-sig.vercel.app';
+
+export type Ciclo = 'monthly' | 'annual';
+
+export interface OnboardingOpts {
+  plan?: string;
+  ciclo?: Ciclo;
+  fundador?: boolean;
+}
+
+/** Construye la URL de onboarding del app con el deep-link de plan/ciclo/fundador. */
+export function onboardingUrl(opts: OnboardingOpts = {}): string {
+  const qs = new URLSearchParams();
+  if (opts.plan) qs.set('plan', opts.plan);
+  if (opts.ciclo) qs.set('ciclo', opts.ciclo);
+  if (opts.fundador) qs.set('fundador', '1');
+  const q = qs.toString();
+  return `${APP_URL}/onboarding${q ? `?${q}` : ''}`;
+}
+
+/** URL del trial gratuito (el CTA primario del sitio). */
+export const TRIAL_URL = onboardingUrl({ plan: 'trial' });

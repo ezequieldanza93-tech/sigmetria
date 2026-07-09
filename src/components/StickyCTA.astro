@@ -1,0 +1,55 @@
+---
+/**
+ * StickyCTA.astro — barra de CTA sticky SOLO mobile (Fogg: prompt siempre a mano
+ * cuando la motivación es alta). Global vía BaseLayout — este es el sitio de
+ * marketing, no el dashboard, así que aplica a todas las páginas.
+ *
+ * Convive con el FAB de WhatsApp (z-index 300, position fixed bottom-right):
+ * esta barra usa z-index más bajo y el FAB se desplaza hacia arriba en mobile
+ * (ver override de `.float-stack` en styles/global.css) para que no se tapen.
+ */
+import { TRIAL_URL } from '../config/site';
+---
+
+<div class="sticky-cta">
+  <a href={TRIAL_URL} class="sticky-cta-btn" target="_blank" rel="noopener">Probá gratis — 1 mes, sin tarjeta</a>
+</div>
+
+<style>
+.sticky-cta { display: none; }
+
+@media (max-width: 640px) {
+  .sticky-cta {
+    display: block;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 250;
+    padding: 10px 14px calc(10px + env(safe-area-inset-bottom, 0px));
+    background: var(--blanco);
+    border-top: 1px solid var(--borde);
+    box-shadow: 0 -4px 16px rgba(0,0,0,.08);
+  }
+}
+
+@media print {
+  .sticky-cta { display: none !important; }
+}
+
+.sticky-cta-btn {
+  display: block;
+  width: 100%;
+  text-align: center;
+  background: var(--verde-dark);
+  color: #fff;
+  padding: 13px;
+  border-radius: 8px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: .78rem;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+</style>

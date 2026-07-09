@@ -2,6 +2,7 @@
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import BlogComments from '../components/BlogComments.astro';
+import StickyCTA from '../components/StickyCTA.astro';
 import '../styles/global.css';
 
 interface Props {
@@ -90,6 +91,8 @@ const postSlug = isBlogPost ? pathParts[1] : null;
       </svg>
     </a>
   </div>
+
+  <StickyCTA />
 
   <script>
     window.addEventListener('scroll', () => {

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { TRIAL_URL } from '../config/site';
 ---
 
 <BaseLayout
@@ -17,8 +18,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <h1>TODO TU HYS<br><em>EN UN SISTEMA</em></h1>
       <p class="hero-sub">Planificá, ejecutá, controlá y medí tu sistema de gestión HyS completo. Si mañana renunciás, el sistema sigue funcionando.</p>
       <div class="hero-ctas">
-        <a href="/plataforma/demo/" class="btn-primary">Ver demo personalizada</a>
-        <a href="https://wa.me/5491123496789" class="btn-outline" target="_blank" rel="noopener">Consulta por WhatsApp</a>
+        <a href={TRIAL_URL} class="btn-primary" target="_blank" rel="noopener">Probá gratis</a>
+        <a href="/plataforma/demo/" class="btn-outline">Ver demo / consulta</a>
       </div>
     </div>
   </section>

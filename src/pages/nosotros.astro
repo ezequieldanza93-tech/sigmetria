@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Icon from '../components/Icon.astro';
+import { TRIAL_URL } from '../config/site';
 ---
 
 <BaseLayout
@@ -93,7 +94,7 @@ import Icon from '../components/Icon.astro';
         <h2>¿LA <em>PROBÁS</em>?</h2>
         <p>Un mes gratis, sin tarjeta. Cargás un cliente, la usás en serio y ahí decidís.</p>
         <div class="cta-actions">
-          <a href="https://app.sigmetria.com.ar/onboarding?plan=trial" class="btn-primary" target="_blank" rel="noopener">Probá gratis</a>
+          <a href={TRIAL_URL} class="btn-primary">Probá gratis</a>
           <a href="/plataforma/" class="btn-outline">Conocé la plataforma</a>
         </div>
       </div>

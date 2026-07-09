@@ -183,6 +183,13 @@ h3      { font-family: 'Montserrat', sans-serif; font-weight: 700; }
   animation: waPulse 2s ease infinite;
 }
 
+/* En mobile hay una barra sticky de CTA abajo (StickyCTA.astro): subimos el FAB
+   de WhatsApp para que no se tapen entre sí. */
+@media (max-width: 640px) {
+  .float-stack { bottom: 90px; }
+  main { padding-bottom: 76px; }
+}
+
 /* ---- PÁGINA INTERIOR ---- */
 .page-hero {
   position: relative;

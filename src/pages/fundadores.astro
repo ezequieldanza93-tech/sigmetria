@@ -1,10 +1,9 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { APP_URL } from '../config/site';
 
 const FOUNDER_TOTAL = 8;       // cupos totales por plan
 const FOUNDER_DISCOUNT = 20;   // % de por vida
-
-const APP_URL = 'https://app.sigmetria.com.ar';
 
 // Datos estáticos de fallback (se usan si el endpoint no responde)
 const planesFallback = [

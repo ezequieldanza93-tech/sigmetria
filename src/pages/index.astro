@@ -1,7 +1,14 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { FEATURES } from '../config/site';
+import { FEATURES, TRIAL_URL, CANALES } from '../config/site';
 import Icon from '../components/Icon.astro';
+
+const garantias = [
+  { icon: 'gift',            text: '1 mes gratis, sin tarjeta' },
+  { icon: 'ban',              text: 'Sin permanencia — cancelás cuando quieras' },
+  { icon: 'database',         text: 'Tus datos son tuyos y los exportás cuando quieras' },
+  { icon: 'message-circle',   text: 'Soporte por WhatsApp' },
+];
 
 const schema = {
   "@context": "https://schema.org",
@@ -116,7 +123,7 @@ const modulos = [
         </h1>
         <p class="hero-sub">Cargás la recorrida desde el celular, el reporte sale con un botón y ves toda tu cartera de clientes y establecimientos en una sola vista. <strong>Probala un mes gratis, sin tarjeta.</strong></p>
         <div class="hero-actions">
-          <a href="https://app.sigmetria.com.ar/onboarding?plan=trial" target="_blank" rel="noopener" class="btn-primary">Probá gratis</a>
+          <a href={TRIAL_URL} class="btn-primary">Probá gratis</a>
           <a href="/plataforma/" class="btn-outline">Cómo funciona</a>
         </div>
       </div>
@@ -170,6 +177,24 @@ const modulos = [
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONFIANZA: autoridad (Cialdini) + garantías (reduce ansiedad, no hay testimonios inventados) -->
+  <section class="confianza-section" aria-label="Respaldo profesional y garantías">
+    <div class="confianza-inner">
+      <p class="confianza-autoridad">
+        <Icon name="shield-check" size={18} />
+        Matriculados COPIME · CPSH · Ing. Industrial · ISO 45001:2018
+      </p>
+      <div class="confianza-grid">
+        {garantias.map(g => (
+          <div class="confianza-item">
+            <span class="confianza-icon"><Icon name={g.icon} size={22} /></span>
+            <p>{g.text}</p>
+          </div>
+        ))}
       </div>
     </div>
   </section>
@@ -266,6 +291,18 @@ const modulos = [
           <h3>ROI tangible</h3>
           <p>El sistema se paga con una multa evitada, una licitación ganada o un accidente que no sucedió. Calculá el ROI con tus números antes de firmar.</p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CIERRE: último prompt antes del footer (recencia + Fogg: motivación alta, prompt claro) -->
+  <section class="cierre-section" aria-label="Empezar ahora">
+    <div class="cierre-inner">
+      <h2 class="cierre-title">EMPEZÁ A MEDIR TU <em>HyS</em> HOY</h2>
+      <p class="cierre-sub">Un mes de prueba gratis, sin tarjeta. Cargás tu primer cliente y la recorrida sale en un toque.</p>
+      <div class="cierre-actions">
+        <a href={TRIAL_URL} class="btn-primary" target="_blank" rel="noopener">Probá gratis</a>
+        <a href={CANALES.whatsapp} class="btn-outline" target="_blank" rel="noopener">Hablar por WhatsApp</a>
       </div>
     </div>
   </section>
@@ -753,6 +790,72 @@ const modulos = [
   .marca-inner { grid-template-columns: 1fr; gap: 36px; }
 }
 
+/* CONFIANZA: autoridad + garantías */
+.confianza-section {
+  position: relative;
+  z-index: 1;
+  padding: 28px 51px;
+  background: var(--verde-light);
+  border-bottom: 1px solid var(--verde-borde);
+}
+.confianza-inner { max-width: 1100px; margin: 0 auto; }
+.confianza-autoridad {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .6px;
+  text-transform: uppercase;
+  color: var(--verde-dark);
+  text-align: center;
+  margin-bottom: 20px;
+}
+.confianza-autoridad :global(.icon) { flex-shrink: 0; }
+.confianza-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+.confianza-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--blanco);
+  border: 1px solid var(--verde-borde);
+  border-radius: 8px;
+  padding: 14px 16px;
+}
+.confianza-icon { color: var(--verde-dark); display: inline-flex; flex-shrink: 0; }
+.confianza-item p { font-size: 12.5px; font-weight: 600; color: var(--gris-1); line-height: 1.4; margin: 0; }
+
+/* CIERRE: banda final antes del footer */
+.cierre-section {
+  position: relative;
+  z-index: 1;
+  padding: 64px 51px;
+  background: var(--gris-1);
+  text-align: center;
+}
+.cierre-inner { max-width: 640px; margin: 0 auto; }
+.cierre-title {
+  font-size: clamp(26px, 3.5vw, 40px);
+  letter-spacing: 1.5px;
+  color: #fff;
+  margin-bottom: 12px;
+}
+.cierre-title em { font-style: normal; color: var(--verde); }
+.cierre-sub {
+  font-size: 14px;
+  font-weight: 300;
+  color: rgba(255,255,255,.65);
+  line-height: 1.7;
+  margin-bottom: 28px;
+}
+.cierre-actions { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+
 /* RESPONSIVE */
 @media (max-width: 1100px) {
   .sectores-grid { grid-template-columns: repeat(2, 1fr); }
@@ -765,9 +868,13 @@ const modulos = [
   .sectores-section { padding: 32px 24px 52px; }
   .sectores-header { flex-direction: column; align-items: flex-start; gap: 6px; }
   .porque-section   { padding: 54px 24px; }
+  .confianza-section { padding: 24px 24px; }
+  .confianza-grid { grid-template-columns: repeat(2, 1fr); }
+  .cierre-section { padding: 48px 24px; }
 }
 @media (max-width: 600px) {
   .sectores-grid { grid-template-columns: 1fr; }
   .porque-grid   { grid-template-columns: 1fr; }
+  .confianza-grid { grid-template-columns: 1fr; }
 }
 </style>
