@@ -18,11 +18,39 @@ import { TRIAL_URL } from '../config/site';
       <h1>TODO TU HYS<br><em>EN UN SISTEMA</em></h1>
       <p class="hero-sub">Planificá, ejecutá, controlá y medí tu sistema de gestión HyS completo. Si mañana renunciás, el sistema sigue funcionando.</p>
       <div class="hero-ctas">
-        <a href={TRIAL_URL} class="btn-primary" target="_blank" rel="noopener">Probá gratis</a>
+        <a href={TRIAL_URL} class="btn-primary">Probá gratis</a>
         <a href="/plataforma/demo/" class="btn-outline">Ver demo / consulta</a>
       </div>
     </div>
   </section>
+
+  <!-- Galería de producto: capturas reales del app (LIFT claridad / MECLABS valor) -->
+  <section class="plat-showcase" aria-label="Capturas de la plataforma">
+    <div class="plat-showcase-inner">
+      <figure class="plat-shot plat-shot--wide">
+        <img src="/producto/dashboard.jpeg" alt="Dashboard ejecutivo de HyS con KPIs en tiempo real" loading="lazy" width="1440" height="900" />
+        <figcaption>Dashboard ejecutivo en tiempo real</figcaption>
+      </figure>
+      <figure class="plat-shot">
+        <img src="/producto/agenda.jpeg" alt="Agenda de gestiones planificadas y ejecutadas" loading="lazy" width="1440" height="900" />
+        <figcaption>Agenda de gestiones por responsable</figcaption>
+      </figure>
+      <figure class="plat-shot">
+        <img src="/producto/cartera.jpeg" alt="Cartera de empresas y establecimientos" loading="lazy" width="1440" height="900" />
+        <figcaption>Cartera de clientes y establecimientos</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <style>
+    .plat-showcase { padding: 8px 24px 8px; }
+    .plat-showcase-inner { max-width: 1080px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+    .plat-shot { margin: 0; }
+    .plat-shot--wide { grid-column: 1 / -1; }
+    .plat-shot img { width: 100%; height: auto; display: block; border-radius: 12px; border: 1px solid var(--borde, #e3e6ea); box-shadow: 0 12px 40px rgba(0,0,0,.12); }
+    .plat-shot figcaption { text-align: center; font-size: .82rem; color: var(--gris-3, #667); margin-top: 9px; }
+    @media (max-width: 800px) { .plat-showcase-inner { grid-template-columns: 1fr; gap: 18px; } }
+  </style>
 
   <section class="content-section">
     <div class="content-inner">

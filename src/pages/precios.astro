@@ -247,7 +247,7 @@ const ctas = [
                 href={ctas[i].href}
                 class={`pc-cta ${destacado[i] ? 'pc-cta-primary' : 'pc-cta-outline'}`}
                 data-plan-slug={ctas[i].dynamic ? plan.slug : undefined}
-                {...(ctas[i].ext ? { target: '_blank', rel: 'noopener' } : {})}
+                {...(ctas[i].ext ? { rel: 'noopener' } : {})}
               >{ctas[i].label}</a>
             </div>
           );
@@ -304,7 +304,7 @@ const ctas = [
                   href={ctas[i].href}
                   class={`pc-cta ${destacado[i] ? 'pc-cta-primary' : 'pc-cta-outline'}`}
                   data-plan-slug={ctas[i].dynamic ? plan.slug : undefined}
-                  {...(ctas[i].ext ? { target: '_blank', rel: 'noopener' } : {})}
+                  {...(ctas[i].ext ? { rel: 'noopener' } : {})}
                 >{ctas[i].label}</a>
               </div>
             );
@@ -429,7 +429,7 @@ const ctas = [
                     href={cta.href}
                     class={`th-cta ${destacado[i] ? 'th-cta-primary' : 'th-cta-outline'}`}
                     data-plan-slug={cta.dynamic ? planes[i].slug : undefined}
-                    {...(cta.ext ? { target: '_blank', rel: 'noopener' } : {})}
+                    {...(cta.ext ? { rel: 'noopener' } : {})}
                   >
                     {cta.label}
                   </a>
@@ -455,7 +455,7 @@ const ctas = [
         <div class="faq-grid">
           <div class="faq-item">
             <h3>¿Cómo se paga?</h3>
-            <p>Por transferencia bancaria. Una vez acreditado el pago, activamos tu plan automáticamente. No se requiere tarjeta (próximamente Mercado Pago).</p>
+            <p>Por transferencia bancaria: al elegir el plan te mostramos los datos para transferir. Una vez acreditado el pago <strong>activamos tu cuenta dentro de las 24 hs hábiles</strong> y retomás justo donde estabas. No se requiere tarjeta (Mercado Pago, próximamente).</p>
           </div>
           <div class="faq-item">
             <h3>¿El IVA está incluido?</h3>

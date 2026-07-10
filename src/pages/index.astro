@@ -181,6 +181,34 @@ const modulos = [
     </div>
   </section>
 
+  <!-- SHOWCASE DE PRODUCTO: mostramos el app real (MECLABS: peso 3 en claridad de valor; LIFT: claridad). -->
+  <section class="showcase" aria-label="Así se ve la plataforma por dentro">
+    <div class="showcase-inner">
+      <div class="showcase-head">
+        <span class="showcase-kicker">ASÍ SE VE POR DENTRO</span>
+        <h2>El sistema, no un PDF de promesas</h2>
+        <p>Dashboards en tiempo real, tu cartera en tres niveles y la agenda de gestiones — datos reales, no maquetas.</p>
+      </div>
+      <figure class="showcase-main">
+        <img src="/producto/dashboard.jpeg" alt="Dashboard de Higiene y Seguridad con cumplimiento, días sin accidente, incidentes, inspecciones y observaciones en tiempo real" loading="lazy" width="1440" height="900" />
+        <figcaption>Dashboard ejecutivo: cumplimiento, días sin accidente, incidentes y observaciones — en vivo.</figcaption>
+      </figure>
+      <div class="showcase-grid">
+        <figure>
+          <img src="/producto/cartera.jpeg" alt="Cartera de empresas cliente y establecimientos por rubro y ubicación" loading="lazy" width="1440" height="900" />
+          <figcaption>Toda tu cartera de clientes y establecimientos en una sola vista.</figcaption>
+        </figure>
+        <figure>
+          <img src="/producto/agenda.jpeg" alt="Agenda de gestiones HyS planificadas y ejecutadas por responsable" loading="lazy" width="1440" height="900" />
+          <figcaption>Agenda de gestiones: planificás, ejecutás y seguís por responsable.</figcaption>
+        </figure>
+      </div>
+      <div class="showcase-cta">
+        <a href={TRIAL_URL} class="btn-primary">Probá gratis — 1 mes, sin tarjeta</a>
+      </div>
+    </div>
+  </section>
+
   <!-- CONFIANZA: autoridad (Cialdini) + garantías (reduce ansiedad, no hay testimonios inventados) -->
   <section class="confianza-section" aria-label="Respaldo profesional y garantías">
     <div class="confianza-inner">
@@ -301,7 +329,7 @@ const modulos = [
       <h2 class="cierre-title">EMPEZÁ A MEDIR TU <em>HyS</em> HOY</h2>
       <p class="cierre-sub">Un mes de prueba gratis, sin tarjeta. Cargás tu primer cliente y la recorrida sale en un toque.</p>
       <div class="cierre-actions">
-        <a href={TRIAL_URL} class="btn-primary" target="_blank" rel="noopener">Probá gratis</a>
+        <a href={TRIAL_URL} class="btn-primary">Probá gratis</a>
         <a href={CANALES.whatsapp} class="btn-outline" target="_blank" rel="noopener">Hablar por WhatsApp</a>
       </div>
     </div>
@@ -876,5 +904,24 @@ const modulos = [
   .sectores-grid { grid-template-columns: 1fr; }
   .porque-grid   { grid-template-columns: 1fr; }
   .confianza-grid { grid-template-columns: 1fr; }
+}
+
+/* Showcase de producto (capturas reales del app) */
+.showcase { padding: 64px 32px; background: var(--gris-1, #f6f7f9); }
+.showcase-inner { max-width: 1080px; margin: 0 auto; }
+.showcase-head { text-align: center; max-width: 640px; margin: 0 auto 34px; }
+.showcase-kicker { display:inline-block; font-family:'Montserrat',sans-serif; font-weight:700; font-size:.72rem; letter-spacing:1.5px; color: var(--verde); text-transform:uppercase; margin-bottom:10px; }
+.showcase-head h2 { font-family:'Montserrat',sans-serif; font-weight:700; font-size:1.9rem; color: var(--gris-4, #17202a); margin:0 0 10px; line-height:1.15; }
+.showcase-head p { color: var(--gris-3, #556); font-size:1rem; line-height:1.5; margin:0; }
+.showcase-main { margin: 0 0 22px; }
+.showcase-main figure, .showcase-grid figure { margin:0; }
+.showcase-main img, .showcase-grid img { width:100%; height:auto; display:block; border-radius:12px; border:1px solid var(--borde, #e3e6ea); box-shadow: 0 14px 44px rgba(0,0,0,.13); }
+.showcase-main figcaption, .showcase-grid figcaption { text-align:center; font-size:.82rem; color: var(--gris-3, #667); margin-top:10px; }
+.showcase-grid { display:grid; grid-template-columns: 1fr 1fr; gap:24px; }
+.showcase-cta { text-align:center; margin-top:32px; }
+@media (max-width: 900px) {
+  .showcase { padding: 48px 20px; }
+  .showcase-head h2 { font-size:1.5rem; }
+  .showcase-grid { grid-template-columns: 1fr; gap:20px; }
 }
 </style>
