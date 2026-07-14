@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://sigmetriahys.com/sitemap-index.xml
+Sitemap: https://sigmetria.com.ar/sitemap-index.xml
