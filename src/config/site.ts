@@ -37,15 +37,12 @@ export const CANALES = {
 /**
  * Destino del app (el funnel de conversión) — fuente ÚNICA de verdad.
  *
- * Antes la URL del app estaba hardcodeada y dispersa en 6+ archivos apuntando a
- * `https://app.sigmetria.com.ar`, un dominio que HOY no resuelve en DNS (NXDOMAIN):
- * todos los CTA de "Probá gratis / Elegir plan" caían en el vacío y el fetch de
- * cupos Fundador (build-time) fallaba en silencio y caía a defaults.
- *
- * 🔧 Cuando el DNS de app.sigmetria.com.ar esté cableado en NIC.ar, cambiá SOLO
- *    la constante APP_URL de abajo. Nada más. NO hardcodees la URL en otro lado.
+ * Todos los CTA (Probá gratis / Elegir plan), el onboarding y el trial derivan
+ * de esta constante, y el fetch build-time de cupos Fundador también la usa.
+ * Si el dominio del app cambia, se toca SOLO esta línea. NO hardcodees la URL
+ * en otro lado.
  */
-export const APP_URL = 'https://hys-app-sig.vercel.app';
+export const APP_URL = 'https://app.sigmetria.com.ar';
 
 export type Ciclo = 'monthly' | 'annual';
 
