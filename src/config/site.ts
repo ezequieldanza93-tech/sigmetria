@@ -29,7 +29,7 @@ export const PRIVACY_VERSION = 'pp-2026-06';
  */
 export const CANALES = {
   whatsapp:  'https://wa.me/5491123496789',
-  instagram: 'https://www.instagram.com/sigmetria',
+  instagram: 'https://www.instagram.com/sigmetria.app',
   linkedin:  '#', // TODO: pegar la URL real de LinkedIn
   youtube:   '#', // TODO: pegar la URL real de YouTube
 } as const;
