@@ -329,13 +329,14 @@ import Icon from '../components/Icon.astro';
 </style>
 
 <script>
-  import { createClient } from '@supabase/supabase-js';
+  // Endpoint público de captura de la app (Ola 1 — Motor de Crecimiento).
+  // Reemplaza los INSERT anónimos directos a Supabase: el write pasa por
+  // POST /api/growth/v1/leads con la clave pública del tenant.
+  const APP_URL    = (import.meta.env.PUBLIC_APP_URL ?? '').replace(/\/+$/, '');
+  const GROWTH_KEY = import.meta.env.PUBLIC_GROWTH_KEY ?? '';
 
-  const supabase = createClient(
-    import.meta.env.PUBLIC_SUPABASE_URL,
-    import.meta.env.PUBLIC_SUPABASE_KEY,
-    { auth: { flowType: 'implicit' } }
-  );
+  // Timestamp de montaje → t_fill_ms (anti-bot: el server descarta forms llenados en <1.2s)
+  const montadoEn = Date.now();
 
   // ── Captura de contexto desde URL ──────────────────────────
   const params = new URLSearchParams(window.location.search);
@@ -365,11 +366,12 @@ import Icon from '../components/Icon.astro';
   const form    = document.getElementById('contact-form') as HTMLFormElement;
   const success = document.getElementById('form-success') as HTMLElement;
 
+  // Etapas válidas del funnel: el hidden viene de un query param arbitrario y
+  // un valor fuera del enum haría rechazar TODO el payload en el server.
+  const FUNNELS = ['tofu', 'mofu', 'bofu'];
+
   form?.addEventListener('submit', async (e) => {
     e.preventDefault();
-
-    // Honeypot
-    if ((form.querySelector<HTMLInputElement>('input[name="_gotcha"]'))?.value) return;
 
     // Validar al menos un servicio seleccionado
     const serviciosChecked = [...form.querySelectorAll<HTMLInputElement>('input[name="servicios"]:checked')]
@@ -390,38 +392,58 @@ import Icon from '../components/Icon.astro';
     const data = new FormData(form);
     const str  = (k: string) => (data.get(k) as string)?.trim() || null;
 
-    const { error } = await supabase.from('leads').insert({
-      nombre:                str('nombre'),
-      telefono:              str('telefono'),
-      email:                 str('email'),
-      mensaje:               str('mensaje'),
-      servicios_interes:     serviciosChecked,
-      fuente:                'web',
-      primer_canal:          'web',
-      canales_visitados:     ['web'],
-      pagina_origen:         window.location.href,
-      etapa_funnel:          str('etapa_funnel'),
-      lead_magnet:           str('lead_magnet'),
-      utm_source:            str('utm_source'),
-      utm_medium:            str('utm_medium'),
-      utm_campaign:          str('utm_campaign'),
-      utm_content:           str('utm_content'),
-      acepta_condiciones_at: new Date().toISOString(),
-    });
+    const cOptin = !!(document.getElementById('optin') as HTMLInputElement | null)?.checked;
 
-    if (error) {
-      console.error('Error al guardar lead:', error.message);
-      btn.textContent = originalLabel;
-      btn.disabled = false;
-      alert('Hubo un error. Por favor intentá de nuevo o escribinos por WhatsApp.');
-      return;
+    const payload: Record<string, unknown> = {
+      nombre:                 str('nombre') ?? '',
+      email:                  str('email') ?? '',
+      telefono:               str('telefono') ?? '',
+      servicios_interes:      serviciosChecked,
+      primer_canal:           'web',
+      canales_visitados:      ['web'],
+      pagina_origen:          window.location.href.slice(0, 300),
+      acepta_privacidad:      true,
+      acepta_email_marketing: cOptin,
+      // El honeypot viaja en el JSON: el server hace silent-drop y responde éxito igual.
+      _gotcha:                (form.querySelector<HTMLInputElement>('input[name="_gotcha"]'))?.value ?? '',
+      t_fill_ms:              Date.now() - montadoEn,
+    };
+    const mensaje = str('mensaje');
+    if (mensaje) payload.mensaje = mensaje;
+    const funnel = str('etapa_funnel');
+    if (funnel && FUNNELS.includes(funnel)) payload.etapa_funnel = funnel;
+    const lm = str('lead_magnet');
+    if (lm) payload.lead_magnet = lm.slice(0, 100);
+    for (const k of ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content']) {
+      const v = str(k);
+      if (v) payload[k] = v.slice(0, 150);
     }
 
-    // CRM: consentimientos (best-effort)
-    const cOptin = !!(document.getElementById('optin') as HTMLInputElement | null)?.checked;
-    const cConsents: any[] = [{ email: str('email'), tipo: 'privacidad', otorgado: true, texto_version: 'pp-2026-06', pagina: window.location.href, user_agent: navigator.userAgent }];
-    if (cOptin) cConsents.push({ email: str('email'), tipo: 'email_marketing', otorgado: true, texto_version: 'pp-2026-06', pagina: window.location.href, user_agent: navigator.userAgent });
-    supabase.from('consentimientos').insert(cConsents);
+    let ok = false;
+    let status = 0;
+    try {
+      const res = await fetch(`${APP_URL}/api/growth/v1/leads`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Growth-Key': GROWTH_KEY,
+        },
+        body: JSON.stringify(payload),
+      });
+      ok = res.ok;
+      status = res.status;
+    } catch (_) {
+      ok = false;
+    }
+
+    if (!ok) {
+      btn.textContent = originalLabel;
+      btn.disabled = false;
+      alert(status === 429
+        ? 'Demasiados envíos seguidos. Esperá unos minutos y probá de nuevo — no se pierde lo que escribiste.'
+        : 'Hubo un error. Por favor intentá de nuevo o escribinos por WhatsApp.');
+      return;
+    }
 
     form.style.display = 'none';
     success.style.display = 'block';

@@ -2,13 +2,16 @@
 /**
  * FormConsulta — formulario inline para consultas y lead magnets.
  *
+ * Ambos modos muestran el mismo formulario y envían por la API de captura
+ * de la app (POST /api/growth/v1/leads, autenticado con PUBLIC_GROWTH_KEY).
+ *
  * Modo lead magnet (leadMagnet prop presente):
- *   Autenticado  → descarga directa sin formulario.
- *   No autenticado → CTA "Acceder y descargar" → /acceso/?next=URL
+ *   El recurso se entrega por email — sin cuenta ni login.
  *
  * Modo consulta (sin leadMagnet):
- *   Muestra siempre el formulario de contacto.
+ *   Consulta comercial clásica; el equipo contacta al lead.
  */
+import { RECURSOS } from '../data/recursos';
 
 interface Props {
   servicios: string[];
@@ -29,68 +32,31 @@ const {
   cta = 'Enviar consulta',
   successMsg = '¡Listo! En breve te contactamos. Revisá tu email.',
 } = Astro.props;
+
+// Normalizamos diacríticos del slug ("…primer-año" → "…primer-ano") para que
+// matchee la key real del catálogo de lead magnets.
+const lmKey = leadMagnet
+  ? leadMagnet.normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+  : '';
+
+const recurso = lmKey ? RECURSOS.find((r) => r.slug === lmKey) : undefined;
+const successFinal = lmKey
+  ? `¡Listo! Te enviamos ${recurso ? `«${recurso.titulo}»` : 'el recurso'} a tu correo. Si no lo ves, revisá spam o promociones.`
+  : successMsg;
 ---
 
 <div
   class="fc-wrap"
   data-servicios={JSON.stringify(servicios)}
   data-funnel={funnel}
-  data-lm={leadMagnet ?? ''}
+  data-lm={lmKey}
 >
-
-  {/* ── MODO LEAD MAGNET: estados de auth ── */}
-  {leadMagnet && (
-    <>
-      {/* Loading */}
-      <div class="fc-lm-loading">
-        <div class="fc-lm-spinner" aria-hidden="true"></div>
-        <p>Verificando acceso…</p>
-      </div>
-
-      {/* Autenticado → descarga */}
-      <div class="fc-lm-auth" style="display:none">
-        <div class="fc-lm-lock" aria-hidden="true">✅</div>
-        {titulo && <h3 class="fc-titulo">{titulo}</h3>}
-        <p class="fc-sub">¡Ya tenés acceso! Tu descarga comienza automáticamente.</p>
-        <button class="fc-btn fc-lm-download-btn" type="button">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
-            <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/>
-          </svg>
-          {cta}
-        </button>
-        <p class="fc-signout-hint">¿No sos vos? <button class="fc-link-btn fc-signout-btn" type="button">Cerrar sesión</button></p>
-      </div>
-
-      {/* No autenticado → CTA */}
-      <div class="fc-lm-cta" style="display:none">
-        <div class="fc-lm-lock" aria-hidden="true">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2E7D33" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-          </svg>
-        </div>
-        {titulo    && <h3 class="fc-titulo">{titulo}</h3>}
-        {subtitulo && <p  class="fc-sub">{subtitulo}</p>}
-        <p class="fc-cta-note">📥 Es gratis — solo necesitás una cuenta.</p>
-        <button class="fc-btn fc-lm-login-btn" type="button">Acceder y descargar →</button>
-        <p class="fc-signout-hint">¿Ya tenés cuenta? El mismo botón te lleva al login.</p>
-      </div>
-
-      {/* Éxito descarga */}
-      <div class="fc-lm-success" style="display:none" role="status" aria-live="polite">
-        <span class="fc-success-icon">✅</span>
-        <p>¡Tu descarga ya empezó! Si no, <a href="#" class="fc-lm-dl-link">tocá acá</a>.</p>
-      </div>
-    </>
-  )}
-
-  {/* ── MODO CONSULTA: form siempre visible ── */}
-  <div class="fc-success" style="display:none">
+  <div class="fc-success" style="display:none" role="status" aria-live="polite">
     <span class="fc-success-icon">✅</span>
-    <p>{successMsg}</p>
+    <p>{successFinal}</p>
   </div>
 
-  <form class="fc-form" style={leadMagnet ? 'display:none' : ''} novalidate>
+  <form class="fc-form" novalidate>
     <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
 
     {titulo    && <h3 class="fc-titulo">{titulo}</h3>}
@@ -143,59 +109,6 @@ const {
   color: var(--gris-2);
   margin-bottom: 16px;
   line-height: 1.6;
-}
-
-/* Loading (modo lead magnet) */
-.fc-lm-loading {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  padding: 20px 0 12px;
-  font-size: 13px;
-  color: var(--gris-3);
-}
-.fc-lm-spinner {
-  width: 20px;
-  height: 20px;
-  border: 2px solid rgba(46,125,51,.2);
-  border-top-color: #2E7D33;
-  border-radius: 50%;
-  animation: spin .7s linear infinite;
-}
-@keyframes spin { to { transform: rotate(360deg); } }
-
-/* Lock icon */
-.fc-lm-lock {
-  font-size: 1.5rem;
-  margin-bottom: 12px;
-}
-.fc-lm-lock svg { display: block; }
-
-/* CTA note */
-.fc-cta-note {
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--verde, #2E7D33);
-  margin-bottom: 12px;
-}
-.fc-signout-hint {
-  text-align: center;
-  font-size: 12px;
-  font-weight: 300;
-  color: var(--gris-3);
-  margin-top: 10px;
-}
-.fc-link-btn {
-  background: none;
-  border: none;
-  color: #2E7D33;
-  font-size: 12px;
-  font-weight: 500;
-  text-decoration: underline;
-  cursor: pointer;
-  padding: 0;
-  font-family: inherit;
 }
 
 .fc-form { display: flex; flex-direction: column; gap: 12px; }
@@ -259,18 +172,17 @@ const {
 .fc-btn:focus-visible { outline: 2px solid #2E7D33; outline-offset: 3px; }
 
 /* Éxito */
-.fc-success, .fc-lm-success {
+.fc-success {
   text-align: center;
   padding: 12px 0;
 }
 .fc-success-icon { font-size: 2rem; display: block; margin-bottom: 10px; }
-.fc-success p, .fc-lm-success p {
+.fc-success p {
   font-size: 14px;
   font-weight: 300;
   color: var(--gris-2);
   line-height: 1.7;
 }
-.fc-lm-success a { color: #2E7D33; font-weight: 600; text-decoration: underline; }
 
 @media (max-width: 520px) {
   .fc-wrap { padding: 22px 18px; }
@@ -279,13 +191,13 @@ const {
 </style>
 
 <script>
-  import { createClient } from '@supabase/supabase-js';
+  // Endpoint público de captura de la app (Ola 1 — Motor de Crecimiento).
+  // Ambas vars son PUBLIC_* y se inlinean en build (SSG).
+  const APP_URL    = (import.meta.env.PUBLIC_APP_URL ?? '').replace(/\/+$/, '');
+  const GROWTH_KEY = import.meta.env.PUBLIC_GROWTH_KEY ?? '';
 
-  const supabase = createClient(
-    import.meta.env.PUBLIC_SUPABASE_URL,
-    import.meta.env.PUBLIC_SUPABASE_KEY,
-    { auth: { flowType: 'implicit' } }
-  );
+  // Timestamp de montaje del script → t_fill_ms (anti-bot: forms llenados en <1.2s se descartan server-side)
+  const montadoEn = Date.now();
 
   const p = new URLSearchParams(window.location.search);
   const utm = {
@@ -297,99 +209,9 @@ const {
 
   document.querySelectorAll<HTMLElement>('.fc-wrap').forEach(wrap => {
     const servicios  = JSON.parse(wrap.dataset.servicios ?? '[]') as string[];
-    const funnel     = wrap.dataset.funnel  || null;
-    const leadMagnet = wrap.dataset.lm      || null;
+    const funnel     = wrap.dataset.funnel || null;
+    const leadMagnet = wrap.dataset.lm     || null;
 
-    // ── MODO LEAD MAGNET ────────────────────────────────────────────────────
-    if (leadMagnet) {
-      const elLoading = wrap.querySelector<HTMLElement>('.fc-lm-loading')!;
-      const elAuth    = wrap.querySelector<HTMLElement>('.fc-lm-auth')!;
-      const elCta     = wrap.querySelector<HTMLElement>('.fc-lm-cta')!;
-      const elSuccess = wrap.querySelector<HTMLElement>('.fc-lm-success')!;
-      const dlLink    = wrap.querySelector<HTMLAnchorElement>('.fc-lm-dl-link');
-
-      const ALL_LM = [elLoading, elAuth, elCta, elSuccess];
-      function showLm(el: HTMLElement) {
-        ALL_LM.forEach(s => { if (s) s.style.display = 'none'; });
-        if (el) el.style.display = 'block';
-      }
-
-      async function getSignedUrl(): Promise<string | null> {
-        try {
-          const { data, error } = await supabase.storage
-            .from('lead-magnets')
-            .createSignedUrl(`${leadMagnet}.pdf`, 300);
-          if (!error && data?.signedUrl) return data.signedUrl;
-        } catch (_) {}
-        return null;
-      }
-
-      function triggerDownload(url: string) {
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `Sigmetria-${leadMagnet}.pdf`;
-        a.style.display = 'none';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-      }
-
-      async function handleSession(session: any) {
-        const email = session.user.email as string;
-        await supabase.rpc('link_lead_to_auth_user', { p_email: email }).catch(() => {});
-        localStorage.setItem('sigm_email', email);
-
-        const url = await getSignedUrl();
-        if (url) {
-          if (dlLink) dlLink.href = url;
-          showLm(elSuccess);
-          triggerDownload(url);
-          const slug = window.location.pathname.replace(/\/+$/, '').split('/').pop() || null;
-          supabase.from('lead_magnet_descargas').insert({ email, lead_magnet_key: leadMagnet, auth_user_id: session.user.id, origen_pagina: window.location.href, origen_slug: slug, canal: 'web', etapa_funnel: funnel });
-        } else {
-          showLm(elAuth);
-          const downloadBtn = wrap.querySelector<HTMLButtonElement>('.fc-lm-download-btn');
-          if (downloadBtn) {
-            downloadBtn.onclick = async () => {
-              const u = await getSignedUrl();
-              if (u) triggerDownload(u);
-            };
-          }
-        }
-      }
-
-      supabase.auth.onAuthStateChange(async (event, session) => {
-        if (event === 'INITIAL_SESSION') {
-          if (session) await handleSession(session);
-          else showLm(elCta);
-        } else if ((event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') && session) {
-          await handleSession(session);
-        }
-      });
-
-      // CTA → login
-      const loginBtn = wrap.querySelector<HTMLButtonElement>('.fc-lm-login-btn');
-      if (loginBtn) {
-        loginBtn.addEventListener('click', () => {
-          const next = encodeURIComponent(window.location.href);
-          window.location.href = `/acceso/?next=${next}`;
-        });
-      }
-
-      // Cerrar sesión
-      const signOutBtn = wrap.querySelector<HTMLButtonElement>('.fc-signout-btn');
-      if (signOutBtn) {
-        signOutBtn.addEventListener('click', async () => {
-          localStorage.removeItem('sigm_email');
-          await supabase.auth.signOut();
-          showLm(elCta);
-        });
-      }
-
-      return; // no continuar con el modo consulta
-    }
-
-    // ── MODO CONSULTA ───────────────────────────────────────────────────────
     const form    = wrap.querySelector<HTMLFormElement>('.fc-form')!;
     const success = wrap.querySelector<HTMLElement>('.fc-success')!;
     const errMsg  = wrap.querySelector<HTMLElement>('.fc-error')!;
@@ -402,15 +224,17 @@ const {
     form?.addEventListener('submit', async (e) => {
       e.preventDefault();
 
-      if ((form.querySelector<HTMLInputElement>('input[name="_gotcha"]'))?.value) return;
-
       const nombre   = (form.querySelector<HTMLInputElement>('[name="nombre"]')!).value.trim();
       const telefono = (form.querySelector<HTMLInputElement>('[name="telefono"]')!).value.trim();
       const email    = (form.querySelector<HTMLInputElement>('[name="email"]')!).value.trim();
       const acepta   = (form.querySelector<HTMLInputElement>('[name="acepta"]')!).checked;
       const mensaje  = (form.querySelector<HTMLInputElement>('[name="mensaje"]'))?.value.trim() || null;
+      const optin    = !!(form.querySelector<HTMLInputElement>('[name="optin"]'))?.checked;
+      // El honeypot viaja en el JSON: el server hace silent-drop y responde éxito igual.
+      const gotcha   = (form.querySelector<HTMLInputElement>('input[name="_gotcha"]'))?.value ?? '';
 
       if (!nombre || !telefono || !email || !acepta) {
+        errMsg.textContent = 'Completá todos los campos para continuar.';
         errMsg.style.display = 'block';
         return;
       }
@@ -421,35 +245,70 @@ const {
       btn.textContent = 'Enviando...';
       btn.disabled = true;
 
-      const { error } = await supabase.from('leads').insert({
+      const payload: Record<string, unknown> = {
         nombre,
-        telefono,
         email,
-        mensaje,
-        servicios_interes:     servicios.length ? servicios : null,
-        fuente:                'web',
-        primer_canal:          'web',
-        canales_visitados:     ['web'],
-        pagina_origen:         window.location.href,
-        etapa_funnel:          funnel,
-        acepta_condiciones_at: new Date().toISOString(),
-        ...Object.fromEntries(Object.entries(utm).filter(([, v]) => v)),
-      });
+        telefono,
+        pagina_origen:          window.location.href.slice(0, 300),
+        primer_canal:           'web',
+        canales_visitados:      ['web'],
+        acepta_privacidad:      true,
+        acepta_email_marketing: optin,
+        _gotcha:                gotcha,
+        t_fill_ms:              Date.now() - montadoEn,
+        ...Object.fromEntries(
+          Object.entries(utm)
+            .filter(([, v]) => v)
+            .map(([k, v]) => [k, (v as string).slice(0, 150)]),
+        ),
+      };
+      if (mensaje)           payload.mensaje           = mensaje;
+      if (servicios.length)  payload.servicios_interes = servicios;
+      if (leadMagnet)        payload.lead_magnet       = leadMagnet;
+      if (funnel)            payload.etapa_funnel      = funnel;
 
-      if (error) {
+      let ok = false;
+      let status = 0;
+      let magnetEntregado: string | null = null;
+      try {
+        const res = await fetch(`${APP_URL}/api/growth/v1/leads`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-Growth-Key': GROWTH_KEY,
+          },
+          body: JSON.stringify(payload),
+        });
+        ok = res.ok;
+        status = res.status;
+        try {
+          const data = await res.json();
+          magnetEntregado = data?.magnet ?? null;
+        } catch (_) { /* respuesta sin body: se asume sin entrega */ }
+      } catch (_) {
+        ok = false;
+      }
+
+      if (!ok) {
         btn.textContent = lbl;
         btn.disabled = false;
-        errMsg.textContent = 'Hubo un error. Intentá de nuevo o escribinos por WhatsApp.';
+        errMsg.textContent = status === 429
+          ? 'Demasiados envíos seguidos. Esperá unos minutos y probá de nuevo — no se pierde lo que escribiste.'
+          : 'Hubo un error al enviar. Intentá de nuevo en unos segundos o escribinos por WhatsApp — no se pierde lo que escribiste.';
         errMsg.style.display = 'block';
         return;
       }
 
-      const slug = window.location.pathname.replace(/\/+$/, '').split('/').pop() || null;
-      const optin = !!(form.querySelector<HTMLInputElement>('[name="optin"]'))?.checked;
-      const fcUtm = Object.fromEntries(Object.entries(utm).filter(([, v]) => v));
-      const fcConsents: any[] = [{ email, tipo: 'privacidad', otorgado: true, texto_version: 'pp-2026-06', pagina: window.location.href, user_agent: navigator.userAgent }];
-      if (optin) fcConsents.push({ email, tipo: 'email_marketing', otorgado: true, texto_version: 'pp-2026-06', pagina: window.location.href, user_agent: navigator.userAgent });
-      supabase.from('consentimientos').insert(fcConsents);
+      // Copy HONESTO: solo prometemos "te lo enviamos" si el server confirmó
+      // la entrega (magnet: 'email'). Si el recurso no estaba disponible, el
+      // equipo ya recibió el aviso y lo manda a mano — sin mentirle al lead.
+      if (leadMagnet && magnetEntregado !== 'email') {
+        const successP = success.querySelector('p');
+        if (successP) {
+          successP.textContent =
+            '¡Listo! Recibimos tu pedido del recurso. Te lo enviamos a tu correo a la brevedad.';
+        }
+      }
 
       localStorage.setItem('sigm_email', email);
       form.style.display    = 'none';
