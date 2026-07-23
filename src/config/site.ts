@@ -18,7 +18,7 @@ export const FEATURES = {
 export const CONSULTORA_ID: string | null = null;
 
 /** Versión del texto de política de privacidad aceptado (log de consentimientos). */
-export const PRIVACY_VERSION = 'pp-2026-06';
+export const PRIVACY_VERSION = 'pp-2026-07';
 
 /**
  * Canales de contacto y redes — fuente única de verdad.

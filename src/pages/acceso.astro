@@ -5,7 +5,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 <BaseLayout
   title="Accedé a tu cuenta — SIGMETRÍA HyS"
   description="Ingresá con tu email. Si tenés cuenta te pedimos tu contraseña; si es tu primera vez te mandamos un link."
-  canonical="https://sigmetria.com.ar/acceso/"
+  canonical="https://www.sigmetria.com.ar/acceso/"
+  noindex={true}
 >
   <section class="acceso-wrap">
     <div class="acceso-card">
@@ -39,7 +40,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
           </svg>
         </div>
-        <h2 class="ac-title">¡Hola de nuevo!</h2>
+        <h1 class="ac-title">¡Hola de nuevo!</h1>
         <div class="ac-email-chip">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
@@ -91,7 +92,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <!-- Magic link enviado (cuenta nueva + recuperar contraseña) -->
       <div id="ac-magic-sent-step" style="display:none">
         <div class="ac-success-icon" aria-hidden="true">📬</div>
-        <h2 class="ac-title">Revisá tu casilla</h2>
+        <h1 class="ac-title">Revisá tu casilla</h1>
         <p class="ac-sub">
           Te enviamos un link a <strong id="ac-sent-email"></strong>.
           Hacé clic en él para acceder.
@@ -108,7 +109,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <!-- Ya logueado -->
       <div id="ac-logged-step" style="display:none">
         <div class="ac-success-icon" aria-hidden="true">👋</div>
-        <h2 class="ac-title">Ya estás adentro</h2>
+        <h1 class="ac-title">Ya estás adentro</h1>
         <p class="ac-sub" id="ac-logged-msg">Estás autenticado.</p>
         <a href="/blog/" class="ac-btn ac-btn-link">Ir al blog →</a>
         <p class="ac-hint">

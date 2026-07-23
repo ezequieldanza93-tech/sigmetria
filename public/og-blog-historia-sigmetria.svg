@@ -77,7 +77,7 @@
   <!-- Footer -->
   <circle cx="98" cy="467" r="3" fill="#4CAF50"/>
   <text x="112" y="472" font-family="'Montserrat', 'Helvetica Neue', Arial, sans-serif"
-        font-size="12" font-weight="700" letter-spacing="1.5" fill="#888888">POR EZEQUIEL DANZA</text>
+        font-size="12" font-weight="700" letter-spacing="1.5" fill="#888888">POR EL EQUIPO DE SIGMETRÍA</text>
   <text x="280" y="472" font-family="'Montserrat', 'Helvetica Neue', Arial, sans-serif"
         font-size="12" fill="#AAAAAA">·</text>
   <text x="294" y="472" font-family="'Montserrat', 'Helvetica Neue', Arial, sans-serif"

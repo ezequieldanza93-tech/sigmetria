@@ -5,6 +5,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 <BaseLayout
   title="Bienvenido/a a Sigmetría HyS"
   description="Completá tu perfil para acceder a todo el contenido gratuito de Sigmetría HyS."
+  noindex={true}
 >
   <div class="onboarding-wrapper">
     <div class="wizard-card">
@@ -169,16 +170,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </div>
 
         <div class="field-group">
-          <label class="field-label">¿Conocés o usaste alguna de estas herramientas? <span class="optional">(multi-selección)</span></label>
+          <label class="field-label">¿Cómo gestionás tu HyS hoy? <span class="optional">(multi-selección)</span></label>
           <div class="chips-container" id="chips-competidores">
-            <button class="chip" data-value="ISOTools" type="button">ISOTools</button>
-            <button class="chip" data-value="SafetyCulture / iAuditor" type="button">SafetyCulture / iAuditor</button>
-            <button class="chip" data-value="Intelex" type="button">Intelex</button>
-            <button class="chip" data-value="Cority" type="button">Cority</button>
-            <button class="chip" data-value="EHS Insight" type="button">EHS Insight</button>
-            <button class="chip" data-value="HSETool" type="button">HSETool</button>
-            <button class="chip" data-value="Enablon" type="button">Enablon</button>
-            <button class="chip" data-value="Ninguna de estas" type="button">Ninguna de estas</button>
+            <button class="chip" data-value="Excel / planillas" type="button">Excel / planillas</button>
+            <button class="chip" data-value="Planillas en papel" type="button">Planillas en papel</button>
+            <button class="chip" data-value="Otro software de HyS" type="button">Otro software de HyS</button>
+            <button class="chip" data-value="Sistema a medida" type="button">Sistema a medida</button>
+            <button class="chip" data-value="Ninguno todavía" type="button">Ninguno todavía</button>
           </div>
         </div>
 

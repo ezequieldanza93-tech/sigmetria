@@ -6,26 +6,26 @@ const schema = {
   "@type": "BlogPosting",
   "headline": "Construí una app de HyS porque no existía la que necesitaba",
   "description": "La historia del fundador de Sigmetría: de tres carpetas desordenadas en una constructora a certificar ISO 45001 y construir la herramienta que necesitaba desde el día uno.",
-  "image": "https://sigmetria.com.ar/og-blog-historia-sigmetria.svg",
+  "image": "https://www.sigmetria.com.ar/og-blog-historia-sigmetria.svg",
+  // FASE 2 — restaurar founder: { "@type": "Person", "name": "Ezequiel", "jobTitle": "Fundador de SIGMETRÍA HyS" }
   "author": {
-    "@type": "Person",
-    "name": "Ezequiel",
-    "jobTitle": "Fundador de SIGMETRÍA HyS"
+    "@type": "Organization",
+    "name": "SIGMETRÍA HyS"
   },
   "publisher": {
     "@type": "Organization",
     "name": "SIGMETRÍA HyS",
-    "url": "https://sigmetria.com.ar",
+    "url": "https://www.sigmetria.com.ar",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://sigmetria.com.ar/logo-sigmetria.svg"
+      "url": "https://www.sigmetria.com.ar/logo-sigmetria.svg"
     }
   },
   "datePublished": "2026-06-10",
   "dateModified":  "2026-06-10",
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://sigmetria.com.ar/blog/construi-una-app-hys-historia-sigmetria/"
+    "@id": "https://www.sigmetria.com.ar/blog/construi-una-app-hys-historia-sigmetria/"
   },
   "keywords": [
     "historia de Sigmetría",
@@ -40,10 +40,11 @@ const schema = {
 
 <BaseLayout
   title="Construí una app de HyS porque no existía la que necesitaba — SIGMETRÍA HyS"
-  description="La historia del fundador de Sigmetría: de tres carpetas desordenadas en una constructora a certificar ISO 45001 y construir la herramienta que faltaba."
-  canonical="https://sigmetria.com.ar/blog/construi-una-app-hys-historia-sigmetria/"
+  description="La historia detrás de Sigmetría: de tres carpetas desordenadas en una constructora a implementar ISO 45001 y construir la herramienta que faltaba."
+  canonical="https://www.sigmetria.com.ar/blog/construi-una-app-hys-historia-sigmetria/"
   ogImage="/og-blog-historia-sigmetria.svg"
   schema={schema}
+  noindex={true}
 >
   <section class="page-hero">
     <nav aria-label="Breadcrumb" class="breadcrumb">
@@ -67,7 +68,7 @@ const schema = {
       <div class="article-meta">
         <span class="art-cat">Historia de marca</span>
         <span class="art-sep">·</span>
-        <span class="art-autor">Por Ezequiel, fundador</span>
+        <span class="art-autor">Por el equipo de Sigmetría</span>
         <span class="art-sep">·</span>
         <span class="art-fecha">10 jun 2026</span>
         <span class="art-sep">·</span>
@@ -94,7 +95,7 @@ const schema = {
         </p>
 
         <p>
-          Eso fue hace <strong>[PLACEHOLDER — años]</strong>. Y de ahí sale todo lo que vino después.
+          Eso fue hace unos años. Y de ahí sale todo lo que vino después.
         </p>
 
         <h2>El caos no era un problema de documentos. Era un problema de sistema.</h2>

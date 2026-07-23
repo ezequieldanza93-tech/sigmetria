@@ -164,11 +164,94 @@ const ctas = [
   { label: 'Elegir plan',    href: onboardingUrl({ plan: 'consultora-grande',    ciclo: 'monthly' }), ext: true,  dynamic: true },
   { label: 'Contactar',      href: '/contacto/?s=s4&funnel=plan-empresa',                             ext: false, dynamic: false },
 ];
+
+// FAQPage JSON-LD — mismos 9 pares pregunta/respuesta de la sección "Preguntas frecuentes" más abajo.
+// Los textos con variables ({FOUNDER_CUPOS}, {AJUSTE_ANIO_2}) se arman con template literals para
+// no duplicar los valores a mano y quedar siempre en sync con lo que se ve en pantalla.
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: '¿Cómo se paga?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Por transferencia bancaria: al elegir el plan te mostramos los datos para transferir. Una vez acreditado el pago activamos tu cuenta dentro de las 24 hs hábiles y retomás justo donde estabas. No se requiere tarjeta (Mercado Pago, próximamente).',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: '¿El IVA está incluido?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'No. Los precios son netos. Se suma IVA 21% en la factura, siempre discriminado: neto, IVA y total por separado.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: '¿Los precios pueden subir de golpe, sin aviso?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'No. Durante tu primer año como cliente, el precio de lista se actualiza mes a mes únicamente según la variación del IPC (INDEC). No lo subimos por decisión propia ni de forma arbitraria: el ajuste queda atado al índice oficial de inflación, así sabés de antemano qué esperar.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: '¿Qué pasa con el precio después del primer año?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: `Al cumplir 12 meses, el precio de lista se actualiza una vez para reflejar las nuevas funcionalidades que sumamos a la plataforma durante ese año (estimado +${Math.round(AJUSTE_ANIO_2 * 100)}% — el detalle por plan está en "¿Cómo evoluciona el precio en el año 2?", debajo de las tarjetas de planes). A partir de ese ajuste, el precio vuelve a actualizarse mes a mes por IPC, igual que en el año 1.`,
+      },
+    },
+    {
+      '@type': 'Question',
+      name: '¿Qué pasa cuando vence el trial?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Tenés 7 días adicionales en modo solo lectura. Tus datos quedan intactos. Cuando contratás, retomás desde donde estabas.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: '¿Puedo cambiar de plan?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Sí, en cualquier momento. El upgrade es inmediato. El downgrade aplica al inicio del siguiente período.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: '¿Hay permanencia mínima?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'No. Los planes mensuales se pueden dar de baja en cualquier momento. El anual se cobra por adelantado por 12 meses.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: '¿Mis datos son propios?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Completamente. Podés exportar todo en cualquier momento. No retenemos datos si cancelás.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: '¿Cómo funciona el Programa Fundadores?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: `Los primeros ${FOUNDER_CUPOS} que contratan cada plan entran como Fundadores: −${FOUNDER_DISCOUNT}% de por vida sobre el precio de lista. Además sumás meses gratis si nos dejás una reseña (video: 3 meses, nota: 1 mes, reseña corta: 15 días).`,
+      },
+    },
+  ],
+};
 ---
 
 <BaseLayout
   title="Planes y Precios — Gestión HyS SaaS | SIGMETRÍA"
   description="Conocé los planes de SIGMETRÍA HyS: Trial gratis, Profesional (Inicial y Avanzado), Consultora (Chica, Media y Grande) y Empresa. Programa Fundadores con −20% de por vida. Tabla comparativa completa. Precios en ARS + IVA."
+  schema={faqSchema}
 >
 
   <section class="page-hero">
@@ -184,8 +267,8 @@ const ctas = [
 
       <div class="toggles">
         <div class="billing-toggle" id="billing-toggle">
-          <button class="toggle-btn active" id="btn-mensual">Mensual</button>
-          <button class="toggle-btn" id="btn-anual">
+          <button class="toggle-btn active" id="btn-mensual" aria-pressed="true">Mensual</button>
+          <button class="toggle-btn" id="btn-anual" aria-pressed="false">
             Anual
             <span class="toggle-badge">−20%</span>
           </button>
@@ -406,7 +489,7 @@ const ctas = [
                 </tr>
                 {group.rows.map(row => (
                   <tr class="feature-row">
-                    <td class="feature-label">{row.label}</td>
+                    <th scope="row" class="feature-label">{row.label}</th>
                     {row.values.map((val, i) => (
                       <td class={`feature-cell ${destacado[i] ? 'cell-destacado' : ''}`}>
                         {val === true  && <span class="check" aria-label="Incluido">✓</span>}
@@ -494,7 +577,7 @@ const ctas = [
 
       <div class="cta-banner">
         <h2>¿NO SABÉS QUÉ PLAN <em>TE CONVIENE?</em></h2>
-        <p>Te ayudamos a elegir según tu cartera, equipo y necesidades. Sin compromiso.</p>
+        <p>Te ayudamos a elegir según tus clientes, equipo y necesidades. Sin compromiso.</p>
         <div class="cta-actions">
           <a href="/contacto/?s=s4&funnel=precios-ayuda" class="btn-primary">Hablar con un asesor</a>
           <a href="https://wa.me/5491123496789" class="btn-outline" target="_blank" rel="noopener">WhatsApp</a>
@@ -697,10 +780,11 @@ const ctas = [
 .feature-row:last-child { border-bottom: none; }
 .feature-row:hover { background: #FAFAFA; }
 
-.feature-label {
+.compare-table th.feature-label {
   padding: 11px 16px;
   font-size: 13px; font-weight: 400; color: var(--gris-2);
   text-align: left; line-height: 1.4;
+  vertical-align: middle;
 }
 .feature-cell {
   padding: 11px 14px;
@@ -905,6 +989,8 @@ function setPeriod(p: 'mensual' | 'anual') {
   period = p;
   btnMensual?.classList.toggle('active', p === 'mensual');
   btnAnual?.classList.toggle('active', p === 'anual');
+  btnMensual?.setAttribute('aria-pressed', String(p === 'mensual'));
+  btnAnual?.setAttribute('aria-pressed', String(p === 'anual'));
   render();
 }
 

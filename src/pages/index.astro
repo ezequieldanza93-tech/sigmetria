@@ -16,8 +16,8 @@ const schema = {
   "name": "SIGMETRÍA HyS",
   "applicationCategory": "BusinessApplication",
   "operatingSystem": "Web",
-  "description": "Plataforma SaaS para gestionar Higiene y Seguridad: cargás la recorrida desde el celular, el reporte sale con un botón y ves toda tu cartera de clientes y establecimientos en una sola vista.",
-  "url": "https://sigmetria.com.ar",
+  "description": "Plataforma SaaS para gestionar Higiene y Seguridad: cargás la recorrida desde el celular, el reporte sale con un botón y ves todos tus clientes y establecimientos en una sola vista.",
+  "url": "https://www.sigmetria.com.ar",
   "offers": {
     "@type": "Offer",
     "price": "0",
@@ -102,13 +102,13 @@ const modulos = [
   { icon: 'ruler', badge: 'Protocolos SRT con PDF', name: 'Mediciones con informe automático', desc: 'Medís y cargás en el celular; cuando terminás, el informe sale solo. Se terminó el papel y el Excel.', items: ['Ruido (SRT 85/2012)', 'Iluminación (SRT 84/2012)', 'Puesta a tierra (SRT 900/2015)', 'Carga térmica (SRT 30/2023)'] },
   { icon: 'calendar-clock', badge: 'Alertas automáticas', name: 'Documentación y vencimientos', desc: 'Cargás cada vencimiento una vez y el sistema te avisa antes de que se pase. Dejá de perseguir fechas.', items: ['Documentación centralizada', 'Alertas antes del vencimiento', 'Capacitaciones y EPP', 'Legajo técnico con QR'] },
   { icon: 'triangle-alert', badge: 'IPER dinámica', name: 'Matriz de riesgos', desc: 'Tu matriz IPER viva y versionada, no un Excel muerto que el auditor te objeta.', items: ['Identificación de peligros', 'Evaluación de riesgo', 'Controles y seguimiento', 'Siempre actualizada'] },
-  { icon: 'layout-dashboard', badge: 'Consultora › empresa › establecimiento', name: 'Dashboard a 3 niveles', desc: 'Toda tu cartera en una vista. Y tu cliente entra a ver su propio dashboard, gratis.', items: ['Vista por consultora, empresa y sitio', 'KPIs en tiempo real', 'Reportes listos para auditoría', 'Tu cliente lo ve gratis'] },
+  { icon: 'layout-dashboard', badge: 'Consultora › empresa › establecimiento', name: 'Dashboard a 3 niveles', desc: 'Todos tus clientes en una vista. Y tu cliente entra a ver su propio dashboard, gratis.', items: ['Vista por consultora, empresa y sitio', 'KPIs en tiempo real', 'Reportes listos para auditoría', 'Tu cliente lo ve gratis'] },
 ];
 ---
 
 <BaseLayout
   title="SIGMETRÍA HyS — La app para gestionar Higiene y Seguridad | Probala gratis"
-  description="Plataforma SaaS de gestión de HyS: cargás la recorrida desde el celular, el reporte sale con un botón y ves toda tu cartera en una vista. Probala un mes gratis, sin tarjeta."
+  description="Plataforma SaaS de gestión de HyS: cargás la recorrida desde el celular y el reporte sale con un botón. Probala un mes gratis, sin tarjeta."
   schema={schema}
 >
 
@@ -121,7 +121,7 @@ const modulos = [
           <span class="hero-hys">TODA TU<br>GESTIÓN DE HyS</span>
           <span class="hero-claim">EN UNA SOLA <em>APP</em></span>
         </h1>
-        <p class="hero-sub">Cargás la recorrida desde el celular, el reporte sale con un botón y ves toda tu cartera de clientes y establecimientos en una sola vista. <strong>Probala un mes gratis, sin tarjeta.</strong></p>
+        <p class="hero-sub">Cargás la recorrida desde el celular, el reporte sale con un botón y ves todos tus clientes y establecimientos en una sola vista. <strong>Probala un mes gratis, sin tarjeta.</strong></p>
         <div class="hero-actions">
           <a href={TRIAL_URL} class="btn-primary">Probá gratis</a>
           <a href="/plataforma/" class="btn-outline">Cómo funciona</a>
@@ -187,16 +187,16 @@ const modulos = [
       <div class="showcase-head">
         <span class="showcase-kicker">ASÍ SE VE POR DENTRO</span>
         <h2>El sistema, no un PDF de promesas</h2>
-        <p>Dashboards en tiempo real, tu cartera en tres niveles y la agenda de gestiones — datos reales, no maquetas.</p>
+        <p>Dashboards en tiempo real, tus clientes en tres niveles y la agenda de gestiones — datos reales, no maquetas.</p>
       </div>
       <figure class="showcase-main">
-        <img src="/producto/dashboard.jpeg" alt="Dashboard de Higiene y Seguridad con cumplimiento, días sin accidente, incidentes, inspecciones y observaciones en tiempo real" loading="lazy" width="1440" height="900" />
+        <img src="/producto/dashboard.jpeg" alt="Dashboard de Higiene y Seguridad con cumplimiento, días sin accidente, incidentes, inspecciones y observaciones en tiempo real" fetchpriority="high" width="1440" height="900" />
         <figcaption>Dashboard ejecutivo: cumplimiento, días sin accidente, incidentes y observaciones — en vivo.</figcaption>
       </figure>
       <div class="showcase-grid">
         <figure>
-          <img src="/producto/cartera.jpeg" alt="Cartera de empresas cliente y establecimientos por rubro y ubicación" loading="lazy" width="1440" height="900" />
-          <figcaption>Toda tu cartera de clientes y establecimientos en una sola vista.</figcaption>
+          <img src="/producto/cartera.jpeg" alt="Clientes y establecimientos por rubro y ubicación" loading="lazy" width="1440" height="900" />
+          <figcaption>Todos tus clientes y establecimientos en una sola vista.</figcaption>
         </figure>
         <figure>
           <img src="/producto/agenda.jpeg" alt="Agenda de gestiones HyS planificadas y ejecutadas por responsable" loading="lazy" width="1440" height="900" />
@@ -214,7 +214,7 @@ const modulos = [
     <div class="confianza-inner">
       <p class="confianza-autoridad">
         <Icon name="shield-check" size={18} />
-        Matriculados COPIME · CPSH · Ing. Industrial · ISO 45001:2018
+        Equipo con matrícula COPIME / CPSH · experiencia implementando ISO 45001:2018
       </p>
       <div class="confianza-grid">
         {garantias.map(g => (
@@ -250,10 +250,7 @@ const modulos = [
         </blockquote>
       </div>
       <div class="marca-datos">
-        <div class="marca-stat">
-          <span class="stat-num">80<span class="stat-pct">%</span></span>
-          <p class="stat-label">de las empresas en Argentina no tienen un registro digitalizado de sus métricas de gestión HyS.</p>
-        </div>
+        <p class="marca-context">La mayoría de las empresas en Argentina todavía gestiona sus métricas de HyS en papel y Excel, sin un registro digitalizado.</p>
         <p class="marca-context">Venimos a cambiar eso. No con una app predefinida que te forzamos a adoptar, sino <strong>adaptando el sistema a las necesidades reales de tu organización</strong> — con mejora continua bajo los conceptos de la ISO y métricas accionables en tiempo real.</p>
       </div>
     </div>
@@ -459,7 +456,7 @@ const modulos = [
 .hero-stat-text {
   font-size: 12px;
   font-weight: 300;
-  color: rgba(255,255,255,.45);
+  color: rgba(255,255,255,.72);
   line-height: 1.4;
 }
 .hero-branches {
@@ -508,7 +505,7 @@ const modulos = [
 .hero-branch-list a {
   font-size: 11px;
   font-weight: 300;
-  color: rgba(255,255,255,.38);
+  color: rgba(255,255,255,.72);
   text-decoration: none;
   transition: color .15s;
 }
@@ -782,29 +779,6 @@ const modulos = [
   border-left: 3px solid var(--verde);
   padding-left: 16px;
   max-width: 440px;
-}
-.marca-stat {
-  display: flex;
-  align-items: baseline;
-  gap: 14px;
-  margin-bottom: 20px;
-  padding-bottom: 20px;
-  border-bottom: 1px solid rgba(255,255,255,.1);
-}
-.stat-num {
-  font-family: 'Montserrat', sans-serif;
-  font-size: clamp(48px, 6vw, 72px);
-  font-weight: 800;
-  color: var(--verde);
-  line-height: 1;
-  flex-shrink: 0;
-}
-.stat-pct { font-size: .6em; }
-.stat-label {
-  font-size: 13px;
-  font-weight: 300;
-  color: rgba(255,255,255,.6);
-  line-height: 1.65;
 }
 .marca-context {
   font-size: 14px;

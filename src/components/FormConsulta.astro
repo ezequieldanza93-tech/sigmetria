@@ -63,12 +63,15 @@ const successFinal = lmKey
     {subtitulo && <p  class="fc-sub">{subtitulo}</p>}
 
     <div class="fc-group">
-      <input type="text" name="nombre" required placeholder="Nombre y apellido *" autocomplete="name" />
+      <label for="fc-nombre" class="fc-sr-only">Nombre y apellido</label>
+      <input id="fc-nombre" type="text" name="nombre" required placeholder="Nombre y apellido *" autocomplete="name" />
     </div>
 
     <div class="fc-row">
-      <input type="tel"   name="telefono" required placeholder="WhatsApp +549 11..." autocomplete="tel" />
-      <input type="email" name="email"    required placeholder="Email *" autocomplete="email" />
+      <label for="fc-telefono" class="fc-sr-only">WhatsApp</label>
+      <input id="fc-telefono" type="tel"   name="telefono" required placeholder="WhatsApp +549 11..." autocomplete="tel" />
+      <label for="fc-email" class="fc-sr-only">Email</label>
+      <input id="fc-email" type="email" name="email"    required placeholder="Email *" autocomplete="email" />
     </div>
 
     <label class="fc-terms">
@@ -112,6 +115,18 @@ const successFinal = lmKey
 }
 
 .fc-form { display: flex; flex-direction: column; gap: 12px; }
+/* A13: label accesible para el placeholder — oculto visualmente, presente para lectores de pantalla */
+.fc-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
 .fc-group input,
 .fc-row input {
   background: var(--blanco);

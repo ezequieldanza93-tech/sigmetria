@@ -17,13 +17,13 @@ const servicios = [
     <!-- Logo + descripción -->
     <div class="footer-brand">
       <div class="footer-logo">
-        <img src="/logo-sigmetria.svg" alt="SIGMETRÍA HyS" width="36" height="36" style="object-fit:contain;flex-shrink:0;" />
+        <img src="/logo-sigmetria.svg" alt="" width="36" height="36" style="object-fit:contain;flex-shrink:0;" />
         <div class="footer-brand-text">
           <span class="footer-brand-name">SIGMETRÍA</span>
           <span class="footer-brand-sub">HIGIENE Y SEGURIDAD</span>
         </div>
       </div>
-      <p class="footer-desc">La plataforma para ordenar toda tu gestión de Higiene y Seguridad: cargás la recorrida desde el celular, el reporte sale solo y ves toda tu cartera de clientes y establecimientos en una sola vista.</p>
+      <p class="footer-desc">La plataforma para ordenar toda tu gestión de Higiene y Seguridad: cargás la recorrida desde el celular, el reporte sale solo y ves todos tus clientes y establecimientos en una sola vista.</p>
 
       <div class="footer-ig">
         <a href={CANALES.instagram} target="_blank" rel="noopener" class="footer-ig-link">
@@ -54,6 +54,7 @@ const servicios = [
         <li><a href="/nosotros/">Nosotros</a></li>
         <li><a href="/contacto/">Contacto</a></li>
         <li><a href="/blog/">Blog HyS</a></li>
+        <li><a href="/politica-de-privacidad/">Política de Privacidad</a></li>
       </ul>
     </div>
 
@@ -84,7 +85,7 @@ const servicios = [
 
   <div class="footer-bottom">
     <p>© {new Date().getFullYear()} SIGMETRÍA HyS · Todos los derechos reservados</p>
-    <p>Matriculados COPIME · CPSH · Ing. Industrial · ISO 45001:2018</p>
+    <p>Equipo con matrícula COPIME / CPSH · experiencia implementando ISO 45001:2018</p>
   </div>
 </footer>
 
@@ -240,7 +241,10 @@ address { font-style: normal; display: flex; flex-direction: column; gap: 10px; 
   .footer-brand { grid-column: 1 / -1; }
 }
 @media (max-width: 600px) {
-  footer { padding: 48px 24px 0; }
+  /* Sin "padding-bottom" acá a propósito: lo fija global.css (M12, compensa la
+     sticky-CTA mobile) — un shorthand acá lo pisaría por ser selector scoped
+     (más específico que el `footer` plano de global.css). */
+  footer { padding-top: 48px; padding-left: 24px; padding-right: 24px; }
   .footer-inner { grid-template-columns: 1fr; gap: 32px; }
   .footer-bottom { flex-direction: column; text-align: center; }
 }

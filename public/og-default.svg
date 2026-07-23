@@ -1,0 +1,61 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGradDefault" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#F7F8FA"/>
+      <stop offset="100%" stop-color="#EFF5EF"/>
+    </linearGradient>
+    <clipPath id="rightClipDefault">
+      <rect x="720" y="0" width="480" height="630"/>
+    </clipPath>
+  </defs>
+
+  <!-- Fondo -->
+  <rect width="1200" height="630" fill="url(#bgGradDefault)"/>
+
+  <!-- Panel derecho verde -->
+  <rect x="720" y="0" width="480" height="630" fill="#1B5E20" opacity="0.97"/>
+
+  <!-- Patrón panel derecho -->
+  <g clip-path="url(#rightClipDefault)" opacity="0.1">
+    <polygon points="720,0 960,0 720,280" fill="#FFFFFF"/>
+    <polygon points="1100,0 1200,0 1200,150" fill="#FFFFFF"/>
+    <polygon points="720,380 1000,380 720,630" fill="#FFFFFF"/>
+    <polygon points="1050,480 1200,480 1200,630" fill="#FFFFFF"/>
+  </g>
+
+  <!-- Isotipo grande centrado en el panel -->
+  <g>
+    <polygon points="870,410 940,190 940,410" fill="#FFFFFF" opacity="0.85"/>
+    <polygon points="940,190 1010,410 940,410" fill="none" stroke="#FFFFFF" stroke-width="5" opacity="0.6"/>
+  </g>
+
+  <!-- Acento verde izquierda -->
+  <rect x="60" y="90" width="5" height="410" fill="#4CAF50" rx="3"/>
+
+  <!-- Badge -->
+  <rect x="80" y="90" width="250" height="30" rx="15" fill="#E8F5E9"/>
+  <text x="205" y="110" font-family="'Montserrat', 'Helvetica Neue', Arial, sans-serif"
+        font-size="12" font-weight="700" letter-spacing="2" fill="#2E7D33"
+        text-anchor="middle">SOFTWARE DE GESTIÓN HyS</text>
+
+  <!-- Título línea 1 -->
+  <text x="80" y="250" font-family="'Montserrat', 'Helvetica Neue', Arial, sans-serif"
+        font-size="78" font-weight="800" fill="#1A1A1A" letter-spacing="-1">SIGMETRÍA</text>
+
+  <!-- Título línea 2 -->
+  <text x="80" y="332" font-family="'Montserrat', 'Helvetica Neue', Arial, sans-serif"
+        font-size="78" font-weight="800" fill="#2E7D33" letter-spacing="-1">HyS</text>
+
+  <!-- Tagline -->
+  <text x="80" y="394" font-family="'Helvetica Neue', Arial, sans-serif"
+        font-size="27" font-weight="400" fill="#444444">Higiene y Seguridad,</text>
+  <text x="80" y="428" font-family="'Helvetica Neue', Arial, sans-serif"
+        font-size="27" font-weight="600" fill="#2E7D33">sin vueltas.</text>
+
+  <!-- Separador -->
+  <rect x="80" y="462" width="560" height="1" fill="#D0D0D0"/>
+
+  <!-- URL -->
+  <text x="80" y="502" font-family="'Montserrat', 'Helvetica Neue', Arial, sans-serif"
+        font-size="21" font-weight="700" letter-spacing="1" fill="#4CAF50">sigmetria.com.ar</text>
+</svg>

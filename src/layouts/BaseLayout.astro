@@ -3,6 +3,7 @@ import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import BlogComments from '../components/BlogComments.astro';
 import StickyCTA from '../components/StickyCTA.astro';
+import { blogPosts } from '../data/blog-posts';
 import '../styles/global.css';
 
 interface Props {
@@ -11,17 +12,19 @@ interface Props {
   canonical?: string;
   ogImage?: string;
   schema?: object;
+  noindex?: boolean;
 }
 
 const {
   title,
   description,
   canonical,
-  ogImage = '/og-default.jpg',
+  ogImage = '/og-default.svg',
   schema,
+  noindex = false,
 } = Astro.props;
 
-const siteUrl = 'https://sigmetria.com.ar';
+const siteUrl = 'https://www.sigmetria.com.ar';
 const canonicalUrl = canonical ?? new URL(Astro.url.pathname, siteUrl).href;
 
 // Auto-inyectar comentarios en posts del blog (no en el índice ni en páginas de sector)
@@ -29,6 +32,50 @@ const normalizedPath = Astro.url.pathname.replace(/\/$/, '');
 const pathParts = normalizedPath.split('/').filter(Boolean);
 const isBlogPost = pathParts[0] === 'blog' && pathParts.length === 2;
 const postSlug = isBlogPost ? pathParts[1] : null;
+
+// --- Schema.org DRY (site-wide) ---
+
+// BlogPosting automático: si estamos en un post del blog y NO se pasó un schema
+// explícito, lo construimos desde blog-posts.ts. El schema explícito siempre gana.
+// Si el slug no existe en el data (post no encontrado), no rompemos: queda null.
+const blogPost = isBlogPost && postSlug
+  ? blogPosts.find((p) => p.slug === postSlug) ?? null
+  : null;
+
+const blogPostingSchema = !schema && blogPost
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'BlogPosting',
+      headline: blogPost.titulo,
+      description: blogPost.metaDescription || blogPost.resumen,
+      datePublished: blogPost.fecha,
+      author: {
+        '@type': 'Organization',
+        name: 'SIGMETRÍA HyS',
+      },
+      publisher: {
+        '@type': 'Organization',
+        name: 'SIGMETRÍA HyS',
+        logo: {
+          '@type': 'ImageObject',
+          url: `${siteUrl}/logo-sigmetria.svg`,
+        },
+      },
+      image: `${siteUrl}${ogImage}`,
+      mainEntityOfPage: canonicalUrl,
+      keywords: blogPost.tags,
+    }
+  : null;
+
+// Organization: se emite SIEMPRE, en todas las páginas del sitio.
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'SIGMETRÍA HyS',
+  url: siteUrl,
+  logo: `${siteUrl}/logo-sigmetria.svg`,
+  sameAs: ['https://www.instagram.com/sigmetria.app'],
+};
 ---
 
 <!DOCTYPE html>
@@ -42,7 +89,7 @@ const postSlug = isBlogPost ? pathParts[1] : null;
   <title>{title}</title>
   <meta name="description" content={description} />
   <link rel="canonical" href={canonicalUrl} />
-  <meta name="robots" content="index, follow" />
+  <meta name="robots" content={noindex ? 'noindex, follow' : 'index, follow'} />
 
   <!-- Open Graph -->
   <meta property="og:type"        content="website" />
@@ -75,6 +122,10 @@ const postSlug = isBlogPost ? pathParts[1] : null;
   {schema && (
     <script type="application/ld+json" set:html={JSON.stringify(schema)} />
   )}
+  {blogPostingSchema && (
+    <script type="application/ld+json" set:html={JSON.stringify(blogPostingSchema)} />
+  )}
+  <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
 </head>
 <body>
   <Nav />

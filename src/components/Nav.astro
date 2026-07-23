@@ -154,9 +154,9 @@ const blogGroups = [
 
     <!-- CANALES — redes y contacto directo -->
     <div class="nav-item nav-has-dropdown">
-      <span class="nav-link nav-canales-trigger" role="button" tabindex="0" aria-haspopup="true" aria-expanded="false">
+      <button type="button" id="nav-canales-trigger" class="nav-link nav-canales-trigger" aria-haspopup="true" aria-expanded="false">
         Canales <span class="nav-arrow">▾</span>
-      </span>
+      </button>
       <div class="nav-dropdown nav-canales-dropdown" role="menu">
         {canales.map(c => (
           c.href === '#' ? (
@@ -445,8 +445,14 @@ nav.scrolled {
 }
 
 /* Canales dropdown */
-.nav-canales-trigger { cursor: pointer; user-select: none; }
+.nav-canales-trigger { cursor: pointer; user-select: none; background: transparent; border: none; font: inherit; margin: 0; }
 .nav-canales-dropdown { min-width: 190px; }
+/* Fuerza el cierre por click aunque el mouse siga en hover o el foco siga dentro (toggle real) */
+.nav-canales-force-closed .nav-canales-dropdown {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transform: translateY(-4px) !important;
+}
 .nav-canal-link { display: flex; align-items: center; gap: 9px; }
 .nav-canal-link svg { width: 15px; height: 15px; flex-shrink: 0; color: var(--gris-3); transition: color .15s; }
 .nav-canal-link:hover svg { color: var(--verde); }
@@ -527,7 +533,7 @@ nav.scrolled {
   background: transparent;
   border: none;
   cursor: pointer;
-  padding: 4px;
+  padding: 12px;
 }
 .nav-hamburger span { width: 24px; height: 2px; background: var(--gris-2); border-radius: 2px; transition: all .2s; }
 .nav-hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
@@ -721,6 +727,39 @@ document.addEventListener('keydown', e => {
     toggle?.classList.remove('open');
     toggle?.setAttribute('aria-expanded', 'false');
   }
+});
+
+// ── Dropdowns desktop: sincronizar aria-expanded en focus/blur (M9 a11y) ──
+document.querySelectorAll<HTMLElement>('.nav-has-dropdown').forEach(item => {
+  const trigger = item.querySelector<HTMLElement>('[aria-haspopup="true"]');
+  if (!trigger) return;
+
+  item.addEventListener('focusin', () => {
+    trigger.setAttribute('aria-expanded', 'true');
+  });
+  item.addEventListener('focusout', (e) => {
+    if (!item.contains(e.relatedTarget as Node)) {
+      trigger.setAttribute('aria-expanded', 'false');
+      item.classList.remove('nav-canales-force-closed');
+    }
+  });
+});
+
+// Canales: ahora es un <button> real — abre/cierra por click ademas de hover/foco
+const canalesTrigger = document.getElementById('nav-canales-trigger');
+const canalesItem = canalesTrigger?.closest('.nav-has-dropdown');
+canalesTrigger?.addEventListener('click', () => {
+  const isOpen = canalesTrigger.getAttribute('aria-expanded') === 'true';
+  if (isOpen) {
+    canalesItem?.classList.add('nav-canales-force-closed');
+    canalesTrigger.setAttribute('aria-expanded', 'false');
+  } else {
+    canalesItem?.classList.remove('nav-canales-force-closed');
+    canalesTrigger.setAttribute('aria-expanded', 'true');
+  }
+});
+canalesItem?.addEventListener('mouseleave', () => {
+  canalesItem.classList.remove('nav-canales-force-closed');
 });
 
 // ── Auth state en nav ─────────────────────────────────────────────────────

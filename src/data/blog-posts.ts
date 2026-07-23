@@ -529,6 +529,7 @@ export const blogPosts: BlogPost[] = [
     resumen: 'La historia completa detrás del post de LinkedIn: el caos inicial, la apuesta del CEO, la certificación ISO 45001 y la decisión de construir la app que necesitaba desde el día uno.',
     tags: ['historia', 'fundador', 'ISO 45001', 'plataforma', 'gestión HyS', 'constructora'],
     sectores: ['Consultor HyS', 'Empresas Industriales', 'Construcción'],
+    oculto: true, // FASE 1 — founder story en hold hasta revelar identidad; poner false en Fase 2
   },
   {
     slug: 'como-organizar-gestion-hys-varios-clientes',
